@@ -15,3 +15,7 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 | Kawczynski Emma  | 
 | Looman Jeanine  | 
 | Tsahageas Alex | 
+
+# Reports
+
+Report 1: https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Report-1-Page
