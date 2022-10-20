@@ -28,4 +28,4 @@
 
 The system shall allow registered visitors to purchase tickets to visit the museum. 
 
-IMAGE
+![ECSE 321-User-Dragram drawio](https://user-images.githubusercontent.com/92070091/196830112-40c62e0b-245e-4e08-942d-17802b8de012.png)
