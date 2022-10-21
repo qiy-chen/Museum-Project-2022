@@ -4,4 +4,4 @@
 
 Domain Model
 ## Reports
-[Deliverable 1](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Report-1-Page)
+[Deliverable 1 Report](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Deliverable-1-Report)
