@@ -21,4 +21,4 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 
 # Reports
 
-Report 1: https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Report-1-Page
+- [Report for Deliverable 1](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Report-1-Page)
