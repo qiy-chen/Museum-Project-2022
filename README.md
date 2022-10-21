@@ -9,7 +9,7 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 ## Team Members 
 | Name  | Role | Username | Efforts |
 | ------------- | --- | --- | --- |
-| Abdo Elie-Dimitri  | bigbrainzelie |  |  |
+| Abdo Elie-Dimitri  |  | bigbrainzelie |  |
 | Chen Qi  |  |   |  |
 | Faubert Samuel  |  |  |  |
 | Kawczynski Emma  |  |  |  |
