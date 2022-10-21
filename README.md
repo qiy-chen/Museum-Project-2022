@@ -1,4 +1,7 @@
 # ECSE 321 Group 15 
+
+Hello! This is a README file for team-15. We are designing and building a website for a museum. 
+
 ## Project Overview  
 The museum of a small town needs your help to design a website so they can support their community and provide better services. The museum has ten rooms to display artwork and a storage room. Five of the ten rooms are large rooms and can fit 300 artworks, and the remaining five are smaller rooms that can only fit 200 artworks. The storage room of the museum is very large and can store an almost unlimited number of artworks.
 
