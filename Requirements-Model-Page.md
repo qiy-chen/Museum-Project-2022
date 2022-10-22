@@ -46,18 +46,25 @@ Main success scenario:
 7.	The employee or the manager verifies the return 
 
 Alternative Scenarios:
+
 A.	Alternative Scenario A
+
 1a. The manager decides artifact is not loanable 
 
 B.	Alternative Scenario B 
+
 3b. The loan is refused by the employee or the manager 
 
 C.	Alternative Scenario C
+
 5c. The client does not request an extension on the loan 
+
 7c. The manager or the employer verifies the return of the artifact
 
 D.	Alternative Scenario D 
+
 6d. The extension for the loan is refused by the employee or the manager
+
 7d. The manager or the employer verifies the return of the artifact 
 
 
