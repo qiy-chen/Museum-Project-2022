@@ -81,7 +81,7 @@ D.	Alternative Scenario D
 
 ![image](https://user-images.githubusercontent.com/97963882/197402283-be8381b6-9bd3-4a8b-900c-3cc5b8cc41fa.png)
 
-**Specification: The admin hires a new employee  **
+**Specification: The admin hires a new employee**  
 Main success scenario:  
 1. the admin hires an employee
 2. the admin creates an account for the new employee
