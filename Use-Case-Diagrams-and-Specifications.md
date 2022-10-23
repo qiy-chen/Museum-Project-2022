@@ -97,4 +97,4 @@ D.	Alternative Scenario D
 2. Admin, Employee, or Client view display status (whether it is in display or storage)
 3. Admin, Employee, or Client view artifact room location
 
-2.a Admin, Employee, or Client find out its in storage, so do not have to check for specific room location.
+2.a Admin, Employee, or Client find out it's in storage, so do not have to check for specific room location.
