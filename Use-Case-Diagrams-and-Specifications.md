@@ -21,7 +21,7 @@ Alternate scenarios:
 
 #### Use-Case Specification:
 
-### F04 - The system shall allow anyone to create, update, and delete their client account. 
+### F04 - The Museum Management System shall allow anyone to create, update, and delete their client account. 
 
 #### Diagram:
 ![Visitor Register drawio](https://user-images.githubusercontent.com/97861909/197406917-a11a98e2-5cbd-40c0-8515-e16af9f85481.png)
@@ -36,14 +36,14 @@ Alternate Scenarios:
 * 2b. The client needs help registering account
   * 2b.1 The employee registers account for client
 
-### F05 - The Museum Management system shall allow registered visitors to purchase tickets to visit the museum. 
+### F05 - The Museum Management System shall allow registered visitors to purchase tickets to visit the museum. 
 
 #### Diagram: 
 ![ECSE 321-User-Dragram drawio](https://user-images.githubusercontent.com/92070091/196830112-40c62e0b-245e-4e08-942d-17802b8de012.png)
 
 #### Use-Case Specification:
 
-### F07 - The Museum Management system shall allow employees and admin to manage loan request (Elie)
+### F07 - The Museum Management System shall allow employees and admin to manage loan request (Elie)
 
 #### Diagram: 
 ![casediagram1 drawio](https://user-images.githubusercontent.com/90018206/197401714-3e604a19-7b5c-46ea-8610-d90bfb329fb2.png)
