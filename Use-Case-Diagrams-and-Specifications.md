@@ -1,6 +1,6 @@
 ### F01 - The Museum Management system shall allow the admin to create, update and delete employee accounts
 #### Diagram:
-![image](https://user-images.githubusercontent.com/97963882/197402283-be8381b6-9bd3-4a8b-900c-3cc5b8cc41fa.png)
+![image](https://user-images.githubusercontent.com/97963882/197416351-d6e38d8c-11b5-4483-bd81-3037e91d06d6.png)
 
 #### Use-Case Specification: The admin hires a new employee  
 Main success scenario:  
