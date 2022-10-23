@@ -32,7 +32,7 @@ The system shall allow registered visitors to purchase tickets to visit the muse
 
 ### F07 - The system shall allow employees and admin to manage loan request (Elie)
 
-![casediagram1 drawio](https://user-images.githubusercontent.com/90018206/197311385-31984713-d0c1-4dd8-b8d2-ffb6973bd445.png)
+![casediagram1 drawio](https://user-images.githubusercontent.com/90018206/197401714-3e604a19-7b5c-46ea-8610-d90bfb329fb2.png)
 
 Description: The manager decides if an artifact is loanable or not loanable. If it is loanable, the manager sets a price per day (P) for the loan. The client requests a loan for a specific number of days, and for a price Pm (only if Pm >= P). The manager or the employee can either approve or refuse the loan request of the client. The manager, the employee and the client can view the information about the specific loan, the status, the date of loan, time left. The manager and employee can view all loans’ information. The client can request a loan extension if needed. The manager or the employee can either approve or refuse the loan extension of the client. The client must return the loaned artifact withing the approved time period. The employee or manager verifies that the artifact has been returned. 
 
@@ -67,7 +67,5 @@ D.	Alternative Scenario D
 
 - 7d. The manager or the employer verifies the return of the artifact 
 
-### F03 - The Museum Management System shall allow employees and the admin to move, store / display artifacts. 
-<img width="565" alt="F03_UseCaseDiagram" src="https://user-images.githubusercontent.com/98911345/197401610-d96d528e-08cf-41e3-9fb7-cccf260389cf.png">
 
 
