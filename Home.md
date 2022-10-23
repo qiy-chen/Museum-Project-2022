@@ -27,4 +27,5 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 
 # Project Reports
 
+* [Sprint 1 Project Report](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Deliverable-1-Report)
 * [Sprint 1 Wiki](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Sprint-1)
