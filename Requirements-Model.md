@@ -1,7 +1,3 @@
-# Requirements Model
-
-## List of requirements
-
 ### Functional
 1. The system shall allow the admin to create, update and delete employee accounts (hire/fire).
 2. The system shall allow the admin to assign and update work shifts to employees.
