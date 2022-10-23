@@ -20,6 +20,17 @@ Alternate scenarios:
 <img width="565" alt="F03_UseCaseDiagram" src="https://user-images.githubusercontent.com/98911345/197401953-221a6925-67d9-427e-918b-81299b3393f0.png">
 
 #### Use-Case Specification:
+Main success scenario:
+1. The admin or the user move an artifact from a storage room to a display room.
+2. The admin or the user move an artifact from a display room to a storage room.
+3. The admin or the user move an artifact from a display room to a different display room.
+
+Alternate scenarios: 
+* 1a. The display room is full 
+  * 1a.1 The move request is rejected by the system. The admin or the employee must select a different room.
+* 3a. The display room is full 
+  * 3a.1 The move request is rejected by the system. The admin or the employee must select a different room.
+
 
 ### F04 - The Museum Management System shall allow anyone to create, update, and delete their client account. 
 
