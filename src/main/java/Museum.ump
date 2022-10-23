@@ -11,6 +11,11 @@ class User
   password;
 }
 
+class Ticket {
+  * -<@> 1 Museum;
+  * -- 1 Customer;
+}
+
 class UserRole
 {
   abstract;
@@ -19,9 +24,15 @@ class UserRole
 
 class Shift
 {
-    Date startTime;
+  Date startTime;
   Date endTime;
-  * -- * User;
+  * -- * Employee;
+}
+
+class Loan{
+  * -<@> 1 Museum;
+  * -<@> 1 Customer;
+  * -<@> 1 Artifact; 
 }
 
 class Customer
@@ -32,12 +43,12 @@ class Customer
 class Admin
 {
   isA UserRole;
-  }
+}
 
 class Employee
 {
   isA UserRole;
-  }
+}
 
 class Room
 {
@@ -48,8 +59,7 @@ class Artifact
 {
   Boolean isLoanable;
   * -<@> 1 Museum;
-    * -- 1 Room;
-  * -- * User;
+  * -- 1 Room;
 }
 
 class RoomRole
@@ -67,7 +77,7 @@ class Display
   isA RoomRole;
 }
 
-//$?[End_of_model]$?
+
 
 namespace -;
 
@@ -90,12 +100,13 @@ class UserRole
 {
   position 194 394 109 41.3594;
   position.association UserRole__User 46,0 51,34;
+  position.association User__UserRole 30,0 4,72;
 }
 
 class Shift
 {
   position 576 473 130.516 75.3594;
-  position.association Shift__User 12,0 140,60;
+  position.association Shift__User 12,0 115,60;
 }
 
 class Customer
@@ -106,12 +117,12 @@ class Customer
 class Admin
 {
   position 193 499 109 41.3594;
-  }
+}
 
 class Employee
 {
   position 370 500 109 41.3594;
-  }
+}
 
 class Room
 {
@@ -123,8 +134,8 @@ class Artifact
 {
   position 834 500 158.938 58.3594;
   position.association Artifact__Museum 71,0 82,30;
-    position.association Artifact__Room 120,0 64,10;
-  position.association Artifact__User 0,8 140,27;
+  position.association Artifact__Room 120,0 59,40;
+  position.association Artifact__User 0,8 115,27;
 }
 
 class RoomRole
