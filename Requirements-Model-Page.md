@@ -51,9 +51,9 @@ Main success scenario:
 2. The client registers account for first time.
 
 Alternate Scenarios:
-* 2a. The client already has an account.
-* 2b. The client needs help registering account.
-  *2b.1 The employee registers account for client.
+* 2a. The client already has an account
+* 2b. The client needs help registering account
+  * 2b.1 The employee registers account for client
 
 
 
