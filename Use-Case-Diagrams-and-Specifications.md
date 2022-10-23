@@ -54,7 +54,7 @@ Alternate Scenarios:
 
 #### Use-Case Specification:
 
-### F07 - The Museum Management System shall allow employees and admin to manage loan request (Elie)
+### F07 - The Museum Management System shall allow employees and admin to manage loan request.
 
 #### Diagram: 
 ![casediagram1 drawio](https://user-images.githubusercontent.com/90018206/197401714-3e604a19-7b5c-46ea-8610-d90bfb329fb2.png)
