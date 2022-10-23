@@ -81,12 +81,13 @@ D.	Alternative Scenario D
 
 ![image](https://user-images.githubusercontent.com/97963882/197402283-be8381b6-9bd3-4a8b-900c-3cc5b8cc41fa.png)
 
-Specification: The admin hires a new employee
-Main success scenario:
+**Specification: The admin hires a new employee  **
+Main success scenario:  
 1. the admin hires an employee
 2. the admin creates an account for the new employee
-3. the admin assigns shifts to the new employee
-Alternate scenarios:
+3. the admin assigns shifts to the new employee 
+  
+Alternate scenarios:  
 * 2a. The employee already has an account
 * 2b. The admin tries to register the new account using an email that is already registered with another employee account
   * 2b.1 The employee provides another email for the admin to create the account
