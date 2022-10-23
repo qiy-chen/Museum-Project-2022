@@ -6,7 +6,7 @@
 1. The system shall allow the admin to create, update and delete employee accounts (hire/fire).
 2. The system shall allow the admin to assign and update work shifts to employees.
 3. The system shall allow employees and the admin to move, store / display artifacts.
-4. The system shall allow anyone to create a visitors's account if they input a non-registered email account, name, and password. Sam:)
+4. The system shall allow anyone to create a visitors's account if they input a non-registered email account, name, and password.
 5. The system shall allow registered visitors to purchase tickets to visit the museum.
 6. The system shall allow registered visitors to request loans for loanable artifacts.
 7. The system shall allow employees and admin to manage loan requests.
