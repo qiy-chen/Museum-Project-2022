@@ -93,3 +93,8 @@ D.	Alternative Scenario D
 <img width="581" alt="Screen Shot 2022-10-23 at 11 41 08 AM" src="https://user-images.githubusercontent.com/49253947/197401750-7cd4249d-8b5b-458a-982b-7b58584c9b5a.png">
 
 #### Use-Case Specification:
+1. Admin, Employee or Client view loanable status
+2. Admin, Employee, or Client view display status (whether it is in display or storage)
+3. Admin, Employee, or Client view artifact room location
+
+2.a Admin, Employee, or Client find out its in storage, so do not have to check for specific room location.
