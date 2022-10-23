@@ -13,11 +13,11 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 | Name  | Role | Username | Efforts |
 | ------------- | --- | --- | --- |
 | Abdo Elie-Dimitri  |  | bigbrainzelie |  |
-| Chen Qi  |  |   |  |
+| Chen Qi  |  | qiy-chen  |  |
 | Faubert Samuel  |  | Coldstuff1 | |
-| Kawczynski Emma  |  |  |  |
-| Looman Jeanine  |  |  |  |
-| Tsahageas Alex |  |  |  |
+| Kawczynski Emma  |  | emmakawczynski |  |
+| Looman Jeanine  |  | jeanine56 |  |
+| Tsahageas Alex |  | alextsah |  |
 
 # Project Reports
 
