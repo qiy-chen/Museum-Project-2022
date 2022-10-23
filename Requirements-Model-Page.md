@@ -25,7 +25,7 @@
 
 
 ## Use-Case Diagrams
-### F01 - The system shall allow the admin to create, update and delete employee accounts
+### F01 - The Museum Management system shall allow the admin to create, update and delete employee accounts
 
 ![image](https://user-images.githubusercontent.com/97963882/197402283-be8381b6-9bd3-4a8b-900c-3cc5b8cc41fa.png)
 
