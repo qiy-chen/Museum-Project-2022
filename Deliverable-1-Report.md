@@ -29,7 +29,15 @@ Date: Oct 23
 
 Summary:
 * Present: Sam, Emma, Alex, Elie, Jeanine
-* Checked use-case diagrams and specifications and added them into the wiki, finished requirements, finalized domain model, distributed testing tasks
+* Checked use-case diagrams and specifications and added them into the wiki, finished requirements, finalized domain model, distributed tests
 * Action items:
   * Alex will change user titles for consistency throughout diagrams and requirements
   * Sam will initiate the project using Spring and setup the build dependencies
+  * Jeanine will reformat and organize the wiki
+  * each member will complete their assigned tests
+
+### Meeting 4
+
+Date: Oct 26 at 7pm (tentatively)
+
+* Goal: review completed tests, finalize report and submit deliverable 1
