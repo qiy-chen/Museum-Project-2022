@@ -24,19 +24,34 @@
 
 
 
-### Use-Case Diagrams
+## Use-Case Diagrams
+### F01 - The system shall allow the admin to create, update and delete employee accounts
+
+![image](https://user-images.githubusercontent.com/97963882/197402283-be8381b6-9bd3-4a8b-900c-3cc5b8cc41fa.png)
+
+**Specification: The admin hires a new employee**  
+Main success scenario:  
+1. the admin hires an employee
+2. the admin creates an account for the new employee
+3. the admin assigns shifts to the new employee 
+  
+Alternate scenarios:  
+* 2a. The employee already has an account
+* 2b. The admin tries to register the new account using an email that is already registered with another employee account
+  * 2b.1 The employee provides another email for the admin to create the account
+* 3a. The admin does not assign any shifts to the new employee right away
 ### F03 - The Museum Management System shall allow employees and the admin to move, store / display artifacts.
 <img width="565" alt="F03_UseCaseDiagram" src="https://user-images.githubusercontent.com/98911345/197401953-221a6925-67d9-427e-918b-81299b3393f0.png">
 
-### F04 - The system shall allow anyone to create a visitor's account if they input a non-registered email account, name, and password.
+### F04 - The Museum Management system shall allow anyone to create a visitor's account if they input a non-registered email account, name, and password.
 ![Visitor_Register](https://user-images.githubusercontent.com/97861909/197402095-3cb094d3-267a-446e-a3d4-e7c236b35c5f.png)
 
 
-The system shall allow registered visitors to purchase tickets to visit the museum. 
+### F05 - The Museum Management system shall allow registered visitors to purchase tickets to visit the museum. 
 
 ![ECSE 321-User-Dragram drawio](https://user-images.githubusercontent.com/92070091/196830112-40c62e0b-245e-4e08-942d-17802b8de012.png)
 
-### F07 - The system shall allow employees and admin to manage loan request (Elie)
+### F07 - The Museum Management system shall allow employees and admin to manage loan request (Elie)
 
 ![casediagram1 drawio](https://user-images.githubusercontent.com/90018206/197401714-3e604a19-7b5c-46ea-8610-d90bfb329fb2.png)
 
@@ -76,20 +91,3 @@ D.	Alternative Scenario D
 ### F08 - The Museum Management System shall allow anyone to view artifacts and their status (ie. loanable/not, on loan, in storage, on display).
 
 <img width="581" alt="Screen Shot 2022-10-23 at 11 41 08 AM" src="https://user-images.githubusercontent.com/49253947/197401750-7cd4249d-8b5b-458a-982b-7b58584c9b5a.png">
-
-### F01 - The system shall allow the admin to create, update and delete employee accounts
-
-![image](https://user-images.githubusercontent.com/97963882/197402283-be8381b6-9bd3-4a8b-900c-3cc5b8cc41fa.png)
-
-**Specification: The admin hires a new employee**  
-Main success scenario:  
-1. the admin hires an employee
-2. the admin creates an account for the new employee
-3. the admin assigns shifts to the new employee 
-  
-Alternate scenarios:  
-* 2a. The employee already has an account
-* 2b. The admin tries to register the new account using an email that is already registered with another employee account
-  * 2b.1 The employee provides another email for the admin to create the account
-* 3a. The admin does not assign any shifts to the new employee right away
-
