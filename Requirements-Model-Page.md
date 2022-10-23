@@ -25,6 +25,9 @@
 
 
 ### Use-Case Diagrams
+### F03 - The Museum Management System shall allow employees and the admin to move, store / display artifacts.
+<img width="565" alt="F03_UseCaseDiagram" src="https://user-images.githubusercontent.com/98911345/197401953-221a6925-67d9-427e-918b-81299b3393f0.png">
+
 
 The system shall allow registered visitors to purchase tickets to visit the museum. 
 
@@ -67,7 +70,7 @@ D.	Alternative Scenario D
 
 - 7d. The manager or the employer verifies the return of the artifact 
 
-F08 - The Museum Management System shall allow anyone to view artifacts and their status (ie. loanable/not, on loan, in storage, on display).
+### F08 - The Museum Management System shall allow anyone to view artifacts and their status (ie. loanable/not, on loan, in storage, on display).
 
 <img width="581" alt="Screen Shot 2022-10-23 at 11 41 08 AM" src="https://user-images.githubusercontent.com/49253947/197401750-7cd4249d-8b5b-458a-982b-7b58584c9b5a.png">
 
