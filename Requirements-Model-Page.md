@@ -68,4 +68,5 @@ D.	Alternative Scenario D
 - 7d. The manager or the employer verifies the return of the artifact 
 
 
+<img width="581" alt="Screen Shot 2022-10-23 at 11 41 08 AM" src="https://user-images.githubusercontent.com/49253947/197401750-7cd4249d-8b5b-458a-982b-7b58584c9b5a.png">
 
