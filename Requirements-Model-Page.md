@@ -77,3 +77,18 @@ D.	Alternative Scenario D
 
 <img width="581" alt="Screen Shot 2022-10-23 at 11 41 08 AM" src="https://user-images.githubusercontent.com/49253947/197401750-7cd4249d-8b5b-458a-982b-7b58584c9b5a.png">
 
+### F01 - The system shall allow the admin to create, update and delete employee accounts
+
+![image](https://user-images.githubusercontent.com/97963882/197402283-be8381b6-9bd3-4a8b-900c-3cc5b8cc41fa.png)
+
+Specification: The admin hires a new employee
+Main success scenario:
+1. the admin hires an employee
+2. the admin creates an account for the new employee
+3. the admin assigns shifts to the new employee
+Alternate scenarios:
+2a. The employee already has an account
+2b. The admin tries to register the new account using an email that is already registered with another employee account
+  2b.1 The employee provides another email for the admin to create the account
+3a. The admin does not assign any shifts to the new employee right away
+
