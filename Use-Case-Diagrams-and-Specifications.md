@@ -61,7 +61,7 @@ Alternate Scenarios:
 
 Description: The manager decides if an artifact is loanable or not loanable. If it is loanable, the manager sets a price per day (P) for the loan. The client requests a loan for a specific number of days, and for a price Pm (only if Pm >= P). The manager or the employee can either approve or refuse the loan request of the client. The manager, the employee and the client can view the information about the specific loan, the status, the date of loan, time left. The manager and employee can view all loans’ information. The client can request a loan extension if needed. The manager or the employee can either approve or refuse the loan extension of the client. The client must return the loaned artifact withing the approved time period. The employee or manager verifies that the artifact has been returned. 
 
-#### Use-Case Specification:
+#### Use-Case Specification: The client wants to loan an artifact 
 Main success scenario:
 1.	The manager decides artifact is loanable 
 2.	The client requests artifact loan 
