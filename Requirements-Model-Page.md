@@ -45,6 +45,7 @@ Alternate scenarios:
 
 ### F04 - The system shall allow anyone to create, update, and delete their client account. 
 ![Visitor Register drawio](https://user-images.githubusercontent.com/97861909/197406917-a11a98e2-5cbd-40c0-8515-e16af9f85481.png)
+
 Main success scenario:
 1. The client visits the system.
 2. The client registers account for first time.
