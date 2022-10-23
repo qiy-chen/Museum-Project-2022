@@ -87,8 +87,8 @@ Main success scenario:
 2. the admin creates an account for the new employee
 3. the admin assigns shifts to the new employee
 Alternate scenarios:
-2a. The employee already has an account
-2b. The admin tries to register the new account using an email that is already registered with another employee account
-  2b.1 The employee provides another email for the admin to create the account
-3a. The admin does not assign any shifts to the new employee right away
+* 2a. The employee already has an account
+* 2b. The admin tries to register the new account using an email that is already registered with another employee account
+  * 2b.1 The employee provides another email for the admin to create the account
+* 3a. The admin does not assign any shifts to the new employee right away
 
