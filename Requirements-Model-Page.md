@@ -67,5 +67,7 @@ D.	Alternative Scenario D
 
 - 7d. The manager or the employer verifies the return of the artifact 
 
+### F03 - The Museum Management System shall allow employees and the admin to move, store / display artifacts. 
+<img width="565" alt="F03_UseCaseDiagram" src="https://user-images.githubusercontent.com/98911345/197401610-d96d528e-08cf-41e3-9fb7-cccf260389cf.png">
 
 
