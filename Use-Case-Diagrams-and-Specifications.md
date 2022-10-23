@@ -4,7 +4,7 @@
 
 #### Use-Case Specification: The admin hires a new employee  
 Main success scenario:  
-1. the admin hires an employee
+1. the admin hires an employee and wants to add the employee into the new system
 2. the admin creates an account for the new employee
 3. the admin assigns shifts to the new employee 
   
