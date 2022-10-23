@@ -17,7 +17,7 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 | Faubert Samuel  |  | Coldstuff1 | |
 | Kawczynski Emma  |  |  |  |
 | Looman Jeanine  |  |  |  |
-| Tsahageas Alex |  |  |  |
+| Tsahageas Alex |  | alextsah |  |
 
 # Project Reports
 
