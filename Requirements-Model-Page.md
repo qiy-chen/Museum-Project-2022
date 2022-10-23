@@ -43,8 +43,8 @@ Alternate scenarios:
 ### F03 - The Museum Management System shall allow employees and the admin to move, store / display artifacts.
 <img width="565" alt="F03_UseCaseDiagram" src="https://user-images.githubusercontent.com/98911345/197401953-221a6925-67d9-427e-918b-81299b3393f0.png">
 
-### F04 - The Museum Management system shall allow anyone to create a visitor's account if they input a non-registered email account, name, and password.
-![Visitor_Register](https://user-images.githubusercontent.com/97861909/197402095-3cb094d3-267a-446e-a3d4-e7c236b35c5f.png)
+### F04 - The system shall allow anyone to create, update, and delete their client account. 
+![Visitor Register drawio](https://user-images.githubusercontent.com/97861909/197406917-a11a98e2-5cbd-40c0-8515-e16af9f85481.png)
 
 
 ### F05 - The Museum Management system shall allow registered visitors to purchase tickets to visit the museum. 
