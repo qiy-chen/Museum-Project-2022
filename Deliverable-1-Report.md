@@ -7,16 +7,28 @@
 Date: Oct 15
 
 Summary:
-* Created first draft of domain model
-* Established sprint 1 timeline
-* Set task to complete requirements by next meeting
+* Present: everyone
+* Created first draft of domain model, and established sprint 1 timeline
+* Action items: 
+  * complete requirements by next meeting
 
 ### Meeting 2
 
 Date: Oct 18
 
 Summary:
-* Checked all requirements
-* Prioritized requirements and distributed top 6 requirements for use-case diagrams
-* chose system name
-* logged top 15 requirements as issues on GitHub
+* Present: Sam, Emma, Alex, Jeanine
+* Checked and prioritized all requirements, and distributed top 6 requirements for use-case diagrams
+* Action items: 
+  * Log top 15 requirements as issues on GitHub
+  * Finish use-case diagrams and specifications
+
+### Meeting 3
+
+Date: Oct 23
+
+Summary:
+* Present: Sam, Emma, Alex, Elie, Jeanine
+* Checked use-case diagrams and specifications and added them into the wiki
+* Action items:
+  * 
