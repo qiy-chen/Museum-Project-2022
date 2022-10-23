@@ -29,6 +29,7 @@ Date: Oct 23
 
 Summary:
 * Present: Sam, Emma, Alex, Elie, Jeanine
-* Checked use-case diagrams and specifications and added them into the wiki
+* Checked use-case diagrams and specifications and added them into the wiki, finished requirements, finalized domain model, distributed testing tasks
 * Action items:
-  * 
+  * Alex will change user titles for consistency throughout diagrams and requirements
+  * Sam will initiate the project using Spring and setup the build dependencies
