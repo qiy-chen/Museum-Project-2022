@@ -17,7 +17,7 @@ Summary:
 Date: Oct 18
 
 Summary:
-* Present: Sam, Emma, Alex, Jeanine
+* Present: Sam, Emma, Alex, Jeanine, Qi
 * Checked and prioritized all requirements, and distributed top 6 requirements for use-case diagrams
 * Action items: 
   * Log top 15 requirements as issues on GitHub
