@@ -53,7 +53,7 @@ Alternate Scenarios:
 
 ![ECSE 321-User-Dragram drawio2](https://user-images.githubusercontent.com/92070091/197441868-d48c6e7a-254b-4bd5-8937-05b5a70c690c.png)
 
-#### Use-Case Specification:
+#### Use-Case Specification: A website user wants to purchase a ticket.
 
 Main success scenario:
 1. The user browses available tickets and, with his/her credentials, purchases a ticket to visit the museum on a set date.
