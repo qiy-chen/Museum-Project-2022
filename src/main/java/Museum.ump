@@ -1,7 +1,8 @@
+namespace ca.mcgill.ecse321.MuseumBackend.model;
 class Museum
 {
   1 <@>- * Room;
-  1 <@>- * Shift;
+  1 <@>- * WorkDay;
   1 <@>- * User;
 }
 
@@ -9,30 +10,43 @@ class User
 {
   email;
   password;
+  name;
 }
 
 class Ticket {
-  * -<@> 1 Museum;
+  Double price;
+  UUID ticketId;
+* -<@> 1 Museum;
+  * -<@> 1 WorkDay;
   * -- 1 Customer;
 }
 
 class UserRole
 {
-  abstract;
+  UUID userRoleId;
+abstract;
   * -<@> * User;
 }
 
-class Shift
+class WorkDay
 {
   Date startTime;
   Date endTime;
-  * -- * Employee;
+  UUID workDayId;
+* -- * Employee;
 }
 
-class Loan{
-  * -<@> 1 Museum;
-  * -<@> 1 Customer;
-  * -<@> 1 Artifact; 
+class Loan {
+  Double rentalFee;
+  Date startDate;
+  Date endDate;
+  int numOfDays;
+  enum LoanStatus {Requested,Approved,Denied,Returned}
+  LoanStatus status;
+    UUID loanId;
+* -<@> 1 Museum;
+    * -<@> 1 Customer;
+    * -<@> 1 Artifact; 
 }
 
 class Customer
@@ -52,19 +66,24 @@ class Employee
 
 class Room
 {
-  * <@>- * RoomRole;
+  int roomNumber;
+  UUID roomId;
+* <@>- * RoomRole;
 }
 
 class Artifact
 {
   Boolean isLoanable;
-  * -<@> 1 Museum;
+  Double value;
+  UUID artifactId;
+* -<@> 1 Museum;
   * -- 1 Room;
 }
 
 class RoomRole
 {
-  abstract;
+  UUID roomRoleId;
+abstract;
 }
 
 class Storage
@@ -74,6 +93,7 @@ class Storage
 
 class Display
 {
+  int maxArtifacts;
   isA RoomRole;
 }
 
@@ -86,7 +106,7 @@ class Museum
 {
   position 502 146 109 41;
   position.association Museum__Room 110,16 8,0;
-  position.association Museum__Shift 62,34 60,0;
+  position.association Museum__WorkDay 62,34 60,0;
   position.association Museum__User 0,23 114,0;
   position.association Museum__UserRole 8,41 97,0;
 }
@@ -98,49 +118,50 @@ class User
 
 class UserRole
 {
-  position 194 394 109 41.3594;
+  position 194 394 109 54.5;
   position.association UserRole__User 46,0 51,34;
   position.association User__UserRole 30,0 4,72;
 }
 
-class Shift
+class WorkDay
 {
-  position 576 473 130.516 75.3594;
-  position.association Shift__User 12,0 115,60;
+  position 576 473 113.016 71.5;
+  position.association WorkDay__User 12,0 115,60;
+  position.association Employee__WorkDay 0,10 110,10;
 }
 
 class Customer
 {
-  position 31 497 109 41.3594;
+  position 30 536 109 39.5;
 }
 
 class Admin
 {
-  position 193 499 109 41.3594;
+  position 193 524 109 39.5;
 }
 
 class Employee
 {
-  position 370 500 109 41.3594;
+  position 367 536 109 39.5;
 }
 
 class Room
 {
-  position 924 226 109 41;
-  position.association Room__RoomRole 101,41 50,0;
+  position 924 226 121.672 55.5;
+  position.association Room__RoomRole 123,51 50,0;
 }
 
 class Artifact
 {
-  position 834 500 158.938 58.3594;
+  position 834 500 143.203 71.5;
   position.association Artifact__Museum 71,0 82,30;
-  position.association Artifact__Room 120,0 59,40;
+  position.association Artifact__Room 120,0 55,72;
   position.association Artifact__User 0,8 115,27;
 }
 
 class RoomRole
 {
-  position 1123 341 109 41;
+  position 1123 341 109 54.5;
 }
 
 class Storage
@@ -150,5 +171,5 @@ class Storage
 
 class Display
 {
-  position 1027 448 109 41.3594;
+  position 1027 448 109 71.5;
 }
