@@ -50,7 +50,8 @@ Alternate Scenarios:
 ### F05 - The Museum Management System shall allow registered visitors to purchase tickets to visit the museum. 
 
 #### Diagram: 
-![ECSE 321-User-Dragram drawio](https://user-images.githubusercontent.com/92070091/196830112-40c62e0b-245e-4e08-942d-17802b8de012.png)
+
+![ECSE 321-User-Dragram drawio2](https://user-images.githubusercontent.com/92070091/197437605-6244ade7-9a34-4eeb-acc9-262b170f3dad.png)
 
 #### Use-Case Specification:
 
