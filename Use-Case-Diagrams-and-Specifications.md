@@ -51,9 +51,30 @@ Alternate Scenarios:
 
 #### Diagram: 
 
-![ECSE 321-User-Dragram drawio2](https://user-images.githubusercontent.com/92070091/197437605-6244ade7-9a34-4eeb-acc9-262b170f3dad.png)
+![ECSE 321-User-Dragram drawio2](https://user-images.githubusercontent.com/92070091/197441868-d48c6e7a-254b-4bd5-8937-05b5a70c690c.png)
 
 #### Use-Case Specification:
+
+Main success scenario:
+1. The user browses available tickets and, with his/her credentials, purchases a ticket to visit the museum on a set date.
+2. The user views his/her schedule depending on the purchased tickets and can manage his/her purchased tickets such as cancelling them before a certain due date.
+3. The user manages his/her payment information and can either modify or delete them.
+
+Alternate scenarios: 
+* 1a. The payment information is wrong.
+  * 1a.1 The purchase is not completed and the system notices the user that he/she needs to input the correct payment information.
+
+* 1b. The user is not registered to the website.
+  * 1b.1 The purchase is unavailable and the user is prompted to log in or register to the website.
+
+* 1c. The ticket becomes unavailable at the time of purchase.
+  * 1c.1 The purchase is not completed and the system notices the user that no ticket is not available at this requested time.
+
+* 2a. The user wants to cancel after a certain due date.
+  * 2a.1 The option will be unavailable and the ticket will not get refunded.
+
+* 3a. The new payment information is wrong.
+  * 3a.1 The modification is not completed and the system notices the user that he/she needs to input the correct payment information.
 
 ### F07 - The Museum Management System shall allow employees and admin to manage loan request.
 
