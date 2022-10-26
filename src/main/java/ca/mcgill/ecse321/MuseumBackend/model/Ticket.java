@@ -3,6 +3,8 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 
+import java.util.*;
+
 // line 16 "../../../../../Museum.ump"
 public class Ticket
 {

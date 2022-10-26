@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
+import java.util.*;
 
 // line 39 "../../../../../Museum.ump"
 public class Loan
