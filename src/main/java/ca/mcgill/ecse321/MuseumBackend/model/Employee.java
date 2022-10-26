@@ -4,8 +4,8 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
-// line 62 "../../../../../Museum.ump"
-// line 143 "../../../../../Museum.ump"
+// line 64 "../../../../../Museum.ump"
+// line 144 "../../../../../Museum.ump"
 public class Employee extends UserRole
 {
 
@@ -14,141 +14,141 @@ public class Employee extends UserRole
   //------------------------
 
   //Employee Associations
-  private List<WorkDay> workDaies;
+  private List<Shift> shifts;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Employee(UUID aUserRoleId)
+  public Employee(int aUserRoleId)
   {
     super(aUserRoleId);
-    workDaies = new ArrayList<WorkDay>();
+    shifts = new ArrayList<Shift>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
-  public WorkDay getWorkDay(int index)
+  public Shift getShift(int index)
   {
-    WorkDay aWorkDay = workDaies.get(index);
-    return aWorkDay;
+    Shift aShift = shifts.get(index);
+    return aShift;
   }
 
-  public List<WorkDay> getWorkDaies()
+  public List<Shift> getShifts()
   {
-    List<WorkDay> newWorkDaies = Collections.unmodifiableList(workDaies);
-    return newWorkDaies;
+    List<Shift> newShifts = Collections.unmodifiableList(shifts);
+    return newShifts;
   }
 
-  public int numberOfWorkDaies()
+  public int numberOfShifts()
   {
-    int number = workDaies.size();
+    int number = shifts.size();
     return number;
   }
 
-  public boolean hasWorkDaies()
+  public boolean hasShifts()
   {
-    boolean has = workDaies.size() > 0;
+    boolean has = shifts.size() > 0;
     return has;
   }
 
-  public int indexOfWorkDay(WorkDay aWorkDay)
+  public int indexOfShift(Shift aShift)
   {
-    int index = workDaies.indexOf(aWorkDay);
+    int index = shifts.indexOf(aShift);
     return index;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfWorkDaies()
+  public static int minimumNumberOfShifts()
   {
     return 0;
   }
   /* Code from template association_AddManyToManyMethod */
-  public boolean addWorkDay(WorkDay aWorkDay)
+  public boolean addShift(Shift aShift)
   {
     boolean wasAdded = false;
-    if (workDaies.contains(aWorkDay)) { return false; }
-    workDaies.add(aWorkDay);
-    if (aWorkDay.indexOfEmployee(this) != -1)
+    if (shifts.contains(aShift)) { return false; }
+    shifts.add(aShift);
+    if (aShift.indexOfEmployee(this) != -1)
     {
       wasAdded = true;
     }
     else
     {
-      wasAdded = aWorkDay.addEmployee(this);
+      wasAdded = aShift.addEmployee(this);
       if (!wasAdded)
       {
-        workDaies.remove(aWorkDay);
+        shifts.remove(aShift);
       }
     }
     return wasAdded;
   }
   /* Code from template association_RemoveMany */
-  public boolean removeWorkDay(WorkDay aWorkDay)
+  public boolean removeShift(Shift aShift)
   {
     boolean wasRemoved = false;
-    if (!workDaies.contains(aWorkDay))
+    if (!shifts.contains(aShift))
     {
       return wasRemoved;
     }
 
-    int oldIndex = workDaies.indexOf(aWorkDay);
-    workDaies.remove(oldIndex);
-    if (aWorkDay.indexOfEmployee(this) == -1)
+    int oldIndex = shifts.indexOf(aShift);
+    shifts.remove(oldIndex);
+    if (aShift.indexOfEmployee(this) == -1)
     {
       wasRemoved = true;
     }
     else
     {
-      wasRemoved = aWorkDay.removeEmployee(this);
+      wasRemoved = aShift.removeEmployee(this);
       if (!wasRemoved)
       {
-        workDaies.add(oldIndex,aWorkDay);
+        shifts.add(oldIndex,aShift);
       }
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addWorkDayAt(WorkDay aWorkDay, int index)
+  public boolean addShiftAt(Shift aShift, int index)
   {  
     boolean wasAdded = false;
-    if(addWorkDay(aWorkDay))
+    if(addShift(aShift))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfWorkDaies()) { index = numberOfWorkDaies() - 1; }
-      workDaies.remove(aWorkDay);
-      workDaies.add(index, aWorkDay);
+      if(index > numberOfShifts()) { index = numberOfShifts() - 1; }
+      shifts.remove(aShift);
+      shifts.add(index, aShift);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveWorkDayAt(WorkDay aWorkDay, int index)
+  public boolean addOrMoveShiftAt(Shift aShift, int index)
   {
     boolean wasAdded = false;
-    if(workDaies.contains(aWorkDay))
+    if(shifts.contains(aShift))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfWorkDaies()) { index = numberOfWorkDaies() - 1; }
-      workDaies.remove(aWorkDay);
-      workDaies.add(index, aWorkDay);
+      if(index > numberOfShifts()) { index = numberOfShifts() - 1; }
+      shifts.remove(aShift);
+      shifts.add(index, aShift);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addWorkDayAt(aWorkDay, index);
+      wasAdded = addShiftAt(aShift, index);
     }
     return wasAdded;
   }
 
   public void delete()
   {
-    ArrayList<WorkDay> copyOfWorkDaies = new ArrayList<WorkDay>(workDaies);
-    workDaies.clear();
-    for(WorkDay aWorkDay : copyOfWorkDaies)
+    ArrayList<Shift> copyOfShifts = new ArrayList<Shift>(shifts);
+    shifts.clear();
+    for(Shift aShift : copyOfShifts)
     {
-      aWorkDay.removeEmployee(this);
+      aShift.removeEmployee(this);
     }
     super.delete();
   }

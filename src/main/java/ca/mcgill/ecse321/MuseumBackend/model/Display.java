@@ -5,8 +5,8 @@ package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
 // line 94 "../../../../../Museum.ump"
-// line 172 "../../../../../Museum.ump"
-public class Display extends RoomRole
+// line 161 "../../../../../Museum.ump"
+public class Display extends Room
 {
 
   //------------------------
@@ -20,9 +20,9 @@ public class Display extends RoomRole
   // CONSTRUCTOR
   //------------------------
 
-  public Display(UUID aRoomRoleId, int aMaxArtifacts)
+  public Display(int aRoomNumber, int aRoomId, Museum aMuseum, int aMaxArtifacts)
   {
-    super(aRoomRoleId);
+    super(aRoomNumber, aRoomId, aMuseum);
     maxArtifacts = aMaxArtifacts;
   }
 

@@ -4,8 +4,8 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
-// line 9 "../../../../../Museum.ump"
-// line 114 "../../../../../Museum.ump"
+// line 11 "../../../../../Museum.ump"
+// line 115 "../../../../../Museum.ump"
 public class User
 {
 

@@ -5,8 +5,8 @@ package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 52 "../../../../../Museum.ump"
-// line 133 "../../../../../Museum.ump"
+// line 54 "../../../../../Museum.ump"
+// line 134 "../../../../../Museum.ump"
 public class Customer extends UserRole
 {
 
@@ -22,7 +22,7 @@ public class Customer extends UserRole
   // CONSTRUCTOR
   //------------------------
 
-  public Customer(UUID aUserRoleId)
+  public Customer(int aUserRoleId)
   {
     super(aUserRoleId);
     tickets = new ArrayList<Ticket>();
@@ -98,9 +98,9 @@ public class Customer extends UserRole
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(double aPrice, UUID aTicketId, Museum aMuseum, WorkDay aWorkDay)
+  public Ticket addTicket(double aPrice, int aTicketId, Date aTicketDate, Museum aMuseum)
   {
-    return new Ticket(aPrice, aTicketId, aMuseum, aWorkDay, this);
+    return new Ticket(aPrice, aTicketId, aTicketDate, aMuseum, this);
   }
 
   public boolean addTicket(Ticket aTicket)
@@ -170,9 +170,9 @@ public class Customer extends UserRole
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, UUID aLoanId, Museum aMuseum, Artifact aArtifact)
+  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Museum aMuseum, Artwork aArtwork)
   {
-    return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, aMuseum, this, aArtifact);
+    return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, aMuseum, this, aArtwork);
   }
 
   public boolean addLoan(Loan aLoan)

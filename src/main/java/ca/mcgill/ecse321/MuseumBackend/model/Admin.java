@@ -4,8 +4,8 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
-// line 57 "../../../../../Museum.ump"
-// line 138 "../../../../../Museum.ump"
+// line 59 "../../../../../Museum.ump"
+// line 139 "../../../../../Museum.ump"
 public class Admin extends UserRole
 {
 
@@ -17,7 +17,7 @@ public class Admin extends UserRole
   // CONSTRUCTOR
   //------------------------
 
-  public Admin(UUID aUserRoleId)
+  public Admin(int aUserRoleId)
   {
     super(aUserRoleId);
   }

@@ -2,8 +2,9 @@
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse321.MuseumBackend.model;
+import java.sql.Date;
 
-// line 16 "../../../../../Museum.ump"
+// line 18 "../../../../../Museum.ump"
 public class Ticket
 {
 
@@ -13,30 +14,26 @@ public class Ticket
 
   //Ticket Attributes
   private double price;
-  private UUID ticketId;
+  private int ticketId;
+  private Date ticketDate;
 
   //Ticket Associations
   private Museum museum;
-  private WorkDay workDay;
   private Customer customer;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Ticket(double aPrice, UUID aTicketId, Museum aMuseum, WorkDay aWorkDay, Customer aCustomer)
+  public Ticket(double aPrice, int aTicketId, Date aTicketDate, Museum aMuseum, Customer aCustomer)
   {
     price = aPrice;
     ticketId = aTicketId;
+    ticketDate = aTicketDate;
     boolean didAddMuseum = setMuseum(aMuseum);
     if (!didAddMuseum)
     {
       throw new RuntimeException("Unable to create ticket due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-    boolean didAddWorkDay = setWorkDay(aWorkDay);
-    if (!didAddWorkDay)
-    {
-      throw new RuntimeException("Unable to create ticket due to workDay. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     boolean didAddCustomer = setCustomer(aCustomer);
     if (!didAddCustomer)
@@ -57,10 +54,18 @@ public class Ticket
     return wasSet;
   }
 
-  public boolean setTicketId(UUID aTicketId)
+  public boolean setTicketId(int aTicketId)
   {
     boolean wasSet = false;
     ticketId = aTicketId;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setTicketDate(Date aTicketDate)
+  {
+    boolean wasSet = false;
+    ticketDate = aTicketDate;
     wasSet = true;
     return wasSet;
   }
@@ -70,19 +75,19 @@ public class Ticket
     return price;
   }
 
-  public UUID getTicketId()
+  public int getTicketId()
   {
     return ticketId;
+  }
+
+  public Date getTicketDate()
+  {
+    return ticketDate;
   }
   /* Code from template association_GetOne */
   public Museum getMuseum()
   {
     return museum;
-  }
-  /* Code from template association_GetOne */
-  public WorkDay getWorkDay()
-  {
-    return workDay;
   }
   /* Code from template association_GetOne */
   public Customer getCustomer()
@@ -105,25 +110,6 @@ public class Ticket
       existingMuseum.removeTicket(this);
     }
     museum.addTicket(this);
-    wasSet = true;
-    return wasSet;
-  }
-  /* Code from template association_SetOneToMany */
-  public boolean setWorkDay(WorkDay aWorkDay)
-  {
-    boolean wasSet = false;
-    if (aWorkDay == null)
-    {
-      return wasSet;
-    }
-
-    WorkDay existingWorkDay = workDay;
-    workDay = aWorkDay;
-    if (existingWorkDay != null && !existingWorkDay.equals(aWorkDay))
-    {
-      existingWorkDay.removeTicket(this);
-    }
-    workDay.addTicket(this);
     wasSet = true;
     return wasSet;
   }
@@ -155,12 +141,6 @@ public class Ticket
     {
       placeholderMuseum.removeTicket(this);
     }
-    WorkDay placeholderWorkDay = workDay;
-    this.workDay = null;
-    if(placeholderWorkDay != null)
-    {
-      placeholderWorkDay.removeTicket(this);
-    }
     Customer placeholderCustomer = customer;
     this.customer = null;
     if(placeholderCustomer != null)
@@ -173,10 +153,10 @@ public class Ticket
   public String toString()
   {
     return super.toString() + "["+
-            "price" + ":" + getPrice()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "ticketId" + "=" + (getTicketId() != null ? !getTicketId().equals(this)  ? getTicketId().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "price" + ":" + getPrice()+ "," +
+            "ticketId" + ":" + getTicketId()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "ticketDate" + "=" + (getTicketDate() != null ? !getTicketDate().equals(this)  ? getTicketDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "museum = "+(getMuseum()!=null?Integer.toHexString(System.identityHashCode(getMuseum())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "workDay = "+(getWorkDay()!=null?Integer.toHexString(System.identityHashCode(getWorkDay())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "customer = "+(getCustomer()!=null?Integer.toHexString(System.identityHashCode(getCustomer())):"null");
   }
 }

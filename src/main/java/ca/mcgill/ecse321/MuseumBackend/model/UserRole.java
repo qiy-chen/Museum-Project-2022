@@ -4,8 +4,8 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
-// line 24 "../../../../../Museum.ump"
-// line 119 "../../../../../Museum.ump"
+// line 27 "../../../../../Museum.ump"
+// line 120 "../../../../../Museum.ump"
 public abstract class UserRole
 {
 
@@ -14,7 +14,7 @@ public abstract class UserRole
   //------------------------
 
   //UserRole Attributes
-  private UUID userRoleId;
+  private int userRoleId;
 
   //UserRole Associations
   private List<User> users;
@@ -23,7 +23,7 @@ public abstract class UserRole
   // CONSTRUCTOR
   //------------------------
 
-  public UserRole(UUID aUserRoleId)
+  public UserRole(int aUserRoleId)
   {
     userRoleId = aUserRoleId;
     users = new ArrayList<User>();
@@ -33,7 +33,7 @@ public abstract class UserRole
   // INTERFACE
   //------------------------
 
-  public boolean setUserRoleId(UUID aUserRoleId)
+  public boolean setUserRoleId(int aUserRoleId)
   {
     boolean wasSet = false;
     userRoleId = aUserRoleId;
@@ -41,7 +41,7 @@ public abstract class UserRole
     return wasSet;
   }
 
-  public UUID getUserRoleId()
+  public int getUserRoleId()
   {
     return userRoleId;
   }
@@ -171,7 +171,7 @@ public abstract class UserRole
 
   public String toString()
   {
-    return super.toString() + "["+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "userRoleId" + "=" + (getUserRoleId() != null ? !getUserRoleId().equals(this)  ? getUserRoleId().toString().replaceAll("  ","    ") : "this" : "null");
+    return super.toString() + "["+
+            "userRoleId" + ":" + getUserRoleId()+ "]";
   }
 }
