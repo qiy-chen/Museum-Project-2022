@@ -120,4 +120,4 @@ D.	Alternative Scenario D
 3. Client views display/storage status
 4. Client views the specific room location
 
-3.a Client finds out its in storage so does not need to check specific room location
+3.a Client finds out it's in storage so does not need to check specific room location
