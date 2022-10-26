@@ -43,7 +43,11 @@ public class User
   // INTERFACE
   //------------------------
 
-  public boolean setEmail(String aEmail)
+  public User() {
+	// TODO Auto-generated constructor stub
+}
+
+public boolean setEmail(String aEmail)
   {
     boolean wasSet = false;
     email = aEmail;

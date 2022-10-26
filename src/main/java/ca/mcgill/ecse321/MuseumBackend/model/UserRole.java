@@ -28,6 +28,7 @@ public abstract class UserRole
     userRoleId = aUserRoleId;
     users = new ArrayList<User>();
   }
+  public UserRole() {};
 
   //------------------------
   // INTERFACE

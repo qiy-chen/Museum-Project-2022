@@ -26,7 +26,11 @@ public class Employee extends UserRole
     workDaies = new ArrayList<WorkDay>();
   }
 
-  //------------------------
+  public Employee() {
+	// TODO Auto-generated constructor stub
+}
+
+//------------------------
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */

@@ -26,7 +26,11 @@ public class Admin extends UserRole
   // INTERFACE
   //------------------------
 
-  public void delete()
+  public Admin() {
+	// TODO Auto-generated constructor stub
+}
+
+public void delete()
   {
     super.delete();
   }
