@@ -5,7 +5,11 @@ package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 // line 39 "../../../../../Museum.ump"
+@Entity
 public class Loan
 {
 
@@ -25,6 +29,7 @@ public class Loan
   private Date endDate;
   private int numOfDays;
   private LoanStatus status;
+  @Id
   private UUID loanId;
 
   //Loan Associations

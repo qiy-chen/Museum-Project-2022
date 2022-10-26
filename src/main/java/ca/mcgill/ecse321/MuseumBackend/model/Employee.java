@@ -4,8 +4,11 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
+import javax.persistence.Entity;
+
 // line 62 "../../../../../Museum.ump"
 // line 143 "../../../../../Museum.ump"
+@Entity
 public class Employee extends UserRole
 {
 
@@ -14,7 +17,7 @@ public class Employee extends UserRole
   //------------------------
 
   //Employee Associations
-  private List<WorkDay> workDaies;
+  private List<WorkDay> workDays;
 
   //------------------------
   // CONSTRUCTOR
@@ -23,7 +26,7 @@ public class Employee extends UserRole
   public Employee(UUID aUserRoleId)
   {
     super(aUserRoleId);
-    workDaies = new ArrayList<WorkDay>();
+    workDays = new ArrayList<WorkDay>();
   }
 
   public Employee() {
@@ -36,31 +39,31 @@ public class Employee extends UserRole
   /* Code from template association_GetMany */
   public WorkDay getWorkDay(int index)
   {
-    WorkDay aWorkDay = workDaies.get(index);
+    WorkDay aWorkDay = workDays.get(index);
     return aWorkDay;
   }
 
   public List<WorkDay> getWorkDaies()
   {
-    List<WorkDay> newWorkDaies = Collections.unmodifiableList(workDaies);
+    List<WorkDay> newWorkDaies = Collections.unmodifiableList(workDays);
     return newWorkDaies;
   }
 
   public int numberOfWorkDaies()
   {
-    int number = workDaies.size();
+    int number = workDays.size();
     return number;
   }
 
   public boolean hasWorkDaies()
   {
-    boolean has = workDaies.size() > 0;
+    boolean has = workDays.size() > 0;
     return has;
   }
 
   public int indexOfWorkDay(WorkDay aWorkDay)
   {
-    int index = workDaies.indexOf(aWorkDay);
+    int index = workDays.indexOf(aWorkDay);
     return index;
   }
   /* Code from template association_MinimumNumberOfMethod */
@@ -72,8 +75,8 @@ public class Employee extends UserRole
   public boolean addWorkDay(WorkDay aWorkDay)
   {
     boolean wasAdded = false;
-    if (workDaies.contains(aWorkDay)) { return false; }
-    workDaies.add(aWorkDay);
+    if (workDays.contains(aWorkDay)) { return false; }
+    workDays.add(aWorkDay);
     if (aWorkDay.indexOfEmployee(this) != -1)
     {
       wasAdded = true;
@@ -83,7 +86,7 @@ public class Employee extends UserRole
       wasAdded = aWorkDay.addEmployee(this);
       if (!wasAdded)
       {
-        workDaies.remove(aWorkDay);
+        workDays.remove(aWorkDay);
       }
     }
     return wasAdded;
@@ -92,13 +95,13 @@ public class Employee extends UserRole
   public boolean removeWorkDay(WorkDay aWorkDay)
   {
     boolean wasRemoved = false;
-    if (!workDaies.contains(aWorkDay))
+    if (!workDays.contains(aWorkDay))
     {
       return wasRemoved;
     }
 
-    int oldIndex = workDaies.indexOf(aWorkDay);
-    workDaies.remove(oldIndex);
+    int oldIndex = workDays.indexOf(aWorkDay);
+    workDays.remove(oldIndex);
     if (aWorkDay.indexOfEmployee(this) == -1)
     {
       wasRemoved = true;
@@ -108,7 +111,7 @@ public class Employee extends UserRole
       wasRemoved = aWorkDay.removeEmployee(this);
       if (!wasRemoved)
       {
-        workDaies.add(oldIndex,aWorkDay);
+        workDays.add(oldIndex,aWorkDay);
       }
     }
     return wasRemoved;
@@ -121,8 +124,8 @@ public class Employee extends UserRole
     {
       if(index < 0 ) { index = 0; }
       if(index > numberOfWorkDaies()) { index = numberOfWorkDaies() - 1; }
-      workDaies.remove(aWorkDay);
-      workDaies.add(index, aWorkDay);
+      workDays.remove(aWorkDay);
+      workDays.add(index, aWorkDay);
       wasAdded = true;
     }
     return wasAdded;
@@ -131,12 +134,12 @@ public class Employee extends UserRole
   public boolean addOrMoveWorkDayAt(WorkDay aWorkDay, int index)
   {
     boolean wasAdded = false;
-    if(workDaies.contains(aWorkDay))
+    if(workDays.contains(aWorkDay))
     {
       if(index < 0 ) { index = 0; }
       if(index > numberOfWorkDaies()) { index = numberOfWorkDaies() - 1; }
-      workDaies.remove(aWorkDay);
-      workDaies.add(index, aWorkDay);
+      workDays.remove(aWorkDay);
+      workDays.add(index, aWorkDay);
       wasAdded = true;
     } 
     else 
@@ -148,8 +151,8 @@ public class Employee extends UserRole
 
   public void delete()
   {
-    ArrayList<WorkDay> copyOfWorkDaies = new ArrayList<WorkDay>(workDaies);
-    workDaies.clear();
+    ArrayList<WorkDay> copyOfWorkDaies = new ArrayList<WorkDay>(workDays);
+    workDays.clear();
     for(WorkDay aWorkDay : copyOfWorkDaies)
     {
       aWorkDay.removeEmployee(this);

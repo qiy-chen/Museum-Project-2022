@@ -4,6 +4,10 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 // line 24 "../../../../../Museum.ump"
 // line 119 "../../../../../Museum.ump"
 public abstract class UserRole
@@ -13,6 +17,8 @@ public abstract class UserRole
   // MEMBER VARIABLES
   //------------------------
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
   //UserRole Attributes
   private UUID userRoleId;
 
