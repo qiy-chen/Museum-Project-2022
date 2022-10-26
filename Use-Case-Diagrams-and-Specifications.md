@@ -121,4 +121,5 @@ D.	Alternative Scenario D
 4. Client views the specific room location
 
 2.a Client learns it is non-loanable and leaves. 
+
 3.a Client finds out its in storage so does not need to check specific room location
