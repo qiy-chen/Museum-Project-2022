@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 
 @SpringBootTest
@@ -19,6 +20,8 @@ public class TicketRepositoryTests {
   private CustomerRepository customerRepository;
   @Autowired
   private MuseumRepository museumRepository;
+  @Autowired
+  private PersonRepository personRepository;
 
 
   @AfterEach
@@ -26,6 +29,7 @@ public class TicketRepositoryTests {
     ticketRepository.deleteAll();
     customerRepository.deleteAll();
     museumRepository.deleteAll();
+    personRepository.deleteAll();
   }
   @Test
   public void testPersistAndLoadTicket() {
@@ -33,9 +37,13 @@ public class TicketRepositoryTests {
     int museumId = 0;
     Museum museumInstance = new Museum(museumId);
 
+    //Setup Person
+    String name = "Bob";
+    Person person = new Person("exampleemail@mail.com", "12345", name, museumInstance);
+    
     //Setup customer
     int customerId = 2;
-    Customer customer = new Customer(customerId);
+    Customer customer = new Customer(customerId, person);
     //Setup ticket
     double ticketPrice = 10.00;
     Date ticketDate = new Date(2);
@@ -50,6 +58,7 @@ public class TicketRepositoryTests {
     museumInstance = null;
     
     museumRepository.save(museumInstance);
+    personRepository.save(person);
     customerRepository.save(customer);
     //Search for the ticket in the database
     ticket = ticketRepository.findTicketByTicketId(ticketId);
@@ -62,6 +71,9 @@ public class TicketRepositoryTests {
     
     assertNotNull(ticket.getCustomer());
     assertEquals(customerId, ticket.getCustomer().getPersonRoleId());
+    
+    assertNotNull(ticket.getCustomer().getPerson());
+    assertEquals(name, ticket.getCustomer().getPerson().getName());
     
     assertNotNull(ticket.getMuseum());
     assertEquals(museumId, ticket.getMuseum().getMuseumId());
