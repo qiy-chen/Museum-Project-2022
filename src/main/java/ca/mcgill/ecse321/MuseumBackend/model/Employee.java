@@ -23,9 +23,9 @@ public class Employee extends PersonRole
   // CONSTRUCTOR
   //------------------------
 
-  public Employee(int aPersonRoleId)
+  public Employee(int aPersonRoleId, Person person)
   {
-    super(aPersonRoleId);
+    super(aPersonRoleId, person);
     shifts = new ArrayList<Shift>();
   }
 
