@@ -34,10 +34,19 @@ Summary:
   * Alex will change user titles for consistency throughout diagrams and requirements
   * Sam will initiate the project using Spring and setup the build dependencies
   * Jeanine will reformat and organize the wiki
-  * each member will complete their assigned tests and JPA annotations
 
 ### Meeting 4
 
-Date: Oct 26 at 7pm (tentatively)
+Date: Oct 26 at 7pm
 
-* Goal: review completed tests, finalize report and submit deliverable 1
+* Present: everyone
+* Fixed domain model, created all crud repositories and JPA annotations, finished project report and domain model description
+* Action items:
+  * each member will complete their assigned persistence tests
+
+### Meeting 5
+
+Date: Oct 26 at 7pm
+
+* Present: everyone
+* final check and deliverable 1 submission
