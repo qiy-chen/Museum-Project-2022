@@ -3,10 +3,14 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.sql.Date;
 
 // line 2 "../../../../../Museum.ump"
-// line 105 "../../../../../Museum.ump"
+// line 106 "../../../../../Museum.ump"
 public class Museum
 {
 
@@ -14,32 +18,52 @@ public class Museum
   // MEMBER VARIABLES
   //------------------------
 
+  //Museum Attributes
+  private int museumId;
+
   //Museum Associations
   private List<Room> rooms;
-  private List<WorkDay> workDaies;
-  private List<User> users;
+  private List<Shift> shifts;
+  private List<Person> persons;
   private List<Ticket> tickets;
   private List<Loan> loans;
-  private List<Artifact> artifacts;
+  private List<Artwork> artworks;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Museum()
+  public Museum(int aMuseumId)
   {
+    museumId = aMuseumId;
     rooms = new ArrayList<Room>();
-    workDaies = new ArrayList<WorkDay>();
-    users = new ArrayList<User>();
+    shifts = new ArrayList<Shift>();
+    persons = new ArrayList<Person>();
     tickets = new ArrayList<Ticket>();
     loans = new ArrayList<Loan>();
-    artifacts = new ArrayList<Artifact>();
+    artworks = new ArrayList<Artwork>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setMuseumId(int aMuseumId)
+  {
+    boolean wasSet = false;
+    museumId = aMuseumId;
+    wasSet = true;
+    return wasSet;
+  }
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public int getMuseumId()
+  {
+    return museumId;
+  }
   /* Code from template association_GetMany */
+  @OneToMany
   public Room getRoom(int index)
   {
     Room aRoom = rooms.get(index);
@@ -70,66 +94,69 @@ public class Museum
     return index;
   }
   /* Code from template association_GetMany */
-  public WorkDay getWorkDay(int index)
+  @OneToMany
+  public Shift getShift(int index)
   {
-    WorkDay aWorkDay = workDaies.get(index);
-    return aWorkDay;
+    Shift aShift = shifts.get(index);
+    return aShift;
   }
 
-  public List<WorkDay> getWorkDaies()
+  public List<Shift> getShifts()
   {
-    List<WorkDay> newWorkDaies = Collections.unmodifiableList(workDaies);
-    return newWorkDaies;
+    List<Shift> newShifts = Collections.unmodifiableList(shifts);
+    return newShifts;
   }
 
-  public int numberOfWorkDaies()
+  public int numberOfShifts()
   {
-    int number = workDaies.size();
+    int number = shifts.size();
     return number;
   }
 
-  public boolean hasWorkDaies()
+  public boolean hasShifts()
   {
-    boolean has = workDaies.size() > 0;
+    boolean has = shifts.size() > 0;
     return has;
   }
 
-  public int indexOfWorkDay(WorkDay aWorkDay)
+  public int indexOfShift(Shift aShift)
   {
-    int index = workDaies.indexOf(aWorkDay);
+    int index = shifts.indexOf(aShift);
     return index;
   }
   /* Code from template association_GetMany */
-  public User getUser(int index)
+  @OneToMany
+  public Person getPerson(int index)
   {
-    User aUser = users.get(index);
-    return aUser;
+    Person aPerson = persons.get(index);
+    return aPerson;
   }
 
-  public List<User> getUsers()
+  public List<Person> getPersons()
   {
-    List<User> newUsers = Collections.unmodifiableList(users);
-    return newUsers;
+    List<Person> newPersons = Collections.unmodifiableList(persons);
+    return newPersons;
   }
 
-  public int numberOfUsers()
+  public int numberOfPersons()
   {
-    int number = users.size();
+    int number = persons.size();
     return number;
   }
 
-  public boolean hasUsers()
+  public boolean hasPersons()
   {
-    boolean has = users.size() > 0;
+    boolean has = persons.size() > 0;
     return has;
   }
 
-  public int indexOfUser(User aUser)
+  public int indexOfPerson(Person aPerson)
   {
-    int index = users.indexOf(aUser);
+    int index = persons.indexOf(aPerson);
     return index;
   }
   /* Code from template association_GetMany */
+  @OneToMany
   public Ticket getTicket(int index)
   {
     Ticket aTicket = tickets.get(index);
@@ -160,6 +187,7 @@ public class Museum
     return index;
   }
   /* Code from template association_GetMany */
+  @OneToMany
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);
@@ -190,33 +218,34 @@ public class Museum
     return index;
   }
   /* Code from template association_GetMany */
-  public Artifact getArtifact(int index)
+  @OneToMany
+  public Artwork getArtwork(int index)
   {
-    Artifact aArtifact = artifacts.get(index);
-    return aArtifact;
+    Artwork aArtwork = artworks.get(index);
+    return aArtwork;
   }
 
-  public List<Artifact> getArtifacts()
+  public List<Artwork> getArtworks()
   {
-    List<Artifact> newArtifacts = Collections.unmodifiableList(artifacts);
-    return newArtifacts;
+    List<Artwork> newArtworks = Collections.unmodifiableList(artworks);
+    return newArtworks;
   }
 
-  public int numberOfArtifacts()
+  public int numberOfArtworks()
   {
-    int number = artifacts.size();
+    int number = artworks.size();
     return number;
   }
 
-  public boolean hasArtifacts()
+  public boolean hasArtworks()
   {
-    boolean has = artifacts.size() > 0;
+    boolean has = artworks.size() > 0;
     return has;
   }
 
-  public int indexOfArtifact(Artifact aArtifact)
+  public int indexOfArtwork(Artwork aArtwork)
   {
-    int index = artifacts.indexOf(aArtifact);
+    int index = artworks.indexOf(aArtwork);
     return index;
   }
   /* Code from template association_MinimumNumberOfMethod */
@@ -225,10 +254,7 @@ public class Museum
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Room addRoom(int aRoomNumber, UUID aRoomId)
-  {
-    return new Room(aRoomNumber, aRoomId, this);
-  }
+
 
   public boolean addRoom(Room aRoom)
   {
@@ -292,146 +318,146 @@ public class Museum
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfWorkDaies()
+  public static int minimumNumberOfShifts()
   {
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public WorkDay addWorkDay(Date aStartTime, Date aEndTime, UUID aWorkDayId)
+  public Shift addShift(Date aStartTime, Date aEndTime, int aWorkDayId)
   {
-    return new WorkDay(aStartTime, aEndTime, aWorkDayId, this);
+    return new Shift(aStartTime, aEndTime, aWorkDayId, this);
   }
 
-  public boolean addWorkDay(WorkDay aWorkDay)
+  public boolean addShift(Shift aShift)
   {
     boolean wasAdded = false;
-    if (workDaies.contains(aWorkDay)) { return false; }
-    Museum existingMuseum = aWorkDay.getMuseum();
+    if (shifts.contains(aShift)) { return false; }
+    Museum existingMuseum = aShift.getMuseum();
     boolean isNewMuseum = existingMuseum != null && !this.equals(existingMuseum);
     if (isNewMuseum)
     {
-      aWorkDay.setMuseum(this);
+      aShift.setMuseum(this);
     }
     else
     {
-      workDaies.add(aWorkDay);
+      shifts.add(aShift);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeWorkDay(WorkDay aWorkDay)
+  public boolean removeShift(Shift aShift)
   {
     boolean wasRemoved = false;
-    //Unable to remove aWorkDay, as it must always have a museum
-    if (!this.equals(aWorkDay.getMuseum()))
+    //Unable to remove aShift, as it must always have a museum
+    if (!this.equals(aShift.getMuseum()))
     {
-      workDaies.remove(aWorkDay);
+      shifts.remove(aShift);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addWorkDayAt(WorkDay aWorkDay, int index)
+  public boolean addShiftAt(Shift aShift, int index)
   {  
     boolean wasAdded = false;
-    if(addWorkDay(aWorkDay))
+    if(addShift(aShift))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfWorkDaies()) { index = numberOfWorkDaies() - 1; }
-      workDaies.remove(aWorkDay);
-      workDaies.add(index, aWorkDay);
+      if(index > numberOfShifts()) { index = numberOfShifts() - 1; }
+      shifts.remove(aShift);
+      shifts.add(index, aShift);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveWorkDayAt(WorkDay aWorkDay, int index)
+  public boolean addOrMoveShiftAt(Shift aShift, int index)
   {
     boolean wasAdded = false;
-    if(workDaies.contains(aWorkDay))
+    if(shifts.contains(aShift))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfWorkDaies()) { index = numberOfWorkDaies() - 1; }
-      workDaies.remove(aWorkDay);
-      workDaies.add(index, aWorkDay);
+      if(index > numberOfShifts()) { index = numberOfShifts() - 1; }
+      shifts.remove(aShift);
+      shifts.add(index, aShift);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addWorkDayAt(aWorkDay, index);
+      wasAdded = addShiftAt(aShift, index);
     }
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfUsers()
+  public static int minimumNumberOfPersons()
   {
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public User addUser(String aEmail, String aPassword, String aName)
+  public Person addPerson(String aEmail, String aPassword, String aName)
   {
-    return new User(aEmail, aPassword, aName, this);
+    return new Person(aEmail, aPassword, aName, this);
   }
 
-  public boolean addUser(User aUser)
+  public boolean addPerson(Person aPerson)
   {
     boolean wasAdded = false;
-    if (users.contains(aUser)) { return false; }
-    Museum existingMuseum = aUser.getMuseum();
+    if (persons.contains(aPerson)) { return false; }
+    Museum existingMuseum = aPerson.getMuseum();
     boolean isNewMuseum = existingMuseum != null && !this.equals(existingMuseum);
     if (isNewMuseum)
     {
-      aUser.setMuseum(this);
+      aPerson.setMuseum(this);
     }
     else
     {
-      users.add(aUser);
+      persons.add(aPerson);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeUser(User aUser)
+  public boolean removePerson(Person aPerson)
   {
     boolean wasRemoved = false;
-    //Unable to remove aUser, as it must always have a museum
-    if (!this.equals(aUser.getMuseum()))
+    //Unable to remove aPerson, as it must always have a museum
+    if (!this.equals(aPerson.getMuseum()))
     {
-      users.remove(aUser);
+      persons.remove(aPerson);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addUserAt(User aUser, int index)
+  public boolean addPersonAt(Person aPerson, int index)
   {  
     boolean wasAdded = false;
-    if(addUser(aUser))
+    if(addPerson(aPerson))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfUsers()) { index = numberOfUsers() - 1; }
-      users.remove(aUser);
-      users.add(index, aUser);
+      if(index > numberOfPersons()) { index = numberOfPersons() - 1; }
+      persons.remove(aPerson);
+      persons.add(index, aPerson);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveUserAt(User aUser, int index)
+  public boolean addOrMovePersonAt(Person aPerson, int index)
   {
     boolean wasAdded = false;
-    if(users.contains(aUser))
+    if(persons.contains(aPerson))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfUsers()) { index = numberOfUsers() - 1; }
-      users.remove(aUser);
-      users.add(index, aUser);
+      if(index > numberOfPersons()) { index = numberOfPersons() - 1; }
+      persons.remove(aPerson);
+      persons.add(index, aPerson);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addUserAt(aUser, index);
+      wasAdded = addPersonAt(aPerson, index);
     }
     return wasAdded;
   }
@@ -441,9 +467,9 @@ public class Museum
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(double aPrice, UUID aTicketId, WorkDay aWorkDay, Customer aCustomer)
+  public Ticket addTicket(double aPrice, int aTicketId, Date aTicketDate, Customer aCustomer)
   {
-    return new Ticket(aPrice, aTicketId, this, aWorkDay, aCustomer);
+    return new Ticket(aPrice, aTicketId, aTicketDate, this, aCustomer);
   }
 
   public boolean addTicket(Ticket aTicket)
@@ -513,9 +539,9 @@ public class Museum
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, UUID aLoanId, Customer aCustomer, Artifact aArtifact)
+  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Customer aCustomer, Artwork aArtwork)
   {
-    return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, this, aCustomer, aArtifact);
+    return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, this, aCustomer, aArtwork);
   }
 
   public boolean addLoan(Loan aLoan)
@@ -580,74 +606,74 @@ public class Museum
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfArtifacts()
+  public static int minimumNumberOfArtworks()
   {
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Artifact addArtifact(boolean aIsLoanable, double aValue, UUID aArtifactId, Room aRoom)
+  public Artwork addArtwork(boolean aIsLoanable, double aValue, int aArtworkId, String aArtworkName, Room aRoom)
   {
-    return new Artifact(aIsLoanable, aValue, aArtifactId, this, aRoom);
+    return new Artwork(aIsLoanable, aValue, aArtworkId, aArtworkName, this, aRoom);
   }
 
-  public boolean addArtifact(Artifact aArtifact)
+  public boolean addArtwork(Artwork aArtwork)
   {
     boolean wasAdded = false;
-    if (artifacts.contains(aArtifact)) { return false; }
-    Museum existingMuseum = aArtifact.getMuseum();
+    if (artworks.contains(aArtwork)) { return false; }
+    Museum existingMuseum = aArtwork.getMuseum();
     boolean isNewMuseum = existingMuseum != null && !this.equals(existingMuseum);
     if (isNewMuseum)
     {
-      aArtifact.setMuseum(this);
+      aArtwork.setMuseum(this);
     }
     else
     {
-      artifacts.add(aArtifact);
+      artworks.add(aArtwork);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeArtifact(Artifact aArtifact)
+  public boolean removeArtwork(Artwork aArtwork)
   {
     boolean wasRemoved = false;
-    //Unable to remove aArtifact, as it must always have a museum
-    if (!this.equals(aArtifact.getMuseum()))
+    //Unable to remove aArtwork, as it must always have a museum
+    if (!this.equals(aArtwork.getMuseum()))
     {
-      artifacts.remove(aArtifact);
+      artworks.remove(aArtwork);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addArtifactAt(Artifact aArtifact, int index)
+  public boolean addArtworkAt(Artwork aArtwork, int index)
   {  
     boolean wasAdded = false;
-    if(addArtifact(aArtifact))
+    if(addArtwork(aArtwork))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfArtifacts()) { index = numberOfArtifacts() - 1; }
-      artifacts.remove(aArtifact);
-      artifacts.add(index, aArtifact);
+      if(index > numberOfArtworks()) { index = numberOfArtworks() - 1; }
+      artworks.remove(aArtwork);
+      artworks.add(index, aArtwork);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveArtifactAt(Artifact aArtifact, int index)
+  public boolean addOrMoveArtworkAt(Artwork aArtwork, int index)
   {
     boolean wasAdded = false;
-    if(artifacts.contains(aArtifact))
+    if(artworks.contains(aArtwork))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfArtifacts()) { index = numberOfArtifacts() - 1; }
-      artifacts.remove(aArtifact);
-      artifacts.add(index, aArtifact);
+      if(index > numberOfArtworks()) { index = numberOfArtworks() - 1; }
+      artworks.remove(aArtwork);
+      artworks.add(index, aArtwork);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addArtifactAt(aArtifact, index);
+      wasAdded = addArtworkAt(aArtwork, index);
     }
     return wasAdded;
   }
@@ -661,18 +687,18 @@ public class Museum
       rooms.remove(aRoom);
     }
     
-    while (workDaies.size() > 0)
+    while (shifts.size() > 0)
     {
-      WorkDay aWorkDay = workDaies.get(workDaies.size() - 1);
-      aWorkDay.delete();
-      workDaies.remove(aWorkDay);
+      Shift aShift = shifts.get(shifts.size() - 1);
+      aShift.delete();
+      shifts.remove(aShift);
     }
     
-    while (users.size() > 0)
+    while (persons.size() > 0)
     {
-      User aUser = users.get(users.size() - 1);
-      aUser.delete();
-      users.remove(aUser);
+      Person aPerson = persons.get(persons.size() - 1);
+      aPerson.delete();
+      persons.remove(aPerson);
     }
     
     while (tickets.size() > 0)
@@ -689,13 +715,19 @@ public class Museum
       loans.remove(aLoan);
     }
     
-    while (artifacts.size() > 0)
+    while (artworks.size() > 0)
     {
-      Artifact aArtifact = artifacts.get(artifacts.size() - 1);
-      aArtifact.delete();
-      artifacts.remove(aArtifact);
+      Artwork aArtwork = artworks.get(artworks.size() - 1);
+      aArtwork.delete();
+      artworks.remove(aArtwork);
     }
     
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "museumId" + ":" + getMuseumId()+ "]";
+  }
 }

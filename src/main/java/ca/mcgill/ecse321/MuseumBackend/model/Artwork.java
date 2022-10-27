@@ -3,23 +3,30 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.sql.Date;
 
-// line 74 "../../../../../Museum.ump"
-// line 154 "../../../../../Museum.ump"
-public class Artifact
+// line 76 "../../../../../Museum.ump"
+@Entity
+public class Artwork
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //Artifact Attributes
+  //Artwork Attributes
   private boolean isLoanable;
   private double value;
-  private UUID artifactId;
+  private int artworkId;
+  private String artworkName;
 
-  //Artifact Associations
+  //Artwork Associations
   private Museum museum;
   private Room room;
   private List<Loan> loans;
@@ -28,20 +35,21 @@ public class Artifact
   // CONSTRUCTOR
   //------------------------
 
-  public Artifact(boolean aIsLoanable, double aValue, UUID aArtifactId, Museum aMuseum, Room aRoom)
+  public Artwork(boolean aIsLoanable, double aValue, int aArtworkId, String aArtworkName, Museum aMuseum, Room aRoom)
   {
     isLoanable = aIsLoanable;
     value = aValue;
-    artifactId = aArtifactId;
+    artworkId = aArtworkId;
+    artworkName = aArtworkName;
     boolean didAddMuseum = setMuseum(aMuseum);
     if (!didAddMuseum)
     {
-      throw new RuntimeException("Unable to create artifact due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create artwork due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     boolean didAddRoom = setRoom(aRoom);
     if (!didAddRoom)
     {
-      throw new RuntimeException("Unable to create artifact due to room. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create artwork due to room. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     loans = new ArrayList<Loan>();
   }
@@ -66,10 +74,18 @@ public class Artifact
     return wasSet;
   }
 
-  public boolean setArtifactId(UUID aArtifactId)
+  public boolean setArtworkId(int aArtworkId)
   {
     boolean wasSet = false;
-    artifactId = aArtifactId;
+    artworkId = aArtworkId;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setArtworkName(String aArtworkName)
+  {
+    boolean wasSet = false;
+    artworkName = aArtworkName;
     wasSet = true;
     return wasSet;
   }
@@ -84,9 +100,16 @@ public class Artifact
     return value;
   }
 
-  public UUID getArtifactId()
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getArtworkId()
   {
-    return artifactId;
+    return artworkId;
+  }
+
+  public String getArtworkName()
+  {
+    return artworkName;
   }
   /* Code from template attribute_IsBoolean */
   public boolean isIsLoanable()
@@ -94,16 +117,19 @@ public class Artifact
     return isLoanable;
   }
   /* Code from template association_GetOne */
+  @ManyToOne(optional=false)
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetOne */
+  @ManyToOne(optional=true)
   public Room getRoom()
   {
     return room;
   }
   /* Code from template association_GetMany */
+  @OneToMany
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);
@@ -146,9 +172,9 @@ public class Artifact
     museum = aMuseum;
     if (existingMuseum != null && !existingMuseum.equals(aMuseum))
     {
-      existingMuseum.removeArtifact(this);
+      existingMuseum.removeArtwork(this);
     }
-    museum.addArtifact(this);
+    museum.addArtwork(this);
     wasSet = true;
     return wasSet;
   }
@@ -165,9 +191,9 @@ public class Artifact
     room = aRoom;
     if (existingRoom != null && !existingRoom.equals(aRoom))
     {
-      existingRoom.removeArtifact(this);
+      existingRoom.removeArtwork(this);
     }
-    room.addArtifact(this);
+    room.addArtwork(this);
     wasSet = true;
     return wasSet;
   }
@@ -177,7 +203,7 @@ public class Artifact
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, UUID aLoanId, Museum aMuseum, Customer aCustomer)
+  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Museum aMuseum, Customer aCustomer)
   {
     return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, aMuseum, aCustomer, this);
   }
@@ -186,11 +212,11 @@ public class Artifact
   {
     boolean wasAdded = false;
     if (loans.contains(aLoan)) { return false; }
-    Artifact existingArtifact = aLoan.getArtifact();
-    boolean isNewArtifact = existingArtifact != null && !this.equals(existingArtifact);
-    if (isNewArtifact)
+    Artwork existingArtwork = aLoan.getArtwork();
+    boolean isNewArtwork = existingArtwork != null && !this.equals(existingArtwork);
+    if (isNewArtwork)
     {
-      aLoan.setArtifact(this);
+      aLoan.setArtwork(this);
     }
     else
     {
@@ -203,8 +229,8 @@ public class Artifact
   public boolean removeLoan(Loan aLoan)
   {
     boolean wasRemoved = false;
-    //Unable to remove aLoan, as it must always have a artifact
-    if (!this.equals(aLoan.getArtifact()))
+    //Unable to remove aLoan, as it must always have a artwork
+    if (!this.equals(aLoan.getArtwork()))
     {
       loans.remove(aLoan);
       wasRemoved = true;
@@ -250,21 +276,19 @@ public class Artifact
     this.museum = null;
     if(placeholderMuseum != null)
     {
-      placeholderMuseum.removeArtifact(this);
+      placeholderMuseum.removeArtwork(this);
     }
     Room placeholderRoom = room;
     this.room = null;
     if(placeholderRoom != null)
     {
-      placeholderRoom.removeArtifact(this);
+      placeholderRoom.removeArtwork(this);
     }
-    while (loans.size() > 0)
+    for(int i=loans.size(); i > 0; i--)
     {
-      Loan aLoan = loans.get(loans.size() - 1);
+      Loan aLoan = loans.get(i - 1);
       aLoan.delete();
-      loans.remove(aLoan);
     }
-    
   }
 
 
@@ -272,8 +296,9 @@ public class Artifact
   {
     return super.toString() + "["+
             "isLoanable" + ":" + getIsLoanable()+ "," +
-            "value" + ":" + getValue()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "artifactId" + "=" + (getArtifactId() != null ? !getArtifactId().equals(this)  ? getArtifactId().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "value" + ":" + getValue()+ "," +
+            "artworkId" + ":" + getArtworkId()+ "," +
+            "artworkName" + ":" + getArtworkName()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "museum = "+(getMuseum()!=null?Integer.toHexString(System.identityHashCode(getMuseum())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "room = "+(getRoom()!=null?Integer.toHexString(System.identityHashCode(getRoom())):"null");
   }

@@ -2,31 +2,32 @@
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse321.MuseumBackend.model;
+import javax.persistence.*;
 import java.util.*;
 
-// line 9 "../../../../../Museum.ump"
-// line 114 "../../../../../Museum.ump"
-public class User
+// line 11 "../../../../../Museum.ump"
+// line 115 "../../../../../Museum.ump"
+public class Person
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //User Attributes
+  //Person Attributes
   private String email;
   private String password;
   private String name;
 
-  //User Associations
+  //Person Associations
   private Museum museum;
-  private List<UserRole> userRoles;
+  private List<PersonRole> personRoles;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
-
-  public User(String aEmail, String aPassword, String aName, Museum aMuseum)
+  @Entity
+  public Person(String aEmail, String aPassword, String aName, Museum aMuseum)
   {
     email = aEmail;
     password = aPassword;
@@ -34,9 +35,9 @@ public class User
     boolean didAddMuseum = setMuseum(aMuseum);
     if (!didAddMuseum)
     {
-      throw new RuntimeException("Unable to create user due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create person due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    userRoles = new ArrayList<UserRole>();
+    personRoles = new ArrayList<PersonRole>();
   }
 
   //------------------------
@@ -70,7 +71,8 @@ public boolean setEmail(String aEmail)
     wasSet = true;
     return wasSet;
   }
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   public String getEmail()
   {
     return email;
@@ -86,38 +88,40 @@ public boolean setEmail(String aEmail)
     return name;
   }
   /* Code from template association_GetOne */
+  @ManyToOne
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetMany */
-  public UserRole getUserRole(int index)
+  @OneToMany
+  public PersonRole getPersonRole(int index)
   {
-    UserRole aUserRole = userRoles.get(index);
-    return aUserRole;
+    PersonRole aPersonRole = personRoles.get(index);
+    return aPersonRole;
   }
 
-  public List<UserRole> getUserRoles()
+  public List<PersonRole> getPersonRoles()
   {
-    List<UserRole> newUserRoles = Collections.unmodifiableList(userRoles);
-    return newUserRoles;
+    List<PersonRole> newPersonRoles = Collections.unmodifiableList(personRoles);
+    return newPersonRoles;
   }
 
-  public int numberOfUserRoles()
+  public int numberOfPersonRoles()
   {
-    int number = userRoles.size();
+    int number = personRoles.size();
     return number;
   }
 
-  public boolean hasUserRoles()
+  public boolean hasPersonRoles()
   {
-    boolean has = userRoles.size() > 0;
+    boolean has = personRoles.size() > 0;
     return has;
   }
 
-  public int indexOfUserRole(UserRole aUserRole)
+  public int indexOfPersonRole(PersonRole aPersonRole)
   {
-    int index = userRoles.indexOf(aUserRole);
+    int index = personRoles.indexOf(aPersonRole);
     return index;
   }
   /* Code from template association_SetOneToMany */
@@ -133,91 +137,78 @@ public boolean setEmail(String aEmail)
     museum = aMuseum;
     if (existingMuseum != null && !existingMuseum.equals(aMuseum))
     {
-      existingMuseum.removeUser(this);
+      existingMuseum.removePerson(this);
     }
-    museum.addUser(this);
+    museum.addPerson(this);
     wasSet = true;
     return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfUserRoles()
+  public static int minimumNumberOfPersonRoles()
   {
     return 0;
   }
-  /* Code from template association_AddManyToManyMethod */
-  public boolean addUserRole(UserRole aUserRole)
+  /* Code from template association_AddManyToOne */
+
+
+  public boolean addPersonRole(PersonRole aPersonRole)
   {
     boolean wasAdded = false;
-    if (userRoles.contains(aUserRole)) { return false; }
-    userRoles.add(aUserRole);
-    if (aUserRole.indexOfUser(this) != -1)
+    if (personRoles.contains(aPersonRole)) { return false; }
+    Person existingPerson = aPersonRole.getPerson();
+    boolean isNewPerson = existingPerson != null && !this.equals(existingPerson);
+    if (isNewPerson)
     {
-      wasAdded = true;
+      aPersonRole.setPerson(this);
     }
     else
     {
-      wasAdded = aUserRole.addUser(this);
-      if (!wasAdded)
-      {
-        userRoles.remove(aUserRole);
-      }
+      personRoles.add(aPersonRole);
     }
+    wasAdded = true;
     return wasAdded;
   }
-  /* Code from template association_RemoveMany */
-  public boolean removeUserRole(UserRole aUserRole)
+
+  public boolean removePersonRole(PersonRole aPersonRole)
   {
     boolean wasRemoved = false;
-    if (!userRoles.contains(aUserRole))
+    //Unable to remove aPersonRole, as it must always have a person
+    if (!this.equals(aPersonRole.getPerson()))
     {
-      return wasRemoved;
-    }
-
-    int oldIndex = userRoles.indexOf(aUserRole);
-    userRoles.remove(oldIndex);
-    if (aUserRole.indexOfUser(this) == -1)
-    {
+      personRoles.remove(aPersonRole);
       wasRemoved = true;
-    }
-    else
-    {
-      wasRemoved = aUserRole.removeUser(this);
-      if (!wasRemoved)
-      {
-        userRoles.add(oldIndex,aUserRole);
-      }
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addUserRoleAt(UserRole aUserRole, int index)
-  {  
+  public boolean addPersonRoleAt(PersonRole aPersonRole, int index)
+  {
     boolean wasAdded = false;
-    if(addUserRole(aUserRole))
+    if(addPersonRole(aPersonRole))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfUserRoles()) { index = numberOfUserRoles() - 1; }
-      userRoles.remove(aUserRole);
-      userRoles.add(index, aUserRole);
+      if(index > numberOfPersonRoles()) { index = numberOfPersonRoles() - 1; }
+      personRoles.remove(aPersonRole);
+      personRoles.add(index, aPersonRole);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveUserRoleAt(UserRole aUserRole, int index)
+  public boolean addOrMovePersonRoleAt(PersonRole aPersonRole, int index)
   {
     boolean wasAdded = false;
-    if(userRoles.contains(aUserRole))
+    if(personRoles.contains(aPersonRole))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfUserRoles()) { index = numberOfUserRoles() - 1; }
-      userRoles.remove(aUserRole);
-      userRoles.add(index, aUserRole);
+      if(index > numberOfPersonRoles()) { index = numberOfPersonRoles() - 1; }
+      personRoles.remove(aPersonRole);
+      personRoles.add(index, aPersonRole);
       wasAdded = true;
-    } 
-    else 
+    }
+    else
     {
-      wasAdded = addUserRoleAt(aUserRole, index);
+      wasAdded = addPersonRoleAt(aPersonRole, index);
     }
     return wasAdded;
   }
@@ -228,15 +219,15 @@ public boolean setEmail(String aEmail)
     this.museum = null;
     if(placeholderMuseum != null)
     {
-      placeholderMuseum.removeUser(this);
+      placeholderMuseum.removePerson(this);
     }
-    while (userRoles.size() > 0)
+    while (personRoles.size() > 0)
     {
-      UserRole aUserRole = userRoles.get(userRoles.size() - 1);
-      aUserRole.delete();
-      userRoles.remove(aUserRole);
+      PersonRole aPersonRole = personRoles.get(personRoles.size() - 1);
+      aPersonRole.delete();
+      personRoles.remove(aPersonRole);
     }
-    
+
   }
 
 

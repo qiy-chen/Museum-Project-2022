@@ -3,12 +3,13 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
-import java.util.*;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-// line 39 "../../../../../Museum.ump"
+// line 42 "../../../../../Museum.ump"
 @Entity
 public class Loan
 {
@@ -29,19 +30,18 @@ public class Loan
   private Date endDate;
   private int numOfDays;
   private LoanStatus status;
-  @Id
-  private UUID loanId;
+  private int loanId;
 
   //Loan Associations
   private Museum museum;
   private Customer customer;
-  private Artifact artifact;
+  private Artwork artwork;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Loan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, LoanStatus aStatus, UUID aLoanId, Museum aMuseum, Customer aCustomer, Artifact aArtifact)
+  public Loan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, LoanStatus aStatus, int aLoanId, Museum aMuseum, Customer aCustomer, Artwork aArtwork)
   {
     rentalFee = aRentalFee;
     startDate = aStartDate;
@@ -59,10 +59,10 @@ public class Loan
     {
       throw new RuntimeException("Unable to create loan due to customer. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    boolean didAddArtifact = setArtifact(aArtifact);
-    if (!didAddArtifact)
+    boolean didAddArtwork = setArtwork(aArtwork);
+    if (!didAddArtwork)
     {
-      throw new RuntimeException("Unable to create loan due to artifact. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create loan due to artwork. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
 
@@ -70,11 +70,7 @@ public class Loan
   // INTERFACE
   //------------------------
 
-  public Loan() {
-	// TODO Auto-generated constructor stub
-}
-
-public boolean setRentalFee(double aRentalFee)
+  public boolean setRentalFee(double aRentalFee)
   {
     boolean wasSet = false;
     rentalFee = aRentalFee;
@@ -114,7 +110,7 @@ public boolean setRentalFee(double aRentalFee)
     return wasSet;
   }
 
-  public boolean setLoanId(UUID aLoanId)
+  public boolean setLoanId(int aLoanId)
   {
     boolean wasSet = false;
     loanId = aLoanId;
@@ -147,24 +143,29 @@ public boolean setRentalFee(double aRentalFee)
     return status;
   }
 
-  public UUID getLoanId()
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getLoanId()
   {
     return loanId;
   }
   /* Code from template association_GetOne */
+  @ManyToOne(optional=false)
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetOne */
+  @ManyToOne(optional=false)
   public Customer getCustomer()
   {
     return customer;
   }
   /* Code from template association_GetOne */
-  public Artifact getArtifact()
+  @ManyToOne
+  public Artwork getArtwork()
   {
-    return artifact;
+    return artwork;
   }
   /* Code from template association_SetOneToMany */
   public boolean setMuseum(Museum aMuseum)
@@ -205,21 +206,21 @@ public boolean setRentalFee(double aRentalFee)
     return wasSet;
   }
   /* Code from template association_SetOneToMany */
-  public boolean setArtifact(Artifact aArtifact)
+  public boolean setArtwork(Artwork aArtwork)
   {
     boolean wasSet = false;
-    if (aArtifact == null)
+    if (aArtwork == null)
     {
       return wasSet;
     }
 
-    Artifact existingArtifact = artifact;
-    artifact = aArtifact;
-    if (existingArtifact != null && !existingArtifact.equals(aArtifact))
+    Artwork existingArtwork = artwork;
+    artwork = aArtwork;
+    if (existingArtwork != null && !existingArtwork.equals(aArtwork))
     {
-      existingArtifact.removeLoan(this);
+      existingArtwork.removeLoan(this);
     }
-    artifact.addLoan(this);
+    artwork.addLoan(this);
     wasSet = true;
     return wasSet;
   }
@@ -238,11 +239,11 @@ public boolean setRentalFee(double aRentalFee)
     {
       placeholderCustomer.removeLoan(this);
     }
-    Artifact placeholderArtifact = artifact;
-    this.artifact = null;
-    if(placeholderArtifact != null)
+    Artwork placeholderArtwork = artwork;
+    this.artwork = null;
+    if(placeholderArtwork != null)
     {
-      placeholderArtifact.removeLoan(this);
+      placeholderArtwork.removeLoan(this);
     }
   }
 
@@ -251,13 +252,13 @@ public boolean setRentalFee(double aRentalFee)
   {
     return super.toString() + "["+
             "rentalFee" + ":" + getRentalFee()+ "," +
-            "numOfDays" + ":" + getNumOfDays()+ "]" + System.getProperties().getProperty("line.separator") +
+            "numOfDays" + ":" + getNumOfDays()+ "," +
+            "loanId" + ":" + getLoanId()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "startDate" + "=" + (getStartDate() != null ? !getStartDate().equals(this)  ? getStartDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "endDate" + "=" + (getEndDate() != null ? !getEndDate().equals(this)  ? getEndDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "status" + "=" + (getStatus() != null ? !getStatus().equals(this)  ? getStatus().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "loanId" + "=" + (getLoanId() != null ? !getLoanId().equals(this)  ? getLoanId().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "museum = "+(getMuseum()!=null?Integer.toHexString(System.identityHashCode(getMuseum())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "customer = "+(getCustomer()!=null?Integer.toHexString(System.identityHashCode(getCustomer())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "artifact = "+(getArtifact()!=null?Integer.toHexString(System.identityHashCode(getArtifact())):"null");
+            "  " + "artwork = "+(getArtwork()!=null?Integer.toHexString(System.identityHashCode(getArtwork())):"null");
   }
 }

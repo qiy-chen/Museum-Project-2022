@@ -3,16 +3,12 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
-
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
-
-
-// line 57 "../../../../../Museum.ump"
-// line 138 "../../../../../Museum.ump"
+// line 59 "../../../../../Museum.ump"
+// line 139 "../../../../../Museum.ump"
 @Entity
-public class Admin extends UserRole
+public class Admin extends PersonRole
 {
 
   //------------------------
@@ -22,21 +18,17 @@ public class Admin extends UserRole
   //------------------------
   // CONSTRUCTOR
   //------------------------
-  
-  public Admin(UUID aUserRoleId)
+
+  public Admin(int aPersonRoleId)
   {
-    super(aUserRoleId);
+    super(aPersonRoleId);
   }
 
   //------------------------
   // INTERFACE
   //------------------------
 
-  public Admin() {
-	// TODO Auto-generated constructor stub
-}
-
-public void delete()
+  public void delete()
   {
     super.delete();
   }

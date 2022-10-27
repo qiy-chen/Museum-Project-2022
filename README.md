@@ -10,14 +10,14 @@ The museum is managed by its owner who gets their own user account. The museum a
 In teams of six students, you will gather requirements, design a multi-tier software solution to satisfy those requirements, implement the system, validate that the system is satisfying the requirements, and develop a release pipeline to automate the software delivery process.
 
 ## Team Members 
-| Name  | Role | Username |
+| Name | Username | Year |
 | ------------- | --- | --- |
-| Abdo Elie-Dimitri  |  | bigbrainzelie |
-| Chen Qi  |  | qiy-chen  |
-| Faubert Samuel  |  | Coldstuff1 |
-| Kawczynski Emma  |  | emmakawczynski |
-| Looman Jeanine  |  | jeanine56 |
-| Tsahageas Alex |  | alextsah |
+| Abdo Elie-Dimitri | bigbrainzelie | U2 |
+| Chen Qi  | qiy-chen  | U2 |
+| Faubert Samuel  | Coldstuff1 | U2 |
+| Kawczynski Emma  | emmakawczynski | U2 |
+| Looman Jeanine  | jeanine56 | U4 |
+| Tsahageas Alex  | alextsah | U2 |
 
 ## Time Contributions
 | Name  | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |

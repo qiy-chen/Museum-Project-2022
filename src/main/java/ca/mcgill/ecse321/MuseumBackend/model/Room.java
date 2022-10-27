@@ -3,10 +3,17 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
-// line 67 "../../../../../Museum.ump"
-// line 148 "../../../../../Museum.ump"
-public class Room
+// line 69 "../../../../../Museum.ump"
+// line 149 "../../../../../Museum.ump"
+@MappedSuperclass
+public abstract class Room
 {
 
   //------------------------
@@ -15,28 +22,26 @@ public class Room
 
   //Room Attributes
   private int roomNumber;
-  private UUID roomId;
+  private int roomId;
 
   //Room Associations
-  private List<RoomRole> roomRoles;
   private Museum museum;
-  private List<Artifact> artifacts;
+  private List<Artwork> artworks;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Room(int aRoomNumber, UUID aRoomId, Museum aMuseum)
+  public Room(int aRoomNumber, int aRoomId, Museum aMuseum)
   {
     roomNumber = aRoomNumber;
     roomId = aRoomId;
-    roomRoles = new ArrayList<RoomRole>();
     boolean didAddMuseum = setMuseum(aMuseum);
     if (!didAddMuseum)
     {
       throw new RuntimeException("Unable to create room due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    artifacts = new ArrayList<Artifact>();
+    artworks = new ArrayList<Artwork>();
   }
 
   //------------------------
@@ -51,7 +56,7 @@ public class Room
     return wasSet;
   }
 
-  public boolean setRoomId(UUID aRoomId)
+  public boolean setRoomId(int aRoomId)
   {
     boolean wasSet = false;
     roomId = aRoomId;
@@ -64,156 +69,48 @@ public class Room
     return roomNumber;
   }
 
-  public UUID getRoomId()
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getRoomId()
   {
     return roomId;
   }
-  /* Code from template association_GetMany */
-  public RoomRole getRoomRole(int index)
-  {
-    RoomRole aRoomRole = roomRoles.get(index);
-    return aRoomRole;
-  }
-
-  public List<RoomRole> getRoomRoles()
-  {
-    List<RoomRole> newRoomRoles = Collections.unmodifiableList(roomRoles);
-    return newRoomRoles;
-  }
-
-  public int numberOfRoomRoles()
-  {
-    int number = roomRoles.size();
-    return number;
-  }
-
-  public boolean hasRoomRoles()
-  {
-    boolean has = roomRoles.size() > 0;
-    return has;
-  }
-
-  public int indexOfRoomRole(RoomRole aRoomRole)
-  {
-    int index = roomRoles.indexOf(aRoomRole);
-    return index;
-  }
   /* Code from template association_GetOne */
+  @ManyToOne
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetMany */
-  public Artifact getArtifact(int index)
+  @OneToMany
+  public Artwork getArtwork(int index)
   {
-    Artifact aArtifact = artifacts.get(index);
-    return aArtifact;
+    Artwork aArtwork = artworks.get(index);
+    return aArtwork;
   }
 
-  public List<Artifact> getArtifacts()
+  public List<Artwork> getArtworks()
   {
-    List<Artifact> newArtifacts = Collections.unmodifiableList(artifacts);
-    return newArtifacts;
+    List<Artwork> newArtworks = Collections.unmodifiableList(artworks);
+    return newArtworks;
   }
 
-  public int numberOfArtifacts()
+  public int numberOfArtworks()
   {
-    int number = artifacts.size();
+    int number = artworks.size();
     return number;
   }
 
-  public boolean hasArtifacts()
+  public boolean hasArtworks()
   {
-    boolean has = artifacts.size() > 0;
+    boolean has = artworks.size() > 0;
     return has;
   }
 
-  public int indexOfArtifact(Artifact aArtifact)
+  public int indexOfArtwork(Artwork aArtwork)
   {
-    int index = artifacts.indexOf(aArtifact);
+    int index = artworks.indexOf(aArtwork);
     return index;
-  }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfRoomRoles()
-  {
-    return 0;
-  }
-  /* Code from template association_AddManyToManyMethod */
-  public boolean addRoomRole(RoomRole aRoomRole)
-  {
-    boolean wasAdded = false;
-    if (roomRoles.contains(aRoomRole)) { return false; }
-    roomRoles.add(aRoomRole);
-    if (aRoomRole.indexOfRoom(this) != -1)
-    {
-      wasAdded = true;
-    }
-    else
-    {
-      wasAdded = aRoomRole.addRoom(this);
-      if (!wasAdded)
-      {
-        roomRoles.remove(aRoomRole);
-      }
-    }
-    return wasAdded;
-  }
-  /* Code from template association_RemoveMany */
-  public boolean removeRoomRole(RoomRole aRoomRole)
-  {
-    boolean wasRemoved = false;
-    if (!roomRoles.contains(aRoomRole))
-    {
-      return wasRemoved;
-    }
-
-    int oldIndex = roomRoles.indexOf(aRoomRole);
-    roomRoles.remove(oldIndex);
-    if (aRoomRole.indexOfRoom(this) == -1)
-    {
-      wasRemoved = true;
-    }
-    else
-    {
-      wasRemoved = aRoomRole.removeRoom(this);
-      if (!wasRemoved)
-      {
-        roomRoles.add(oldIndex,aRoomRole);
-      }
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addRoomRoleAt(RoomRole aRoomRole, int index)
-  {  
-    boolean wasAdded = false;
-    if(addRoomRole(aRoomRole))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfRoomRoles()) { index = numberOfRoomRoles() - 1; }
-      roomRoles.remove(aRoomRole);
-      roomRoles.add(index, aRoomRole);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMoveRoomRoleAt(RoomRole aRoomRole, int index)
-  {
-    boolean wasAdded = false;
-    if(roomRoles.contains(aRoomRole))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfRoomRoles()) { index = numberOfRoomRoles() - 1; }
-      roomRoles.remove(aRoomRole);
-      roomRoles.add(index, aRoomRole);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addRoomRoleAt(aRoomRole, index);
-    }
-    return wasAdded;
   }
   /* Code from template association_SetOneToMany */
   public boolean setMuseum(Museum aMuseum)
@@ -235,97 +132,90 @@ public class Room
     return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfArtifacts()
+  public static int minimumNumberOfArtworks()
   {
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Artifact addArtifact(boolean aIsLoanable, double aValue, UUID aArtifactId, Museum aMuseum)
+  public Artwork addArtwork(boolean aIsLoanable, double aValue, int aArtworkId, String aArtworkName, Museum aMuseum)
   {
-    return new Artifact(aIsLoanable, aValue, aArtifactId, aMuseum, this);
+    return new Artwork(aIsLoanable, aValue, aArtworkId, aArtworkName, aMuseum, this);
   }
 
-  public boolean addArtifact(Artifact aArtifact)
+  public boolean addArtwork(Artwork aArtwork)
   {
     boolean wasAdded = false;
-    if (artifacts.contains(aArtifact)) { return false; }
-    Room existingRoom = aArtifact.getRoom();
+    if (artworks.contains(aArtwork)) { return false; }
+    Room existingRoom = aArtwork.getRoom();
     boolean isNewRoom = existingRoom != null && !this.equals(existingRoom);
     if (isNewRoom)
     {
-      aArtifact.setRoom(this);
+      aArtwork.setRoom(this);
     }
     else
     {
-      artifacts.add(aArtifact);
+      artworks.add(aArtwork);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeArtifact(Artifact aArtifact)
+  public boolean removeArtwork(Artwork aArtwork)
   {
     boolean wasRemoved = false;
-    //Unable to remove aArtifact, as it must always have a room
-    if (!this.equals(aArtifact.getRoom()))
+    //Unable to remove aArtwork, as it must always have a room
+    if (!this.equals(aArtwork.getRoom()))
     {
-      artifacts.remove(aArtifact);
+      artworks.remove(aArtwork);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addArtifactAt(Artifact aArtifact, int index)
+  public boolean addArtworkAt(Artwork aArtwork, int index)
   {  
     boolean wasAdded = false;
-    if(addArtifact(aArtifact))
+    if(addArtwork(aArtwork))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfArtifacts()) { index = numberOfArtifacts() - 1; }
-      artifacts.remove(aArtifact);
-      artifacts.add(index, aArtifact);
+      if(index > numberOfArtworks()) { index = numberOfArtworks() - 1; }
+      artworks.remove(aArtwork);
+      artworks.add(index, aArtwork);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveArtifactAt(Artifact aArtifact, int index)
+  public boolean addOrMoveArtworkAt(Artwork aArtwork, int index)
   {
     boolean wasAdded = false;
-    if(artifacts.contains(aArtifact))
+    if(artworks.contains(aArtwork))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfArtifacts()) { index = numberOfArtifacts() - 1; }
-      artifacts.remove(aArtifact);
-      artifacts.add(index, aArtifact);
+      if(index > numberOfArtworks()) { index = numberOfArtworks() - 1; }
+      artworks.remove(aArtwork);
+      artworks.add(index, aArtwork);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addArtifactAt(aArtifact, index);
+      wasAdded = addArtworkAt(aArtwork, index);
     }
     return wasAdded;
   }
 
   public void delete()
   {
-    while (roomRoles.size() > 0)
-    {
-      RoomRole aRoomRole = roomRoles.get(roomRoles.size() - 1);
-      aRoomRole.delete();
-      roomRoles.remove(aRoomRole);
-    }
-    
     Museum placeholderMuseum = museum;
     this.museum = null;
     if(placeholderMuseum != null)
     {
       placeholderMuseum.removeRoom(this);
     }
-    for(int i=artifacts.size(); i > 0; i--)
+    for(int i=artworks.size(); i > 0; i--)
     {
-      Artifact aArtifact = artifacts.get(i - 1);
-      aArtifact.delete();
+      Artwork aArtwork = artworks.get(i - 1);
+      aArtwork.delete();
     }
   }
 
@@ -333,8 +223,8 @@ public class Room
   public String toString()
   {
     return super.toString() + "["+
-            "roomNumber" + ":" + getRoomNumber()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "roomId" + "=" + (getRoomId() != null ? !getRoomId().equals(this)  ? getRoomId().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "roomNumber" + ":" + getRoomNumber()+ "," +
+            "roomId" + ":" + getRoomId()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "museum = "+(getMuseum()!=null?Integer.toHexString(System.identityHashCode(getMuseum())):"null");
   }
 }
