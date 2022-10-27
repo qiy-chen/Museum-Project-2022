@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.model.PersonRole;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 
 @SpringBootTest
