@@ -15,7 +15,7 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 | Abdo Elie-Dimitri | bigbrainzelie | U2 |  |
 | Chen Qi  | qiy-chen  | U2 | Software developer |
 | Faubert Samuel  | Coldstuff1 | U2 |  |
-| Kawczynski Emma  | emmakawczynski | U2 |  |
+| Kawczynski Emma  | emmakawczynski | U2 | Software developer |
 | Looman Jeanine  | jeanine56 | U4 | Documentation |
 | Tsahageas Alex  | alextsah | U2 |  |
 
@@ -27,7 +27,7 @@ Role Ideas: software developer, project management, documentation
 | Abdo Elie-Dimitri  |  |  |  |  |
 | Chen Qi  | 14 |  |  |  |
 | Faubert Samuel  |  |  |  |  |
-| Kawczynski Emma  |  |  |  |  |
+| Kawczynski Emma  | 15|  |  |  |
 | Looman Jeanine  | 18 |  |  |  |
 | Tsahageas Alex |  |  |  |  |
 
