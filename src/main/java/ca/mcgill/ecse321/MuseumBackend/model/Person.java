@@ -8,6 +8,7 @@ import java.util.*;
 // line 11 "../../../../../Museum.ump"
 // line 115 "../../../../../Museum.ump"
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Person
 {
 
@@ -16,12 +17,16 @@ public class Person
   //------------------------
 
   //Person Attributes
+  @Id
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String email;
   private String password;
   private String name;
 
   //Person Associations
+  @ManyToOne
   private Museum museum;
+  @OneToMany
   private List<PersonRole> personRoles;
 
   //------------------------
@@ -38,6 +43,10 @@ public class Person
       throw new RuntimeException("Unable to create person due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     personRoles = new ArrayList<PersonRole>();
+  }
+  
+  public Person() {
+    
   }
 
   //------------------------
@@ -68,8 +77,7 @@ public boolean setEmail(String aEmail)
     wasSet = true;
     return wasSet;
   }
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public String getEmail()
   {
     return email;
@@ -85,19 +93,18 @@ public boolean setEmail(String aEmail)
     return name;
   }
   /* Code from template association_GetOne */
-  @ManyToOne
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public PersonRole getPersonRole(int index)
   {
     PersonRole aPersonRole = personRoles.get(index);
     return aPersonRole;
   }
-
+  
   public List<PersonRole> getPersonRoles()
   {
     List<PersonRole> newPersonRoles = Collections.unmodifiableList(personRoles);

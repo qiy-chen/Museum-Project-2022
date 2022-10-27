@@ -7,6 +7,6 @@ import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 
 public interface LoanRepository extends CrudRepository<Loan, Integer>{
 
-	Loan FindLoanById(int loanId);
+	Loan findLoanByLoanId(int loanId);
 	
 }

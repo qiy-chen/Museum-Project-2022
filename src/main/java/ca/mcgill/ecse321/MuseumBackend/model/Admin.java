@@ -24,6 +24,10 @@ public class Admin extends PersonRole
     super(aPersonRoleId, person);
   }
 
+  public Admin() {
+    super();
+  }
+  
   //------------------------
   // INTERFACE
   //------------------------

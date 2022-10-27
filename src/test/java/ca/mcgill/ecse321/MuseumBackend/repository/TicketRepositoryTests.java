@@ -43,13 +43,16 @@ public class TicketRepositoryTests {
     
     //Setup customer
     int customerId = 2;
-    Customer customer = new Customer(customerId, person);
+    Customer customer = new Customer(customerId,person);
     //Setup ticket
     double ticketPrice = 10.00;
     Date ticketDate = new Date(2);
     int ticketId = 33;
     Ticket ticket = new Ticket(ticketPrice, ticketId, ticketDate, museumInstance, customer);
     
+    museumRepository.save(museumInstance);
+    personRepository.save(person);
+    customerRepository.save(customer);
     ticket = ticketRepository.save(ticket);
     
     //Set all values of objects to null
@@ -57,9 +60,7 @@ public class TicketRepositoryTests {
     customer = null;
     museumInstance = null;
     
-    museumRepository.save(museumInstance);
-    personRepository.save(person);
-    customerRepository.save(customer);
+
     //Search for the ticket in the database
     ticket = ticketRepository.findTicketByTicketId(ticketId);
     

@@ -17,6 +17,7 @@ public class Employee extends PersonRole
   //------------------------
 
   //Employee Associations
+  @ManyToMany
   private List<Shift> shifts;
 
   //------------------------
@@ -28,18 +29,22 @@ public class Employee extends PersonRole
     super(aPersonRoleId, person);
     shifts = new ArrayList<Shift>();
   }
+  
+  public Employee() {
+    super();
+  }
 
   //------------------------
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
-  @ManyToMany
+  
   public Shift getShift(int index)
   {
     Shift aShift = shifts.get(index);
     return aShift;
   }
-
+  
   public List<Shift> getShifts()
   {
     List<Shift> newShifts = Collections.unmodifiableList(shifts);

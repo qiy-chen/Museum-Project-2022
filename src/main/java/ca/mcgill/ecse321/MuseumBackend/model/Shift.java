@@ -24,10 +24,14 @@ public class Shift
   //Shift Attributes
   private Date startTime;
   private Date endTime;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int workDayId;
 
   //Shift Associations
+  @ManyToMany
   private List<Employee> employees;
+  @ManyToOne
   private Museum museum;
 
   //------------------------
@@ -85,14 +89,13 @@ public class Shift
     return endTime;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public int getWorkDayId()
   {
     return workDayId;
   }
   /* Code from template association_GetMany */
-  @ManyToMany
+ 
   public Employee getEmployee(int index)
   {
     Employee aEmployee = employees.get(index);
@@ -123,7 +126,6 @@ public class Shift
     return index;
   }
   /* Code from template association_GetOne */
-  @ManyToOne
   public Museum getMuseum()
   {
     return museum;
