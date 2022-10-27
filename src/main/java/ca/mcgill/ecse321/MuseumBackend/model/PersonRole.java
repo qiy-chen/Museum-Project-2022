@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-
 // line 27 "../../../../../Museum.ump"
 // line 120 "../../../../../Museum.ump"
 @MappedSuperclass
@@ -25,16 +24,20 @@ public abstract class PersonRole
   private int personRoleId;
 
   //PersonRole Associations
-  private List<Person> persons;
+  private Person person;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public PersonRole(int aPersonRoleId)
+  public PersonRole(int aPersonRoleId, Person aPerson)
   {
     personRoleId = aPersonRoleId;
-    persons = new ArrayList<Person>();
+    boolean didAddPerson = setPerson(aPerson);
+    if (!didAddPerson)
+    {
+      throw new RuntimeException("Unable to create personRole due to person. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
   }
 
   //------------------------
@@ -48,135 +51,45 @@ public abstract class PersonRole
     wasSet = true;
     return wasSet;
   }
-
-  
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   public int getPersonRoleId()
   {
     return personRoleId;
   }
-  /* Code from template association_GetMany */
+  /* Code from template association_GetOne */
   @OneToMany
-  public Person getPerson(int index)
+  public Person getPerson()
   {
-    Person aPerson = persons.get(index);
-    return aPerson;
+    return person;
   }
-
-  public List<Person> getPersons()
+  /* Code from template association_SetOneToMany */
+  public boolean setPerson(Person aPerson)
   {
-    List<Person> newPersons = Collections.unmodifiableList(persons);
-    return newPersons;
-  }
-
-  public int numberOfPersons()
-  {
-    int number = persons.size();
-    return number;
-  }
-
-  public boolean hasPersons()
-  {
-    boolean has = persons.size() > 0;
-    return has;
-  }
-
-  public int indexOfPerson(Person aPerson)
-  {
-    int index = persons.indexOf(aPerson);
-    return index;
-  }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfPersons()
-  {
-    return 0;
-  }
-  /* Code from template association_AddManyToManyMethod */
-  public boolean addPerson(Person aPerson)
-  {
-    boolean wasAdded = false;
-    if (persons.contains(aPerson)) { return false; }
-    persons.add(aPerson);
-    if (aPerson.indexOfPersonRole(this) != -1)
+    boolean wasSet = false;
+    if (aPerson == null)
     {
-      wasAdded = true;
-    }
-    else
-    {
-      wasAdded = aPerson.addPersonRole(this);
-      if (!wasAdded)
-      {
-        persons.remove(aPerson);
-      }
-    }
-    return wasAdded;
-  }
-  /* Code from template association_RemoveMany */
-  public boolean removePerson(Person aPerson)
-  {
-    boolean wasRemoved = false;
-    if (!persons.contains(aPerson))
-    {
-      return wasRemoved;
+      return wasSet;
     }
 
-    int oldIndex = persons.indexOf(aPerson);
-    persons.remove(oldIndex);
-    if (aPerson.indexOfPersonRole(this) == -1)
+    Person existingPerson = person;
+    person = aPerson;
+    if (existingPerson != null && !existingPerson.equals(aPerson))
     {
-      wasRemoved = true;
+      existingPerson.removePersonRole(this);
     }
-    else
-    {
-      wasRemoved = aPerson.removePersonRole(this);
-      if (!wasRemoved)
-      {
-        persons.add(oldIndex,aPerson);
-      }
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addPersonAt(Person aPerson, int index)
-  {  
-    boolean wasAdded = false;
-    if(addPerson(aPerson))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfPersons()) { index = numberOfPersons() - 1; }
-      persons.remove(aPerson);
-      persons.add(index, aPerson);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMovePersonAt(Person aPerson, int index)
-  {
-    boolean wasAdded = false;
-    if(persons.contains(aPerson))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfPersons()) { index = numberOfPersons() - 1; }
-      persons.remove(aPerson);
-      persons.add(index, aPerson);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addPersonAt(aPerson, index);
-    }
-    return wasAdded;
+    person.addPersonRole(this);
+    wasSet = true;
+    return wasSet;
   }
 
   public void delete()
   {
-    ArrayList<Person> copyOfPersons = new ArrayList<Person>(persons);
-    persons.clear();
-    for(Person aPerson : copyOfPersons)
+    Person placeholderPerson = person;
+    this.person = null;
+    if(placeholderPerson != null)
     {
-      aPerson.removePersonRole(this);
+      placeholderPerson.removePersonRole(this);
     }
   }
 
@@ -184,6 +97,7 @@ public abstract class PersonRole
   public String toString()
   {
     return super.toString() + "["+
-            "personRoleId" + ":" + getPersonRoleId()+ "]";
+            "personRoleId" + ":" + getPersonRoleId()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "person = "+(getPerson()!=null?Integer.toHexString(System.identityHashCode(getPerson())):"null");
   }
 }
