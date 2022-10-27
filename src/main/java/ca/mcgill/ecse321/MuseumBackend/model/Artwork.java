@@ -3,9 +3,16 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.sql.Date;
 
 // line 76 "../../../../../Museum.ump"
+@Entity
 public class Artwork
 {
 
@@ -93,6 +100,8 @@ public class Artwork
     return value;
   }
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   public int getArtworkId()
   {
     return artworkId;
@@ -108,16 +117,19 @@ public class Artwork
     return isLoanable;
   }
   /* Code from template association_GetOne */
+  @ManyToOne(optional=false)
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetOne */
+  @ManyToOne(optional=true)
   public Room getRoom()
   {
     return room;
   }
   /* Code from template association_GetMany */
+  @OneToMany
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);

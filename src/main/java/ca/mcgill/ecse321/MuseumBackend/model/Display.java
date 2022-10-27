@@ -3,9 +3,11 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
 
 // line 94 "../../../../../Museum.ump"
 // line 161 "../../../../../Museum.ump"
+@Entity
 public class Display extends Room
 {
 

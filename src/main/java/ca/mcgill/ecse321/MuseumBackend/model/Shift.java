@@ -4,9 +4,16 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
 import java.util.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 // line 34 "../../../../../Museum.ump"
 // line 127 "../../../../../Museum.ump"
+@Entity
 public class Shift
 {
 
@@ -78,11 +85,14 @@ public class Shift
     return endTime;
   }
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   public int getWorkDayId()
   {
     return workDayId;
   }
   /* Code from template association_GetMany */
+  @ManyToMany
   public Employee getEmployee(int index)
   {
     Employee aEmployee = employees.get(index);
@@ -113,6 +123,7 @@ public class Shift
     return index;
   }
   /* Code from template association_GetOne */
+  @ManyToOne
   public Museum getMuseum()
   {
     return museum;

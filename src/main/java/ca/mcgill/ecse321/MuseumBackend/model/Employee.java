@@ -3,10 +3,13 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 // line 64 "../../../../../Museum.ump"
 // line 144 "../../../../../Museum.ump"
-public class Employee extends UserRole
+@Entity
+public class Employee extends PersonRole
 {
 
   //------------------------
@@ -20,9 +23,9 @@ public class Employee extends UserRole
   // CONSTRUCTOR
   //------------------------
 
-  public Employee(int aUserRoleId)
+  public Employee(int aPersonRoleId)
   {
-    super(aUserRoleId);
+    super(aPersonRoleId);
     shifts = new ArrayList<Shift>();
   }
 
@@ -30,6 +33,7 @@ public class Employee extends UserRole
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
+  @ManyToMany
   public Shift getShift(int index)
   {
     Shift aShift = shifts.get(index);

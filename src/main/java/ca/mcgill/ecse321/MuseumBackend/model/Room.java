@@ -3,9 +3,16 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 // line 69 "../../../../../Museum.ump"
 // line 149 "../../../../../Museum.ump"
+@MappedSuperclass
 public abstract class Room
 {
 
@@ -62,16 +69,20 @@ public abstract class Room
     return roomNumber;
   }
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   public int getRoomId()
   {
     return roomId;
   }
   /* Code from template association_GetOne */
+  @ManyToOne
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetMany */
+  @OneToMany
   public Artwork getArtwork(int index)
   {
     Artwork aArtwork = artworks.get(index);
