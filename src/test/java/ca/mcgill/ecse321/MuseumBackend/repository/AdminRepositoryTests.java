@@ -4,12 +4,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.UUID;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.*; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 import ca.mcgill.ecse321.MuseumBackend.model.User;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.model.PersonRole;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+
 
 @SpringBootTest
 public class AdminRepositoryTests {
@@ -25,21 +29,21 @@ public class AdminRepositoryTests {
 	public void testPersistAndLoadAdmin() {
 		// Create object
 		String name = "anakin skywalker";
-		User aUser = new User();
-		Admin anakin = new Admin();
-		aUser.addUserRole(anakin);
-		aUser.setName(name);
-
-		// Save object
-		anakin = adminRepository.save(anakin);
-		UUID id = anakin.getUserRoleId();
-
-		// Read object from database
-		anakin = adminRepository.findAdminByAUserRoleId(id);
-
-		// Assert that object has correct attributes
+		String aEmail = "emma.k@gmail.com";
+		String aPassword = "12345";
+		int aMuseumId = 123;
+		Museum aMuseum = new Museum(aMuseumId);
+		Person aPerson = new Person(aEmail, aPassword, name, aMuseum);
+		
+		PersonRole anakin = new Admin();
+		anakin.setPerson(aPerson);
+		anakin.setPersonRoleId(324);
+		
+		adminRepository.save(anakin);
+		int adminId = anakin.getPersonRoleId();
+		anakin = null;
+		anakin = adminRepository.findAdminByAPersonRoleID(adminId);
 		assertNotNull(anakin);
-		assertEquals(id, anakin.getUserRoleId());
-		assertEquals(name, anakin.getUser(0).getName());
+		assertEquals(adminId, anakin.getPersonRoleId());
 	}
 }
