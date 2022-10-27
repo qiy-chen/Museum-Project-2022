@@ -16,7 +16,7 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 | Chen Qi  | qiy-chen  | U2 |
 | Faubert Samuel  | Coldstuff1 | U2 |
 | Kawczynski Emma  | emmakawczynski | U2 |
-| Looman Jeanine  | jeanine56 | U2 |
+| Looman Jeanine  | jeanine56 | U4 |
 | Tsahageas Alex  | alextsah | U2 |
 
 ## Time Contributions
