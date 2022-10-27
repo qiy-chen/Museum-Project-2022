@@ -17,8 +17,7 @@ import ca.mcgill.ecse321.MuseumBackend.model.Room;
 
 @SpringBootTest
 public class StorageRepositoryTests {
-    @Autowired
-    private MuseumRepository museumRepository;
+
     @Autowired
     private StorageRepository storageRepository;
 

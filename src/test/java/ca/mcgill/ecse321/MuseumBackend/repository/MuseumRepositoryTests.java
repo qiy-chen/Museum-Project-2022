@@ -56,8 +56,7 @@ public class MuseumRepositoryTests {
       museum = null;
       
       museum = MuseumRepository.findMuseumByMuseumId(museumID);
-      
-      
+            
       //Assertion Tests
       assertNotNull(museum);
       assertEquals(museumID, museum.getMuseumId);
