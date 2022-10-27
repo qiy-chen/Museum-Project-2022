@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import java.sql.Date;
 
 // line 76 "../../../../../Museum.ump"
@@ -23,12 +24,17 @@ public class Artwork
   //Artwork Attributes
   private boolean isLoanable;
   private double value;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int artworkId;
   private String artworkName;
 
   //Artwork Associations
+  @ManyToOne(optional=false)
   private Museum museum;
+  @ManyToOne
   private Room room;
+  @OneToMany
   private List<Loan> loans;
 
   //------------------------
@@ -54,6 +60,9 @@ public class Artwork
     loans = new ArrayList<Loan>();
   }
 
+  public Artwork() {
+    
+  }
   //------------------------
   // INTERFACE
   //------------------------
@@ -100,8 +109,7 @@ public class Artwork
     return value;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public int getArtworkId()
   {
     return artworkId;
@@ -112,30 +120,30 @@ public class Artwork
     return artworkName;
   }
   /* Code from template attribute_IsBoolean */
+  @Transient
   public boolean isIsLoanable()
   {
     return isLoanable;
   }
   /* Code from template association_GetOne */
-  @ManyToOne(optional=false)
+  
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetOne */
-  @ManyToOne(optional=true)
   public Room getRoom()
   {
     return room;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);
     return aLoan;
   }
-
+  
   public List<Loan> getLoans()
   {
     List<Loan> newLoans = Collections.unmodifiableList(loans);

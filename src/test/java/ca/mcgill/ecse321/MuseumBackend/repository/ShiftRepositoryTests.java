@@ -43,7 +43,7 @@ public class ShiftRepositoryTests {
     museumInstance = null;
     
     //Search for the ticket in the database
-    shift = shiftRepository.findShiftByShiftId(shiftId);
+    shift = shiftRepository.findShiftByWorkDayId(shiftId);
     
     //Test if the values are correct
     assertNotNull(shift);

@@ -18,7 +18,9 @@ public class Customer extends PersonRole
   //------------------------
 
   //Customer Associations
+  @OneToMany
   private List<Ticket> tickets;
+  @OneToMany
   private List<Loan> loans;
 
   //------------------------
@@ -31,18 +33,22 @@ public class Customer extends PersonRole
     tickets = new ArrayList<Ticket>();
     loans = new ArrayList<Loan>();
   }
+  
+  public Customer() {
+    super();
+  }
 
   //------------------------
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public Ticket getTicket(int index)
   {
     Ticket aTicket = tickets.get(index);
     return aTicket;
   }
-
+  
   public List<Ticket> getTickets()
   {
     List<Ticket> newTickets = Collections.unmodifiableList(tickets);
@@ -67,13 +73,13 @@ public class Customer extends PersonRole
     return index;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);
     return aLoan;
   }
-
+  
   public List<Loan> getLoans()
   {
     List<Loan> newLoans = Collections.unmodifiableList(loans);
