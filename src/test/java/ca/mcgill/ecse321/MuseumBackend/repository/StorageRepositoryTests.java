@@ -27,6 +27,7 @@ public class StorageRepositoryTests {
     @AfterEach
     public void clearDatabase() {
       storageRepository.deleteAll();
+      museumRepository.deleteAll();
     }
     
     @Test
