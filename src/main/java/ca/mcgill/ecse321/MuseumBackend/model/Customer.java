@@ -25,9 +25,9 @@ public class Customer extends PersonRole
   // CONSTRUCTOR
   //------------------------
 
-  public Customer(int aPersonRoleId)
+  public Customer(int aPersonRoleId,Person person)
   {
-    super(aPersonRoleId);
+    super(aPersonRoleId, person);
     tickets = new ArrayList<Ticket>();
     loans = new ArrayList<Loan>();
   }
