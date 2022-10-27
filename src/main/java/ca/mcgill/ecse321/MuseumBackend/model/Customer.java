@@ -3,11 +3,14 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.sql.Date;
 
 // line 54 "../../../../../Museum.ump"
 // line 134 "../../../../../Museum.ump"
-public class Customer extends UserRole
+@Entity
+public class Customer extends PersonRole
 {
 
   //------------------------
@@ -22,9 +25,9 @@ public class Customer extends UserRole
   // CONSTRUCTOR
   //------------------------
 
-  public Customer(int aUserRoleId)
+  public Customer(int aPersonRoleId)
   {
-    super(aUserRoleId);
+    super(aPersonRoleId);
     tickets = new ArrayList<Ticket>();
     loans = new ArrayList<Loan>();
   }
@@ -33,6 +36,7 @@ public class Customer extends UserRole
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
+  @OneToMany
   public Ticket getTicket(int index)
   {
     Ticket aTicket = tickets.get(index);
@@ -63,6 +67,7 @@ public class Customer extends UserRole
     return index;
   }
   /* Code from template association_GetMany */
+  @OneToMany
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);

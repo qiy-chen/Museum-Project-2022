@@ -5,10 +5,10 @@ class Museum
   
   1 <@>- * Room;
   1 <@>- * Shift;
-  1 <@>- * User;
+  1 <@>- * Person;
 }
 
-class User
+class Person
 {
   email;
   password;
@@ -24,11 +24,11 @@ class Ticket {
   * -- 1 Customer;
 }
 
-class UserRole
+class PersonRole
 {
-  int userRoleId;
+  int personRoleId;
 abstract;
-  * -<@> * User;
+  * -<@> * Person;
 }
 
 class Shift
@@ -53,17 +53,17 @@ class Loan {
 
 class Customer
 {
-  isA UserRole;
+  isA PersonRole;
 }
 
 class Admin
 {
-  isA UserRole;
+  isA PersonRole;
 }
 
 class Employee
 {
-  isA UserRole;
+  isA PersonRole;
 }
 
 class Room
@@ -94,7 +94,7 @@ class Storage
 class Display
 {
     isA Room;
-int maxArtifacts;
+int maxArtworks;
    
 }
 
@@ -108,26 +108,26 @@ class Museum
   position 502 146 109 41;
   position.association Museum__Room 110,16 0,2;
   position.association Museum__Shift 0,25 143,0;
-  position.association Museum__User 0,23 114,0;
-  position.association Museum__UserRole 8,41 97,0;
+  position.association Museum__Person 0,23 114,0;
+  position.association Museum__PersonRole 8,41 97,0;
 }
 
-class User
+class Person
 {
   position 244 254 138.766 75.3594;
 }
 
-class UserRole
+class PersonRole
 {
   position 176 390 141.984 76.3008;
-  position.association UserRole__User 46,0 51,34;
-  position.association User__UserRole 30,0 4,72;
+  position.association PersonRole__Person 46,0 51,34;
+  position.association Person__PersonRole 30,0 4,72;
 }
 
 class Shift
 {
   position 435 690 109 94.793;
-  position.association Shift__User 12,0 115,60;
+  position.association Shift__Person 12,0 115,60;
   position.association Employee__Shift 86,0 110,36;
 }
 

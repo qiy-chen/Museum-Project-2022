@@ -3,9 +3,11 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
 
 // line 94 "../../../../../Museum.ump"
 // line 161 "../../../../../Museum.ump"
+@Entity
 public class Display extends Room
 {
 
@@ -14,33 +16,33 @@ public class Display extends Room
   //------------------------
 
   //Display Attributes
-  private int maxArtifacts;
+  private int maxArtworks;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Display(int aRoomNumber, int aRoomId, Museum aMuseum, int aMaxArtifacts)
+  public Display(int aRoomNumber, int aRoomId, Museum aMuseum, int aMaxArtworks)
   {
     super(aRoomNumber, aRoomId, aMuseum);
-    maxArtifacts = aMaxArtifacts;
+    maxArtworks = aMaxArtworks;
   }
 
   //------------------------
   // INTERFACE
   //------------------------
 
-  public boolean setMaxArtifacts(int aMaxArtifacts)
+  public boolean setMaxArtworks(int aMaxArtworks)
   {
     boolean wasSet = false;
-    maxArtifacts = aMaxArtifacts;
+    maxArtworks = aMaxArtworks;
     wasSet = true;
     return wasSet;
   }
 
-  public int getMaxArtifacts()
+  public int getMaxArtworks()
   {
-    return maxArtifacts;
+    return maxArtworks;
   }
 
   public void delete()
@@ -52,6 +54,6 @@ public class Display extends Room
   public String toString()
   {
     return super.toString() + "["+
-            "maxArtifacts" + ":" + getMaxArtifacts()+ "]";
+            "maxArtworks" + ":" + getMaxArtworks()+ "]";
   }
 }
