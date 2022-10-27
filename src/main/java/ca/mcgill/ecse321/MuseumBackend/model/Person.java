@@ -7,6 +7,7 @@ import java.util.*;
 
 // line 11 "../../../../../Museum.ump"
 // line 115 "../../../../../Museum.ump"
+@Entity
 public class Person
 {
 
@@ -26,7 +27,6 @@ public class Person
   //------------------------
   // CONSTRUCTOR
   //------------------------
-  @Entity
   public Person(String aEmail, String aPassword, String aName, Museum aMuseum)
   {
     email = aEmail;
@@ -39,14 +39,14 @@ public class Person
     }
     personRoles = new ArrayList<PersonRole>();
   }
+  public Person() {};
 
   //------------------------
   // INTERFACE
   //------------------------
 
-  public User() {
 	// TODO Auto-generated constructor stub
-}
+
 
 public boolean setEmail(String aEmail)
   {

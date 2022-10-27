@@ -58,7 +58,11 @@ public class Artwork
   // INTERFACE
   //------------------------
 
-  public boolean setIsLoanable(boolean aIsLoanable)
+  public Artwork() {
+	// TODO Auto-generated constructor stub
+}
+
+public boolean setIsLoanable(boolean aIsLoanable)
   {
     boolean wasSet = false;
     isLoanable = aIsLoanable;

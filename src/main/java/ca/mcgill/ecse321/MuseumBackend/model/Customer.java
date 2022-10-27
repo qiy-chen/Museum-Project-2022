@@ -3,13 +3,10 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import java.sql.Date;
 
-// line 54 "../../../../../Museum.ump"
-// line 134 "../../../../../Museum.ump"
-@Entity
+// line 52 "../../../../../Museum.ump"
+// line 133 "../../../../../Museum.ump"
 public class Customer extends PersonRole
 {
 
@@ -25,9 +22,11 @@ public class Customer extends PersonRole
   // CONSTRUCTOR
   //------------------------
 
-  public Customer(int aPersonRoleId)
+  public Customer(UUID aUserRoleId)
   {
-    super(aPersonRoleId);
+
+    super();
+
     tickets = new ArrayList<Ticket>();
     loans = new ArrayList<Loan>();
   }
@@ -36,7 +35,6 @@ public class Customer extends PersonRole
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
-  @OneToMany
   public Ticket getTicket(int index)
   {
     Ticket aTicket = tickets.get(index);
@@ -67,7 +65,6 @@ public class Customer extends PersonRole
     return index;
   }
   /* Code from template association_GetMany */
-  @OneToMany
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);
@@ -103,9 +100,9 @@ public class Customer extends PersonRole
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(double aPrice, int aTicketId, Date aTicketDate, Museum aMuseum)
+  public Ticket addTicket(double aPrice, int aTicketId, Date aDate, Museum aMuseum, Customer aCustomer)
   {
-    return new Ticket(aPrice, aTicketId, aTicketDate, aMuseum, this);
+    return new Ticket(aPrice, aTicketId, aDate, aMuseum, aCustomer);
   }
 
   public boolean addTicket(Ticket aTicket)
@@ -175,9 +172,9 @@ public class Customer extends PersonRole
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Museum aMuseum, Artwork aArtwork)
+  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Museum aMuseum, Artwork aArtifact)
   {
-    return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, aMuseum, this, aArtwork);
+    return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, aMuseum, this, aArtifact);
   }
 
   public boolean addLoan(Loan aLoan)

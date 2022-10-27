@@ -70,7 +70,11 @@ public class Loan
   // INTERFACE
   //------------------------
 
-  public boolean setRentalFee(double aRentalFee)
+  public Loan() {
+	// TODO Auto-generated constructor stub
+}
+
+public boolean setRentalFee(double aRentalFee)
   {
     boolean wasSet = false;
     rentalFee = aRentalFee;

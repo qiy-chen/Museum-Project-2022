@@ -21,7 +21,6 @@ public class Admin extends PersonRole
 
   public Admin(int aPersonRoleId)
   {
-    super(aPersonRoleId);
   }
 
   //------------------------

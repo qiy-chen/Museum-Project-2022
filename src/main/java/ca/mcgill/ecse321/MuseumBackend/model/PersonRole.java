@@ -39,6 +39,7 @@ public abstract class PersonRole
       throw new RuntimeException("Unable to create personRole due to person. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
+  public PersonRole() {};
 
   //------------------------
   // INTERFACE

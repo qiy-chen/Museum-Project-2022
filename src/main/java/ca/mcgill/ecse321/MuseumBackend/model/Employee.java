@@ -25,11 +25,14 @@ public class Employee extends PersonRole
 
   public Employee(int aPersonRoleId)
   {
-    super(aPersonRoleId);
     shifts = new ArrayList<Shift>();
   }
 
-  //------------------------
+  public Employee() {
+	// TODO Auto-generated constructor stub
+}
+
+//------------------------
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
