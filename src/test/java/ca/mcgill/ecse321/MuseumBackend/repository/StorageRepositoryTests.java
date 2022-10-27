@@ -52,6 +52,7 @@ public class StorageRepositoryTests {
         assertEquals(storage.getRoomId(), roomId);
         assertEquals(storage.getRoomNumber(), roomNumber);
         assertEquals(storage.getMuseum(), musem);
+        assertEquals(storage.getMuseum().getMuseumId(), musemId);
 
     }
 }
