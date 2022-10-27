@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.MuseumBackend.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterEach;
@@ -54,6 +55,5 @@ public class StorageRepositoryTests {
         assertEquals(storage.getRoomNumber(), roomNumber);
         assertEquals(storage.getMuseum(), musem);
         assertEquals(storage.getMuseum().getMuseumId(), musemId);
-
     }
 }
