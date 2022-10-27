@@ -38,7 +38,7 @@ public class DisplayRepositoryTests {
 		emmaRoom.setMuseum(museum);
 		displayRepository.save(emmaRoom);
 		emmaRoom = null;
-		emmaRoom = Repository.findDisplayByARoomID(roomId);
+		emmaRoom = displayRepository.findDisplayByARoomID(roomId);
 		
 		assertNotNull(emmaRoom);
 		assertEquals(roomId, emmaRoom.getRoomId());
