@@ -27,7 +27,12 @@ public class MuseumRepositoryTests {
     @Test
     public void testPersistAndLoadMuseum() {
       //Creating the museum instance 
+<<<<<<< Updated upstream
       Museum museum = new Museum()
+=======
+      int id = 123;
+      Museum museum = new Museum(id);
+>>>>>>> Stashed changes
       
       //Save the museum instance in the MuseumRepository table 
       museumRepository.save(museum);

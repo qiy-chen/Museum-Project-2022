@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+
 import javax.persistence.Entity;
 
 // line 88 "../../../../../Museum.ump"
