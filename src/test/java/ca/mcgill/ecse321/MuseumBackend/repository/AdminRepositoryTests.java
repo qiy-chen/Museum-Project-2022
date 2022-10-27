@@ -39,10 +39,10 @@ public class AdminRepositoryTests {
 		anakin.setPerson(aPerson);
 		anakin.setPersonRoleId(324);
 		
-		adminRepository.save(anakin);
+		AdminRepository.save(anakin);
 		int adminId = anakin.getPersonRoleId();
 		anakin = null;
-		anakin = adminRepository.findAdminByAPersonRoleID(adminId);
+		anakin = AdminRepository.findAdminByAPersonRoleID(adminId);
 		assertNotNull(anakin);
 		assertEquals(adminId, anakin.getPersonRoleId());
 	}

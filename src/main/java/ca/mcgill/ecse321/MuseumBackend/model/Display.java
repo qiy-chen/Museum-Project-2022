@@ -21,7 +21,7 @@ public class Display extends Room
   //------------------------
   // CONSTRUCTOR
   //------------------------
-
+  public Display() {}
   public Display(int aRoomNumber, int aRoomId, Museum aMuseum, int aMaxArtworks)
   {
     super(aRoomNumber, aRoomId, aMuseum);
