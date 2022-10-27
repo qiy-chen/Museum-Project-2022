@@ -13,6 +13,7 @@ import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 import ca.mcgill.ecse321.MuseumBackend.model.Room;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 
 
 @SpringBootTest
@@ -20,6 +21,8 @@ public class StorageRepositoryTests {
 
     @Autowired
     private StorageRepository storageRepository;
+    @Autowired
+    private MuseumRepository museumRepository;
 
     @AfterEach
     public void clearDatabase() {
@@ -30,10 +33,16 @@ public class StorageRepositoryTests {
     public void testPersistAndLoadMuseum() {
         int roomNumber = 25;
         int roomId = 123;
+        int museumId = 456;
         
-        Room storage = new Storage(roomNumber, roomId);
+        Museum museum = new Museum(museumId);
+        
+        Room storage = new Storage(roomNumber, roomId, museum);
+        
+        museum.addRoom(storage); //lol idk
         
         storageRepository.save(storage);
+        museumRepository.save(museum);
         
         storage = null;
         
@@ -42,6 +51,7 @@ public class StorageRepositoryTests {
         assertNotNull(storage);
         assertEquals(storage.getRoomId(), roomId);
         assertEquals(storage.getRoomNumber(), roomNumber);
+        assertEquals(storage.getMuseum(), musem);
 
     }
 }
