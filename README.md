@@ -17,7 +17,7 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 | Faubert Samuel  | Coldstuff1 | U2 |  |
 | Kawczynski Emma  | emmakawczynski | U2 | Software developer |
 | Looman Jeanine  | jeanine56 | U4 | Documentation |
-| Tsahageas Alex  | alextsah | U2 |  |
+| Tsahageas Alex  | alextsah | U2 | Project Management |
 
 Role Ideas: software developer, project management, documentation
 
@@ -29,7 +29,7 @@ Role Ideas: software developer, project management, documentation
 | Faubert Samuel  |  |  |  |  |
 | Kawczynski Emma  | 15|  |  |  |
 | Looman Jeanine  | 18 |  |  |  |
-| Tsahageas Alex |  |  |  |  |
+| Tsahageas Alex | 16 |  |  |  |
 
 # Project Reports
 
