@@ -6,8 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 
-public interface EmployeeRepository extends CrudRepository<Employee, UUID>{
+public interface EmployeeRepository extends CrudRepository<Employee, Integer>{
 	
-	Employee findEmployeeByAUserRoleId(UUID aUserRoleId);
+	Employee findEmployeeByPersonRoleId(int aUserRoleId);
 	
 }

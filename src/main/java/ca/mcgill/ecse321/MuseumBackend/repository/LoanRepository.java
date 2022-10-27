@@ -5,8 +5,8 @@ import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 
-public interface LoanRepository extends CrudRepository<Loan, UUID>{
+public interface LoanRepository extends CrudRepository<Loan, Integer>{
 
-	Loan FindLoanById(UUID loanId);
+	Loan FindLoanById(int loanId);
 	
 }
