@@ -45,7 +45,6 @@ public class Person
   //------------------------
 
 
-
 public boolean setEmail(String aEmail)
   {
     boolean wasSet = false;

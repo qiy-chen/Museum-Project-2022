@@ -19,9 +19,9 @@ public class Admin extends PersonRole
   // CONSTRUCTOR
   //------------------------
 
-  public Admin(int aPersonRoleId)
+  public Admin(int aPersonRoleId, Person person)
   {
-    super(aPersonRoleId);
+    super(aPersonRoleId, person);
   }
 
   //------------------------

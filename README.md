@@ -10,23 +10,25 @@ The museum is managed by its owner who gets their own user account. The museum a
 In teams of six students, you will gather requirements, design a multi-tier software solution to satisfy those requirements, implement the system, validate that the system is satisfying the requirements, and develop a release pipeline to automate the software delivery process.
 
 ## Team Members 
-| Name | Username | Year |
-| ------------- | --- | --- |
-| Abdo Elie-Dimitri | bigbrainzelie | U2 |
-| Chen Qi  | qiy-chen  | U2 |
-| Faubert Samuel  | Coldstuff1 | U2 |
-| Kawczynski Emma  | emmakawczynski | U2 |
-| Looman Jeanine  | jeanine56 | U4 |
-| Tsahageas Alex  | alextsah | U2 |
+| Name | Username | Year | Role |
+| ------------- | --- | --- | --- |
+| Abdo Elie-Dimitri | bigbrainzelie | U2 |  |
+| Chen Qi  | qiy-chen  | U2 | Software developer |
+| Faubert Samuel  | Coldstuff1 | U2 |  |
+| Kawczynski Emma  | emmakawczynski | U2 | Software developer |
+| Looman Jeanine  | jeanine56 | U4 | Documentation |
+| Tsahageas Alex  | alextsah | U2 |  |
+
+Role Ideas: software developer, project management, documentation
 
 ## Time Contributions
 | Name  | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |
 | ------------- | --- | --- | --- | --- |
 | Abdo Elie-Dimitri  |  |  |  |  |
-| Chen Qi  |  |  |  |  |
+| Chen Qi  | 14 |  |  |  |
 | Faubert Samuel  |  |  |  |  |
-| Kawczynski Emma  |  |  |  |  |
-| Looman Jeanine  |  |  |  |  |
+| Kawczynski Emma  | 15|  |  |  |
+| Looman Jeanine  | 18 |  |  |  |
 | Tsahageas Alex |  |  |  |  |
 
 # Project Reports

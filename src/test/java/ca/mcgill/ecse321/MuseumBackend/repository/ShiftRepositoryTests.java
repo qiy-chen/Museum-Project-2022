@@ -31,7 +31,7 @@ public class ShiftRepositoryTests {
 
     //Setup shift
     Date startDate = new Date(2);
-    Date endDate = new Date(2);
+    Date endDate = new Date(3);
     int shiftId = 33;
     Shift shift = new Shift(startDate, endDate, shiftId, museumInstance);
     
