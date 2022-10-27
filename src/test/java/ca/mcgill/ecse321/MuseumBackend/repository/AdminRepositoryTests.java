@@ -35,7 +35,7 @@ public class AdminRepositoryTests {
 		Museum aMuseum = new Museum(aMuseumId);
 		Person aPerson = new Person(aEmail, aPassword, name, aMuseum);
 		
-		PersonRole anakin = new Admin();
+		Admin anakin = new Admin();
 		anakin.setPerson(aPerson);
 		anakin.setPersonRoleId(324);
 		
