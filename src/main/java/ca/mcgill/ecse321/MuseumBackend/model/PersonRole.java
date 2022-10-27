@@ -3,17 +3,12 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
 // line 27 "../../../../../Museum.ump"
 // line 120 "../../../../../Museum.ump"
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class PersonRole
 {
 
@@ -23,7 +18,7 @@ public abstract class PersonRole
 
   //PersonRole Attributes
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  //@GeneratedValue(strategy = GenerationType.AUTO)
   private int personRoleId;
 
   //PersonRole Associations

@@ -8,7 +8,6 @@ import java.util.*;
 // line 11 "../../../../../Museum.ump"
 // line 115 "../../../../../Museum.ump"
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Person
 {
 
