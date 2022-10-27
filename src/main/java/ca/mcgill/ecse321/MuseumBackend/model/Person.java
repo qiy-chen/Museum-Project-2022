@@ -44,11 +44,7 @@ public class Person
   // INTERFACE
   //------------------------
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> elie_tests
 public boolean setEmail(String aEmail)
   {
     boolean wasSet = false;
