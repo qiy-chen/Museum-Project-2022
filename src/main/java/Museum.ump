@@ -28,14 +28,14 @@ class PersonRole
 {
   int personRoleId;
 abstract;
-  * -<@> * Person;
+  * -<@> 1 Person;
 }
 
 class Shift
 {
   Date startTime;
   Date endTime;
-  int workDayId;
+  int shiftId;
 * -- * Employee;
 }
 
