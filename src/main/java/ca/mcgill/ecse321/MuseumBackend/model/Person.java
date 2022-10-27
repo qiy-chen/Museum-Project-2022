@@ -2,17 +2,11 @@
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse321.MuseumBackend.model;
+import javax.persistence.*;
 import java.util.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 // line 11 "../../../../../Museum.ump"
 // line 115 "../../../../../Museum.ump"
-@Entity
 public class Person
 {
 
@@ -32,7 +26,7 @@ public class Person
   //------------------------
   // CONSTRUCTOR
   //------------------------
-
+  @Entity
   public Person(String aEmail, String aPassword, String aName, Museum aMuseum)
   {
     email = aEmail;
@@ -73,7 +67,6 @@ public class Person
     wasSet = true;
     return wasSet;
   }
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   public String getEmail()
@@ -151,54 +144,41 @@ public class Person
   {
     return 0;
   }
-  /* Code from template association_AddManyToManyMethod */
+  /* Code from template association_AddManyToOne */
+
+
   public boolean addPersonRole(PersonRole aPersonRole)
   {
     boolean wasAdded = false;
     if (personRoles.contains(aPersonRole)) { return false; }
-    personRoles.add(aPersonRole);
-    if (aPersonRole.indexOfPerson(this) != -1)
+    Person existingPerson = aPersonRole.getPerson();
+    boolean isNewPerson = existingPerson != null && !this.equals(existingPerson);
+    if (isNewPerson)
     {
-      wasAdded = true;
+      aPersonRole.setPerson(this);
     }
     else
     {
-      wasAdded = aPersonRole.addPerson(this);
-      if (!wasAdded)
-      {
-        personRoles.remove(aPersonRole);
-      }
+      personRoles.add(aPersonRole);
     }
+    wasAdded = true;
     return wasAdded;
   }
-  /* Code from template association_RemoveMany */
+
   public boolean removePersonRole(PersonRole aPersonRole)
   {
     boolean wasRemoved = false;
-    if (!personRoles.contains(aPersonRole))
+    //Unable to remove aPersonRole, as it must always have a person
+    if (!this.equals(aPersonRole.getPerson()))
     {
-      return wasRemoved;
-    }
-
-    int oldIndex = personRoles.indexOf(aPersonRole);
-    personRoles.remove(oldIndex);
-    if (aPersonRole.indexOfPerson(this) == -1)
-    {
+      personRoles.remove(aPersonRole);
       wasRemoved = true;
-    }
-    else
-    {
-      wasRemoved = aPersonRole.removePerson(this);
-      if (!wasRemoved)
-      {
-        personRoles.add(oldIndex,aPersonRole);
-      }
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
   public boolean addPersonRoleAt(PersonRole aPersonRole, int index)
-  {  
+  {
     boolean wasAdded = false;
     if(addPersonRole(aPersonRole))
     {
@@ -221,8 +201,8 @@ public class Person
       personRoles.remove(aPersonRole);
       personRoles.add(index, aPersonRole);
       wasAdded = true;
-    } 
-    else 
+    }
+    else
     {
       wasAdded = addPersonRoleAt(aPersonRole, index);
     }
@@ -243,7 +223,7 @@ public class Person
       aPersonRole.delete();
       personRoles.remove(aPersonRole);
     }
-    
+
   }
 
 
