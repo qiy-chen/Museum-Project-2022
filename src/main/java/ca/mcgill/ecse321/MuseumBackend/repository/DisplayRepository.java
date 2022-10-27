@@ -1,5 +1,10 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
 
-public class DisplayRepository {
+import org.springframework.data.repository.CrudRepository;
+import ca.mcgill.ecse321.MuseumBackend.model.Display;
 
+public interface DisplayRepository extends CrudRepository<Display, Integer>{
+
+	Display findDisplayByDisplayId(int aDisplayId);
+	
 }

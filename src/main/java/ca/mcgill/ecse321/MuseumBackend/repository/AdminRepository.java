@@ -1,12 +1,10 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
 
-import java.util.UUID;
-
 import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 
-public interface AdminRepository extends CrudRepository<Admin, UUID>{
+public interface AdminRepository extends CrudRepository<Admin, Integer>{
 
-	Admin findAdminByAUserRoleId(UUID aUserRoleId);
+	Admin findAdminByPersonRoleId(int aPersonRoleId);
 	
 }
