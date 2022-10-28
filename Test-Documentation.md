@@ -15,7 +15,7 @@ They are saved to their respective repositories. They are then set to null befor
 
 The ticket reference is found using the repository find function, findShiftByShiftId(shiftId), and the test checks if each attribute retrieved of the class and each associated class are correct compared to the values that were set up at the start.
 
-##Test Contributions
+## Test Contributions
 We divided persistence testing between group members as follows:
 * Display room: Emma  
 * Storage room: Alex  
