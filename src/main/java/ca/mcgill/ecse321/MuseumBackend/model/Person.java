@@ -43,10 +43,12 @@ public class Person
     }
     personRoles = new ArrayList<PersonRole>();
   }
-  
+
   public Person() {
-    
+    personRoles = new ArrayList<PersonRole>();
   }
+  
+
 
   //------------------------
   // INTERFACE
