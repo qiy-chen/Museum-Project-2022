@@ -50,6 +50,10 @@ public class Shift
       throw new RuntimeException("Unable to create shift due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
+  
+  public Shift() {
+    
+  }
 
   //------------------------
   // INTERFACE
