@@ -1,3 +1,6 @@
+## Test Overview
+For each repository class, a corresponding repository tests class was made containing tests for writing to and reading from the database. Tests also check one class attribute and one reference between classes. Below are examples for two specific tests explaining the general procedure used for all tests:
+
 ### Ticket Persistence Test
 An instance of a museum, a customer and a ticket is created with specific attributes.
 
