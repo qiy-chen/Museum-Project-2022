@@ -16,7 +16,9 @@ import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 @SpringBootTest
 public class DisplayRepositoryTests {
 	@Autowired
-	private DisplayRepository DisplayRepository;
+	private DisplayRepository displayRepository;
+	@Autowired
+	private MuseumRepository museumRepository;
 
 	@AfterEach
 	public void clearDatabase() {
@@ -31,7 +33,8 @@ public class DisplayRepositoryTests {
 		int roomId = 456;
 		int museumId = 789;
 		Museum museum = new Museum(museumId);
-		Room emmaRoom = new Display();
+		museum = museumRepository.save(museum);
+		Display emmaRoom = new Display();
 		emmaRoom.setRoomNumber(roomNumber);
 		emmaRoom.setMaxArtworks(maxArtworks);
 		emmaRoom.setRoomId(roomId);
