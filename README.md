@@ -12,7 +12,7 @@ In teams of six students, you will gather requirements, design a multi-tier soft
 ## Team Members 
 | Name | Username | Year | Role |
 | ------------- | --- | --- | --- |
-| Abdo Elie-Dimitri | bigbrainzelie | U2 |  |
+| Abdo Elie-Dimitri | bigbrainzelie | U2 | Software developer |
 | Chen Qi  | qiy-chen  | U2 | Software developer |
 | Faubert Samuel  | Coldstuff1 | U2 |  |
 | Kawczynski Emma  | emmakawczynski | U2 | Software developer |
@@ -24,7 +24,7 @@ Role Ideas: software developer, project management, documentation
 ## Time Contributions
 | Name  | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |
 | ------------- | --- | --- | --- | --- |
-| Abdo Elie-Dimitri  |  |  |  |  |
+| Abdo Elie-Dimitri  | 17 |  |  |  |
 | Chen Qi  | 14 |  |  |  |
 | Faubert Samuel  |  |  |  |  |
 | Kawczynski Emma  | 15|  |  |  |
