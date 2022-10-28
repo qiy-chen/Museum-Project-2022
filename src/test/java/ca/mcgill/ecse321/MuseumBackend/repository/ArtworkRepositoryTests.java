@@ -20,9 +20,6 @@ public class ArtworkRepositoryTests {
   private ArtworkRepository artworkRepository;
 
   @Autowired
-  private LoanRepository loanRepository;
-
-  @Autowired
   private MuseumRepository museumRepository;
   
   @Autowired
@@ -30,10 +27,9 @@ public class ArtworkRepositoryTests {
 
   @AfterEach
   public void clearDatabase() {
-      museumRepository.deleteAll();
       artworkRepository.deleteAll();
-      //loanRepository.deleteAll();
       displayRepository.deleteAll();
+      museumRepository.deleteAll();
   }
   
   @Test
