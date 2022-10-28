@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+
 import javax.persistence.Entity;
 
 // line 88 "../../../../../Museum.ump"
@@ -22,6 +23,10 @@ public class Storage extends Room
   public Storage(int aRoomNumber, int aRoomId, Museum aMuseum)
   {
     super(aRoomNumber, aRoomId, aMuseum);
+  }
+  
+  public Storage() {
+    super();
   }
 
   //------------------------

@@ -17,32 +17,34 @@ public class Employee extends PersonRole
   //------------------------
 
   //Employee Associations
+  @ManyToMany
   private List<Shift> shifts;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Employee(int aPersonRoleId)
+  public Employee(int aPersonRoleId, Person person)
   {
+    super(aPersonRoleId, person);
     shifts = new ArrayList<Shift>();
   }
-
+  
   public Employee() {
-	// TODO Auto-generated constructor stub
-}
+    super();
+  }
 
-//------------------------
+  //------------------------
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
-  @ManyToMany
+  
   public Shift getShift(int index)
   {
     Shift aShift = shifts.get(index);
     return aShift;
   }
-
+  
   public List<Shift> getShifts()
   {
     List<Shift> newShifts = Collections.unmodifiableList(shifts);

@@ -3,10 +3,13 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.sql.Date;
 
-// line 52 "../../../../../Museum.ump"
-// line 133 "../../../../../Museum.ump"
+// line 54 "../../../../../Museum.ump"
+// line 134 "../../../../../Museum.ump"
+@Entity
 public class Customer extends PersonRole
 {
 
@@ -15,32 +18,37 @@ public class Customer extends PersonRole
   //------------------------
 
   //Customer Associations
+  @OneToMany
   private List<Ticket> tickets;
+  @OneToMany
   private List<Loan> loans;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Customer(UUID aUserRoleId)
+  public Customer(int aPersonRoleId,Person person)
   {
-
-    super();
-
+    super(aPersonRoleId, person);
     tickets = new ArrayList<Ticket>();
     loans = new ArrayList<Loan>();
+  }
+  
+  public Customer() {
+    super();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
+  
   public Ticket getTicket(int index)
   {
     Ticket aTicket = tickets.get(index);
     return aTicket;
   }
-
+  
   public List<Ticket> getTickets()
   {
     List<Ticket> newTickets = Collections.unmodifiableList(tickets);
@@ -65,12 +73,13 @@ public class Customer extends PersonRole
     return index;
   }
   /* Code from template association_GetMany */
+
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);
     return aLoan;
   }
-
+  
   public List<Loan> getLoans()
   {
     List<Loan> newLoans = Collections.unmodifiableList(loans);
@@ -100,9 +109,9 @@ public class Customer extends PersonRole
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(double aPrice, int aTicketId, Date aDate, Museum aMuseum, Customer aCustomer)
+  public Ticket addTicket(double aPrice, int aTicketId, Date aTicketDate, Museum aMuseum)
   {
-    return new Ticket(aPrice, aTicketId, aDate, aMuseum, aCustomer);
+    return new Ticket(aPrice, aTicketId, aTicketDate, aMuseum, this);
   }
 
   public boolean addTicket(Ticket aTicket)
@@ -172,9 +181,9 @@ public class Customer extends PersonRole
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Museum aMuseum, Artwork aArtifact)
+  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Museum aMuseum, Artwork aArtwork)
   {
-    return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, aMuseum, this, aArtifact);
+    return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, aMuseum, this, aArtwork);
   }
 
   public boolean addLoan(Loan aLoan)

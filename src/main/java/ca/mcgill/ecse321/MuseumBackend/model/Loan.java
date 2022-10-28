@@ -30,11 +30,16 @@ public class Loan
   private Date endDate;
   private int numOfDays;
   private LoanStatus status;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int loanId;
 
   //Loan Associations
+  @ManyToOne
   private Museum museum;
+  @ManyToOne
   private Customer customer;
+  @ManyToOne
   private Artwork artwork;
 
   //------------------------
@@ -64,6 +69,10 @@ public class Loan
     {
       throw new RuntimeException("Unable to create loan due to artwork. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
+  }
+  
+  public Loan() {
+    
   }
 
   //------------------------
@@ -147,26 +156,22 @@ public boolean setRentalFee(double aRentalFee)
     return status;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public int getLoanId()
   {
     return loanId;
   }
   /* Code from template association_GetOne */
-  @ManyToOne(optional=false)
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetOne */
-  @ManyToOne(optional=false)
   public Customer getCustomer()
   {
     return customer;
   }
   /* Code from template association_GetOne */
-  @ManyToOne
   public Artwork getArtwork()
   {
     return artwork;
