@@ -84,10 +84,6 @@ public class LoanRepositoryTests {
 		assertNotNull(aLoan);
 		assertEquals(loanID, aLoan.getLoanId());
 		assertEquals(artID,aLoan.getArtwork().getArtworkId());
-		
-		// untie references so that tables can be cleared
-		aLoan.setArtwork(null);
-		loanRepository.save(aLoan);
 	}
 	
 }
