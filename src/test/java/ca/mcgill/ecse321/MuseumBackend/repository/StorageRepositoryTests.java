@@ -38,22 +38,20 @@ public class StorageRepositoryTests {
         int museumId = 456;
         
         Museum museum = new Museum(museumId);
+        museum = museumRepository.save(museum);
+        Storage storage = new Storage(roomNumber, roomId, museum);
         
-        Room storage = new Storage(roomNumber, roomId, museum);
+
         
-        museum.addRoom(storage); //lol idk
-        
-        storageRepository.save(storage);
-        museumRepository.save(museum);
-        
+        storage = storageRepository.save(storage);
+        roomId = storage.getRoomId();
         storage = null;
-        
-        storage = storageRepository.findStorageByStorageId(storageID);
+
+        storage = storageRepository.findStorageByRoomId(roomId);
         
         assertNotNull(storage);
         assertEquals(storage.getRoomId(), roomId);
         assertEquals(storage.getRoomNumber(), roomNumber);
-        assertEquals(storage.getMuseum(), musem);
-        assertEquals(storage.getMuseum().getMuseumId(), musemId);
+        assertEquals(storage.getMuseum().getMuseumId(), museum.getMuseumId());
     }
 }
