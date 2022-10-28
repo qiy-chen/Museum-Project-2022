@@ -17,14 +17,14 @@ The ticket reference is found using the repository find function, findShiftByShi
 
 ##Test Contributions
 We divided persistence testing between group members as follows:
-Display room: Emma  
-Storage room: Alex  
-Artwork: Elie  
-Person: Sam  
-Customer: Elie  
-Admin: Emma  
-Employee: Jeanine  
-Ticket: Qi  
-Loan: Jeanine  
-Shift: Qi  
-Museum: Alex  
+* Display room: Emma  
+* Storage room: Alex  
+* Artwork: Elie  
+* Person: Sam  
+* Customer: Elie  
+* Admin: Emma  
+* Employee: Jeanine  
+* Ticket: Qi  
+* Loan: Jeanine  
+* Shift: Qi  
+* Museum: Alex  
