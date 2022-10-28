@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 // line 69 "../../../../../Museum.ump"
 // line 149 "../../../../../Museum.ump"
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Room
 {
 
@@ -27,7 +27,7 @@ public abstract class Room
   //Room Attributes
   private int roomNumber;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  //@GeneratedValue(strategy = GenerationType.AUTO)
   private int roomId;
 
   //Room Associations
