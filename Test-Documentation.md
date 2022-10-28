@@ -8,12 +8,12 @@ They are saved to their respective repositories. They are then set to null befor
 
 The ticket reference is found using the repository find function, findTicketByTicketId(ticketId), and the test checks if each attribute retrieved of the class and each associated class are correct compared to the values that were set up at the start.
 
-### Shift Persistence Test
-An instance of a museum and a work shift is created with specific attributes.
+### Loan to Artwork Reference Test
+An instance of a museum, loan and artwork are created with specific attributes. The loan is added to the artwork, and the artwork is set to the loan.
 
-They are saved to their respective repositories. They are then set to null before starting the test.
+They are saved to their respective repositories. The loan is then set to null before starting the test.
 
-The ticket reference is found using the repository find function, findShiftByShiftId(shiftId), and the test checks if each attribute retrieved of the class and each associated class are correct compared to the values that were set up at the start.
+The loan is found using the repository find function, findLoanByLoanId(loanId), and the test checks if each attribute retrieved of the class and each associated class are correct compared to the values that were set up at the start.
 
 ## Test Contributions
 We divided persistence testing between group members as follows:
