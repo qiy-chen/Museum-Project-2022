@@ -3,13 +3,14 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+
 import java.sql.Date;
 
 // line 76 "../../../../../Museum.ump"
@@ -25,7 +26,6 @@ public class Artwork
   private boolean isLoanable;
   private double value;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private int artworkId;
   private String artworkName;
 
@@ -34,7 +34,7 @@ public class Artwork
   private Museum museum;
   @ManyToOne
   private Room room;
-  @OneToMany
+  @OneToMany(orphanRemoval = true)
   private List<Loan> loans;
 
   //------------------------
@@ -61,15 +61,15 @@ public class Artwork
   }
 
   public Artwork() {
-    
+	  loans = new ArrayList<Loan>();
   }
   //------------------------
   // INTERFACE
   //------------------------
 
-  public Artwork() {
+
 	// TODO Auto-generated constructor stub
-}
+
 
 public boolean setIsLoanable(boolean aIsLoanable)
   {

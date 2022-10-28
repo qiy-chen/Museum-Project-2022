@@ -55,7 +55,12 @@ public class Museum
   }
   
   public Museum() {
-    
+	    rooms = new ArrayList<Room>();
+	    shifts = new ArrayList<Shift>();
+	    persons = new ArrayList<Person>();
+	    tickets = new ArrayList<Ticket>();
+	    loans = new ArrayList<Loan>();
+	    artworks = new ArrayList<Artwork>();
   }
 
   //------------------------

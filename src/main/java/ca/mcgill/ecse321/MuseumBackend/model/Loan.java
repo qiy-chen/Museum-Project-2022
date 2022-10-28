@@ -31,7 +31,6 @@ public class Loan
   private int numOfDays;
   private LoanStatus status;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private int loanId;
 
   //Loan Associations
@@ -79,9 +78,8 @@ public class Loan
   // INTERFACE
   //------------------------
 
-  public Loan() {
 	// TODO Auto-generated constructor stub
-}
+
 
 public boolean setRentalFee(double aRentalFee)
   {
