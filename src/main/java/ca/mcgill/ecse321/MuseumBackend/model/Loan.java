@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
@@ -33,11 +34,11 @@ public class Loan
   private int loanId;
 
   //Loan Associations
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Museum museum;
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Customer customer;
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Artwork artwork;
 
   //------------------------

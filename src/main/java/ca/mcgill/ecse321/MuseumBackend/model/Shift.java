@@ -4,12 +4,7 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
 import java.util.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 // line 34 "../../../../../Museum.ump"
 // line 127 "../../../../../Museum.ump"
@@ -31,7 +26,7 @@ public class Shift
   //Shift Associations
   @ManyToMany
   private List<Employee> employees;
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Museum museum;
 
   //------------------------

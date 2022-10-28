@@ -3,9 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.sql.Date;
 
 // line 2 "../../../../../Museum.ump"
@@ -24,17 +22,17 @@ public class Museum
   private int museumId;
 
   //Museum Associations
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Room> rooms;
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Shift> shifts;
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Person> persons;
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Ticket> tickets;
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Loan> loans;
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Artwork> artworks;
 
   //------------------------
