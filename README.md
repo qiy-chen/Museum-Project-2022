@@ -22,7 +22,7 @@ Role Ideas: software developer, project management, documentation
 | Name  | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |
 | ------------- | --- | --- | --- | --- |
 | Abdo Elie-Dimitri  | 17 |  |  |  |
-| Chen Qi  | 14 |  |  |  |
+| Chen Qi  | 17 |  |  |  |
 | Faubert Samuel  | 17 |  |  |  |
 | Kawczynski Emma  | 15|  |  |  |
 | Looman Jeanine  | 18 |  |  |  |

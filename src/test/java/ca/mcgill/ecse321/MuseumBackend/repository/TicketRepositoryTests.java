@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.model.PersonRole;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 
 @SpringBootTest
@@ -21,8 +19,6 @@ public class TicketRepositoryTests {
   private CustomerRepository customerRepository;
   @Autowired
   private MuseumRepository museumRepository;
-  //@Autowired
-  //private PersonRepository personRepository;
 
 
   @AfterEach
@@ -30,7 +26,6 @@ public class TicketRepositoryTests {
     
     ticketRepository.deleteAll();
     customerRepository.deleteAll();
-    //personRepository.deleteAll();
     museumRepository.deleteAll();
     
   }
@@ -42,18 +37,10 @@ public class TicketRepositoryTests {
     museumInstance.setMuseumId(museumId);
     museumInstance = museumRepository.save(museumInstance);
     museumId = museumInstance.getMuseumId();
-    //Setup Person
-    //Person person = new Person();
-    //person.setEmail("exampleemail@mail.com");
-    //person.setMuseum(museumInstance);
-    //person.setName("Bob");
-    //person.setPassword("12345");
-    
-   // String name = person.getName();
-    //person = personRepository.save(person);
+
+
     //Setup customer
     Customer customer = new Customer();
-    //customer.setPerson(person);
     customer.setPersonRoleId(2);
     customer = customerRepository.save(customer);
     int customerId = customer.getPersonRoleId();
@@ -89,9 +76,6 @@ public class TicketRepositoryTests {
     
     assertNotNull(ticket.getCustomer());
     assertEquals(customerId, ticket.getCustomer().getPersonRoleId());
-    
-    //assertNotNull(ticket.getCustomer().getPerson());
-    //assertEquals(name, ticket.getCustomer().getPerson().getName());
     
     assertNotNull(ticket.getMuseum());
     assertEquals(museumId, ticket.getMuseum().getMuseumId());
