@@ -1,13 +1,10 @@
 # ECSE 321 Group 15 
 
-Hello! This is a README file for team-15. We are designing and building a website for a museum. 
+Welcome to the repository for the Museum Management System, a software and website that's helping local museums help you! 
 
-## Project Overview  
-A small town museum needs our help to design a website so they can support their community and provide better services. The museum has ten rooms to display artwork and a storage room. Five of the ten rooms are large rooms and can fit 300 artworks, and the remaining five are smaller rooms that can only fit 200 artworks. The storage room of the museum is very large and can store an almost unlimited number of artworks.
+Our software will support accounts for visitors, museum employees and the admin and provides state of the art scheduling services to regulate employee shifts and museum visiting hours. Our website will allow viewing of all artwork in the museum, will support artwork loans. Employees will be able to use the website to track artwork placement through the museum rooms and in the storage. The admin will have unique functionalities to give them control over employee management.
 
-The museum is managed by its owner who gets their own user account. The museum also has several employees, each of which gets their own account. Museum visitors can choose to create an account as well. Through their account the owner can manage and decide on numerous things related to the museum: opening hours, employee schedules, visitor fees, rental fees, hiring/firing employees, etc. Employees, on the other hand, can use their accounts to decide which artwork goes into which room and whether an artwork is on display (in a room) or in storage. The manager can do all the tasks that an employee can. Using a visitor account, a visitor can purchase museum passes, browse all artwork the museum owns, and request to take an item on loan. If a visitor wants to take an item on loan, they must pay a fee and this must be approved by an employee. However, not all items are available for loan.
-
-We are designing a multi-tier software solution to satisfy those requirements. We are implementing the system, validating that the system is satisfying the requirements, and developing a release pipeline to automate the software delivery process.
+The Museum Management System development team is comprised of six skilled software engineers collaborating on state of the art project management and version control platform.
 
 ## Team Members 
 | Name | Username | Year | Role |
