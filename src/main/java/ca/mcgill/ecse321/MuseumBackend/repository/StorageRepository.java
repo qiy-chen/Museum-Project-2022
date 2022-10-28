@@ -5,6 +5,6 @@ import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 
 public interface StorageRepository extends CrudRepository<Storage, Integer>{
 
-	Storage findStorageByStorageId(int aStorageId);
+	Storage findStorageByRoomId(int aStorageId);
 	
 }

@@ -21,11 +21,15 @@ public class Ticket
 
   //Ticket Attributes
   private double price;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int ticketId;
   private Date ticketDate;
 
   //Ticket Associations
+  @ManyToOne
   private Museum museum;
+  @ManyToOne
   private Customer customer;
 
   //------------------------
@@ -49,6 +53,10 @@ public class Ticket
     }
   }
 
+  public Ticket() {
+    
+  }
+  
   //------------------------
   // INTERFACE
   //------------------------
@@ -82,8 +90,7 @@ public class Ticket
     return price;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public int getTicketId()
   {
     return ticketId;
@@ -94,13 +101,11 @@ public class Ticket
     return ticketDate;
   }
   /* Code from template association_GetOne */
-  @ManyToOne
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetOne */
-  @ManyToOne
   public Customer getCustomer()
   {
     return customer;

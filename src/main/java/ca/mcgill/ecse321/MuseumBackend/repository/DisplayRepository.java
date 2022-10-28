@@ -5,6 +5,6 @@ import ca.mcgill.ecse321.MuseumBackend.model.Display;
 
 public interface DisplayRepository extends CrudRepository<Display, Integer>{
 
-	Display findDisplayByDisplayId(int aDisplayId);
+	Display findDisplayByRoomId(int aDisplayId);
 	
 }

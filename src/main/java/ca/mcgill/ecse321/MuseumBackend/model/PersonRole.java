@@ -3,16 +3,12 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
 // line 27 "../../../../../Museum.ump"
 // line 120 "../../../../../Museum.ump"
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class PersonRole
 {
 
@@ -21,9 +17,12 @@ public abstract class PersonRole
   //------------------------
 
   //PersonRole Attributes
+  @Id
+  //@GeneratedValue(strategy = GenerationType.AUTO)
   private int personRoleId;
 
   //PersonRole Associations
+  @ManyToOne
   private Person person;
 
   //------------------------
@@ -39,6 +38,10 @@ public abstract class PersonRole
       throw new RuntimeException("Unable to create personRole due to person. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
+  
+  public PersonRole() {
+    
+  }
 
   //------------------------
   // INTERFACE
@@ -51,14 +54,12 @@ public abstract class PersonRole
     wasSet = true;
     return wasSet;
   }
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public int getPersonRoleId()
   {
     return personRoleId;
   }
   /* Code from template association_GetOne */
-  @OneToMany
   public Person getPerson()
   {
     return person;

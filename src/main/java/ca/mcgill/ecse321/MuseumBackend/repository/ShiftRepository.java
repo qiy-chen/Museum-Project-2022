@@ -5,6 +5,6 @@ import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 
 public interface ShiftRepository extends CrudRepository<Shift, Integer>{
 
-	Shift findShiftByShiftId(int aShiftId);
+	Shift findShiftByWorkDayId(int aShiftId);
 	
 }

@@ -3,16 +3,20 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 // line 69 "../../../../../Museum.ump"
 // line 149 "../../../../../Museum.ump"
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Room
 {
 
@@ -22,10 +26,14 @@ public abstract class Room
 
   //Room Attributes
   private int roomNumber;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int roomId;
 
   //Room Associations
+  @ManyToOne
   private Museum museum;
+  @OneToMany
   private List<Artwork> artworks;
 
   //------------------------
@@ -44,6 +52,10 @@ public abstract class Room
     artworks = new ArrayList<Artwork>();
   }
 
+  public Room() {
+    
+  }
+  
   //------------------------
   // INTERFACE
   //------------------------
@@ -69,20 +81,18 @@ public abstract class Room
     return roomNumber;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public int getRoomId()
   {
     return roomId;
   }
   /* Code from template association_GetOne */
-  @ManyToOne
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public Artwork getArtwork(int index)
   {
     Artwork aArtwork = artworks.get(index);

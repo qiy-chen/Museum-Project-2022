@@ -16,12 +16,16 @@ public class Person
   //------------------------
 
   //Person Attributes
+  @Id
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String email;
   private String password;
   private String name;
 
   //Person Associations
+  @ManyToOne
   private Museum museum;
+  @OneToMany
   private List<PersonRole> personRoles;
 
   //------------------------
@@ -39,6 +43,12 @@ public class Person
     }
     personRoles = new ArrayList<PersonRole>();
   }
+
+  public Person() {
+    personRoles = new ArrayList<PersonRole>();
+  }
+  
+
 
   //------------------------
   // INTERFACE
@@ -68,8 +78,7 @@ public boolean setEmail(String aEmail)
     wasSet = true;
     return wasSet;
   }
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public String getEmail()
   {
     return email;
@@ -85,19 +94,18 @@ public boolean setEmail(String aEmail)
     return name;
   }
   /* Code from template association_GetOne */
-  @ManyToOne
   public Museum getMuseum()
   {
     return museum;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public PersonRole getPersonRole(int index)
   {
     PersonRole aPersonRole = personRoles.get(index);
     return aPersonRole;
   }
-
+  
   public List<PersonRole> getPersonRoles()
   {
     List<PersonRole> newPersonRoles = Collections.unmodifiableList(personRoles);

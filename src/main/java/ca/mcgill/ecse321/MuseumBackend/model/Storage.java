@@ -24,6 +24,10 @@ public class Storage extends Room
   {
     super(aRoomNumber, aRoomId, aMuseum);
   }
+  
+  public Storage() {
+    super();
+  }
 
   //------------------------
   // INTERFACE

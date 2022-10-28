@@ -19,10 +19,10 @@ import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 @SpringBootTest
 public class MuseumRepositoryTests {
     @Autowired
-    private MuseumRepository ticketRepository;
+    private MuseumRepository museumRepository;
     
     @Autowired
-    private TicketRepository museumRepository;
+    private TicketRepository ticketRepository;
 
     @AfterEach
     public void clearDatabase() {
@@ -56,11 +56,11 @@ public class MuseumRepositoryTests {
       //int ticketIndex = museum.getTicketIndex(ticket);
       museum = null;
       
-      museum = MuseumRepository.findMuseumByMuseumId(museumID);
+      museum = museumRepository.findMuseumByMuseumId(museumID);
             
       //Assertion Tests
       assertNotNull(museum);
-      assertEquals(museumID, museum.getMuseumId);
+      assertEquals(museumID, museum.getMuseumId());
       //assertEquals(ticket, museum.getTicket(ticketIndex));
     }
 }

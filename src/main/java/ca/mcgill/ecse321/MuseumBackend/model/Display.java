@@ -28,6 +28,9 @@ public class Display extends Room
     maxArtworks = aMaxArtworks;
   }
 
+  public Display() {
+    super();
+  }
   //------------------------
   // INTERFACE
   //------------------------

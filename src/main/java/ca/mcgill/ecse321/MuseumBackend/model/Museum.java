@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import java.sql.Date;
 
 // line 2 "../../../../../Museum.ump"
 // line 106 "../../../../../Museum.ump"
+@Entity
 public class Museum
 {
 
@@ -19,14 +21,22 @@ public class Museum
   //------------------------
 
   //Museum Attributes
+  @Id
+  //@GeneratedValue(strategy = GenerationType.IDENTITY)
   private int museumId;
 
   //Museum Associations
+  @OneToMany
   private List<Room> rooms;
+  @OneToMany
   private List<Shift> shifts;
+  @OneToMany
   private List<Person> persons;
+  @OneToMany
   private List<Ticket> tickets;
+  @OneToMany
   private List<Loan> loans;
+  @OneToMany
   private List<Artwork> artworks;
 
   //------------------------
@@ -43,6 +53,10 @@ public class Museum
     loans = new ArrayList<Loan>();
     artworks = new ArrayList<Artwork>();
   }
+  
+  public Museum() {
+    
+  }
 
   //------------------------
   // INTERFACE
@@ -56,20 +70,19 @@ public class Museum
     return wasSet;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+
   public int getMuseumId()
   {
     return museumId;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+ 
   public Room getRoom(int index)
   {
     Room aRoom = rooms.get(index);
     return aRoom;
   }
-
+  
   public List<Room> getRooms()
   {
     List<Room> newRooms = Collections.unmodifiableList(rooms);
@@ -94,13 +107,13 @@ public class Museum
     return index;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public Shift getShift(int index)
   {
     Shift aShift = shifts.get(index);
     return aShift;
   }
-
+  
   public List<Shift> getShifts()
   {
     List<Shift> newShifts = Collections.unmodifiableList(shifts);
@@ -125,13 +138,12 @@ public class Museum
     return index;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public Person getPerson(int index)
   {
     Person aPerson = persons.get(index);
     return aPerson;
   }
-
   public List<Person> getPersons()
   {
     List<Person> newPersons = Collections.unmodifiableList(persons);
@@ -156,13 +168,12 @@ public class Museum
     return index;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public Ticket getTicket(int index)
   {
     Ticket aTicket = tickets.get(index);
     return aTicket;
   }
-
   public List<Ticket> getTickets()
   {
     List<Ticket> newTickets = Collections.unmodifiableList(tickets);
@@ -187,13 +198,12 @@ public class Museum
     return index;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public Loan getLoan(int index)
   {
     Loan aLoan = loans.get(index);
     return aLoan;
   }
-
   public List<Loan> getLoans()
   {
     List<Loan> newLoans = Collections.unmodifiableList(loans);
@@ -218,13 +228,12 @@ public class Museum
     return index;
   }
   /* Code from template association_GetMany */
-  @OneToMany
+  
   public Artwork getArtwork(int index)
   {
     Artwork aArtwork = artworks.get(index);
     return aArtwork;
   }
-
   public List<Artwork> getArtworks()
   {
     List<Artwork> newArtworks = Collections.unmodifiableList(artworks);
