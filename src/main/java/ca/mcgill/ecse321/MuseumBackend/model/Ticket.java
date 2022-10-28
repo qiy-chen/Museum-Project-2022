@@ -22,7 +22,6 @@ public class Ticket
   //Ticket Attributes
   private double price;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private int ticketId;
   private Date ticketDate;
 

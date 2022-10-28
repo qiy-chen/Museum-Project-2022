@@ -22,7 +22,6 @@ public class Museum
 
   //Museum Attributes
   @Id
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
   private int museumId;
 
   //Museum Associations
@@ -32,7 +31,7 @@ public class Museum
   private List<Shift> shifts;
   @OneToMany
   private List<Person> persons;
-  @OneToMany
+  @OneToMany(orphanRemoval = true)
   private List<Ticket> tickets;
   @OneToMany
   private List<Loan> loans;
