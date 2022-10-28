@@ -23,7 +23,7 @@ Role Ideas: software developer, project management, documentation
 | ------------- | --- | --- | --- | --- |
 | Abdo Elie-Dimitri  | 17 |  |  |  |
 | Chen Qi  | 17 |  |  |  |
-| Faubert Samuel  | 17 |  |  |  |
+| Faubert Samuel  | 20 |  |  |  |
 | Kawczynski Emma  | 15|  |  |  |
 | Looman Jeanine  | 18 |  |  |  |
 | Tsahageas Alex | 17 |  |  |  |
