@@ -68,7 +68,6 @@ public class EmployeeRepositoryTests {
 		sandy.setMuseum(aMuseum);
 		sandy.setEmail(email);
 		personRepository.save(sandy);
-		
 		aEmployee.setPerson(sandy);
 
 		// Update object
