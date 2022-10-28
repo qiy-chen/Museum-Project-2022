@@ -50,6 +50,7 @@ public class ArtworkRepositoryTests {
     frenchRoom.setMuseum(beauty);
     frenchRoom.setRoomNumber(3);
     frenchRoom.setRoomId(123);
+    frenchRoom.setMuseum(beauty);
     frenchRoom = displayRepository.save(frenchRoom);
   
     //create artwork

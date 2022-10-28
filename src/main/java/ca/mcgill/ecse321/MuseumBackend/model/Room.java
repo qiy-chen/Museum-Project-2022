@@ -53,6 +53,8 @@ public abstract class Room
   }
 
   public Room() {
+
+    artworks = new ArrayList<Artwork>();
     
   }
   
