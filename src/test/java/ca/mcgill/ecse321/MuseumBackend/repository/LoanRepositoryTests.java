@@ -78,6 +78,7 @@ public class LoanRepositoryTests {
 		int loanID = aLoan.getLoanId();
 
 		// Read object from database
+		aLoan = null;
 		aLoan = loanRepository.findLoanByLoanId(loanID);
 
 		// Assert that object has correct attributes
