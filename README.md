@@ -11,7 +11,7 @@ The Museum Management System development team is comprised of six skilled softwa
 | ------------- | --- | --- | --- |
 | Abdo Elie-Dimitri | bigbrainzelie | U2 | Software developer |
 | Chen Qi  | qiy-chen  | U2 | Software developer |
-| Faubert Samuel  | Coldstuff1 | U2 |  |
+| Faubert Samuel  | Coldstuff1 | U2 | Scrum Master |
 | Kawczynski Emma  | emmakawczynski | U2 | Software developer |
 | Looman Jeanine  | jeanine56 | U4 | Documentation |
 | Tsahageas Alex  | alextsah | U2 | Project Management |
@@ -26,7 +26,7 @@ Role Ideas: software developer, project management, documentation
 | Faubert Samuel  |  |  |  |  |
 | Kawczynski Emma  | 15|  |  |  |
 | Looman Jeanine  | 18 |  |  |  |
-| Tsahageas Alex | 16 |  |  |  |
+| Tsahageas Alex | 17 |  |  |  |
 
 # Project Reports
 
