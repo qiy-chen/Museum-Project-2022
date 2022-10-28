@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
 
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -9,10 +10,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/*
+@Author  Samuel Faubert
+ */
 @SpringBootTest
 public class PersonRepositoryTests {
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private MuseumRepository museumRepository;
 
 
     @AfterEach
@@ -22,6 +29,9 @@ public class PersonRepositoryTests {
 
     @Test
     public void testPersonPersistAndLoad() {
+        // Create object
+        Museum museum = new Museum(12);
+        museum = museumRepository.save(museum);
         String email = "samuel.faubert@mail.mcgill.ca";
         String name = "Samuel Faubert";
         String password = "MarwanisC00l";
@@ -29,12 +39,17 @@ public class PersonRepositoryTests {
         samuel.setEmail(email);
         samuel.setName(name);
         samuel.setPassword(password);
+        samuel.setMuseum(museum);
+        // Save object
         samuel = personRepository.save(samuel);
         String idEmail = samuel.getEmail();
         samuel = null;
+        // Read object from database
         samuel = personRepository.findPersonByEmail(email);
         assertNotNull(samuel);
         assertEquals(idEmail, samuel.getEmail());
+        assertEquals(name, samuel.getName());
+        assertEquals(password, samuel.getPassword());
 
     }
 }

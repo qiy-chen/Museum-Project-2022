@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
+
 
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
-import ca.mcgill.ecse321.MuseumBackend.model.Room;
+
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 
 

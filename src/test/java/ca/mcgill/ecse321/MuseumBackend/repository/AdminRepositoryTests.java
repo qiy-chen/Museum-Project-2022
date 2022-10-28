@@ -2,7 +2,7 @@ package ca.mcgill.ecse321.MuseumBackend.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.UUID;
+
 
 import org.junit.jupiter.api.*; 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.model.PersonRole;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
+
 
 
 @SpringBootTest
