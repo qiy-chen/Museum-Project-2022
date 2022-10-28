@@ -33,7 +33,7 @@ public abstract class Room
   //Room Associations
   @ManyToOne
   private Museum museum;
-  @OneToMany
+  @OneToMany(orphanRemoval = true)
   private List<Artwork> artworks;
 
   //------------------------

@@ -26,17 +26,17 @@ public class Museum
   private int museumId;
 
   //Museum Associations
-  @OneToMany
+  @OneToMany(orphanRemoval=true)
   private List<Room> rooms;
-  @OneToMany
+  @OneToMany(orphanRemoval=true)
   private List<Shift> shifts;
-  @OneToMany
+  @OneToMany(orphanRemoval=true)
   private List<Person> persons;
-  @OneToMany
+  @OneToMany(orphanRemoval=true)
   private List<Ticket> tickets;
-  @OneToMany
+  @OneToMany(orphanRemoval=true)
   private List<Loan> loans;
-  @OneToMany
+  @OneToMany(orphanRemoval=true)
   private List<Artwork> artworks;
 
   //------------------------

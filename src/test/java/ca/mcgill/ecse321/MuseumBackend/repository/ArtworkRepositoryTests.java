@@ -30,18 +30,18 @@ public class ArtworkRepositoryTests {
 
   @AfterEach
   public void clearDatabase() {
-      artworkRepository.deleteAll();
-      loanRepository.deleteAll();
-      displayRepository.deleteAll();
       museumRepository.deleteAll();
+      artworkRepository.deleteAll();
+      //loanRepository.deleteAll();
+      displayRepository.deleteAll();
   }
   
   @Test
   public void testPersistAndLoadArtwork() {
     
     //create a museum 
-    Museum beauty = new Museum();
-    beauty.setMuseumId(0);
+    Museum beauty = new Museum(1);
+    //beauty.setMuseumId(0);
     beauty =  museumRepository.save(beauty);
     
     //create display room
@@ -82,7 +82,7 @@ public class ArtworkRepositoryTests {
     // Check Associations
 
     assertNotNull(monaLisa.getMuseum());
-    assertEquals(0, monaLisa.getMuseum().getMuseumId());
+    assertEquals(1, monaLisa.getMuseum().getMuseumId());
 
     assertNotNull(monaLisa.getRoom());
     assertEquals(123, monaLisa.getRoom().getRoomId()); 
