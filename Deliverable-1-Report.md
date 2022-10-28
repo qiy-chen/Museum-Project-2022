@@ -1,5 +1,9 @@
 # Deliverable 1 Report 
 
+## Key Design Decisions
+**Project Management:** Our group chose to create one branch per group member, and to divide tasks by classes so that it would be simple to merge changes, and to prevent overlap in individual work. We scheduled meetings with strong milestones between meetings, where individual tasks like the JPA annotation for different classes were all completed so we could merge all work done and proceed to next steps which are reliant on that milestone.  
+**Domain Model:** 
+
 ## Meetings
 
 ### Meeting 1
