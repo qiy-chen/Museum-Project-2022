@@ -47,7 +47,6 @@ public class ArtworkRepositoryTests {
     //create display room
     Display frenchRoom = new Display();
     frenchRoom.setMaxArtworks(200);
-    frenchRoom.setMuseum(beauty);
     frenchRoom.setRoomNumber(3);
     frenchRoom.setRoomId(123);
     frenchRoom.setMuseum(beauty);
