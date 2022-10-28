@@ -3,7 +3,9 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.sql.Date;
 
@@ -18,9 +20,9 @@ public class Customer extends PersonRole
   //------------------------
 
   //Customer Associations
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Ticket> tickets;
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Loan> loans;
 
   //------------------------

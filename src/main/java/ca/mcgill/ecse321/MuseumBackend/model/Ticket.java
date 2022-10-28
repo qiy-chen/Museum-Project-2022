@@ -3,11 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 // line 18 "../../../../../Museum.ump"
 @Entity
@@ -21,14 +17,13 @@ public class Ticket
   //Ticket Attributes
   private double price;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private int ticketId;
   private Date ticketDate;
 
   //Ticket Associations
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Museum museum;
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Customer customer;
 
   //------------------------
