@@ -25,6 +25,7 @@ public class PersonRepositoryTests {
     @AfterEach
     public void clearDatabase() {
         personRepository.deleteAll();
+        museumRepository.deleteAll();
     }
 
     @Test
