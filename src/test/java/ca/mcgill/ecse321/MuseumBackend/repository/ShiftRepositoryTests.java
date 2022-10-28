@@ -32,10 +32,10 @@ public class ShiftRepositoryTests {
     int museumId = 10;
     Museum museumInstance = new Museum(museumId);
 
-    museumRepository.save(museumInstance);
+    museumInstance = museumRepository.save(museumInstance);
     //Setup shift
     Date startDate = new Date(0);
-    Date endDate = new Date(0);
+    Date endDate = new Date(2);
     
     
     Shift shift = new Shift();

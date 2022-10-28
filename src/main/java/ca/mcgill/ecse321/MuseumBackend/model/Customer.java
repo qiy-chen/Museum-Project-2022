@@ -36,6 +36,8 @@ public class Customer extends PersonRole
   
   public Customer() {
     super();
+    tickets = new ArrayList<Ticket>();
+    loans = new ArrayList<Loan>();
   }
 
   //------------------------

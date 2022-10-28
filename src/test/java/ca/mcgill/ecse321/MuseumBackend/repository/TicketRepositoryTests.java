@@ -37,7 +37,7 @@ public class TicketRepositoryTests {
     //Setup museum instance
     int museumId = 5;
     Museum museumInstance = new Museum(museumId);
-    museumRepository.save(museumInstance);
+    museumInstance = museumRepository.save(museumInstance);
     //Setup Person
     Person person = new Person();
     person.setEmail("exampleemail@mail.com");
@@ -45,19 +45,22 @@ public class TicketRepositoryTests {
     person.setName("Bob");
     person.setPassword("12345");
     String name = person.getName();
-    personRepository.save(person);
+    person = personRepository.save(person);
     //Setup customer
     Customer customer = new Customer();
-    int customerId = customer.getPersonRoleId();
     customer.setPerson(person);
-    customerRepository.save(customer);
+    customer.setPersonRoleId(2);
+    int customerId = customer.getPersonRoleId();
+    
+    customer = customerRepository.save(customer);
     
     //Setup ticket
     Ticket ticket = new Ticket();
-    ticket.setCustomer(customer);
     ticket.setMuseum(museumInstance);
     ticket.setPrice(10.00);
     ticket.setTicketDate(new Date(4));
+    ticket.setCustomer(customer);
+
     int ticketId = ticket.getTicketId();
     double ticketPrice = ticket.getPrice();
     Date ticketDate = ticket.getTicketDate();
