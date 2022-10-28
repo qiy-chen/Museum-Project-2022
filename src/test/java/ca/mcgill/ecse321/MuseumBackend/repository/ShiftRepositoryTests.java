@@ -19,7 +19,6 @@ public class ShiftRepositoryTests {
   private ShiftRepository shiftRepository;
   @Autowired
   private MuseumRepository museumRepository;
-  
 
   @AfterEach
   public void clearDatabase() {
@@ -33,6 +32,7 @@ public class ShiftRepositoryTests {
     Museum museumInstance = new Museum(museumId);
 
     museumInstance = museumRepository.save(museumInstance);
+    museumId = museumInstance.getMuseumId();
     //Setup shift
     Date startDate = new Date(0);
     Date endDate = new Date(2);
@@ -58,8 +58,8 @@ public class ShiftRepositoryTests {
     //Test if the values are correct
     assertNotNull(shift);
     assertEquals(shiftId, shift.getWorkDayId());
-    assertEquals(startDate, shift.getStartTime());
-    assertEquals(endDate, shift.getEndTime());
+    assertEquals(startDate.toString(), shift.getStartTime().toString());
+    assertEquals(endDate.toString(), shift.getEndTime().toString());
     
     assertNotNull(shift.getMuseum());
     assertEquals(museumId, shift.getMuseum().getMuseumId());

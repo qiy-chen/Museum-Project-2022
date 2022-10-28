@@ -22,7 +22,7 @@ public class Museum
 
   //Museum Attributes
   @Id
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int museumId;
 
   //Museum Associations
@@ -55,7 +55,12 @@ public class Museum
   }
   
   public Museum() {
-    
+    rooms = new ArrayList<Room>();
+    shifts = new ArrayList<Shift>();
+    persons = new ArrayList<Person>();
+    tickets = new ArrayList<Ticket>();
+    loans = new ArrayList<Loan>();
+    artworks = new ArrayList<Artwork>();
   }
 
   //------------------------
