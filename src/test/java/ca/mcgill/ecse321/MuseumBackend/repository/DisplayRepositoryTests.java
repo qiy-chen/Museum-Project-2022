@@ -3,7 +3,6 @@ package ca.mcgill.ecse321.MuseumBackend.repository;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-import java.util.UUID;
 
 import org.junit.jupiter.api.*; 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,8 @@ public class DisplayRepositoryTests {
 
 	@AfterEach
 	public void clearDatabase() {
-		DisplayRepository.deleteAll();
-		Museum.deleteAll();
+		displayRepository.deleteAll();
+		museumRepository.deleteAll();
 	}
 
 	@Test
@@ -39,15 +38,16 @@ public class DisplayRepositoryTests {
 		emmaRoom.setMaxArtworks(maxArtworks);
 		emmaRoom.setRoomId(roomId);
 		emmaRoom.setMuseum(museum);
-		displayRepository.save(emmaRoom);
+		emmaRoom = displayRepository.save(emmaRoom);
+		roomId = emmaRoom.getRoomId();
 		emmaRoom = null;
-		emmaRoom = displayRepository.findDisplayByARoomID(roomId);
+		emmaRoom = displayRepository.findDisplayByRoomId(roomId);
 		
 		assertNotNull(emmaRoom);
 		assertEquals(roomId, emmaRoom.getRoomId());
 		assertEquals(roomNumber, emmaRoom.getRoomNumber());
 		assertEquals(maxArtworks, emmaRoom.getMaxArtworks());
-		assertEquals(museum, emmaRoom.getMuseum());
+		assertEquals(museum.getMuseumId(), emmaRoom.getMuseum().getMuseumId());
 		
 	}
 }
