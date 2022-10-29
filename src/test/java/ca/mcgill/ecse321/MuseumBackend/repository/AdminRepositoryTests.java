@@ -2,7 +2,8 @@ package ca.mcgill.ecse321.MuseumBackend.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.*; 
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -78,7 +79,7 @@ public class AdminRepositoryTests {
         // Assert that object has correct attributes
         assertNotNull(aAdmin);
         assertEquals(adminID, aAdmin.getPersonRoleId());
-        assertEquals(email,aAdmin.getPerson().getAdmin());
+        assertEquals(email,aAdmin.getPerson().getEmail());
     }
     
     
