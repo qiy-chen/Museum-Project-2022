@@ -22,14 +22,12 @@ Alternate scenarios:
 #### Use-Case Specification:
 Main success scenario:
 1. The admin or the user move an artifact from a storage room to a display room.
-2. The admin or the user move an artifact from a display room to a storage room.
-3. The admin or the user move an artifact from a display room to a different display room.
 
 Alternate scenarios: 
 * 1a. The display room is full 
   * 1a.1 The move request is rejected by the system. The admin or the employee must select a different room.
-* 3a. The display room is full 
-  * 3a.1 The move request is rejected by the system. The admin or the employee must select a different room.
+* 2a. The artifact is on loan
+  * 2a.1 The move request is rejected by the system.
 
 
 ### F04 - The Museum Management System shall allow anyone to create, update, and delete their client account. 
