@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.sql.Date;
 import org.junit.jupiter.api.AfterEach;
@@ -21,11 +22,12 @@ public class TicketRepositoryTests {
   private MuseumRepository museumRepository;
 
 
+
   @AfterEach
   public void clearDatabase() {
-    
     ticketRepository.deleteAll();
     customerRepository.deleteAll();
+
     museumRepository.deleteAll();
     
   }
@@ -41,7 +43,7 @@ public class TicketRepositoryTests {
 
     //Setup customer
     Customer customer = new Customer();
-    customer.setPersonRoleId(2);
+    customer.setPersonRoleId(99);
     customer = customerRepository.save(customer);
     int customerId = customer.getPersonRoleId();
     

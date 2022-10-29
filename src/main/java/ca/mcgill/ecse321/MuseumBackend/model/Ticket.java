@@ -21,9 +21,9 @@ public class Ticket
   private Date ticketDate;
 
   //Ticket Associations
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne(cascade = CascadeType.ALL)
   private Museum museum;
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne(cascade = CascadeType.ALL)
   private Customer customer;
 
   //------------------------

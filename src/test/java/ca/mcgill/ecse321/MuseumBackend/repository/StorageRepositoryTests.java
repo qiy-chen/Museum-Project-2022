@@ -34,7 +34,7 @@ public class StorageRepositoryTests {
     @Test
     public void testPersistAndLoadMuseum() {
         int roomNumber = 25;
-        int roomId = 123;
+        int roomId = 456;
         int museumId = 456;
         
         Museum museum = new Museum(museumId);
