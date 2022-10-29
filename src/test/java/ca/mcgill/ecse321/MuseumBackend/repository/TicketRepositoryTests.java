@@ -22,11 +22,12 @@ public class TicketRepositoryTests {
   private MuseumRepository museumRepository;
 
 
+
   @AfterEach
   public void clearDatabase() {
-    
     ticketRepository.deleteAll();
     customerRepository.deleteAll();
+
     museumRepository.deleteAll();
     
   }
@@ -42,7 +43,7 @@ public class TicketRepositoryTests {
 
     //Setup customer
     Customer customer = new Customer();
-    customer.setPersonRoleId(2);
+    customer.setPersonRoleId(99);
     customer = customerRepository.save(customer);
     int customerId = customer.getPersonRoleId();
     

@@ -23,7 +23,7 @@ public abstract class Room
   private int roomId;
 
   //Room Associations
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private Museum museum;
   @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Artwork> artworks;
