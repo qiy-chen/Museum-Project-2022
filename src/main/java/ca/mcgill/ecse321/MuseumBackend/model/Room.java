@@ -3,12 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 // line 69 "../../../../../Museum.ump"
 // line 149 "../../../../../Museum.ump"
@@ -30,7 +25,7 @@ public abstract class Room
   //Room Associations
   @ManyToOne
   private Museum museum;
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Artwork> artworks;
 
   //------------------------
@@ -50,6 +45,8 @@ public abstract class Room
   }
 
   public Room() {
+
+    artworks = new ArrayList<Artwork>();
     
   }
   
