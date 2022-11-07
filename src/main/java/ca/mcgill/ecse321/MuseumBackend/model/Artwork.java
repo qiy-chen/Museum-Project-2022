@@ -4,11 +4,7 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 
 import java.sql.Date;
@@ -30,11 +26,11 @@ public class Artwork
   private String artworkName;
 
   //Artwork Associations
-  @ManyToOne(optional=false)
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Museum museum;
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Room room;
-  @OneToMany(orphanRemoval = true)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Loan> loans;
 
   //------------------------
