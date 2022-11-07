@@ -14,7 +14,6 @@ import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 
-
 @SpringBootTest
 public class StorageRepositoryTests {
 
