@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
-
+import ca.mcgill.ecse321.MuseumBackend.model.Room;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 
 @SpringBootTest

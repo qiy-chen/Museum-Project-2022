@@ -21,12 +21,12 @@ Role Ideas: software developer, project management, documentation
 ## Time Contributions
 | Name  | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |
 | ------------- | --- | --- | --- | --- |
-| Abdo Elie-Dimitri  | 20 |  |  |  |
-| Chen Qi  | 20 |  |  |  |
-| Faubert Samuel  | 24 |  |  |  |
-| Kawczynski Emma  | 19 |  |  |  |
+| Abdo Elie-Dimitri  | 17 |  |  |  |
+| Chen Qi  | 14 |  |  |  |
+| Faubert Samuel  |  |  |  |  |
+| Kawczynski Emma  | 15|  |  |  |
 | Looman Jeanine  | 18 |  |  |  |
-| Tsahageas Alex | 20 |  |  |  |
+| Tsahageas Alex | 17 |  |  |  |
 
 # Project Reports
 

@@ -2,8 +2,6 @@
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse321.MuseumBackend.model;
-import org.hibernate.action.internal.OrphanRemovalAction;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -25,9 +23,9 @@ public class Person
   private String name;
 
   //Person Associations
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private Museum museum;
-  @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany
   private List<PersonRole> personRoles;
 
   //------------------------
