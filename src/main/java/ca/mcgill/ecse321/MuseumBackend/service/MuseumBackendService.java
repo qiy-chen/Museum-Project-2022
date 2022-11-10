@@ -24,18 +24,27 @@ public class MuseumBackendService {
   ArtworkRepository artworkRepository;
   
   @Transactional
-  public Loan createLoan(double loadId, Date startDate, Date endDate, int numOfDays, LoanStatus status, int loanId, Museum museum, Customer customer, Artwork artwork ) {
+  public Loan createLoan(double loadId, Date startDate, Date endDate, int numOfDays, int loanId, Museum museum, Customer customer, Artwork artwork ) {
       Loan loan = new Loan();
       loan.setLoanId(loanId);
       loan.setStartDate(startDate);
       loan.setEndDate(endDate);
       loan.setNumOfDays(numOfDays);
+      LoanStatus status = LoanStatus.Requested;
       loan.setStatus(status);
       loan.setMuseum(museum);
       loan.setArtwork(artwork);
       loan.setCustomer(customer);
       loan.setRentalFee(loanId);
+      loanRepository.save(loan);
       return loan;
+  }
+  
+  @Transactional
+  public void approveLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    LoanStatus status = LoanStatus.Approved;
+    loan.setStatus(status);
   }
   
   @Transactional
