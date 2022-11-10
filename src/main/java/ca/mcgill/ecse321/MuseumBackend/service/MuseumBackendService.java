@@ -43,8 +43,18 @@ public class MuseumBackendService {
   @Transactional
   public void approveLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
-    LoanStatus status = LoanStatus.Approved;
-    loan.setStatus(status);
+    Artwork loanArtwork = loan.getArtwork();
+    if (loanArtwork.getIsLoanable()) {
+      LoanStatus status = LoanStatus.Approved;
+      loan.setStatus(status);
+      loanArtwork.setIsLoanable(false);
+    }
+    else {
+      LoanStatus status = LoanStatus.Denied;
+      loan.setStatus(status);
+      //throw exception 
+    }
+    
   }
   
   @Transactional
