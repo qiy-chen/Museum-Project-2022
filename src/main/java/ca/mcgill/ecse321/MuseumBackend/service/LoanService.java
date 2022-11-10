@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
 import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 
 @Service
-public class MuseumBackendService {
+public class LoanService {
   @Autowired
   LoanRepository loanRepository;
   @Autowired
@@ -71,8 +72,6 @@ public class MuseumBackendService {
   @Transactional
   public void denyLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
-    Artwork artWork = loan.getArtwork();
-    
     if(loan.getStatus().equals(LoanStatus.Requested)) {
        loan.setStatus(LoanStatus.Denied);
     }
@@ -80,6 +79,7 @@ public class MuseumBackendService {
       //throw exception
     }
   }
+  
   @Transactional
   public List<Loan> getAllLoans() {
       return toList(loanRepository.findAll());
