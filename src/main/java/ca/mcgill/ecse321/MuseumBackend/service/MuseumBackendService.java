@@ -30,6 +30,7 @@ public class MuseumBackendService {
       loan.setStartDate(startDate);
       loan.setEndDate(endDate);
       loan.setNumOfDays(numOfDays);
+      loan.setStatus(status);
       loan.setMuseum(museum);
       loan.setArtwork(artwork);
       loan.setCustomer(customer);
