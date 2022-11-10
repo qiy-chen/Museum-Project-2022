@@ -54,15 +54,32 @@ public class MuseumBackendService {
       loan.setStatus(status);
       //throw exception 
     }
-    
+   
   }
-  
   @Transactional
-  public Loan getloan(int loanId) {
-      Loan loan = loanRepository.findLoanByLoanId(loanId);
-      return loan;
+  public void endLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    Artwork loanArtwork = loan.getArtwork();
+    loan.setStatus(LoanStatus.Returned);
+    loanArtwork.setIsLoanable(true);
   }
-  
+  @Transactional
+  public Loan readLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    return loan;
+  }
+  @Transactional
+  public void denyLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    Artwork artWork = loan.getArtwork();
+    
+    if(loan.getStatus().equals(LoanStatus.Requested)) {
+       loan.setStatus(LoanStatus.Denied);
+    }
+    else if (loan.getStatus().equals(LoanStatus.Approved) || loan.getStatus().equals(LoanStatus.Returned)) {
+      //throw exception
+    }
+  }
   @Transactional
   public List<Loan> getAllLoans() {
       return toList(loanRepository.findAll());
