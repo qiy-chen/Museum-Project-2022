@@ -51,6 +51,7 @@ public class AdminRepositoryTests {
     
     @Test
     public void testAdminToPersonReference() {
+      
         // Create object
         int id = 1;
         Admin aAdmin = new Admin();
