@@ -19,3 +19,5 @@ The Museum Management System development team is comprised of six skilled softwa
 
 * [Sprint 1 Project Report](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Deliverable-1-Report)
 * [Sprint 1 Wiki](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Sprint-1)
+* [Sprint 2 Project Report](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Deliverable-2-Report)
+* [Sprint 2 Wiki](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Sprint-2)
