@@ -15,7 +15,7 @@ public class EmployeeResponseDto {
 		this.id = employee.getPersonRoleId();
 		this.person = new PersonDto(employee.getPerson());
 		for (Shift shift : employee.getShifts()) {
-			this.shifts.add(new ShiftDto(shift));
+			this.shifts.add(new ShiftDto(shift.getStartTime(),shift.getEndTime(),shift.getWorkDayId(),shift.getMuseum()));
 		}
 	}
 

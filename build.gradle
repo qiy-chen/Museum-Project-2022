@@ -33,4 +33,4 @@ tasks.named('jacocoTestReport') {
 	// The tests must be run before the coverage report can be generated
 	dependsOn 'test'
 }
-}
+
