@@ -38,10 +38,9 @@ public class MuseumRepositoryTests {
 
       int ticketId = 456;
       
-      Ticket ticket = new Ticket ();
+      Ticket ticket = new Ticket();
       ticket.setTicketId(ticketId);
       ticket.setMuseum(museum);
-      ticket = ticketRepository.save(ticket);
       
       //Save the museum instance in the MuseumRepository table 
       museum = museumRepository.save(museum);
