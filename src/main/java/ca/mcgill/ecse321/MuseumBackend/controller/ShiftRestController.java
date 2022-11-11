@@ -36,7 +36,7 @@ public class ShiftRestController {
         if(s==null) {
             throw new IllegalArgumentException("There is no such Shift!");
         }
-        ShiftDto shiftDto = new ShiftDto(s.getStartTime(), s.getEndTime(), s.getWorkDayId(), s.getMuseum());
+        ShiftDto shiftDto = new ShiftDto(s.getStartTime(), s.getEndTime(), s.getWorkDayId(), s.getMuseum(), s.getEmployees());
         return shiftDto;
     }
 
