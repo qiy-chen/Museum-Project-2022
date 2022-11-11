@@ -1,16 +1,18 @@
-package ca.mcgill.ecse321.MuseumBackend.controller;
-
+package ca.mcgill.ecse321.MuseumBackend.dto;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import java.sql.Date;
 
-public class TicketDTO {
+public class TicketRequestDto {
+  @NotNull
   private Date ticketDate;
+  @NotNull
   private double price;
+  @NotBlank
+  @NotNull
   private int ticketId;
-  public TicketDTO(int ticketId, Date ticketDate, double price) {
-    this.ticketId = ticketId;
-    this.ticketDate = ticketDate;
-    this.price = price;
-  }
+  
   public void setTicketDate(Date newDate) {
     ticketDate = newDate;
   }
@@ -30,6 +32,14 @@ public class TicketDTO {
   }
   public double getTicketId() {
     return ticketId;
+  }
+  
+  public Ticket toModel() {
+    Ticket ticket = new Ticket();
+    ticket.setPrice(price);
+    ticket.setTicketDate(ticketDate);
+    ticket.setTicketId(ticketId);
+    return ticket;
   }
   
 }

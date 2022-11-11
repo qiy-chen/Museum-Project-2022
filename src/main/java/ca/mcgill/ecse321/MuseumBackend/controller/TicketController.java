@@ -7,103 +7,96 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ca.mcgill.ecse321.MuseumBackend.dto.TicketDTO;
+import ca.mcgill.ecse321.MuseumBackend.dto.TicketRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.TicketResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.exception.TicketNotFoundException;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
+import ca.mcgill.ecse321.MuseumBackend.service.TicketService;
 
 @RestController
 public class TicketController {
-  private TicketRepository ticketRepository;
-  private CustomerRepository customerRepository;
+  @Autowired
+  TicketService ticketService;
   
-  TicketController(TicketRepository repository, CustomerRepository customerRepository){
-    this.ticketRepository = repository;
-    this.customerRepository = customerRepository;
-  }
   // Aggregate root
   // tag::get-aggregate-root[]
-  @GetMapping("/tickets")
-  public List<Ticket> getAll() {
-    return (List<Ticket>) ticketRepository.findAll();
-  }
+//  @GetMapping("/tickets")
+//  public List<Ticket> getAll() {
+//    return (List<Ticket>) ticketRepository.findAll();
+//  }
   // end::get-aggregate-root[]
 
   @PostMapping("/tickets")
-  public Ticket newTicket(@RequestBody Ticket newTicket) {
-    return ticketRepository.save(newTicket);
+  public TicketResponseDto createTicket(@Valid @RequestBody TicketRequestDto newTicket, @RequestBody int customerId, Museum museum) {
+    Ticket ticket = newTicket.toModel();
+    return new TicketResponseDto(ticketService.createTicket(ticket, customerId, museum));
   }
 
   // Single item
   
-  @GetMapping("/tickets/{id}")
-  public Ticket getTicketFromId(@PathVariable int id) {
-    
-    Ticket ticket = ticketRepository.findTicketByTicketId(id);
-    if (ticket!=null) {
-      return ticket;
-    }
-    else throw new TicketNotFoundException(id);
-    }
+//  @GetMapping("/tickets/{id}")
+//  public Ticket getTicketFromId(@PathVariable int id) {
+//    
+//    Ticket ticket = ticketRepository.findTicketByTicketId(id);
+//    if (ticket!=null) {
+//      return ticket;
+//    }
+//    else throw new TicketNotFoundException(id);
+//    }
 
-  @PutMapping("/tickets/{id}")
-  public Ticket replaceTicket(@RequestBody Ticket newTicket, @PathVariable int id) {
-    
-    Ticket oldTicket = ticketRepository.findTicketByTicketId(id);
-    
-    if (oldTicket!=null) {
-      oldTicket.setCustomer(newTicket.getCustomer());
-      oldTicket.setMuseum(newTicket.getMuseum());
-      oldTicket.setPrice(newTicket.getPrice());
-      oldTicket.setTicketDate(newTicket.getTicketDate());
-      return ticketRepository.save(oldTicket);
-    }
-    else {
-      newTicket.setTicketId(id);
-      return ticketRepository.save(newTicket);
-    }
-      
-  }
+//  @PutMapping("/tickets/{id}")
+//  public Ticket replaceTicket(@RequestBody Ticket newTicket, @PathVariable int id) {
+//    
+//    Ticket oldTicket = ticketRepository.findTicketByTicketId(id);
+//    
+//    if (oldTicket!=null) {
+//      oldTicket.setCustomer(newTicket.getCustomer());
+//      oldTicket.setMuseum(newTicket.getMuseum());
+//      oldTicket.setPrice(newTicket.getPrice());
+//      oldTicket.setTicketDate(newTicket.getTicketDate());
+//      return ticketRepository.save(oldTicket);
+//    }
+//    else {
+//      newTicket.setTicketId(id);
+//      return ticketRepository.save(newTicket);
+//    }
+//      
+//  }
 
-  @DeleteMapping("/tickets/{id}")
-  void deleteTicket(@PathVariable int id) {
-    ticketRepository.deleteById(id);
-  }
+//  @DeleteMapping("/tickets/{id}")
+//  void deleteTicket(@PathVariable int id) {
+//    ticketRepository.deleteById(id);
+//  }
   
   //The following methods are dedicated for use-cases scenarios only (for the regular web user)
+  //Browse ticket
   @GetMapping("/persons/{roleId}")
-  public List<TicketDTO> getTicketsFromCustomer(@PathVariable int roleId){
+  public List<TicketResponseDto> getTicketsFromCustomer(@PathVariable int roleId){
     List<Ticket> allTickets = (List<Ticket>) ticketRepository.findAll();
-    List<TicketDTO> customerTickets = new ArrayList<TicketDTO>();
+    List<TicketResponseDto> customerTickets = new ArrayList<TicketResponseDto>();
     for (Ticket ticket: allTickets) {
       if (ticket.getCustomer().getPersonRoleId()==roleId) {
-        TicketDTO ticketDTO = new TicketDTO(ticket.getTicketId(),ticket.getTicketDate(),ticket.getPrice());
+        TicketResponseDto ticketDTO = new TicketResponseDto(ticket);
         customerTickets.add(ticketDTO);
       }
     }
     return customerTickets;
   }
   
+  //Purchase ticket
   @PostMapping("/persons/{roleId}")
-  public void purchaseTicket(@PathVariable int personRoleId, Date ticketDate, double price, int ticketId, Museum museum) {
-    Ticket purchasedTicket = ticketRepository.findTicketByTicketId(ticketId);
-    //Need to also check if the ticket is available and not purchased
-    Customer customer = customerRepository.findCustomerByPersonRoleId(personRoleId);
-    if (purchasedTicket==null && customer!=null) {
-      purchasedTicket = new Ticket();
-      purchasedTicket.setCustomer(customer);
-      purchasedTicket.setMuseum(museum);
-      purchasedTicket.setPrice(price);
-      purchasedTicket.setTicketDate(ticketDate);
-      purchasedTicket.setTicketId(ticketId);
-      ticketRepository.save(purchasedTicket);
-    }
-    else {
-      //Throw customer not found or ticket id already existent
-    }
+  public TicketResponseDto purchaseTicket(@PathVariable int personRoleId, Ticket ticket) {
+    Ticket purchasedTicket = ticketService.createTicket(ticket, personRoleId);
+    return new TicketResponseDto(purchasedTicket);
   }
   
   @DeleteMapping("/persons/{roleId}")
