@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.controller;
 
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
@@ -20,9 +21,15 @@ public class ShiftRestController {
     @Autowired
     private ShiftService service;
 
-    @GetMapping(value = {"/shifts/{workDayId}","/shifts/{workDayId}"})
+    @GetMapping(value = {"/shifts/{workDayId}","/shifts/{workDayId}/"})
     public ShiftDto getShiftById(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException {
         return convertToDto(service.getShiftById(workDayId));
+    }
+
+    @GetMapping(value = {"/shifts/{workDayId}", "/shifts/{workDayId}/"})
+    public List<EmployeeResponseDto> getShiftEmployeesById(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException{
+    ShiftDto shiftDto = convertToDto(service.getShiftById(workDayId));
+        return shiftDto.getEmployees();
     }
 
 
