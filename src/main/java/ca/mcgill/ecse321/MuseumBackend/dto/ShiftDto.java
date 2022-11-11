@@ -28,6 +28,45 @@ public class ShiftDto {
 			this.employees.add(employee);
 		}
 
+
+
 	}
-	
+	public int getWorkDayId() {
+		return workdayId;
+	}
+
+	public void setWorkdayId(int workdayId) {
+		this.workdayId = workdayId;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public Museum getMuseum() {
+		return museum;
+	}
+
+	public void setMuseum(Museum museum) {
+		this.museum = museum;
+	}
+	public List<EmployeeResponseDto> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<EmployeeResponseDto> employees) {
+		this.employees = employees;
+	}
 }
