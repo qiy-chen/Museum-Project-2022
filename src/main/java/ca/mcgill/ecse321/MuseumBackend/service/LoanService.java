@@ -18,7 +18,7 @@ public class LoanService {
   }
   
   @Transactional
-  public Loan createEmployee(Loan loan) {
+  public Loan createLoan(Loan loan) {
       loan = loanRepository.save(loan);
       return loan;
   }
