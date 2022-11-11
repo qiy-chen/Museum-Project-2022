@@ -56,6 +56,5 @@ public class LoanRequestDto {
   
   public Loan toModel() {
     Loan loan = new Loan();
-    loan.set
   }
 }
