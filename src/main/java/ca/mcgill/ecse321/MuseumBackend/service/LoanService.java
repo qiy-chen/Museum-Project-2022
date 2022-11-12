@@ -21,13 +21,13 @@ public class LoanService {
   }
   
   @Transactional
-  public Loan createLoan(Loan loan) {
+  public Loan createLoan(Loan loan) { //emma
       loan = loanRepository.save(loan);
       return loan;
   }
   
   @Transactional
-  public void approveLoan(int loanId) {
+  public void approveLoan(int loanId) { //emma
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     Artwork loanArtwork = loan.getArtwork();
     if (loanArtwork.getIsLoanable()) {

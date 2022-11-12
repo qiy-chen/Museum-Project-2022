@@ -15,6 +15,7 @@ import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(MockitoExtension.class)
 public class TestLoanService {
