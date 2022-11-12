@@ -66,7 +66,17 @@ public class LoanService {
       //throw exception
     }
   }
-  
+  @Transactional
+  public List<Loan> getLoansByStatus(LoanStatus status){
+    List<Loan> loans = toList(loanRepository.findAll());
+    List<Loan> statusLoans = new ArrayList<Loan>();
+    for (Loan loan : loans) {
+       if(loan.getStatus().equals(status)) {
+         statusLoans.add(loan);
+       }
+    }
+    return statusLoans;
+  }
   @Transactional
   public List<Loan> getAllLoans() {
       return toList(loanRepository.findAll());
@@ -79,6 +89,8 @@ public class LoanService {
     }
     return resultList;
   }
+  
+  
   
   
 }
