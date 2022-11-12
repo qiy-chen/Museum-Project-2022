@@ -21,7 +21,7 @@ public abstract class PersonRole
   private int personRoleId;
 
   //PersonRole Associations
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne(cascade = CascadeType.ALL)
   private Person person;
 
   //------------------------

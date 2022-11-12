@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'ca.mcgill.ecse321'
@@ -31,5 +32,6 @@ tasks.named('test') {
 }
 
 tasks.named('jacocoTestReport') {
+	// The tests must be run before the coverage report can be generated
 	dependsOn 'test'
 }

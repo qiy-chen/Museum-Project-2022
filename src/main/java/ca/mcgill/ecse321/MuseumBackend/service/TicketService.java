@@ -27,7 +27,7 @@ public class TicketService {
 
   @Transactional
   public List<Ticket> getAllTickets() {
-    List<Ticket> tickets = (List<Ticket>) ticketRepository.findAll();
+    List<Ticket> tickets = toList(ticketRepository.findAll());
     if (tickets.size() == 0) {
       throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
     }
@@ -36,7 +36,7 @@ public class TicketService {
 
   @Transactional
   public List<Ticket> getAllTicketsFromCustomer(int customerId) {
-    List<Ticket> tickets = (List<Ticket>) ticketRepository.findAll();
+    List<Ticket> tickets = toList(ticketRepository.findAll());
     if (tickets.size() == 0) {
       throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
     }
@@ -59,39 +59,26 @@ public class TicketService {
   }
 
   @Transactional
-  public Ticket createTicket(TicketRequestDto ticket,int customerId, int museumId) {
+  public Ticket createTicket(Ticket ticket) {
     if (ticketRepository.findTicketByTicketId(ticket.getTicketId()) != null) {
       throw new TicketException(HttpStatus.CONFLICT, "A ticket with the given id already exists.");
     }
-    Customer customer = customerService.getCustomerById(customerId);
-    Museum museum = museumService.getMuseumById(museumId);
-    Ticket newTicket = new Ticket();
-    newTicket.setCustomer(customer);
-    newTicket.setMuseum(museum);
-    newTicket.setPrice(ticket.getPrice());
-    newTicket.setTicketDate(ticket.getTicketDate());
-    newTicket.setTicketId(ticket.getTicketId());
-    newTicket = ticketRepository.save(newTicket);
-    return newTicket;
+    return ticketRepository.save(ticket);
   }
 
   @Transactional
-  public Ticket replaceTicket(TicketRequestDto newTicket, int id, int customerId, int museumId) {
-    //Replace old ticket with id 'id' with the new one, 'newTicket'
+  public Ticket replaceTicket(Ticket ticket, int id) {
+    //Replace old ticket with id, 'id', with the new one, 'ticket'
     Ticket oldTicket = ticketRepository.findTicketByTicketId(id);
     if (oldTicket == null) {
       throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
     }
-    Customer newCustomer = customerService.getCustomerById(customerId);
-
-    Museum museum = museumService.getMuseumById(museumId);
-
-    oldTicket.setCustomer(newCustomer);
-    oldTicket.setMuseum(museum);
-    oldTicket.setPrice(newTicket.getPrice());
-    oldTicket.setTicketDate(newTicket.getTicketDate());
-    oldTicket.setTicketId(newTicket.getTicketId());
-    return new TicketResponseDto(ticketRepository.save(oldTicket));
+    oldTicket.setCustomer(ticket.getCustomer());
+    oldTicket.setMuseum(ticket.getMuseum());
+    oldTicket.setPrice(ticket.getPrice());
+    oldTicket.setTicketDate(ticket.getTicketDate());
+    oldTicket.setTicketId(ticket.getTicketId());
+    return ticketRepository.save(oldTicket);
 
   }
 
@@ -111,12 +98,31 @@ public class TicketService {
       Calendar c = Calendar.getInstance(); 
       c.setTime(ticketDate); 
       c.add(Calendar.DATE, -3);
-      Date cancelDate = (Date) c.getTime();
-      Date currentDate = new Date(System.currentTimeMillis());
+      java.util.Date utilDate = c.getTime();
+      Date cancelDate = new Date(utilDate.getTime());
+      Date currentDate = getCurrentDate();
       if (currentDate.before(cancelDate)) {
         deleteTicket(ticketId);
       }
+      else {
+        throw new TicketException(HttpStatus.FORBIDDEN, "Too late to make cancelation.");
+      }
+    }
+    else {
+      throw new TicketException(HttpStatus.FORBIDDEN, "Wrong customer id.");
     }
 
+  }
+  private <T> List<T> toList(Iterable<T> iterable){
+    List<T> resultList = new ArrayList<T>();
+    if (iterable == null) return resultList;
+    for (T t : iterable) {
+        resultList.add(t);
+    }
+    return resultList;
+}
+  
+  public Date getCurrentDate() {
+    return new Date(System.currentTimeMillis());
   }
 }

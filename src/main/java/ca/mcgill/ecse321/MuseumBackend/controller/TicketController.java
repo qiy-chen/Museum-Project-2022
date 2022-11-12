@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,29 +9,53 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ca.mcgill.ecse321.MuseumBackend.dto.TicketRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.TicketResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
+import ca.mcgill.ecse321.MuseumBackend.service.CustomerService;
+import ca.mcgill.ecse321.MuseumBackend.service.MuseumService;
 import ca.mcgill.ecse321.MuseumBackend.service.TicketService;
 
 @RestController
 public class TicketController {
   @Autowired
   TicketService ticketService;
-
+  @Autowired
+  private CustomerService customerService;
+  @Autowired
+  private MuseumService museumService;
 
   @GetMapping("/tickets/{id}")
   public ResponseEntity<TicketResponseDto> getTicketById(@PathVariable int id) {
-    TicketResponseDto ticket = ticketService.getTicketByTicketId(id);
-    return new ResponseEntity<TicketResponseDto>(ticket, HttpStatus.OK);
+    Ticket ticket = ticketService.getTicketByTicketId(id);
+    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(ticket), HttpStatus.OK);
   }
   @PostMapping("/tickets")
-  public ResponseEntity<TicketResponseDto> createTicket(@Valid @RequestBody TicketRequestDto newTicket, @RequestBody int customerId, int museumId) {
-    TicketResponseDto ticket = ticketService.createTicket(newTicket, customerId, museumId);
-    return new ResponseEntity<TicketResponseDto>(ticket, HttpStatus.CREATED);
+  public ResponseEntity<TicketResponseDto> createTicket(@Valid @RequestBody TicketRequestDto newTicketDto, @RequestBody int customerId, int museumId) {
+    Ticket newTicket = newTicketDto.toModel();
+    Museum museum = museumService.getMuseumById(museumId);
+    Customer customer = customerService.getCustomerById(customerId);
+    if (museum==null||customer==null) {
+      return new ResponseEntity<TicketResponseDto>(HttpStatus.BAD_REQUEST);
+    }
+    newTicket.setMuseum(museum);
+    newTicket.setCustomer(customer);
+    newTicket = ticketService.createTicket(newTicket);
+    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket), HttpStatus.CREATED);
   }
 
   @PutMapping("/tickets/{id}")
-  public ResponseEntity<TicketResponseDto> replaceTicket(@PathVariable int id,@RequestBody int customerId, int museumId,@RequestBody TicketRequestDto newTicket) {
-    TicketResponseDto ticket = ticketService.replaceTicket(newTicket, id, customerId, museumId);
-    return new ResponseEntity<TicketResponseDto>(ticket, HttpStatus.OK);
+  public ResponseEntity<TicketResponseDto> replaceTicket(@PathVariable int id,@RequestBody int customerId, int museumId,@RequestBody TicketRequestDto newTicketDto) {
+    Ticket newTicket = newTicketDto.toModel();
+    Museum museum = museumService.getMuseumById(museumId);
+    Customer customer = customerService.getCustomerById(customerId);
+    if (museum==null||customer==null) {
+      return new ResponseEntity<TicketResponseDto>(HttpStatus.BAD_REQUEST);
+    }
+    newTicket.setMuseum(museum);
+    newTicket.setCustomer(customer);
+    newTicket = ticketService.replaceTicket(newTicket, id);
+    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket), HttpStatus.OK);
   }
 
   @DeleteMapping("/tickets/{id}")
@@ -44,20 +69,32 @@ public class TicketController {
   //Browse ticket
   @GetMapping("/persons/{roleId}")
   public ResponseEntity<List<TicketResponseDto>> getTicketsFromCustomer(@PathVariable int roleId){
-    List<TicketResponseDto> customerTickets = ticketService.getAllTicketsFromCustomer(roleId);
-    return new ResponseEntity<List<TicketResponseDto>>(customerTickets, HttpStatus.OK);
+    List<Ticket> customerTickets = ticketService.getAllTicketsFromCustomer(roleId);
+    List<TicketResponseDto> customerTicketsDto = new ArrayList<TicketResponseDto>();
+    for (Ticket ticket: customerTickets) {
+      customerTicketsDto.add(new TicketResponseDto(ticket));
+    }
+    return new ResponseEntity<List<TicketResponseDto>>(customerTicketsDto, HttpStatus.OK);
   }
 
   //Purchase ticket
   @PostMapping("/persons/{roleId}")
-  public ResponseEntity<TicketResponseDto> purchaseTicket(@PathVariable int personRoleId, int museumId, TicketRequestDto ticket) {
-    TicketResponseDto purchasedTicket = ticketService.createTicket(ticket, personRoleId,museumId);
-    return new ResponseEntity<TicketResponseDto>(purchasedTicket,HttpStatus.OK);
+  public ResponseEntity<TicketResponseDto> purchaseTicket(@PathVariable int customerId, int museumId, TicketRequestDto newTicketDto) {
+    Ticket newTicket = newTicketDto.toModel();
+    Museum museum = museumService.getMuseumById(museumId);
+    Customer customer = customerService.getCustomerById(customerId);
+    if (museum==null||customer==null) {
+      return new ResponseEntity<TicketResponseDto>(HttpStatus.BAD_REQUEST);
+    }
+    newTicket.setMuseum(museum);
+    newTicket.setCustomer(customer);
+    newTicket = ticketService.createTicket(newTicket);
+    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.OK);
   }
 
   @DeleteMapping("/persons/{roleId}")
-  public ResponseEntity<TicketResponseDto> cancelTicket(@PathVariable int personRoleId, @RequestBody int ticketId) {
-    ticketService.cancelTicket(ticketId,personRoleId);
+  public ResponseEntity<TicketResponseDto> cancelTicket(@PathVariable int customerId, @RequestBody int ticketId) {
+    ticketService.cancelTicket(ticketId,customerId);
     return new ResponseEntity<TicketResponseDto>(HttpStatus.OK);
   }
 }

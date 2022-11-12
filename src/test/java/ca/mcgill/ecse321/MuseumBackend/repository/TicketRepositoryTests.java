@@ -25,10 +25,10 @@ public class TicketRepositoryTests {
 
   @AfterEach
   public void clearDatabase() {
-    ticketRepository.deleteAll();
-    customerRepository.deleteAll();
-
     museumRepository.deleteAll();
+    
+    customerRepository.deleteAll();
+    ticketRepository.deleteAll();
     
   }
   @Test
