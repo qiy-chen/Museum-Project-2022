@@ -1,14 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-<<<<<<< HEAD
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan;
-=======
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.*;
->>>>>>> origin/alex_branch_updated
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 
 @Service
 public class LoanService {
-<<<<<<< HEAD
-
-	@Autowired
-	LoanRepository loanRepo;
-	
-	@Transactional
-	public Loan getLoanById(int id) {
-		Loan loan = loanRepo.findLoanByLoanId(id);
-		if (loan == null) {
-			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found.");
-		}
-		return loan;
-	}
-	
-	@Transactional
-	public Loan createLoan(Loan loan) {
-		loan = loanRepo.save(loan);
-		return loan;
-	}
-=======
   @Autowired
   LoanRepository loanRepository;
   
@@ -111,5 +81,4 @@ public class LoanService {
   }
   
   
->>>>>>> origin/alex_branch_updated
 }
