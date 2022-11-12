@@ -44,4 +44,26 @@ public class TestLoanService {
     assertNotNull(loan);
     assertEquals(loaniD, loan.getLoanId());
   }
+  
+  @Test
+  public void testEndLoan() {
+    double rentalfee = 200.0;
+    Date startDate = new Date(0);
+    Date endDate = new Date(2);
+    int numOfDays = 20;
+    LoanStatus status = LoanStatus.Requested;
+    int loaniD = 1234;
+    Museum museum = new Museum();
+    Customer customer = new Customer();
+    Artwork artwork = new Artwork();
+    
+    Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
+    when(loanRepository.findLoanByLoanId(loaniD)).thenAnswer((InvocationOnMock invocation) -> loan1);
+    
+    loanService.endLoan(loaniD);
+    
+    assertNotNull(loan1);
+    assertEquals(LoanStatus.Returned, loan1.getStatus());
+    
+  }
 }
