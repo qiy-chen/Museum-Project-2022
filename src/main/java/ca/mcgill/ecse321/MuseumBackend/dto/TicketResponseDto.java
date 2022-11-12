@@ -21,7 +21,7 @@ public class TicketResponseDto {
     return price;
   }
   
-  public double getTicketId() {
+  public int getTicketId() {
     return ticketId;
   }
   

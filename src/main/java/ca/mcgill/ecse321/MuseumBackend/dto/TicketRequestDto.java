@@ -30,7 +30,7 @@ public class TicketRequestDto {
   public void setTicketId(int ticketId) {
     this.ticketId = ticketId;
   }
-  public double getTicketId() {
+  public int getTicketId() {
     return ticketId;
   }
   
