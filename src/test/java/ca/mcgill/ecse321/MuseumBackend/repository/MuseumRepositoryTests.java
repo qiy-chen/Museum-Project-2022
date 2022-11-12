@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
+
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 
@@ -24,7 +26,6 @@ public class MuseumRepositoryTests {
 
     @AfterEach
     public void clearDatabase() {
-      ticketRepository.deleteAll();
       museumRepository.deleteAll();
     }
     
@@ -34,21 +35,25 @@ public class MuseumRepositoryTests {
 
       int id = 123;
       Museum museum = new Museum(id);
-      museum = museumRepository.save(museum);
-
-      int ticketId = 456;
       
-      Ticket ticket = new Ticket ();
-      ticket.setTicketId(ticketId);
-      ticket.setMuseum(museum);
-      ticket = ticketRepository.save(ticket);
+      //double price = 19.99;
+      //int ticketId = 456;
+      //Date date = new Date(2022, 04, 18);
+      
+      //Ticket ticket = new Ticket (price, ticketId, date);
+      //ticket.setMuseum(museum);
       
       //Save the museum instance in the MuseumRepository table 
-      museum = museumRepository.save(museum);
+      museumRepository.save(museum);
+      //ticketRepository.save(ticket);
       
       //Obtain museumID of created museum object that was saved in MuseumRepository table 
       int museumID = museum.getMuseumId();
+      //double ticketPrice = ticket.getPrice();
+      //int ticketID = ticket.getTicketId();
+      //Date ticketID = ticket.getTicketDate();
       
+      //int ticketIndex = museum.getTicketIndex(ticket);
       museum = null;
       
       museum = museumRepository.findMuseumByMuseumId(museumID);
@@ -56,6 +61,6 @@ public class MuseumRepositoryTests {
       //Assertion Tests
       assertNotNull(museum);
       assertEquals(museumID, museum.getMuseumId());
-      assertEquals(ticketId, museum.getTicket(0).getTicketId());
+      //assertEquals(ticket, museum.getTicket(ticketIndex));
     }
 }

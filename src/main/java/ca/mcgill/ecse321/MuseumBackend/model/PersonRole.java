@@ -17,11 +17,11 @@ public abstract class PersonRole
 
   //PersonRole Attributes
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  //@GeneratedValue(strategy = GenerationType.AUTO)
   private int personRoleId;
 
   //PersonRole Associations
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Person person;
 
   //------------------------
