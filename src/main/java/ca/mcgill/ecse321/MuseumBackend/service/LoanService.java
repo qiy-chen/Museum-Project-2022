@@ -43,7 +43,7 @@ public class LoanService {
   }
   
   @Transactional
-  public void endLoan(int loanId) { //alex
+  public void endLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     Artwork loanArtwork = loan.getArtwork();
     loan.setStatus(LoanStatus.Returned);
@@ -51,13 +51,13 @@ public class LoanService {
   }
   
   @Transactional
-  public Loan readLoan(int loanId) { //alex
+  public Loan readLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     return loan;
   }
   
   @Transactional
-  public void denyLoan(int loanId) { //emma
+  public void denyLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     if(loan.getStatus().equals(LoanStatus.Requested)) {
        loan.setStatus(LoanStatus.Denied);
@@ -66,10 +66,19 @@ public class LoanService {
       //throw exception
     }
   }
- 
-  
   @Transactional
-  public List<Loan> getAllLoans() { //alex
+  public List<Loan> getLoansByStatus(LoanStatus status){
+    List<Loan> loans = toList(loanRepository.findAll());
+    List<Loan> statusLoans = new ArrayList<Loan>();
+    for (Loan loan : loans) {
+       if(loan.getStatus().equals(status)) {
+         statusLoans.add(loan);
+       }
+    }
+    return statusLoans;
+  }
+  @Transactional
+  public List<Loan> getAllLoans() {
       return toList(loanRepository.findAll());
   }
   
@@ -80,6 +89,8 @@ public class LoanService {
     }
     return resultList;
   }
+  
+  
   
   
 }
