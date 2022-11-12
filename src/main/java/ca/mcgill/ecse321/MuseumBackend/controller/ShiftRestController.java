@@ -21,19 +21,19 @@ public class ShiftRestController {
     @Autowired
     private ShiftService service;
 
-    @GetMapping(value = {"/museum/shifts/{workDayId}","/museum/shifts/{workDayId}/"})
+    @GetMapping(value = {"/shifts/{workDayId}","/shifts/{workDayId}/"})
     public ShiftDto getShiftById(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException {
         return convertToDto(service.getShiftById(workDayId));
     }
 
-    @GetMapping(value = {"/museum/shifts/{workDayId}", "/museum/shifts/{workDayId}/"})
+    @GetMapping(value = {"/shifts/{workDayId}", "/shifts/{workDayId}/"})
     public List<EmployeeResponseDto> getShiftEmployeesById(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException{
     ShiftDto shiftDto = convertToDto(service.getShiftById(workDayId));
         return shiftDto.getEmployees();
     }
 
 
-    @PostMapping(value = {"/museum/shifts/{workDayId}", "/museum/shifts/{workDayId}/"})
+    @PostMapping(value = {"/shifts/{workDayId}", "/shifts/{workDayId}/"})
     public ShiftDto createShift(@PathVariable("workDayId") int workDayId, @RequestParam Date startTime, @RequestParam Date endTime, @RequestParam Museum museum) throws IllegalArgumentException {
         Shift shift = service.createShift(new Shift(startTime, endTime, workDayId, museum));
         return convertToDto(shift);
