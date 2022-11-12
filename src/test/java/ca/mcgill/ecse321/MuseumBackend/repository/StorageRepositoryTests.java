@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.MuseumBackend.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterEach;
@@ -10,16 +11,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-
-import ca.mcgill.ecse321.MuseumBackend.model.Storage;
+import ca.mcgill.ecse321.MuseumBackend.model.Storage; 
 
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-
 
 @SpringBootTest
 public class StorageRepositoryTests {
 
+  
     @Autowired
     private StorageRepository storageRepository;
     @Autowired
@@ -41,7 +40,6 @@ public class StorageRepositoryTests {
         museum = museumRepository.save(museum);
         Storage storage = new Storage(roomNumber, roomId, museum);
         
-
         
         storage = storageRepository.save(storage);
         roomId = storage.getRoomId();

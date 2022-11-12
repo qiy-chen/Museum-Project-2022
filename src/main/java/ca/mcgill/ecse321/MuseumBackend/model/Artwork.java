@@ -57,6 +57,7 @@ public class Artwork
   }
 
   public Artwork() {
+    
 	  loans = new ArrayList<Loan>();
   }
   //------------------------

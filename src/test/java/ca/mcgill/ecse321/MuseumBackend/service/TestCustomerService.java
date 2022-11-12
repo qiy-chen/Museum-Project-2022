@@ -40,7 +40,7 @@ public class TestCustomerService {
 		when(customerRepo.findCustomerByPersonRoleId(id)).thenAnswer((InvocationOnMock invocation) -> hannah);
 		
 		// Test that the service behaves properly
-		Customer customer = customerService.getCustomerById(id);
+		Customer customer = customerService.getCustomerByPersonRoleId(id);
 		
 		assertNotNull(customer);
 		assertEquals(id, customer.getPersonRoleId());
@@ -54,7 +54,7 @@ public class TestCustomerService {
 		when(customerRepo.findCustomerByPersonRoleId(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
 		
 		// call method, and obtain resulting exception
-		MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> customerService.getCustomerById(invalidId));
+		MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> customerService.getCustomerByPersonRoleId(invalidId));
 		
 		// check results
 		assertEquals("Customer not found.", ex.getMessage());
