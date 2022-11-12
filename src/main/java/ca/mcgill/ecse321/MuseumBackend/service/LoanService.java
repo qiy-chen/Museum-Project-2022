@@ -51,12 +51,6 @@ public class LoanService {
   }
   
   @Transactional
-  public Loan readLoan(int loanId) { //alex
-    Loan loan = loanRepository.findLoanByLoanId(loanId);
-    return loan;
-  }
-  
-  @Transactional
   public void denyLoan(int loanId) { //emma
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     if(loan.getStatus().equals(LoanStatus.Requested)) {

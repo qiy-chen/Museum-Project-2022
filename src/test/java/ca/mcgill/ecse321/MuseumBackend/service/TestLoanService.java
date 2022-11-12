@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.MuseumBackend.service;
 
 
 import java.sql.Date;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +16,7 @@ import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 public class TestLoanService {
@@ -64,6 +66,7 @@ public class TestLoanService {
     
     assertNotNull(loan1);
     assertEquals(LoanStatus.Returned, loan1.getStatus());
-    
+    assertTrue(loan1.getArtwork().getIsLoanable());
   }
+  
 }
