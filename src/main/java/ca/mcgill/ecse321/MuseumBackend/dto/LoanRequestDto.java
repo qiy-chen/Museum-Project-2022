@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.MuseumBackend.dto;
 
 import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
-import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.service.LoanService;
