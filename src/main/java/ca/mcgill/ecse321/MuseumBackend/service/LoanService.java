@@ -15,7 +15,7 @@ public class LoanService {
   LoanRepository loanRepository;
   
   @Transactional
-  public Loan getLoanById(int id) {
+  public Loan getLoanById(int id) { //alex
       Loan loan = loanRepository.findLoanByLoanId(id);
       return loan;
   }
