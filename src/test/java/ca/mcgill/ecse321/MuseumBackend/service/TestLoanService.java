@@ -212,7 +212,7 @@ public class TestLoanService {
     Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
     
     int loaniD2 = 777;
-    Loan loan2 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
+    Loan loan2 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD2,museum,customer,artwork);
    
     when(loanRepository.findLoanByLoanId(loaniD)).thenAnswer((InvocationOnMock invocation) -> null);
     when(loanRepository.findLoanByLoanId(loaniD2)).thenAnswer((InvocationOnMock invocation) -> loan2);
