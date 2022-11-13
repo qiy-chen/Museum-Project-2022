@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +103,7 @@ public class TestLoanService {
     assertEquals(loans.get(0),allloans.get(0));
     assertEquals(loans.get(1),allloans.get(1));
   }
+  
   //emma
   @Test
   public void testCreateLoan() {
@@ -118,6 +117,7 @@ public class TestLoanService {
     verify(loanRepository, times(1)).save(loanReturned);
     
   }
+  
   //emma
   @Test
   public void testApproveLoan() {
@@ -140,9 +140,8 @@ public class TestLoanService {
     assertNotNull(loan1);
     assertEquals(LoanStatus.Approved, loan1.getStatus());
     assertFalse(loan1.getArtwork().getIsLoanable());
-    
-    
   }
+  
   @Test
   public void testDenyLoan() {
     double rentalfee = 200.0;
@@ -163,6 +162,7 @@ public class TestLoanService {
     assertEquals(LoanStatus.Denied, loan1.getStatus());
     assertTrue(loan1.getArtwork().getIsLoanable());
   }
+  
   @Test
   public void testGetLoansByStatus() {
     
