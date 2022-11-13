@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.Month;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,7 @@ public class TicketRepositoryTests {
     Ticket ticket = new Ticket();
     ticket.setMuseum(museumInstance);
     ticket.setPrice(10.00);
-    ticket.setTicketDate(new Date(4));
+    ticket.setTicketDate(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0));
     ticket.setCustomer(customer);
     ticket.setTicketId(13);
     
@@ -59,7 +61,7 @@ public class TicketRepositoryTests {
     
     int ticketId = ticket.getTicketId();
     double ticketPrice = ticket.getPrice();
-    Date ticketDate = ticket.getTicketDate();
+    LocalDateTime ticketDate = ticket.getTicketDate();
     
     //Set all values of objects to null
     ticket = null;

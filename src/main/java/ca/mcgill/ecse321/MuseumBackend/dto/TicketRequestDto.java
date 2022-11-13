@@ -3,20 +3,27 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class TicketRequestDto {
-  @NotNull
-  private Date ticketDate;
-  @NotNull
+
+  private LocalDateTime ticketDate;
+
   private double price;
-  @NotBlank
-  @NotNull
+
   private int ticketId;
   
-  public void setTicketDate(Date newDate) {
+  public TicketRequestDto() {}
+  public TicketRequestDto(int ticketId, LocalDateTime ticketDate, double price) {
+    this.ticketId = ticketId;
+    this.ticketDate = ticketDate;
+    this.price = price;
+  }
+  
+  public void setTicketDate(LocalDateTime newDate) {
     ticketDate = newDate;
   }
-  public Date getTicketDate() {
+  public LocalDateTime getTicketDate() {
     return ticketDate;
   }
   

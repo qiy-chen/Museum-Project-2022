@@ -2,7 +2,7 @@
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse321.MuseumBackend.model;
-import java.sql.Date;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 
 // line 18 "../../../../../Museum.ump"
@@ -18,7 +18,7 @@ public class Ticket
   private double price;
   @Id
   private int ticketId;
-  private Date ticketDate;
+  private LocalDateTime ticketDate;
 
   //Ticket Associations
   @ManyToOne(cascade = CascadeType.ALL)
@@ -30,7 +30,7 @@ public class Ticket
   // CONSTRUCTOR
   //------------------------
 
-  public Ticket(double aPrice, int aTicketId, Date aTicketDate, Museum aMuseum, Customer aCustomer)
+  public Ticket(double aPrice, int aTicketId, LocalDateTime aTicketDate, Museum aMuseum, Customer aCustomer)
   {
     price = aPrice;
     ticketId = aTicketId;
@@ -71,7 +71,7 @@ public class Ticket
     return wasSet;
   }
 
-  public boolean setTicketDate(Date aTicketDate)
+  public boolean setTicketDate(LocalDateTime aTicketDate)
   {
     boolean wasSet = false;
     ticketDate = aTicketDate;
@@ -90,7 +90,7 @@ public class Ticket
     return ticketId;
   }
 
-  public Date getTicketDate()
+  public LocalDateTime getTicketDate()
   {
     return ticketDate;
   }

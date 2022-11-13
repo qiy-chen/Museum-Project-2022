@@ -1,18 +1,20 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class TicketResponseDto {
-  private Date ticketDate;
-  private double price;
+  private LocalDateTime ticketDate ;
+  private double price ;
   private int ticketId;
+  public TicketResponseDto() {}
   public TicketResponseDto(Ticket ticket) {
     this.ticketId = ticket.getTicketId();
     this.ticketDate = ticket.getTicketDate();
     this.price = ticket.getPrice();
   }
 
-  public Date getTicketDate() {
+  public LocalDateTime getTicketDate() {
     return ticketDate;
   }
   

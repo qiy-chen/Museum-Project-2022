@@ -1,6 +1,8 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
 import java.sql.Date;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -63,6 +65,9 @@ public class TicketService {
     if (ticketRepository.findTicketByTicketId(ticket.getTicketId()) != null) {
       throw new TicketException(HttpStatus.CONFLICT, "A ticket with the given id already exists.");
     }
+    else if (ticket.getTicketDate()==null||ticket.getPrice()<0) {
+      throw new TicketException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
+    }
     return ticketRepository.save(ticket);
   }
 
@@ -72,6 +77,12 @@ public class TicketService {
     Ticket oldTicket = ticketRepository.findTicketByTicketId(id);
     if (oldTicket == null) {
       throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
+    }
+    else if (ticketRepository.findTicketByTicketId(ticket.getTicketId()) != null) {
+      throw new TicketException(HttpStatus.CONFLICT, "A ticket with the given id already exists.");
+    }
+    else if (ticket.getTicketDate()==null||ticket.getPrice()<0) {
+      throw new TicketException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
     }
     oldTicket.setCustomer(ticket.getCustomer());
     oldTicket.setMuseum(ticket.getMuseum());
@@ -94,14 +105,10 @@ public class TicketService {
     //Check if it's the owner that is canceling
     if (canceledTicket.getCustomer().equals(customer)) {
       //Allow canceling 3 days before the ticket date
-      Date ticketDate = canceledTicket.getTicketDate();
-      Calendar c = Calendar.getInstance(); 
-      c.setTime(ticketDate); 
-      c.add(Calendar.DATE, -3);
-      java.util.Date utilDate = c.getTime();
-      Date cancelDate = new Date(utilDate.getTime());
-      Date currentDate = getCurrentDate();
-      if (currentDate.before(cancelDate)) {
+      LocalDateTime ticketDate = canceledTicket.getTicketDate();
+      LocalDateTime cancelDate = ticketDate.minus(Duration.ofDays(3));
+      LocalDateTime currentDate = getCurrentDate();
+      if (currentDate.isBefore(cancelDate)) {
         deleteTicket(ticketId);
       }
       else {
@@ -122,7 +129,7 @@ public class TicketService {
     return resultList;
 }
   
-  public Date getCurrentDate() {
-    return new Date(System.currentTimeMillis());
+  public LocalDateTime getCurrentDate() {
+    return LocalDateTime.now();
   }
 }
