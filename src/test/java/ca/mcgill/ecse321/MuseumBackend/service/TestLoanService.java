@@ -126,7 +126,7 @@ public class TestLoanService {
     Date endDate = new Date(2);
     int numOfDays = 20;
     LoanStatus status = LoanStatus.Requested;
-    int loaniD = 12345;
+    int loaniD = 321;
     Museum museum = new Museum();
     Customer customer = new Customer();
     Artwork artwork = new Artwork();
@@ -148,7 +148,7 @@ public class TestLoanService {
     Date endDate = new Date(2);
     int numOfDays = 20;
     LoanStatus status = LoanStatus.Requested;
-    int loaniD = 123456;
+    int loaniD = 3214;
     Museum museum = new Museum();
     Customer customer = new Customer();
     Artwork artwork = new Artwork();
