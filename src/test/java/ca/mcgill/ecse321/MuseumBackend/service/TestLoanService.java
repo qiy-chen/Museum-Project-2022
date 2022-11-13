@@ -130,8 +130,6 @@ public class TestLoanService {
     Museum museum = new Museum();
     Customer customer = new Customer();
     Artwork artwork = new Artwork();
-    Storage room = new Storage();
-    
     
     Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
     loan1.getArtwork().setIsLoanable(true);
