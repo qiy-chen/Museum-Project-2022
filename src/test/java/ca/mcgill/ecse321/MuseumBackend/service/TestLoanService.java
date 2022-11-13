@@ -193,6 +193,7 @@ public class TestLoanService {
     List<Loan> allloans = loanService.getLoansByStatus(LoanStatus.Approved);
     
     assertNotNull(allloans);
+    assertEquals(2,allloans.size());
     assertEquals(allloans.get(0).getStatus(), LoanStatus.Approved);
     assertNotEquals(allloans.get(1).getStatus(), LoanStatus.Requested);
     
