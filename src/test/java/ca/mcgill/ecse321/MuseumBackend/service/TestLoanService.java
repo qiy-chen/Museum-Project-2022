@@ -78,7 +78,7 @@ public class TestLoanService {
     Date endDate = new Date(2);
     int numOfDays = 20;
     LoanStatus status = LoanStatus.Requested;
-    int loaniD = 1234;
+    int loaniD = 12345;
     Museum museum = new Museum();
     Customer customer = new Customer();
     Artwork artwork = new Artwork();
