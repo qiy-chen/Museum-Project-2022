@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 
 
@@ -105,7 +106,6 @@ public class TestLoanService {
     assertEquals(loans.get(1),allloans.get(1));
   }
   
-  //emma
   @Test
   public void testCreateLoan() {
     when(loanRepository.save(any(Loan.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
@@ -119,7 +119,6 @@ public class TestLoanService {
     
   }
   
-  //emma
   @Test
   public void testApproveLoan() {
     double rentalfee = 200.0;
@@ -164,6 +163,7 @@ public class TestLoanService {
     assertTrue(loan1.getArtwork().getIsLoanable());
   }
   
+  
   @Test
   public void testGetLoansByStatus() {
     double rentalfee = 200.0;
@@ -196,6 +196,31 @@ public class TestLoanService {
     assertEquals(2,allloans.size());
     assertEquals(allloans.get(0).getStatus(), LoanStatus.Approved);
     assertNotEquals(allloans.get(1).getStatus(), LoanStatus.Requested);
+  }
+  
+  @Test
+  public void testDeleteLoan() {
+    double rentalfee = 200.0;
+    Date startDate = new Date(0);
+    Date endDate = new Date(2);
+    int numOfDays = 30;
+    LoanStatus status = LoanStatus.Requested;
+    int loaniD = 5555;
+    Museum museum = new Museum();
+    Customer customer = new Customer();
+    Artwork artwork = new Artwork();
+    Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
+    
+    int loaniD2 = 777;
+    Loan loan2 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
+   
+    when(loanRepository.findLoanByLoanId(loaniD)).thenAnswer((InvocationOnMock invocation) -> null);
+    when(loanRepository.findLoanByLoanId(loaniD2)).thenAnswer((InvocationOnMock invocation) -> loan2);
+    
+    loanService.deleteLoan(loan1);
+    
+    assertNull(loanService.getLoanById(loaniD));
+    assertNotNull(loanService.getLoanById(loaniD2));
     
   }
 }

@@ -25,6 +25,13 @@ public class LoanService {
     loan = loanRepository.save(loan);
     return loan;
   }
+  
+  @Transactional
+  public Loan deleteLoan(Loan loan) { //alex
+    loanRepository.delete(loan);
+    loan.delete();
+    return loan;
+  }
 
   @Transactional
   public void approveLoan(int loanId) { //emma
@@ -64,7 +71,7 @@ public class LoanService {
     }
   }
   @Transactional
-  public List<Loan> getLoansByStatus(LoanStatus status){ //emma
+  public List<Loan> getLoansByStatus(LoanStatus status){ //alex
     List<Loan> loans = toList(loanRepository.findAll());
     List<Loan> statusLoans = new ArrayList<Loan>();
     for (Loan loan : loans) {
