@@ -15,10 +15,14 @@ import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+
 
 @ExtendWith(MockitoExtension.class)
 public class TestLoanService {
@@ -102,4 +106,29 @@ public class TestLoanService {
     assertEquals(loans.get(1),allloans.get(1));
   }
   
+  @Test
+  public void testCreateLoan() {
+    when(loanRepository.save(any(Loan.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
+    final Loan finalLoan = new Loan();
+    int id = finalLoan.getLoanId();
+    Loan loanReturned = loanService.createLoan(finalLoan);
+    
+    assertNotNull(loanReturned);
+    assertEquals(id, loanReturned.getLoanId());
+    verify(loanRepository, times(1)).save(loanReturned);
+    
+  }
+  
+  @Test
+  public void testApproveLoan() {
+    
+  }
+  @Test
+  public void testDenyLoan() {
+    
+  }
+  @Test
+  public void testGetLoansByStatus() {
+    
+  }
 }
