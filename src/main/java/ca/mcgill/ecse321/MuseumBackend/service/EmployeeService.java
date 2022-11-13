@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
-import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 
 @Service
@@ -42,8 +41,15 @@ public class EmployeeService {
 		return toList(employeeRepo.findAll());
 	}
 	
-	// TO_DO update employee
-	// find the employee, then change the given attribute
+	// remove employee from database
+	@Transactional
+    public Employee deleteEmployee(int ID){
+        Employee employee = employeeRepo.findEmployeeByPersonRoleId(ID);
+        if(employee == null) 
+        	throw new NullPointerException("Employee not found");
+        employeeRepo.delete(employee); 
+        return employee;
+    }
 	
 	// convert ArrayList to List
 	private <T> List<T> toList(Iterable<T> iterable){

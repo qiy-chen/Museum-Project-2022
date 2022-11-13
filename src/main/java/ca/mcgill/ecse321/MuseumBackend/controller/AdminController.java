@@ -20,12 +20,14 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
-	@GetMapping("/admin/{name}")
+	// find admin by their ID
+	@GetMapping("/admin/{id}")
 	public ResponseEntity<AdminResponseDto> getAdminByID(@PathVariable int ID) {
 		Admin admin = adminService.getAdminById(ID);
 		return new ResponseEntity<AdminResponseDto>(new AdminResponseDto(admin), HttpStatus.OK);
 	}
 	
+	// create admin
 	@PostMapping("/admin")
 	public ResponseEntity<AdminResponseDto> createAdmin(@RequestBody AdminRequestDto request) {
 		Admin adminToCreate = request.toModel();
