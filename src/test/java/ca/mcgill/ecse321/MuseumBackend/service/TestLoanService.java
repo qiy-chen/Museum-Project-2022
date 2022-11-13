@@ -59,7 +59,7 @@ public class TestLoanService {
     Date startDate = new Date(0);
     Date endDate = new Date(2);
     int numOfDays = 20;
-    LoanStatus status = LoanStatus.Requested;
+    LoanStatus status = LoanStatus.Approved;
     int loaniD = 1234;
     Museum museum = new Museum();
     Customer customer = new Customer();
@@ -105,7 +105,7 @@ public class TestLoanService {
     assertEquals(loans.get(0),allloans.get(0));
     assertEquals(loans.get(1),allloans.get(1));
   }
-  
+  //emma
   @Test
   public void testCreateLoan() {
     when(loanRepository.save(any(Loan.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
@@ -121,7 +121,16 @@ public class TestLoanService {
   
   @Test
   public void testApproveLoan() {
-    
+    double rentalfee = 200.0;
+    Date startDate = new Date(0);
+    Date endDate = new Date(2);
+    int numOfDays = 20;
+    LoanStatus status = LoanStatus.Requested;
+    int loaniD = 12345;
+    Museum museum = new Museum();
+    Customer customer = new Customer();
+    Artwork artwork = new Artwork();
+    Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
   }
   @Test
   public void testDenyLoan() {

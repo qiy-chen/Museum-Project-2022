@@ -13,19 +13,19 @@ import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 public class LoanService {
   @Autowired
   LoanRepository loanRepository;
-  
+
   @Transactional
   public Loan getLoanById(int id) { //alex
-      Loan loan = loanRepository.findLoanByLoanId(id);
-      return loan;
+    Loan loan = loanRepository.findLoanByLoanId(id);
+    return loan;
   }
-  
+
   @Transactional
   public Loan createLoan(Loan loan) { //emma
-      loan = loanRepository.save(loan);
-      return loan;
+    loan = loanRepository.save(loan);
+    return loan;
   }
-  
+
   @Transactional
   public void approveLoan(int loanId) { //emma
     Loan loan = loanRepository.findLoanByLoanId(loanId);
@@ -41,20 +41,22 @@ public class LoanService {
       //throw exception 
     }
   }
-  
+
   @Transactional
   public void endLoan(int loanId) { //alex
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     Artwork loanArtwork = loan.getArtwork();
-    loan.setStatus(LoanStatus.Returned);
-    loanArtwork.setIsLoanable(true);
+    if(loan.getStatus().equals(LoanStatus.Approved)) {
+      loan.setStatus(LoanStatus.Returned);
+      loanArtwork.setIsLoanable(true);
+    }
   }
-  
+
   @Transactional
   public void denyLoan(int loanId) { //emma
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     if(loan.getStatus().equals(LoanStatus.Requested)) {
-       loan.setStatus(LoanStatus.Denied);
+      loan.setStatus(LoanStatus.Denied);
     }
     else if (loan.getStatus().equals(LoanStatus.Approved) || loan.getStatus().equals(LoanStatus.Returned)) {
       //throw exception
@@ -65,26 +67,26 @@ public class LoanService {
     List<Loan> loans = toList(loanRepository.findAll());
     List<Loan> statusLoans = new ArrayList<Loan>();
     for (Loan loan : loans) {
-       if(loan.getStatus().equals(status)) {
-         statusLoans.add(loan);
-       }
+      if(loan.getStatus().equals(status)) {
+        statusLoans.add(loan);
+      }
     }
     return statusLoans;
   }
   @Transactional
   public List<Loan> getAllLoans() { //alex
-      return toList(loanRepository.findAll());
+    return toList(loanRepository.findAll());
   }
-  
+
   private <T> List<T> toList(Iterable<T> iterable){
     List<T> resultList = new ArrayList<T>();
     for (T t : iterable) {
-        resultList.add(t);
+      resultList.add(t);
     }
     return resultList;
   }
-  
-  
-  
-  
+
+
+
+
 }
