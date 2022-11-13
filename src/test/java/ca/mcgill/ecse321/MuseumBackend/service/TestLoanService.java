@@ -16,6 +16,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -165,6 +166,35 @@ public class TestLoanService {
   
   @Test
   public void testGetLoansByStatus() {
+    double rentalfee = 200.0;
+    Date startDate = new Date(0);
+    Date endDate = new Date(2);
+    int numOfDays = 20;
+    LoanStatus status = LoanStatus.Requested;
+    int loaniD = 3214;
+    Museum museum = new Museum();
+    Customer customer = new Customer();
+    Artwork artwork = new Artwork();
+    Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
+    int loaniD2 = 999;
+    LoanStatus status2 = LoanStatus.Approved;
+    Loan loan2 = new Loan(rentalfee,startDate,endDate,numOfDays,status2,loaniD2,museum,customer,artwork);
+    int loaniD3 = 9999;
+    LoanStatus status3 = LoanStatus.Approved;
+    Loan loan3 = new Loan(rentalfee,startDate,endDate,numOfDays,status3,loaniD3,museum,customer,artwork);
+    
+    ArrayList<Loan> loans = new ArrayList<Loan>();
+    loans.add(loan1);
+    loans.add(loan2);
+    loans.add(loan3);
+    
+    when(loanRepository.findAll()).thenAnswer((InvocationOnMock invocation) -> loans);
+    
+    List<Loan> allloans = loanService.getLoansByStatus(LoanStatus.Approved);
+    
+    assertNotNull(allloans);
+    assertEquals(allloans.get(0).getStatus(), LoanStatus.Approved);
+    assertNotEquals(allloans.get(1).getStatus(), LoanStatus.Requested);
     
   }
 }
