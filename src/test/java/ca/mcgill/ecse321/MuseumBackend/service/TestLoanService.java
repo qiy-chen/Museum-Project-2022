@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
@@ -21,6 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 
 
@@ -130,14 +130,18 @@ public class TestLoanService {
     Museum museum = new Museum();
     Customer customer = new Customer();
     Artwork artwork = new Artwork();
+    Storage room = new Storage();
+    
+    
     Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
+    loan1.getArtwork().setIsLoanable(true);
     when(loanRepository.findLoanByLoanId(loaniD)).thenAnswer((InvocationOnMock invocation) -> loan1);
     
     loanService.approveLoan(loaniD);
     
     assertNotNull(loan1);
     assertEquals(LoanStatus.Approved, loan1.getStatus());
-    assertTrue(loan1.getArtwork().getIsLoanable());
+    assertFalse(loan1.getArtwork().getIsLoanable());
     
     
   }

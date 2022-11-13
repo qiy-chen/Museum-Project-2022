@@ -57,6 +57,7 @@ public class LoanService {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     if(loan.getStatus().equals(LoanStatus.Requested)) {
       loan.setStatus(LoanStatus.Denied);
+      loan.getArtwork().setIsLoanable(true);
     }
     else if (loan.getStatus().equals(LoanStatus.Approved) || loan.getStatus().equals(LoanStatus.Returned)) {
       //throw exception
