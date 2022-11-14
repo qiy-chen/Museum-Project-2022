@@ -1,0 +1,138 @@
+package ca.mcgill.ecse321.MuseumBackend.service;
+
+
+import ca.mcgill.ecse321.MuseumBackend.model.Employee;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.model.Shift;
+import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.ShiftRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+public class TestShiftService {
+
+    @Mock
+    ShiftRepository shiftRepository;
+
+
+    @InjectMocks
+    ShiftService shiftService;
+
+    @Test
+    public void testCreateShift() {
+        Museum museum = new Museum();
+        museum.setMuseumId(12);
+        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
+        long workHours = (long) sixHoursInMillisecond;
+        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
+        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
+        Shift shift = new Shift(startTime, endTime, 54, museum);
+        when(shiftRepository.save(shift)).thenAnswer((InvocationOnMock invocation) -> shift);
+        assertEquals(shift, shiftService.createShift(shift));
+    }
+
+    @Test
+    public void testFindShiftById() {
+        Museum museum = new Museum();
+        museum.setMuseumId(12);
+        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
+        long workHours = (long) sixHoursInMillisecond;
+        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
+        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
+        Shift shift = new Shift(startTime, endTime, 54, museum);
+        when(shiftRepository.findShiftByWorkDayId(shift.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift);
+        assertEquals(shift.getWorkDayId(), shiftService.getShiftById(shift.getWorkDayId()).getWorkDayId());
+    }
+
+    @Test
+    public void testChangeShiftDate() {
+        Museum museum = new Museum();
+        museum.setMuseumId(12);
+        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
+        long workHours = (long) sixHoursInMillisecond;
+        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
+        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
+        Shift shift0 = new Shift(startTime, endTime, 54, museum);
+        when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
+        Date startTime1 = new Date(5);
+        Date endTime1 = new Date(6);
+        shiftService.changeShiftDate(shift0.getWorkDayId(), startTime1, endTime1);
+        assertEquals(54, shift0.getWorkDayId());
+        assertNotEquals(startTime,shift0.getStartTime());
+        assertNotEquals(endTime,shift0.getEndTime());
+
+
+    }
+
+    @Test
+    public void testAddEmployeeToShift() {
+        Museum museum = new Museum();
+        museum.setMuseumId(12);
+        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
+        long workHours = (long) sixHoursInMillisecond;
+        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
+        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
+        Shift shift0 = new Shift(startTime, endTime, 54, museum);
+        when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
+        Person Sam = new Person("email","password","Sam",museum);
+        Sam.addPersonRole(new Employee(5,Sam));
+        shiftService.addEmployeeToShift(shift0.getWorkDayId(),(Employee) Sam.getPersonRole(0));
+        assertEquals(Sam.getPersonRole(0).getPersonRoleId(), shift0.getEmployee(0).getPersonRoleId());
+    }
+
+    @Test
+    public void testRemoveEmployeeFromShift() {
+        Museum museum = new Museum();
+        museum.setMuseumId(12);
+        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
+        long workHours = (long) sixHoursInMillisecond;
+        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
+        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
+        Shift shift0 = new Shift(startTime, endTime, 54, museum);
+        when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
+        Person Sam = new Person("email","password","Sam",museum);
+        Sam.addPersonRole(new Employee(5,Sam));
+        shiftService.addEmployeeToShift(shift0.getWorkDayId(), (Employee) Sam.getPersonRole(0));
+        Person Brock = new Person("email0","password","Brock",museum);
+        Brock.addPersonRole(new Employee(6,Brock));
+        shiftService.addEmployeeToShift(shift0.getWorkDayId(), (Employee) Brock.getPersonRole(0));
+        Person Stacy = new Person("email1","password","Stacy",museum);
+        Stacy.addPersonRole(new Employee(7,Stacy));
+        shiftService.addEmployeeToShift(shift0.getWorkDayId(), (Employee) Stacy.getPersonRole(0));
+        int brockEmployeeIndex = shift0.getEmployees().indexOf(Brock.getPersonRole(0));
+        shiftService.removeEmployeeFromShift(shift0.getWorkDayId(), (Employee) Brock.getPersonRole(0));
+        assertNotEquals(shift0.getEmployee(brockEmployeeIndex).getPersonRoleId(), Brock.getPersonRole(0).getPersonRoleId());
+        assertNotEquals(-1, shift0.getEmployees().indexOf(Sam.getPersonRole(0)));
+        assertNotEquals(-1, shift0.getEmployees().indexOf(Stacy.getPersonRole(0)));
+        assertEquals(Sam.getPersonRole(0).getPersonRoleId(), shift0.getEmployee(shift0.getEmployees().indexOf(Sam.getPersonRole(0))).getPersonRoleId());
+        assertEquals(Stacy.getPersonRole(0).getPersonRoleId(), shift0.getEmployee(shift0.getEmployees().indexOf(Stacy.getPersonRole(0))).getPersonRoleId());
+    }
+
+    @Test
+    public void testDeleteShift() {
+        Museum museum = new Museum();
+        museum.setMuseumId(12);
+        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
+        long workHours = (long) sixHoursInMillisecond;
+        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
+        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
+        Shift shift0 = new Shift(startTime, endTime, 54, museum);
+        when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
+        shiftService.deleteShift(shift0.getWorkDayId());
+        assertNull(shift0.getMuseum());
+    }
+
+}
