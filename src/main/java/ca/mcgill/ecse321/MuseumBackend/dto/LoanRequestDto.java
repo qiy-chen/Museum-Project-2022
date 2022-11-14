@@ -2,8 +2,11 @@ package ca.mcgill.ecse321.MuseumBackend.dto;
 
 import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.service.LoanService;
 
 public class LoanRequestDto {
@@ -16,6 +19,9 @@ public class LoanRequestDto {
   private Date startDate;
   private Date endDate;
   private double rentalFee;
+  private Artwork artwork;
+  private Customer customer;
+  private Museum museum;
   
   public int getLoanId() {
     return loanId;
@@ -65,10 +71,36 @@ public class LoanRequestDto {
     rentalFee = fee;
   }
   
+  public Artwork getArtwork() {
+    return artwork;
+  }
+  public void setArtwork(Artwork artwork) {
+    this.artwork = artwork;
+  }
+  public Customer getCustomer() {
+    return customer;
+  }
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
+  public Museum getMuseum() {
+    return museum;
+  }
+  public void setMuseum(Museum museum) {
+    this.museum = museum;
+  }
   public Loan toModel() {
    Loan loan = new Loan();
-   Loan loanForModel = loanService.createLoan(loan);
-   return loanForModel; 
+   loan.setArtwork(artwork);
+   loan.setCustomer(customer);
+   loan.setEndDate(endDate);
+   loan.setLoanId(loanId);
+   loan.setMuseum(museum);
+   loan.setNumOfDays(numOfDays);
+   loan.setRentalFee(rentalFee);
+   loan.setStartDate(startDate);
+   loan.setStatus(status);
+   return loan;
   }
   
 }
