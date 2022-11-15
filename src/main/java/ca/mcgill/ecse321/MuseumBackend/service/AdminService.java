@@ -19,8 +19,9 @@ public class AdminService {
 	@Autowired
 	AdminRepository adminRepo;
 	@Autowired
-	PersonService personService;
+	PersonRepository personRepo;
 	
+	// get Admin by ID
 	@Transactional
 	public Admin getAdminById(int id) {
 		Admin admin = adminRepo.findAdminByPersonRoleId(id);
@@ -30,10 +31,18 @@ public class AdminService {
 		return admin;
 	}
 	
-	// create Admin 
+	// create Admin given a requestDTO
 	@Transactional
 	public AdminResponseDto createAdmin(AdminRequestDto adminDto) {
-		Person person = personService.getPersonByEmail(adminDto.getPersonEmail());
+		String email = adminDto.getPersonEmail();
+		// check if the person with the given email already exists, else throw error (we don't want to create people from the role end)
+		Person person = personRepo.findPersonByEmail(email);
+		if (person == null) {
+			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Person with given email not found.");
+		}
+		if (person.isAdmin()) {
+			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Person with given email is already an admin.");
+		}
 		Admin admin = new Admin();
 		admin.setPerson(person);
 		admin = adminRepo.save(admin);
