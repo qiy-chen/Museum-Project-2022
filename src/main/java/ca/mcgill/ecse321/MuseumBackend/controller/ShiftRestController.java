@@ -3,12 +3,10 @@ package ca.mcgill.ecse321.MuseumBackend.controller;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
-import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
-import ca.mcgill.ecse321.MuseumBackend.service.PersonService;
 import ca.mcgill.ecse321.MuseumBackend.service.ShiftService;
-import jdk.jfr.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +23,24 @@ public class ShiftRestController {
     public ShiftDto getShiftById(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException {
         return convertToDto(service.getShiftById(workDayId));
     }
+
+    @PostMapping(value = {"/shifts/{workDayId}","/shifts/{workDayId}/"})
+    public ShiftDto addEmployeeToShift(@PathVariable("workDayId") int workDayId, @RequestParam EmployeeRequestDto employee) throws IllegalArgumentException {
+        Employee modelEmployee = employee.toModel();
+        return convertToDto(service.addEmployeeToShift(workDayId, modelEmployee));
+    }
+
+    @PostMapping(value = {"/shifts/{workDayId}","/shifts/{workDayId}/"})
+    public ShiftDto removeEmployeeFromShift(@PathVariable("workDayId") int workDayId, @RequestParam EmployeeRequestDto employee) throws IllegalArgumentException {
+        Employee modelEmployee = employee.toModel();
+        return convertToDto(service.removeEmployeeFromShift(workDayId, modelEmployee));
+    }
+
+    @PostMapping(value = {"/shifts/{workDayId}","/shifts/{workDayId}/"})
+    public void deleteShift(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException {
+        service.deleteShift(workDayId);
+    }
+
 
     @GetMapping(value = {"/shifts/{workDayId}", "/shifts/{workDayId}/"})
     public List<EmployeeResponseDto> getShiftEmployeesById(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException{
