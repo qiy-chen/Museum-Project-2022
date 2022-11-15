@@ -35,10 +35,10 @@ public class LoanIntegrationTest {
     testGetLoan(id);
   }
   private int testCreateLoan() {
-    Loan loan = new Loan();
-    int loanId = 321;
-    loan.setLoanId(loanId);
-    loanRepo.save(loan);
+    //Loan loan = new Loan();
+    //int loanId = 321;
+    //loan.setLoanId(loanId);
+    //loanRepo.save(loan);
     
     ResponseEntity<LoanDto> response = client.postForEntity("/loan", new LoanDto(123), LoanDto.class);
     assertNotNull(response);
