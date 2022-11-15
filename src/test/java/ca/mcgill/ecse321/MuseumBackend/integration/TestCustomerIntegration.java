@@ -39,7 +39,6 @@ public class TestCustomerIntegration {
 	
 	private int testCreateCustomer() {
 		ResponseEntity<CustomerDto> response = client.postForEntity("/customer", new CustomerDto("obi@kenobi.com"), CustomerDto.class);
-		
 		assertNotNull(response);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
@@ -62,7 +61,6 @@ public class TestCustomerIntegration {
 	@Test
 	public void testCreateInvalidCustomer() {
 		ResponseEntity<String> response = client.postForEntity("/customer", new CustomerDto("   "), String.class);
-		
 		assertNotNull(response);
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode(), "Response has correct status");
 	}

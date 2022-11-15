@@ -88,7 +88,7 @@ public class TestAdminService {
 		finn.setEmail(email);
 
 		// call method
-		AdminResponseDto returnedAdmin = adminService.createAdmin(finn);
+		AdminResponseDto returnedAdmin = adminService.createAdmin(email);
 
 		// check results
 		assertNotNull(returnedAdmin);
@@ -100,6 +100,7 @@ public class TestAdminService {
 	// check if creating admin given person who is already an admin throws exception
 	@Test
 	public void testInvalidCreateExistingAdmin() {
+		
 		// test set up - create a person who is already an admin
 		Person person = new Person();
 		String email = "finnigan@mail.com";
@@ -111,12 +112,12 @@ public class TestAdminService {
 		// when searching for person using email, return person
 		when(personRepo.findPersonByEmail(email)).thenAnswer((InvocationOnMock invocation) -> person);
 		// create the admin request and tie it to the existing person
-		AdminRequestDto invalidRequest = new AdminRequestDto();
-		invalidRequest.setEmail(email);
+		//AdminRequestDto invalidRequest = new AdminRequestDto();
+		//invalidRequest.setEmail(email);
 
 		// call method expecting exception
 		MuseumBackendException ex = assertThrows(MuseumBackendException.class,
-				() -> adminService.createAdmin(invalidRequest));
+				() -> adminService.createAdmin(email));
 
 		// check results
 		assertEquals(ex.getMessage(), "Person with given email is already an admin.");
@@ -126,6 +127,7 @@ public class TestAdminService {
 	// check if creating admin given person who does not yet exist throws exception
 	@Test
 	public void testInvalidCreateAdminForMissingPerson() {
+		
 		String email = "finnigan@mail.com";
 		// when searching for a person using an email, return null since the person does not exist
 		when(personRepo.findPersonByEmail(any(String.class))).thenAnswer((InvocationOnMock invocation) -> null);
@@ -135,7 +137,7 @@ public class TestAdminService {
 
 		// call method expecting exception
 		MuseumBackendException ex = assertThrows(MuseumBackendException.class,
-				() -> adminService.createAdmin(invalidRequest));
+				() -> adminService.createAdmin(email));
 
 		// check results
 		assertEquals(ex.getMessage(), "Person with given email not found.");

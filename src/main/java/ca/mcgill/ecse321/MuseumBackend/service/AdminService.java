@@ -33,8 +33,7 @@ public class AdminService {
 	
 	// create Admin given a requestDTO
 	@Transactional
-	public AdminResponseDto createAdmin(AdminRequestDto adminDto) {
-		String email = adminDto.getPersonEmail();
+	public AdminResponseDto createAdmin(String email) {
 		// check if the person with the given email already exists, else throw error (we don't want to create people from the role end)
 		Person person = personRepo.findPersonByEmail(email);
 		if (person == null) {

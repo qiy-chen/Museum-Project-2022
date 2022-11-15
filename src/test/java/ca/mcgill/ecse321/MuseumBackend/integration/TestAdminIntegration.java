@@ -14,7 +14,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) //set random port
 public class TestAdminIntegration {
@@ -24,11 +26,14 @@ public class TestAdminIntegration {
 	
 	@Autowired
 	private AdminRepository adminRepo;
+	@Autowired
+	private PersonRepository personRepo;
 	
 	@BeforeEach
 	@AfterEach
 	public void clearDatabase() {
 		adminRepo.deleteAll();
+		personRepo.deleteAll();
 	}
 	
 	@Test
@@ -38,11 +43,21 @@ public class TestAdminIntegration {
 	}
 	
 	private int testCreateAdmin() {
-		ResponseEntity<AdminDto> response = client.postForEntity("/admin", new AdminDto("obi@kenobi.com"), AdminDto.class);
+		
+		// setup - first create and save person that will get the role admin
+		Person person = new Person();
+		String email = "obi@kenobi.com";
+		person.setEmail(email);
+		personRepo.save(person);
+		
+		// call method: create a new admin
+		ResponseEntity<AdminDto> response = client.postForEntity("/admin", new AdminDto(email), AdminDto.class);
+		
+		// check response
 		assertNotNull(response);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
-		assertEquals("obi@kenobi.com", response.getBody().email, "Response has correct email");
+		assertEquals(email, response.getBody().email, "Response has correct email");
 		assertTrue(response.getBody().id > 0, "Response has valid ID");
 		
 		return response.getBody().id;
