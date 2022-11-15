@@ -18,7 +18,7 @@ public class LoanController {
   @Autowired
   LoanService loanService;
   
-  @GetMapping("/loan/loanId/{id}")
+  @GetMapping("/loan/{id}")
   public ResponseEntity<LoanResponseDto> getLoanByLoanId(@PathVariable int id){
     Loan loan = loanService.getLoanById(id);
     return new ResponseEntity<LoanResponseDto>(new LoanResponseDto(loan), HttpStatus.OK);

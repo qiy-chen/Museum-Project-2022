@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -34,6 +35,11 @@ public class LoanIntegrationTest {
     testGetLoan(id);
   }
   private int testCreateLoan() {
+    Loan loan = new Loan();
+    int loanId = 321;
+    loan.setLoanId(loanId);
+    loanRepo.save(loan);
+    
     ResponseEntity<LoanDto> response = client.postForEntity("/loan", new LoanDto(123), LoanDto.class);
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
