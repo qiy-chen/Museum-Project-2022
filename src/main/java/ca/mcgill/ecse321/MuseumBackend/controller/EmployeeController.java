@@ -41,10 +41,10 @@ public class EmployeeController {
 		return new ResponseEntity<EmployeeResponseDto>(response, HttpStatus.CREATED);
 	}
 	
-	// delete employee by ID
-	@DeleteMapping("/employee/delete")
-	public ResponseEntity<EmployeeResponseDto> deleteEmployee(@RequestParam int id) {
-		EmployeeResponseDto response = new EmployeeResponseDto(employeeService.deleteEmployee(id));
+	// fire employee by ID
+	@DeleteMapping("/employee/fire")
+	public ResponseEntity<EmployeeResponseDto> fireEmployee(@RequestParam int id) {
+		EmployeeResponseDto response = new EmployeeResponseDto(employeeService.fireEmployee(id));
 		return new ResponseEntity<EmployeeResponseDto>(response, HttpStatus.OK);
 	}
 	

@@ -43,7 +43,7 @@ public class EmployeeService {
 	
 	// remove employee from database
 	@Transactional
-    public Employee deleteEmployee(int ID){
+    public Employee fireEmployee(int ID){
         Employee employee = employeeRepo.findEmployeeByPersonRoleId(ID);
         if(employee == null) 
         	throw new NullPointerException("Employee not found");

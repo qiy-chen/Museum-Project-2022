@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.AdminRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
@@ -30,9 +31,7 @@ public class AdminController {
 	// create admin
 	@PostMapping("/admin")
 	public ResponseEntity<AdminResponseDto> createAdmin(@RequestBody AdminRequestDto request) {
-		Admin adminToCreate = request.toModel();
-		Admin createdAdmin = adminService.createAdmin(adminToCreate);
-		AdminResponseDto response = new AdminResponseDto(createdAdmin);
+		AdminResponseDto response = adminService.createAdmin(request);
 		return new ResponseEntity<AdminResponseDto>(response, HttpStatus.CREATED);
 	}
 }
