@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'ca.mcgill.ecse321'
@@ -20,9 +21,13 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 	testLogging {
 	exceptionFormat "full"
-}
 }
