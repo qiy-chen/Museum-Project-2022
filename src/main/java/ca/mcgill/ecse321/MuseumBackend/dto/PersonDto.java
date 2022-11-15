@@ -11,4 +11,12 @@ public class PersonDto {
 		this.email = person.getEmail();
 		this.name = person.getName();
 	}
+	public PersonDto() {}
+	
+	public Person toModel() {
+	  Person person = new Person();
+	  person.setEmail(email);
+	  person.setName(name);
+	  return person;
+	}
 }

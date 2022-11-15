@@ -36,9 +36,6 @@ public class TicketService {
   @Transactional
   public List<Ticket> getAllTicketsFromCustomer(int customerId) {
     List<Ticket> tickets = toList(ticketRepository.findAll());
-    if (tickets.size() == 0) {
-      throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
-    }
     List<Ticket> ticketsdto = new ArrayList<Ticket>();
     for (Ticket ticket:tickets) {
       if (ticket.getCustomer().getPersonRoleId()==customerId) {
@@ -80,13 +77,9 @@ public class TicketService {
       ticket.setTicketId(id);
       return ticketRepository.save(ticket);
     }
-    ticketRepository.delete(oldTicket);
     //Replace old ticket with new values
-    oldTicket.setCustomer(ticket.getCustomer());
-    oldTicket.setMuseum(ticket.getMuseum());
     oldTicket.setPrice(ticket.getPrice());
     oldTicket.setTicketDate(ticket.getTicketDate());
-    oldTicket.setTicketId(id);
     return ticketRepository.save(oldTicket);
 
   }

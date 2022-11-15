@@ -75,19 +75,6 @@ public class TestTicketService {
   }
 
   @Test
-  public void testGetAllFromCustomerEmpty() {
-    final int id = 99;
-    // Mock: if asking for a ticket with invalid ID, return null
-    when(ticketRepo.findAll()).thenAnswer((InvocationOnMock invocation) -> null);
-
-    // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.getAllTicketsFromCustomer(id));
-
-    // check results
-    assertEquals("Ticket not found.", ex.getMessage());
-    assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
-  }
-  @Test
   public void testGetAllTickets() {
     // Tell the mocked repository how to behave
     final int id = 1;

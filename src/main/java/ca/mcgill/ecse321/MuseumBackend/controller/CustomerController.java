@@ -13,24 +13,27 @@ import ca.mcgill.ecse321.MuseumBackend.dto.CustomerRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.service.CustomerService;
+import ca.mcgill.ecse321.MuseumBackend.service.PersonService;
 
 @RestController
 public class CustomerController {
 
-	@Autowired
-	CustomerService customerService;
-	
-	@GetMapping("/customer/{name}")
-	public ResponseEntity<CustomerResponseDto> getCustomerByID(@PathVariable int ID) {
-		Customer customer = customerService.getCustomerById(ID);
-		return new ResponseEntity<CustomerResponseDto>(new CustomerResponseDto(customer), HttpStatus.OK);
-	}
-	
-	@PostMapping("/customer")
-	public ResponseEntity<CustomerResponseDto> createCustomer(@RequestBody CustomerRequestDto request) {
-		Customer customerToCreate = request.toModel();
-		Customer createdCustomer = customerService.createCustomer(customerToCreate);
-		CustomerResponseDto response = new CustomerResponseDto(createdCustomer);
-		return new ResponseEntity<CustomerResponseDto>(response, HttpStatus.CREATED);
-	}
+  @Autowired
+  CustomerService customerService;
+  @Autowired
+  PersonService personService;
+
+  @GetMapping("/customer/{name}")
+  public ResponseEntity<CustomerResponseDto> getCustomerByID(@PathVariable int ID) {
+    Customer customer = customerService.getCustomerById(ID);
+    return new ResponseEntity<CustomerResponseDto>(new CustomerResponseDto(customer), HttpStatus.OK);
+  }
+
+  @PostMapping("/customer")
+  public ResponseEntity<CustomerResponseDto> createCustomer(@RequestBody CustomerRequestDto request) {
+    Customer customerToCreate = request.toModel();
+    Customer createdCustomer = customerService.createCustomer(customerToCreate);
+    CustomerResponseDto response = new CustomerResponseDto(createdCustomer);
+    return new ResponseEntity<CustomerResponseDto>(response, HttpStatus.CREATED);
+  }
 }

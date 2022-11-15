@@ -50,7 +50,7 @@ public class TicketController {
   }
 
   @PutMapping("/tickets/{ticketId}")
-  public ResponseEntity<TicketResponseDto> replaceTicket(@PathVariable int ticketId, @RequestBody TicketRequestDto newTicketDto) {
+  public ResponseEntity<TicketResponseDto> replaceTicket(@PathVariable int ticketId, @Valid @RequestBody TicketRequestDto newTicketDto) {
     Ticket newTicket = newTicketDto.toModel();
     newTicket = ticketService.replaceTicket(newTicket, ticketId);
     return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket), HttpStatus.OK);
@@ -85,7 +85,7 @@ public class TicketController {
     }
     newTicket.setCustomer(customer);
     newTicket = ticketService.createTicket(newTicket);
-    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.OK);
+    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.CREATED);
   }
 
   @DeleteMapping("/persons/{roleId}")
