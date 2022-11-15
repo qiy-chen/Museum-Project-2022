@@ -212,12 +212,20 @@ public class TicketIntegrationTests {
   @Test
   public void testdeleteTicket() {
     int id = 1;
-    client.postForEntity("/tickets", new TicketRequestDto(id, LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0),10.00), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/tickets", new TicketRequestDto(id, LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0),10.00), TicketResponseDto.class);
 
-    ResponseEntity<TicketResponseDto> response1 = client.exchange("/tickets/"+id, HttpMethod.DELETE, null, TicketResponseDto.class);
+    assertNotNull(responsePost);
+    assertEquals(HttpStatus.CREATED, responsePost.getStatusCode(), "Response has correct status");
     
+    ResponseEntity<TicketResponseDto> response1 = client.exchange("/tickets/"+id, HttpMethod.DELETE, null, TicketResponseDto.class);
+
     assertNotNull(response1);
     assertEquals(HttpStatus.OK, response1.getStatusCode(), "Response has correct status");
+    
+    //Check if ticket is now present
+    ResponseEntity<String> responseGet = client.getForEntity("/tickets/" + id, String.class);
+    assertNotNull(responseGet);
+    assertEquals(HttpStatus.NOT_FOUND, responseGet.getStatusCode(), "Response has correct status");
   }
   
   @Test
@@ -257,7 +265,7 @@ public class TicketIntegrationTests {
   }
   
   @Test
-  public void browseTicket() {
+  public void cancelTicket() {
     int customerId = 10;
     int id = 1;
     int id2 = 2;
