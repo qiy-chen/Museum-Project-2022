@@ -23,7 +23,6 @@ public class TestAdminIntegration {
 
 	@Autowired
 	private TestRestTemplate client;
-
 	@Autowired
 	private AdminRepository adminRepo;
 	@Autowired

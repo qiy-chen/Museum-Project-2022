@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
-import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
@@ -63,7 +62,7 @@ public class EmployeeService {
 	public Employee fireEmployee(int ID) {
 		Employee employee = employeeRepo.findEmployeeByPersonRoleId(ID);
 		if (employee == null)
-			throw new NullPointerException("Employee not found");
+			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Employee with given ID not found.");
 		employeeRepo.delete(employee);
 		return employee;
 	}

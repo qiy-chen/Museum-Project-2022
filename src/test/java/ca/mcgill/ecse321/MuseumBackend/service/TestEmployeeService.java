@@ -4,7 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,7 +48,7 @@ public class TestEmployeeService {
 		final int id = 1;
 		final Employee hannah = new Employee();
 		hannah.setPersonRoleId(id);
-		when(employeeRepo.findEmployeeByPersonRoleId(id)).thenAnswer((InvocationOnMock invocation) -> hannah);
+		when(employeeRepo.findEmployeeByPersonRoleId(id)).thenAnswer(x -> hannah);
 
 		// Test that the service behaves properly
 		Employee employee = employeeService.getEmployeeById(id);
@@ -57,7 +62,7 @@ public class TestEmployeeService {
 		final int invalidId = 99;
 
 		// Mock: if asking for a employee with invalid ID, return null
-		when(employeeRepo.findEmployeeByPersonRoleId(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
+		when(employeeRepo.findEmployeeByPersonRoleId(invalidId)).thenAnswer(x -> null);
 
 		// call method, and obtain resulting exception
 		MuseumBackendException ex = assertThrows(MuseumBackendException.class,
@@ -80,7 +85,7 @@ public class TestEmployeeService {
 		person.setEmail(email);
 		person.setName(name);
 		// when searching for person using email, return person
-		when(personRepo.findPersonByEmail(email)).thenAnswer((InvocationOnMock invocation) -> person);
+		when(personRepo.findPersonByEmail(email)).thenAnswer(x -> person);
 		// create the employee request and tie it to the existing person
 		EmployeeRequestDto finn = new EmployeeRequestDto();
 		finn.setEmail(email);
@@ -108,7 +113,7 @@ public class TestEmployeeService {
 		Employee existingEmployee = new Employee();
 		person.addPersonRole(existingEmployee);
 		// when searching for person using email, return person
-		when(personRepo.findPersonByEmail(email)).thenAnswer((InvocationOnMock invocation) -> person);
+		when(personRepo.findPersonByEmail(email)).thenAnswer(x -> person);
 		// create the employee request and tie it to the existing person
 		//EmployeeRequestDto invalidRequest = new EmployeeRequestDto();
 		//invalidRequest.setEmail(email);
@@ -128,7 +133,7 @@ public class TestEmployeeService {
 		
 		String email = "finnigan@mail.com";
 		// when searching for a person using an email, return null since the person does not exist
-		when(personRepo.findPersonByEmail(any(String.class))).thenAnswer((InvocationOnMock invocation) -> null);
+		when(personRepo.findPersonByEmail(any(String.class))).thenAnswer(x -> null);
 		// create the employee request and tie it to the existing person
 		EmployeeRequestDto invalidRequest = new EmployeeRequestDto();
 		invalidRequest.setEmail(email);
@@ -140,5 +145,65 @@ public class TestEmployeeService {
 		// check results
 		assertEquals(ex.getMessage(), "Person with given email not found.");
 		assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+	}
+	
+	// test delete employee
+	@Test
+	public void testFireEmployee() {
+		// setup: create an employee to delete
+		Employee smith = new Employee();
+		int id = smith.getPersonRoleId();
+		
+		// Mock: if looking for smith using their ID, return smith
+		when(employeeRepo.findEmployeeByPersonRoleId(id)).thenAnswer(x -> smith);
+		
+		// call method
+		Employee returnedEmployee = employeeService.fireEmployee(id);
+		
+		// check results
+		assertNotNull(returnedEmployee);
+		assertEquals(id, returnedEmployee.getPersonRoleId());
+		verify(employeeRepo,times(1)).delete(smith);
+	}
+	
+	// test invalid delete employee - they are not found
+	@Test
+	public void testInvalidFireEmployee() {
+		// Mock: if searching using an invalid employee id return null
+		when(employeeRepo.findEmployeeByPersonRoleId(any(int.class))).thenAnswer(x -> null);
+		
+		// call method, expecting exception
+		MuseumBackendException ex = assertThrows(MuseumBackendException.class,
+				() -> employeeService.fireEmployee(Integer.MAX_VALUE));
+
+		// check results
+		assertEquals(ex.getMessage(), "Employee with given ID not found.");
+		assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+	}
+	
+	// test get all employees
+	@Test
+	public void testGetAllEmployees() {
+		
+		// setup: make list of employees to find
+		Employee baggins = new Employee();
+		Employee smeagol = new Employee();
+		int bagginsID = baggins.getPersonRoleId();
+		int smeagolsID = smeagol.getPersonRoleId();
+		
+		ArrayList<Employee> hobbits = new ArrayList<>();
+		hobbits.add(baggins); 
+		hobbits.add(smeagol);
+		
+		// Mock: if searching for all employees return a list of employees
+		when(employeeRepo.findAll()).thenAnswer(x -> hobbits);
+		
+		// call method
+		List<Employee> employees = employeeService.getAllEmployees();
+		
+		//check results
+		assertNotNull(employees);
+		assertEquals(employees.get(0).getPersonRoleId(),bagginsID);
+		assertEquals(employees.get(1).getPersonRoleId(),smeagolsID);
 	}
 }

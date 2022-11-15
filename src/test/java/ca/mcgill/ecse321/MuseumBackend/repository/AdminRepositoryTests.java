@@ -32,9 +32,7 @@ public class AdminRepositoryTests {
     @Test
     public void testPersistAndLoadAdmin() {
         // Create object
-        int id = 125;
         Admin aAdmin = new Admin();
-        aAdmin.setPersonRoleId(id);
 
         // Save object
         adminRepository.save(aAdmin);
@@ -42,7 +40,7 @@ public class AdminRepositoryTests {
 
         // Read object from database
         aAdmin = null;
-        aAdmin = adminRepository.findAdminByPersonRoleId(id);
+        aAdmin = adminRepository.findAdminByPersonRoleId(adminId);
 
         // Assert that object has correct attributes
         assertNotNull(aAdmin);
@@ -52,9 +50,7 @@ public class AdminRepositoryTests {
     @Test
     public void testAdminToPersonReference() {
         // Create object
-        int id = 1;
         Admin aAdmin = new Admin();
-        aAdmin.setPersonRoleId(id);
         adminRepository.save(aAdmin); // save before adding art so that it is present for the foreign key when saving the artwork
         
         // create references
