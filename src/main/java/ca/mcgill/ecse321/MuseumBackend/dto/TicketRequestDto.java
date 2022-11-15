@@ -1,8 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class TicketRequestDto {

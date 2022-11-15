@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.MuseumBackend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -12,7 +11,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +27,6 @@ import org.springframework.http.HttpStatus;
 import ca.mcgill.ecse321.MuseumBackend.Exception.TicketException;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
-import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -76,18 +73,7 @@ public class TestTicketService {
     assertEquals("Ticket not found.", ex.getMessage());
     assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
   }
-  @Test
-  public void testGetAllEmpty() {
-    // Mock: if asking for a ticket with invalid ID, return null
-    when(ticketRepo.findAll()).thenAnswer((InvocationOnMock invocation) -> null);
 
-    // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.getAllTickets());
-
-    // check results
-    assertEquals("Ticket not found.", ex.getMessage());
-    assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
-  }
   @Test
   public void testGetAllFromCustomerEmpty() {
     final int id = 99;
@@ -247,6 +233,8 @@ public class TestTicketService {
     final int id = 1;
     final Ticket ticketOne = new Ticket();
     ticketOne.setTicketId(id);
+    ticketOne.setTicketDate(LocalDateTime.of(1990,Month.JANUARY, 1, 0, 0, 0));
+    ticketOne.setPrice(1.00);
     //ticketOne is stored in repo
     when(ticketRepo.findTicketByTicketId(id)).thenAnswer((InvocationOnMock invocation) -> ticketOne);
 
@@ -260,7 +248,37 @@ public class TestTicketService {
     Ticket ticket = ticketService.replaceTicket(ticketTwo, id);
 
     assertNotNull(ticket);
-    assertEquals(id1, ticket.getTicketId());
+    assertEquals(id, ticket.getTicketId());
+    assertEquals(10.00,ticket.getPrice());
+    assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0),ticket.getTicketDate());
+  }
+  @ExtendWith(MockitoExtension.class)
+  @MockitoSettings(strictness = Strictness.LENIENT)
+  @Test
+  public void testReplaceTicket2() {
+    // Tell the mocked repository how to behave
+    when(ticketRepo.save(any(Ticket.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
+    
+    final int id = 999999;
+    final Ticket ticketOne = new Ticket();
+    ticketOne.setTicketId(id);
+    //ticketOne is stored in repo
+    when(ticketRepo.findTicketByTicketId(id)).thenAnswer((InvocationOnMock invocation) -> null);
+
+    final int id1 = 2;
+    final Ticket ticketTwo = new Ticket();
+    ticketTwo.setTicketId(id1);
+    ticketTwo.setTicketDate(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0));
+    ticketTwo.setPrice(10.00);
+    
+    // Test that the service behaves properly
+    Ticket ticket = ticketService.replaceTicket(ticketTwo, id);
+
+    assertNotNull(ticket);
+    assertEquals(id, ticket.getTicketId());
+    assertEquals(id, ticket.getTicketId());
+    assertEquals(10.00,ticket.getPrice());
+    assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0),ticket.getTicketDate());
   }
   @Test
   public void testReplaceInvalidTicket() {
@@ -303,45 +321,42 @@ public class TestTicketService {
     assertEquals("The ticket to be created contains invalid data.", ex.getMessage());
     assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
   }
-    
+
+    @ExtendWith(MockitoExtension.class)
+    @MockitoSettings(strictness = Strictness.LENIENT)
     @Test
-    public void testReplaceExistentTicket() {
+    public void testCancelTicket() {
+      
+      // Tell the mocked repository how to behave
       final int id = 1;
       final Ticket ticketOne = new Ticket();
-      ticketOne.setTicketId(id);
-
-      final Ticket ticketTwo = new Ticket();
-      ticketTwo.setTicketId(id);
-      ticketTwo.setPrice(10.00);
       
+      final int customerId = 10;
+      final Customer customer = new Customer();
+      ticketOne.setTicketId(id);
+      customer.setPersonRoleId(customerId);
+      ticketOne.setCustomer(customer);
+
       when(ticketRepo.findTicketByTicketId(id)).thenAnswer((InvocationOnMock invocation) -> ticketOne);
+      when(customerService.getCustomerById(customerId)).thenAnswer((InvocationOnMock invocation) -> customer);
+
+      
+      
+      //Set 'current date' to 4 days before the ticket date
+      final LocalDateTime ticketDate = LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0);
+      ticketOne.setTicketDate(ticketDate);
+      final LocalDateTime currentDate = ticketDate.minus(Duration.ofDays(4));
 
 
-      // call method, and obtain resulting exception
-      TicketException ex = assertThrows(TicketException.class, () -> ticketService.createTicket(ticketTwo));
-
-      // check results
-      assertEquals("A ticket with the given id already exists.", ex.getMessage());
-      assertEquals(HttpStatus.CONFLICT, ex.getStatus());
-  }
-  @Test
-  public void testReplaceAbsentTicket() {
-    // Tell the mocked repository how to behave
+      //Give this 'current date instead'
+      Mockito.doReturn(currentDate).when(ticketService).getCurrentDate();
+      
+      boolean success = ticketService.cancelTicket(id, customerId);
+      assertEquals(true, success);
+      
+      
+    }
     
-    final int id = 100;
-    when(ticketRepo.findTicketByTicketId(id)).thenAnswer((InvocationOnMock invocation) -> null);
-
-    final int id1 = 2;
-    final Ticket ticketTwo = new Ticket();
-    ticketTwo.setTicketId(id1);
-    
-    // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.replaceTicket(ticketTwo, id));
-
-    // check results
-    assertEquals("Ticket not found.", ex.getMessage());
-    assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
-  }
   @ExtendWith(MockitoExtension.class)
   @MockitoSettings(strictness = Strictness.LENIENT)
   @Test
@@ -365,8 +380,11 @@ public class TestTicketService {
 
     
     
-    //Set 'current date' to 4 days before actual current date
-    final  LocalDateTime currentDate = LocalDateTime.now();
+    //Set 'current date' to 4 days before the ticket date
+    final LocalDateTime ticketDate = LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0);
+    ticketOne.setTicketDate(ticketDate);
+    
+    final LocalDateTime currentDate = ticketDate.minus(Duration.ofDays(4));
     //Give this 'current date instead'
     Mockito.doReturn(currentDate).when(ticketService).getCurrentDate();
     
@@ -398,7 +416,7 @@ public class TestTicketService {
 
     
     
-    //Set 'current date' to 2 days before actual current date
+    //Set 'current date' to 2 days before the ticket date
     final LocalDateTime ticketDate = LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0);
     ticketOne.setTicketDate(ticketDate);
     

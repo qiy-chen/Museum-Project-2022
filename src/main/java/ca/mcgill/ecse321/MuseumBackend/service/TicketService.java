@@ -30,9 +30,6 @@ public class TicketService {
   @Transactional
   public List<Ticket> getAllTickets() {
     List<Ticket> tickets = toList(ticketRepository.findAll());
-    if (tickets.size() == 0) {
-      throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
-    }
     return tickets;
   }
 
@@ -73,33 +70,38 @@ public class TicketService {
 
   @Transactional
   public Ticket replaceTicket(Ticket ticket, int id) {
-    //Replace old ticket with id, 'id', with the new one, 'ticket'
+    //Replace old ticket with id, 'id', with the new ticket
     Ticket oldTicket = ticketRepository.findTicketByTicketId(id);
-    if (oldTicket == null) {
-      throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
-    }
-    else if (ticketRepository.findTicketByTicketId(ticket.getTicketId()) != null) {
-      throw new TicketException(HttpStatus.CONFLICT, "A ticket with the given id already exists.");
-    }
-    else if (ticket.getTicketDate()==null||ticket.getPrice()<0) {
+    if (ticket.getTicketDate()==null||ticket.getPrice()<0) {
       throw new TicketException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
     }
+    else if (oldTicket == null) {
+      //Create the ticket with the given id
+      ticket.setTicketId(id);
+      return ticketRepository.save(ticket);
+    }
+    ticketRepository.delete(oldTicket);
+    //Replace old ticket with new values
     oldTicket.setCustomer(ticket.getCustomer());
     oldTicket.setMuseum(ticket.getMuseum());
     oldTicket.setPrice(ticket.getPrice());
     oldTicket.setTicketDate(ticket.getTicketDate());
-    oldTicket.setTicketId(ticket.getTicketId());
+    oldTicket.setTicketId(id);
     return ticketRepository.save(oldTicket);
 
   }
 
   @Transactional
-  public void deleteTicket(int id) {
+  public boolean deleteTicket(int id) {
+    boolean success = false;
     ticketRepository.deleteById(id);
+    success = true;
+    return success;
   }
 
   @Transactional
-  public void cancelTicket(int ticketId, int customerId) {
+  public boolean cancelTicket(int ticketId, int customerId) {
+    boolean success = false;
     Ticket canceledTicket = ticketRepository.findTicketByTicketId(ticketId);
     Customer customer = customerService.getCustomerById(customerId);
     //Check if it's the owner that is canceling
@@ -110,6 +112,8 @@ public class TicketService {
       LocalDateTime currentDate = getCurrentDate();
       if (currentDate.isBefore(cancelDate)) {
         deleteTicket(ticketId);
+        success = true;
+        return success;
       }
       else {
         throw new TicketException(HttpStatus.FORBIDDEN, "Too late to make cancelation.");
