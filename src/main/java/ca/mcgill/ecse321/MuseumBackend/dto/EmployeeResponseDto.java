@@ -10,13 +10,23 @@ public class EmployeeResponseDto {
 	private int id;
 	private PersonDto person;
 	private List<ShiftDto> shifts;
+	private String email;
 	
 	public EmployeeResponseDto(Employee employee) {
 		this.id = employee.getPersonRoleId();
 		this.person = new PersonDto(employee.getPerson());
+		this.email = this.person.getEmail();
 		for (Shift shift : employee.getShifts()) {
 			this.shifts.add(new ShiftDto(shift));
 		}
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getId() {

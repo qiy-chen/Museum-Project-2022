@@ -27,8 +27,8 @@ public class CustomerController {
 	
 	// find customer by customer ID
 	@GetMapping("/customer/{id}")
-	public ResponseEntity<CustomerResponseDto> getCustomerByID(@PathVariable int ID) {
-		Customer customer = customerService.getCustomerById(ID);
+	public ResponseEntity<CustomerResponseDto> getCustomerByID(@PathVariable int id) {
+		Customer customer = customerService.getCustomerById(id);
 		return new ResponseEntity<CustomerResponseDto>(new CustomerResponseDto(customer), HttpStatus.OK);
 	}
 	
@@ -45,9 +45,7 @@ public class CustomerController {
 	// create new customer
 	@PostMapping("/customer")
 	public ResponseEntity<CustomerResponseDto> createCustomer(@RequestBody CustomerRequestDto request) {
-		Customer customerToCreate = request.toModel();
-		Customer createdCustomer = customerService.createCustomer(customerToCreate);
-		CustomerResponseDto response = new CustomerResponseDto(createdCustomer);
+		CustomerResponseDto response = customerService.createCustomer(request.getEmail());
 		return new ResponseEntity<CustomerResponseDto>(response, HttpStatus.CREATED);
 	}
 

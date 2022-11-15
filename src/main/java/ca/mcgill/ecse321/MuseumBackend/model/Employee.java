@@ -32,6 +32,7 @@ public class Employee extends PersonRole
   
   public Employee() {
     super();
+    shifts = new ArrayList<Shift>();
   }
 
   //------------------------

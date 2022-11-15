@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-import ca.mcgill.ecse321.MuseumBackend.dto.AdminRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
@@ -31,7 +30,7 @@ public class AdminService {
 		return admin;
 	}
 	
-	// create Admin given a requestDTO
+	// create Admin given the email of the person to give that role
 	@Transactional
 	public AdminResponseDto createAdmin(String email) {
 		// check if the person with the given email already exists, else throw error (we don't want to create people from the role end)
