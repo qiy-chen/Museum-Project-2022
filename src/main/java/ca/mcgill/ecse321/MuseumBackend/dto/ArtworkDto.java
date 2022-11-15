@@ -14,6 +14,9 @@ public class ArtworkDto {
     this.value = aValue;
     this.isLoanable = aIsLoanable;
   }
+  public ArtworkDto(Loan loan) {
+    
+  }
   public int getArtworkId() {
     return artworkId;
   }

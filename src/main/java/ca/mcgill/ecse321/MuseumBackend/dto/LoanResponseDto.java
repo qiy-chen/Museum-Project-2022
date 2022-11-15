@@ -32,6 +32,8 @@ public class LoanResponseDto {
     this.artwork2 = loan.getArtwork();
     this.museum = loan.getMuseum();
     this.customer2 = loan.getCustomer();
+    this.artwork = new ArtworkDto();
+    this.customer = new CustomerDto();
   }
   public Museum getMuseum() {
     return museum;

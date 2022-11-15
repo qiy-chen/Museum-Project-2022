@@ -8,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
-
+import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 @Service
 public class LoanService {
   @Autowired
@@ -25,7 +26,14 @@ public class LoanService {
     loan = loanRepository.save(loan);
     return loan;
   }
-  
+  public LoanResponseDto createLoan(LoanRequestDto loanDto) {
+    int id = loanDto.getLoanId();
+    Loan loan = loanRepository.findLoanByLoanId(id);
+    Loan loan2 = new Loan();
+    loan2.setLoanId(loan.getLoanId());
+    loan2 = loanRepository.save(loan2);
+    return new LoanResponseDto(loan2);
+  }
   @Transactional
   public Loan deleteLoan(Loan loan) { //alex
     loanRepository.delete(loan);
