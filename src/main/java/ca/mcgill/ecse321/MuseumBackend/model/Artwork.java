@@ -21,7 +21,8 @@ public class Artwork
   //Artwork Attributes
   private boolean isLoanable;
   private double value;
-  @Id
+  @Id 
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int artworkId;
   private String artworkName;
 
