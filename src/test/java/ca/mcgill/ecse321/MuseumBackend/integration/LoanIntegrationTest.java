@@ -40,15 +40,14 @@ public class LoanIntegrationTest {
     //loan.setLoanId(loanId);
     //loanRepo.save(loan);
     
-    ResponseEntity<LoanDto> response = client.postForEntity("/loan", new LoanDto(123), LoanDto.class);
+    ResponseEntity<LoanDto> response = client.postForEntity("/loan", new LoanDto(123,567), LoanDto.class);
     assertNotNull(response);
     System.out.println(response.getBody());
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
     assertNotNull(response.getBody());
-    //assertEquals(123, response.getBody().getId());
-    assertTrue(response.getBody().getId() > 0);
-    
-    return response.getBody().getId();
+    //assertEquals(123, response.getBody().getcustomerid());
+    assertTrue(response.getBody().getcustomerid() == 123);
+    return response.getBody().getcustomerid();
   }
   
   private void testGetLoan(int id) {
@@ -57,17 +56,22 @@ public class LoanIntegrationTest {
     assertEquals(HttpStatus.OK, response.getStatusCode());
     assertNotNull(response.getBody());
     //assertEquals(123, response.getBody().getId());
-    assertTrue(response.getBody().getId() == 123);
+    assertTrue(response.getBody().getcustomerid() == 123);
   }
 }
 class LoanDto{
-  private int id;
+  private int customerid;
+  private int artworkid;
   
   public LoanDto() {}
-  public LoanDto(int id) {
-    this.id = id;
+  public LoanDto(int customerid, int artworkid) {
+    this.customerid = customerid;
+    this.artworkid = artworkid;
   }
-  public int getId() {
-    return this.id;
+  public int getcustomerid() {
+    return this.customerid;
+  }
+  public int getartworkrid() {
+    return this.artworkid;
   }
 }

@@ -18,88 +18,87 @@ public class LoanRequestDto {
   private Date startDate;
   private Date endDate;
   private double rentalFee;
-  private Artwork artwork;
-  private Customer customer;
-  private Museum museum;
+  private int artworkid;
+  private int customerid;
+  
   
   public int getLoanId() {
     return loanId;
   }
-  
-  public void setLoanId(int id) {
-    loanId = id;
+
+
+  public void setLoanId(int loanId) {
+    this.loanId = loanId;
   }
-  
-  public LoanStatus getLoanStatus() {
+
+
+  public LoanStatus getStatus() {
     return status;
   }
-  
-  public void setLoanStatus(LoanStatus stat) {
-    status = stat;
+
+
+  public void setStatus(LoanStatus status) {
+    this.status = status;
   }
-  
-  public int getNumofDays() {
+
+
+  public int getNumOfDays() {
     return numOfDays;
   }
-  
-  public void setNumOfDays(int nOfDays) {
-    numOfDays = nOfDays;
+
+
+  public void setNumOfDays(int numOfDays) {
+    this.numOfDays = numOfDays;
   }
-  
+
+
   public Date getStartDate() {
     return startDate;
   }
-  
-  public void setStartDate(Date date) {
-    startDate = date;
+
+
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
   }
-  
+
+
   public Date getEndDate() {
     return endDate;
   }
-  
-  public void setEndDate(Date date) {
-    endDate = date;
+
+
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
   }
-  
+
+
   public double getRentalFee() {
     return rentalFee;
   }
-  
-  public void setRentalFee(double fee) {
-    rentalFee = fee;
+
+
+  public void setRentalFee(double rentalFee) {
+    this.rentalFee = rentalFee;
   }
-  
-  public Artwork getArtwork() {
-    return artwork;
+
+
+  public int getArtworkid() {
+    return artworkid;
   }
-  public void setArtwork(Artwork artwork) {
-    this.artwork = artwork;
+
+
+  public void setArtworkid(int artworkid) {
+    this.artworkid = artworkid;
   }
-  public Customer getCustomer() {
-    return customer;
+
+
+  public int getCustomerid() {
+    return customerid;
   }
-  public void setCustomer(Customer customer) {
-    this.customer = customer;
-  }
-  public Museum getMuseum() {
-    return museum;
-  }
-  public void setMuseum(Museum museum) {
-    this.museum = museum;
-  }
-  public Loan toModel() {
-   Loan loan = new Loan();
-   loan.setArtwork(artwork);
-   loan.setCustomer(customer);
-   loan.setEndDate(endDate);
-   loan.setLoanId(loanId);
-   loan.setMuseum(museum);
-   loan.setNumOfDays(numOfDays);
-   loan.setRentalFee(rentalFee);
-   loan.setStartDate(startDate);
-   loan.setStatus(status);
-   return loan;
+
+
+  public void setCustomerid(int customerid) {
+    this.customerid = customerid;
   }
   
 }

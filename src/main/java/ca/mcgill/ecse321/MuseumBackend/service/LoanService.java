@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.*;
+import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
@@ -14,6 +16,13 @@ import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 public class LoanService {
   @Autowired
   LoanRepository loanRepository;
+  
+  @Autowired
+  CustomerRepository customerRepository;
+  
+  @Autowired
+  ArtworkRepository artworkRepository;
+  
 
   @Transactional
   public Loan getLoanById(int id) { //alex
@@ -21,13 +30,15 @@ public class LoanService {
     return loan;
   }
 
+  
+  
   @Transactional
-  public Loan createLoan(Loan loan) { //emma
-    loan = loanRepository.save(loan);
-    return loan;
-  }
   public LoanResponseDto createLoan(LoanRequestDto loanDto) {
-    int id = loanDto.getLoanId();
+    int id = loanDto.getCustomerid();
+    Customer customer = customerRepository.findCustomerByPersonRoleId(id);
+    if (customer == null) {
+      
+    }
     Loan loan = loanRepository.findLoanByLoanId(id);
     Loan loan2 = new Loan();
     loan2.setLoanId(loan.getLoanId());
