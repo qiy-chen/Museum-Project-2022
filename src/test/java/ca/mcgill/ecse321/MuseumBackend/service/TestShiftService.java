@@ -5,7 +5,6 @@ import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
-import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.ShiftRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -31,41 +29,36 @@ public class TestShiftService {
     @InjectMocks
     ShiftService shiftService;
 
-    @Test
-    public void testCreateShift() {
+
+    private Shift initializeTestShift() {
         Museum museum = new Museum();
         museum.setMuseumId(12);
         double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
         long workHours = (long) sixHoursInMillisecond;
         Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
         Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
-        Shift shift = new Shift(startTime, endTime, 54, museum);
+        return new Shift(startTime, endTime, 54, museum);
+    }
+
+    @Test
+    public void testCreateShift() {
+        Shift shift = initializeTestShift();
         when(shiftRepository.save(shift)).thenAnswer((InvocationOnMock invocation) -> shift);
         assertEquals(shift, shiftService.createShift(shift));
     }
 
     @Test
     public void testFindShiftById() {
-        Museum museum = new Museum();
-        museum.setMuseumId(12);
-        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
-        long workHours = (long) sixHoursInMillisecond;
-        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
-        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
-        Shift shift = new Shift(startTime, endTime, 54, museum);
+        Shift shift = initializeTestShift();
         when(shiftRepository.findShiftByWorkDayId(shift.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift);
         assertEquals(shift.getWorkDayId(), shiftService.getShiftById(shift.getWorkDayId()).getWorkDayId());
     }
 
     @Test
     public void testChangeShiftDate() {
-        Museum museum = new Museum();
-        museum.setMuseumId(12);
-        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
-        long workHours = (long) sixHoursInMillisecond;
-        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
-        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
-        Shift shift0 = new Shift(startTime, endTime, 54, museum);
+        Shift shift0 = initializeTestShift();
+        Date startTime = shift0.getStartTime();
+        Date endTime = shift0.getEndTime();
         when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
         Date startTime1 = new Date(5);
         Date endTime1 = new Date(6);
@@ -79,13 +72,8 @@ public class TestShiftService {
 
     @Test
     public void testAddEmployeeToShift() {
-        Museum museum = new Museum();
-        museum.setMuseumId(12);
-        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
-        long workHours = (long) sixHoursInMillisecond;
-        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
-        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
-        Shift shift0 = new Shift(startTime, endTime, 54, museum);
+        Shift shift0 = initializeTestShift();
+        Museum museum = shift0.getMuseum();
         when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
         Person Sam = new Person("email","password","Sam",museum);
         Sam.addPersonRole(new Employee(5,Sam));
@@ -95,13 +83,8 @@ public class TestShiftService {
 
     @Test
     public void testRemoveEmployeeFromShift() {
-        Museum museum = new Museum();
-        museum.setMuseumId(12);
-        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
-        long workHours = (long) sixHoursInMillisecond;
-        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
-        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
-        Shift shift0 = new Shift(startTime, endTime, 54, museum);
+        Shift shift0 = initializeTestShift();
+        Museum museum = shift0.getMuseum();
         when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
         Person Sam = new Person("email","password","Sam",museum);
         Sam.addPersonRole(new Employee(5,Sam));
@@ -123,13 +106,7 @@ public class TestShiftService {
 
     @Test
     public void testDeleteShift() {
-        Museum museum = new Museum();
-        museum.setMuseumId(12);
-        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
-        long workHours = (long) sixHoursInMillisecond;
-        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
-        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
-        Shift shift0 = new Shift(startTime, endTime, 54, museum);
+        Shift shift0 = initializeTestShift();
         when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
         shiftService.deleteShift(shift0.getWorkDayId());
         assertNull(shift0.getMuseum());

@@ -57,6 +57,7 @@ public class ShiftService {
 	@Transactional
 	public void deleteShift(int workDayId) {
 		Shift shift = getShiftById(workDayId);
+		shiftRepo.delete(shift);
 		shift.delete();
 	}
 
