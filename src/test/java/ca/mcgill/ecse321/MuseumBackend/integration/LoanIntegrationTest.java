@@ -45,7 +45,7 @@ public class LoanIntegrationTest {
   }
   
   private void testGetLoan(int id) {
-    ResponseEntity<LoanDto> response = client.getForEntity("/loan/"+id, LoanDto.class);
+    ResponseEntity<LoanDto> response = client.getForEntity("/loan/loanId"+id, LoanDto.class);
     assertNotNull(response);
     assertEquals(HttpStatus.OK, response.getStatusCode());
     assertNotNull(response.getBody());
