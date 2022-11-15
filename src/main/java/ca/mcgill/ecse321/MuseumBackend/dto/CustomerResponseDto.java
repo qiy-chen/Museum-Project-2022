@@ -11,6 +11,7 @@ public class CustomerResponseDto {
 	private PersonDto person;
 	private List<LoanDto> loans;
 	
+	public CustomerResponseDto() {}
 	public CustomerResponseDto(Customer customer) {
 		this.id = customer.getPersonRoleId();
 		this.person = new PersonDto(customer.getPerson());

@@ -6,6 +6,7 @@ public class PersonDto {
 
 	private String email;
 	private String name;
+	public PersonDto() {}
 	
 	public PersonDto(Person person) {
 		this.email = person.getEmail();
@@ -26,5 +27,12 @@ public class PersonDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Person toModel() {
+	  Person person = new Person();
+	  person.setEmail(email);
+	  person.setName(name);
+	  return person;
 	}
 }

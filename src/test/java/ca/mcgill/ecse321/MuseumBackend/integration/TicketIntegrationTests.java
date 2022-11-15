@@ -231,7 +231,7 @@ public class TicketIntegrationTests {
     person.setEmail(personEmail);
     person.setName("Qi Yuan");
     person.setPassword("12345");
-    personRepo.save(person);
+    person = personRepo.save(person);
     
     PersonDto persondto = new PersonDto(person);
     //ResponseEntity<String> personResponse = client.postForEntity("/customer", new CustomerRequestDto("qi@mail.com",customerId, new int[]{1}), String.class);
@@ -239,8 +239,7 @@ public class TicketIntegrationTests {
     //assertEquals(HttpStatus.CREATED, personResponse.getStatusCode(), "Response has correct status");
     
     CustomerRequestDto customerDto = new CustomerRequestDto(persondto,customerId, new int[]{});
-    
-    ResponseEntity<String> customerResponse = client.postForEntity("/customer", customerDto, String.class);
+    ResponseEntity<CustomerResponseDto> customerResponse = client.postForEntity("/customer", customerDto, CustomerResponseDto.class);
     //Ensure the customer is correctly added
     assertEquals(HttpStatus.CREATED, customerResponse.getStatusCode(), "Response has correct status");
     ResponseEntity<String> response1 = client.postForEntity("/customers/"+customerId, new TicketRequestDto(customerId, LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0),10.00), String.class);

@@ -28,11 +28,11 @@ public class CustomerRequestDto {
     this.loanIDs = loanIDs;
   }
   
-  public void setEmail(PersonDto persondto) {
+  public void setPersonDto(PersonDto persondto) {
     this.persondto = persondto;
   }
 
-  public PersonDto getPersonID() {
+  public PersonDto getPersonDto() {
     return this.persondto;
   }
 
@@ -56,7 +56,7 @@ public class CustomerRequestDto {
     Person person = persondto.toModel();
     customer.setPerson(person);
     customer.setPersonRoleId(customerId);
-    if (loanIDs!=null) {
+    if (this.loanIDs!=null) {
       for (int loanID: this.loanIDs) {
         Loan loan = loanService.getLoanById(loanID);
         if (loan!=null) customer.addLoan(loan);
