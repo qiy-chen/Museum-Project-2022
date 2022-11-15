@@ -15,43 +15,43 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // set random port
-public class TestAdminIntegration {
+public class TestEmployeeIntegration {
 
 	@Autowired
 	private TestRestTemplate client;
 
 	@Autowired
-	private AdminRepository adminRepo;
+	private EmployeeRepository employeeRepo;
 	@Autowired
 	private PersonRepository personRepo;
 
 	@BeforeEach
 	@AfterEach
 	public void clearDatabase() {
-		adminRepo.deleteAll();
+		employeeRepo.deleteAll();
 		personRepo.deleteAll();
 	}
 
 	@Test
-	public void testCreateAndGetAdmin() {
-		int id = testCreateAdmin();
-		testGetAdmin(id);
+	public void testCreateAndGetEmployee() {
+		int id = testCreateEmployee();
+		testGetEmployee(id);
 	}
 
-	private int testCreateAdmin() {
+	private int testCreateEmployee() {
 
-		// setup - first create and save person that will get the role admin
+		// setup - first create and save person that will get the role employee
 		Person person = new Person();
 		String email = "obi@kenobi.com";
 		person.setEmail(email);
 		personRepo.save(person);
 
-		// call method: create a new admin
-		ResponseEntity<AdminDto> response = client.postForEntity("/admin", new AdminDto(email), AdminDto.class);
+		// call method: create a new employee
+		ResponseEntity<EmployeeDto> response = client.postForEntity("/employee", new EmployeeDto(email), EmployeeDto.class);
 
 		// check response
 		assertNotNull(response);
@@ -63,10 +63,10 @@ public class TestAdminIntegration {
 		return response.getBody().id;
 	}
 
-	private void testGetAdmin(int id) {
+	private void testGetEmployee(int id) {
 
-		// call method: get the admin by their id
-		ResponseEntity<AdminDto> response = client.getForEntity("/admin/" + id, AdminDto.class);
+		// call method: get the employee by their id
+		ResponseEntity<EmployeeDto> response = client.getForEntity("/employee/" + id, EmployeeDto.class);
 
 		// check response
 		assertNotNull(response);
@@ -77,31 +77,31 @@ public class TestAdminIntegration {
 	}
 
 	@Test
-	public void testCreateInvalidAdmin() {
-		ResponseEntity<String> response = client.postForEntity("/admin", new AdminDto("   "), String.class);
+	public void testCreateInvalidEmployee() {
+		ResponseEntity<String> response = client.postForEntity("/employee", new EmployeeDto("   "), String.class);
 		assertNotNull(response);
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode(), "Response has correct status");
 	}
 
 	@Test
-	public void testGetInvalidAdmin() {
-		ResponseEntity<String> response = client.getForEntity("/admin/" + Integer.MAX_VALUE, String.class);
+	public void testGetInvalidEmployee() {
+		ResponseEntity<String> response = client.getForEntity("/employee/" + Integer.MAX_VALUE, String.class);
 
 		assertNotNull(response);
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
-		assertEquals("Admin not found.", response.getBody(), "Response has correct error message");
+		assertEquals("Employee not found.", response.getBody(), "Response has correct error message");
 	}
 }
 
-class AdminDto {
+class EmployeeDto {
 	public int id;
 	public String email;
 
 	// Need default constructor so that Jackson can instantiate the object
-	public AdminDto() {
+	public EmployeeDto() {
 	}
 
-	public AdminDto(String email) {
+	public EmployeeDto(String email) {
 		this.email = email;
 	}
 }
