@@ -10,8 +10,7 @@ import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.service.LoanService;
 
 public class LoanRequestDto {
-  @Autowired
-  private LoanService loanService;
+  //private LoanService loanService;
   
   private int loanId;
   private LoanStatus status;
