@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
+import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import static org.mockito.Mockito.times;
@@ -109,10 +111,18 @@ public class TestLoanService {
   @Test
   public void testCreateLoan() {
     when(loanRepository.save(any(Loan.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
-    final Loan finalLoan = new Loan();
-    int id = finalLoan.getLoanId();
-    Loan loanReturned = loanService.createLoan(finalLoan);
+    Loan loan = new Loan();
+    Artwork artwork = new Artwork();
+    Customer customer = new Customer();
+    int loanid = loan.getLoanId();
+    loan.setArtwork(artwork);
+    loan.setCustomer(customer);
+    when(loanRepository.findById(loanid)).thenAnswer((InvocationOnMock invocation) -> loan);
     
+    LoanRequestDto request = new LoanRequestDto();
+    request.setLoanId(loanid);
+    
+    LoanResponseDto returnedLoan = loanService.createLoan(request);
     assertNotNull(loanReturned);
     assertEquals(id, loanReturned.getLoanId());
     verify(loanRepository, times(1)).save(loanReturned);

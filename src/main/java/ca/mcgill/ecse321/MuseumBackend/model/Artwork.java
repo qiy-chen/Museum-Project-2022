@@ -5,8 +5,7 @@ package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
 import javax.persistence.*;
-
-
+import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import java.sql.Date;
 
 // line 76 "../../../../../Museum.ump"
@@ -67,7 +66,9 @@ public class Artwork
 
 	// TODO Auto-generated constructor stub
 
-
+public boolean isOnLoan() {
+  return this.loans.stream().anyMatch(loan -> loan.getStatus().equals(LoanStatus.Approved));
+}
 public boolean setIsLoanable(boolean aIsLoanable)
   {
     boolean wasSet = false;

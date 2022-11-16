@@ -62,6 +62,7 @@ public class LoanIntegrationTest {
 class LoanDto{
   private int customerid;
   private int artworkid;
+  private int numOfDays;
   
   public LoanDto() {}
   public LoanDto(int customerid, int artworkid) {
@@ -73,5 +74,8 @@ class LoanDto{
   }
   public int getartworkrid() {
     return this.artworkid;
+  }
+  public int getnumOfDays() {
+    return this.numOfDays;
   }
 }
