@@ -8,11 +8,9 @@ public class TicketRequestDto {
 
   private double price;
 
-  private int ticketId;
   
   public TicketRequestDto() {}
-  public TicketRequestDto(int ticketId, LocalDateTime ticketDate, double price) {
-    this.ticketId = ticketId;
+  public TicketRequestDto(LocalDateTime ticketDate, double price) {
     this.ticketDate = ticketDate;
     this.price = price;
   }
@@ -31,18 +29,12 @@ public class TicketRequestDto {
     return price;
   }
   
-  public void setTicketId(int ticketId) {
-    this.ticketId = ticketId;
-  }
-  public int getTicketId() {
-    return ticketId;
-  }
+
   
   public Ticket toModel() {
     Ticket ticket = new Ticket();
     ticket.setPrice(price);
     ticket.setTicketDate(ticketDate);
-    ticket.setTicketId(ticketId);
     return ticket;
   }
   

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ca.mcgill.ecse321.MuseumBackend.Exception.TicketException;
+import ca.mcgill.ecse321.MuseumBackend.dto.IdRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.TicketRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.TicketResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
@@ -77,9 +78,9 @@ public class TicketController {
 
   //Purchase ticket
   @PostMapping("/customers/{roleId}")
-  public ResponseEntity<TicketResponseDto> purchaseTicket(@PathVariable int customerId, TicketRequestDto newTicketDto) {
+  public ResponseEntity<TicketResponseDto> purchaseTicket(@PathVariable int roleId, @RequestBody TicketRequestDto newTicketDto) {
     Ticket newTicket = newTicketDto.toModel();
-    Customer customer = customerService.getCustomerById(customerId);
+    Customer customer = customerService.getCustomerById(roleId);
     if (customer==null) {
       return new ResponseEntity<TicketResponseDto>(HttpStatus.BAD_REQUEST);
     }
@@ -88,9 +89,10 @@ public class TicketController {
     return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.CREATED);
   }
 
-  @DeleteMapping("/persons/{roleId}")
-  public ResponseEntity<TicketResponseDto> cancelTicket(@PathVariable int customerId, @RequestBody int ticketId) {
-    ticketService.cancelTicket(ticketId,customerId);
+  @DeleteMapping("/customers/{roleId}")
+  public ResponseEntity<TicketResponseDto> cancelTicket(@PathVariable int roleId, @RequestBody IdRequestDto ticketId) {
+    //ticketService.deleteTicket(ticketId.getId());
+    ticketService.cancelTicket(ticketId.getId(),roleId);
     return new ResponseEntity<TicketResponseDto>(HttpStatus.OK);
   }
 }

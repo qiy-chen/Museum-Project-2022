@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class TicketResponseDto {

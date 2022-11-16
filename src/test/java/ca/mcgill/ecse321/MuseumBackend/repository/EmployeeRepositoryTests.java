@@ -38,12 +38,12 @@ public class EmployeeRepositoryTests {
 		aEmployee.setPersonRoleId(id);
 
 		// Save object
-		employeeRepository.save(aEmployee);
+		aEmployee = employeeRepository.save(aEmployee);
 		int EmployeeId = aEmployee.getPersonRoleId();
 
 		// Read object from database
 		aEmployee = null;
-		aEmployee = employeeRepository.findEmployeeByPersonRoleId(id);
+		aEmployee = employeeRepository.findEmployeeByPersonRoleId(EmployeeId);
 
 		// Assert that object has correct attributes
 		assertNotNull(aEmployee);
@@ -71,7 +71,7 @@ public class EmployeeRepositoryTests {
 		aEmployee.setPerson(sandy);
 
 		// Update object
-		employeeRepository.save(aEmployee);
+		aEmployee = employeeRepository.save(aEmployee);
 		int employeeID = aEmployee.getPersonRoleId();
 
 		// Read object from database

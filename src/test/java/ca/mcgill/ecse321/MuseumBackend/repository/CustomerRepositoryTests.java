@@ -43,12 +43,12 @@ public class CustomerRepositoryTests {
         elie.setPersonRoleId(id);
 
         // Save object
-        customerRepository.save(elie);
+        elie = customerRepository.save(elie);
         int EmployeeId = elie.getPersonRoleId();
 
         // Read object from database
         elie = null;
-        elie = customerRepository.findCustomerByPersonRoleId(id);
+        elie = customerRepository.findCustomerByPersonRoleId(EmployeeId);
 
         // Assert that object has correct attributes
         assertNotNull(elie);
@@ -76,7 +76,7 @@ public class CustomerRepositoryTests {
         elie.setPerson(sandy);
 
         // Update object
-        customerRepository.save(elie);
+        elie = customerRepository.save(elie);
         int customerID = elie.getPersonRoleId();
 
         // Read object from database

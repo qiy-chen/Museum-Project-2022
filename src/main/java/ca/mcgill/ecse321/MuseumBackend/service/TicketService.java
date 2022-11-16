@@ -19,8 +19,6 @@ public class TicketService {
   private TicketRepository ticketRepository;
   @Autowired
   private CustomerService customerService;
-  @Autowired
-  private MuseumService museumService;
 
   @Transactional
   public List<Ticket> getAllTickets() {
@@ -68,7 +66,7 @@ public class TicketService {
       throw new TicketException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
     }
     else if (oldTicket == null) {
-      //Create the ticket with the given id
+      //Create a new ticket
       ticket.setTicketId(id);
       return ticketRepository.save(ticket);
     }
@@ -86,11 +84,12 @@ public class TicketService {
     success = true;
     return success;
   }
+  
 
   @Transactional
   public boolean cancelTicket(int ticketId, int customerId) {
     boolean success = false;
-    Ticket canceledTicket = ticketRepository.findTicketByTicketId(ticketId);
+    Ticket canceledTicket = getTicketByTicketId(ticketId);
     Customer customer = customerService.getCustomerById(customerId);
     //Check if it's the owner that is canceling
     if (canceledTicket.getCustomer().equals(customer)) {
@@ -99,7 +98,8 @@ public class TicketService {
       LocalDateTime cancelDate = ticketDate.minus(Duration.ofDays(3));
       LocalDateTime currentDate = getCurrentDate();
       if (currentDate.isBefore(cancelDate)) {
-        deleteTicket(ticketId);
+        canceledTicket.delete();
+        ticketRepository.delete(canceledTicket);
         success = true;
         return success;
       }

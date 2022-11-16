@@ -263,7 +263,6 @@ public class TestTicketService {
 
     assertNotNull(ticket);
     assertEquals(id, ticket.getTicketId());
-    assertEquals(id, ticket.getTicketId());
     assertEquals(10.00,ticket.getPrice());
     assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0),ticket.getTicketDate());
   }
