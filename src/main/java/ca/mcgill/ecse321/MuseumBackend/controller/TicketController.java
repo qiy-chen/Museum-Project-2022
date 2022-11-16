@@ -7,15 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ca.mcgill.ecse321.MuseumBackend.Exception.TicketException;
 import ca.mcgill.ecse321.MuseumBackend.dto.IdRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.TicketRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.TicketResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.service.CustomerService;
-import ca.mcgill.ecse321.MuseumBackend.service.MuseumService;
 import ca.mcgill.ecse321.MuseumBackend.service.TicketService;
 
 @RestController
@@ -24,8 +21,6 @@ public class TicketController {
   TicketService ticketService;
   @Autowired
   private CustomerService customerService;
-  @Autowired
-  private MuseumService museumService;
 
   @GetMapping("/tickets/{id}")
   public ResponseEntity<TicketResponseDto> getTicketById(@PathVariable int id) {

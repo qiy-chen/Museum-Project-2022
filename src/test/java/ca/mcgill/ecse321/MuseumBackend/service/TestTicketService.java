@@ -299,6 +299,19 @@ public class TestTicketService {
     boolean success = ticketService.deleteTicket(id);
     assertEquals(true, success);
   }
+  @Test
+  public void testDeleteNonExistentTicket() {
+    final int id = 1;
+
+    when(ticketRepo.findTicketByTicketId(id)).thenAnswer((InvocationOnMock invocation) -> null);
+    // call method, and obtain resulting exception
+    TicketException ex = assertThrows(TicketException.class, () -> ticketService.deleteTicket(id));
+
+    // check results
+    assertEquals("Ticket not found.", ex.getMessage());
+    assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
+    
+  }
 
     @ExtendWith(MockitoExtension.class)
     @MockitoSettings(strictness = Strictness.LENIENT)

@@ -78,14 +78,12 @@ public class TicketService {
   public boolean deleteTicket(int id) {
     boolean success = false;
     Ticket canceledTicket = getTicketByTicketId(id);
-    if (canceledTicket!=null) {
-      canceledTicket.delete();
-      ticketRepository.delete(canceledTicket);
-    }
+    canceledTicket.delete();
+    ticketRepository.delete(canceledTicket);
     success = true;
     return success;
   }
-  
+
 
   @Transactional
   public boolean cancelTicket(int ticketId, int customerId) {
@@ -117,11 +115,11 @@ public class TicketService {
     List<T> resultList = new ArrayList<T>();
     if (iterable == null) return resultList;
     for (T t : iterable) {
-        resultList.add(t);
+      resultList.add(t);
     }
     return resultList;
-}
-  
+  }
+
   public LocalDateTime getCurrentDate() {
     return LocalDateTime.now();
   }
