@@ -17,7 +17,27 @@ public class ShiftService {
 
 	@Autowired
 	ShiftRepository shiftRepo;
-	
+
+	private void shiftArgumentErrorTest(Shift shift) {
+		String error = "";
+		if (shift == null) {
+			throw new IllegalArgumentException("Shift cannot be null!");
+		}
+		if(shift.getStartTime() == null) {
+			error += "startTime cannot be null!";
+		}
+		if(shift.getEndTime() == null) {
+			error += "endTime cannot be null!";
+		}
+		if(shift.getMuseum() == null) {
+			error += "museum cannot be null!";
+		}
+		error = error.trim();
+		if(error.length() > 0) {
+			throw new IllegalArgumentException(error);
+		}
+	}
+
 	@Transactional
 	public Shift getShiftById(int id) {
 		Shift shift = shiftRepo.findShiftByWorkDayId(id);
@@ -30,6 +50,7 @@ public class ShiftService {
 	@Transactional
 	public Shift createShift(Shift shift) {
 		shift = shiftRepo.save(shift);
+		shiftArgumentErrorTest(shift);
 		return shift;
 	}
 
@@ -38,6 +59,7 @@ public class ShiftService {
 		Shift shift = getShiftById(workDayId);
 		shift.setStartTime(startTime);
 		shift.setEndTime(endTime);
+		shiftArgumentErrorTest(shift);
 		return shift;
 	}
 
@@ -45,6 +67,7 @@ public class ShiftService {
 	public Shift addEmployeeToShift(int workDayId, Employee employee) {
 		Shift shift = getShiftById(workDayId);
 		shift.addEmployee(employee);
+		shiftArgumentErrorTest(shift);
 		return shift;
 	}
 
@@ -52,6 +75,7 @@ public class ShiftService {
 	public Shift removeEmployeeFromShift(int workDayId, Employee employee) {
 		Shift shift = getShiftById(workDayId);
 		shift.removeEmployee(employee);
+		shiftArgumentErrorTest(shift);
 		return shift;
 	}
 	@Transactional

@@ -20,7 +20,6 @@ public class Shift
   private Date startTime;
   private Date endTime;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private int workDayId;
 
   //Shift Associations

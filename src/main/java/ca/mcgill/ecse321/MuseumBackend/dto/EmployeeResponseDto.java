@@ -9,13 +9,13 @@ public class EmployeeResponseDto {
 
 	private int id;
 	private PersonDto person;
-	private List<ShiftDto> shifts;
+	private List<ShiftResponseDto> shifts;
 	
 	public EmployeeResponseDto(Employee employee) {
 		this.id = employee.getPersonRoleId();
 		this.person = new PersonDto(employee.getPerson());
 		for (Shift shift : employee.getShifts()) {
-			this.shifts.add(new ShiftDto(shift.getStartTime(),shift.getEndTime(),shift.getWorkDayId(),shift.getMuseum(),shift.getEmployees()));
+			this.shifts.add(new ShiftResponseDto(shift.getStartTime(),shift.getEndTime(),shift.getWorkDayId(),shift.getMuseum(),shift.getEmployees()));
 		}
 	}
 
@@ -35,11 +35,11 @@ public class EmployeeResponseDto {
 		this.person = person;
 	}
 
-	public List<ShiftDto> getShifts() {
+	public List<ShiftResponseDto> getShifts() {
 		return shifts;
 	}
 
-	public void setShifts(List<ShiftDto> shifts) {
+	public void setShifts(List<ShiftResponseDto> shifts) {
 		this.shifts = shifts;
 	}
 	

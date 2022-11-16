@@ -5,37 +5,41 @@ import java.util.List;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 
-public class ShiftDto {
+public class ShiftResponseDto {
 
-	private int workdayId;
+	private int workDayId;
 	private Date startTime;
 	private Date endTime;
 
 	private Museum museum;
 	private List<EmployeeResponseDto> employees;
 	
-	public ShiftDto(Date startTime, Date endTime, int workDayId, Museum museum, List<Employee> employees) {
+	public ShiftResponseDto() {
+
+	}
+
+	public ShiftResponseDto(Date startTime, Date endTime, int workDayId, Museum museum, List<Employee> employees) {
 		
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.workdayId = workDayId;
+		this.workDayId = workDayId;
 		this.museum = museum;
-		for(Employee e : employees) {
-			EmployeeResponseDto employee = new EmployeeResponseDto(e);
-			this.employees.add(employee);
+			for (Employee e : employees) {
+				EmployeeResponseDto employee = new EmployeeResponseDto(e);
+				this.employees.add(employee);
+			}
 		}
 
 
 
-	}
+
 	public int getWorkDayId() {
-		return workdayId;
+		return workDayId;
 	}
 
 	public void setWorkdayId(int workdayId) {
-		this.workdayId = workdayId;
+		this.workDayId = workdayId;
 	}
 
 	public Date getStartTime() {
