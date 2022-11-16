@@ -190,27 +190,7 @@ public class TestTicketService {
     assertEquals("The ticket to be created contains invalid data.", ex.getMessage());
     assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
   }
-  @Test
-  public void testCreateExistentTicket() {
-    // test set up
-    final int ticketId = 19;
-    final Ticket ticketOne = new Ticket();
-    ticketOne.setTicketId(ticketId);
-    
-    final Ticket ticketTwo = new Ticket();
-    ticketTwo.setTicketId(ticketId);
-    ticketTwo.setPrice(11);
-    ticketTwo.setTicketDate(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0));
-    when(ticketRepo.findTicketByTicketId(ticketId)).thenAnswer((InvocationOnMock invocation) -> ticketOne);
 
-
-    // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.createTicket(ticketTwo));
-
-    // check results
-    assertEquals("A ticket with the given id already exists.", ex.getMessage());
-    assertEquals(HttpStatus.CONFLICT, ex.getStatus());
-  }
   
   @Test
   public void testReplaceTicket() {
@@ -306,6 +286,18 @@ public class TestTicketService {
     // check results
     assertEquals("The ticket to be created contains invalid data.", ex.getMessage());
     assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+  }
+  
+  @Test
+  public void testDeleteTicket() {
+    final int id = 1;
+    final Ticket ticketOne = new Ticket();
+    ticketOne.setTicketId(id);
+    //ticketOne is stored in repo
+    when(ticketRepo.findTicketByTicketId(id)).thenAnswer((InvocationOnMock invocation) -> ticketOne);
+    
+    boolean success = ticketService.deleteTicket(id);
+    assertEquals(true, success);
   }
 
     @ExtendWith(MockitoExtension.class)

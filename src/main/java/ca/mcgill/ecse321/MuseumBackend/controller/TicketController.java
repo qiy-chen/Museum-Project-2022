@@ -81,9 +81,6 @@ public class TicketController {
   public ResponseEntity<TicketResponseDto> purchaseTicket(@PathVariable int roleId, @RequestBody TicketRequestDto newTicketDto) {
     Ticket newTicket = newTicketDto.toModel();
     Customer customer = customerService.getCustomerById(roleId);
-    if (customer==null) {
-      return new ResponseEntity<TicketResponseDto>(HttpStatus.BAD_REQUEST);
-    }
     newTicket.setCustomer(customer);
     newTicket = ticketService.createTicket(newTicket);
     return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.CREATED);

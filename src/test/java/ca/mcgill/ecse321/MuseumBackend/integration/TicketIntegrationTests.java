@@ -298,6 +298,17 @@ public class TicketIntegrationTests {
     assertNotNull(response.getBody(), "Response has body");
     assertEquals(0, responseList.size(), "Response has correct number of tickets");
   }
+  
+  @Test
+  public void purchaseTicketMissingCustomer() {
+    
+   int customerId = 9999;
+    
+    ResponseEntity<String> response1 = client.postForEntity("/customers/"+customerId, new TicketRequestDto(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0),10.00), String.class);
+    
+    assertEquals(HttpStatus.NOT_FOUND, response1.getStatusCode(), "Response has correct status");
+
+  }
   @Test
   public void purchaseInvalidTicket2() {
     

@@ -49,10 +49,7 @@ public class TicketService {
 
   @Transactional
   public Ticket createTicket(Ticket ticket) {
-    if (ticketRepository.findTicketByTicketId(ticket.getTicketId()) != null) {
-      throw new TicketException(HttpStatus.CONFLICT, "A ticket with the given id already exists.");
-    }
-    else if (ticket.getTicketDate()==null||ticket.getPrice()<0) {
+    if (ticket.getTicketDate()==null||ticket.getPrice()<0) {
       throw new TicketException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
     }
     return ticketRepository.save(ticket);
@@ -80,7 +77,11 @@ public class TicketService {
   @Transactional
   public boolean deleteTicket(int id) {
     boolean success = false;
-    ticketRepository.deleteById(id);
+    Ticket canceledTicket = getTicketByTicketId(id);
+    if (canceledTicket!=null) {
+      canceledTicket.delete();
+      ticketRepository.delete(canceledTicket);
+    }
     success = true;
     return success;
   }
