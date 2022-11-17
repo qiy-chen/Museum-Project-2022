@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.MuseumBackend.controller;
 
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
@@ -18,17 +21,16 @@ public class ShiftRestController {
     private ShiftService service;
 
     @GetMapping(value = "/shift/{workDayId}")
-    public ResponseEntity<ShiftResponseDto> getShiftById(@PathVariable int workDayId) throws IllegalArgumentException {
+    public ResponseEntity<ShiftResponseDto> getShiftById(@PathVariable int workDayId) throws IllegalArgumentException, MuseumBackendException {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)), httpHeaders, HttpStatus.OK);
     }
 
-    //@PutMapping(value = "/shifts/{workDayId}")
-    //public ShiftDto addEmployeeToShift(@PathVariable("workDayId") int workDayId, @RequestParam EmployeeRequestDto employee) throws IllegalArgumentException {
-        //Employee modelEmployee = employee.toModel();
-        //return convertToDto(service.addEmployeeToShift(workDayId, modelEmployee));
-    //}
+    @PutMapping(value = "/employee_shifts/{workDayId}")
+    public void addEmployeeToShift(@PathVariable int workDayId, @RequestParam int employeeId) throws IllegalArgumentException {
+
+    }
 
 
     //@PutMapping(value = "/shifts/{workDayId}")
@@ -39,7 +41,7 @@ public class ShiftRestController {
 
 
     @DeleteMapping(value = "/shifts/{workDayId}")
-    public void deleteShift(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException {
+    public void deleteShift(@PathVariable int workDayId) throws IllegalArgumentException {
         service.deleteShift(workDayId);
     }
 

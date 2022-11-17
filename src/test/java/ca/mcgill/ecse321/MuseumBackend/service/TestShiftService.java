@@ -5,6 +5,7 @@ import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
+import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.ShiftRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +25,8 @@ public class TestShiftService {
 
     @Mock
     ShiftRepository shiftRepository;
+    @Mock
+    EmployeeRepository employeeRepository;
 
 
     @InjectMocks
@@ -77,7 +80,8 @@ public class TestShiftService {
         when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
         Person Sam = new Person("email","password","Sam",museum);
         Sam.addPersonRole(new Employee(5,Sam));
-        shiftService.addEmployeeToShift(shift0.getWorkDayId(),(Employee) Sam.getPersonRole(0));
+        when(employeeRepository.findEmployeeByPersonRoleId(Sam.getPersonRole(0).getPersonRoleId())).thenAnswer((InvocationOnMock invocation) -> Sam.getPersonRole(0));
+        shiftService.addEmployeeToShift(shift0.getWorkDayId(),Sam.getPersonRole(0).getPersonRoleId());
         assertEquals(Sam.getPersonRole(0).getPersonRoleId(), shift0.getEmployee(0).getPersonRoleId());
     }
 
@@ -88,13 +92,16 @@ public class TestShiftService {
         when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
         Person Sam = new Person("email","password","Sam",museum);
         Sam.addPersonRole(new Employee(5,Sam));
-        shiftService.addEmployeeToShift(shift0.getWorkDayId(), (Employee) Sam.getPersonRole(0));
+        when(employeeRepository.findEmployeeByPersonRoleId(Sam.getPersonRole(0).getPersonRoleId())).thenAnswer((InvocationOnMock invocation) -> Sam.getPersonRole(0));
+        shiftService.addEmployeeToShift(shift0.getWorkDayId(), Sam.getPersonRole(0).getPersonRoleId());
         Person Brock = new Person("email0","password","Brock",museum);
         Brock.addPersonRole(new Employee(6,Brock));
-        shiftService.addEmployeeToShift(shift0.getWorkDayId(), (Employee) Brock.getPersonRole(0));
+        when(employeeRepository.findEmployeeByPersonRoleId(Brock.getPersonRole(0).getPersonRoleId())).thenAnswer((InvocationOnMock invocation) -> Brock.getPersonRole(0));
+        shiftService.addEmployeeToShift(shift0.getWorkDayId(), Brock.getPersonRole(0).getPersonRoleId());
         Person Stacy = new Person("email1","password","Stacy",museum);
         Stacy.addPersonRole(new Employee(7,Stacy));
-        shiftService.addEmployeeToShift(shift0.getWorkDayId(), (Employee) Stacy.getPersonRole(0));
+        when(employeeRepository.findEmployeeByPersonRoleId(Stacy.getPersonRole(0).getPersonRoleId())).thenAnswer((InvocationOnMock invocation) -> Stacy.getPersonRole(0));
+        shiftService.addEmployeeToShift(shift0.getWorkDayId(), Stacy.getPersonRole(0).getPersonRoleId());
         int brockEmployeeIndex = shift0.getEmployees().indexOf(Brock.getPersonRole(0));
         shiftService.removeEmployeeFromShift(shift0.getWorkDayId(), (Employee) Brock.getPersonRole(0));
         assertNotEquals(shift0.getEmployee(brockEmployeeIndex).getPersonRoleId(), Brock.getPersonRole(0).getPersonRoleId());

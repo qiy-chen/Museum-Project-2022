@@ -1,7 +1,11 @@
 package ca.mcgill.ecse321.MuseumBackend.integration;
 
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
@@ -13,6 +17,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -82,6 +88,35 @@ public class ShiftIntegrationTest {
         assertEquals(this.workDayId, response.getBody().getWorkDayId(), "Response has correct id");
 
     }
+
+    @Test
+    public void testCreateGetAndAddEmployee() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+    }
+
+    private void testAddEmployee(int workDayId, EmployeeRequestDto employeeRequestDto) {
+        ResponseEntity<EmployeeResponseDto> employeeResponse = client.postForEntity("/employee", employeeRequestDto, EmployeeResponseDto.class);
+    }
+
+    /*@Test
+    public void testCreateGetAndDeleteShift() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+        testDeleteShift(workDayId);
+
+    }
+
+    private void testDeleteShift(int workDayId) {
+        client.delete("/shift/"+workDayId);
+        try {
+            client.getForEntity("/shift/"+workDayId,ShiftResponseDto.class);
+            fail("Shift was found");
+        } catch(MuseumBackendException e) {
+            assertEquals(HttpStatus.NOT_FOUND,e.getStatus());
+            assertEquals("Shift not found.", e.getMessage());
+        }
+    }*/
 }
 
 

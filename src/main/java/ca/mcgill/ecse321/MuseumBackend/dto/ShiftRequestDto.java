@@ -7,6 +7,7 @@ import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ShiftRequestDto {
     private Date endTime;
 
     private Museum museum;
-    private List<Integer> employeeIds = Collections.emptyList();
+    private List<Integer> employeeIds = new ArrayList<>();
 
     public ShiftRequestDto(Date startTime, Date endTime, int workDayId, Museum museum) {
         this.startTime = startTime;
@@ -74,5 +75,9 @@ public class ShiftRequestDto {
 
     public void setEmployeeIds(List<Integer> employeeIds) {
         this.employeeIds = employeeIds;
+    }
+
+    public List<Integer> getEmployeeIds() {
+        return employeeIds;
     }
 }

@@ -34,6 +34,7 @@ public class ShiftRepositoryTests {
     Shift shift = new Shift();
     shift.setStartTime(startDate);
     shift.setEndTime(endDate);
+    shift.setWorkDayId(12);
     // save shift
     shift = shiftRepository.save(shift);
     int shiftId = shift.getWorkDayId();

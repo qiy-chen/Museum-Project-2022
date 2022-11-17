@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
+import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class ShiftService {
 
 	@Autowired
 	ShiftRepository shiftRepo;
+	@Autowired
+	EmployeeRepository employeeRepository;
 
 	private void shiftArgumentErrorTest(Shift shift) {
 		String error = "";
@@ -64,8 +67,9 @@ public class ShiftService {
 	}
 
 	@Transactional
-	public Shift addEmployeeToShift(int workDayId, Employee employee) {
+	public Shift addEmployeeToShift(int workDayId, int employeeId) {
 		Shift shift = getShiftById(workDayId);
+		Employee employee = employeeRepository.findEmployeeByPersonRoleId(employeeId);
 		shift.addEmployee(employee);
 		shiftArgumentErrorTest(shift);
 		return shift;
