@@ -12,6 +12,7 @@ import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.Exception.LoanException;
 import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
@@ -27,6 +28,9 @@ public class LoanService {
   @Autowired
   ArtworkRepository artworkRepository;
   
+  @Autowired
+  MuseumRepository museumRepository;
+  
 
   @Transactional
   public Loan getLoanByLoanId(int id) { //alex  
@@ -38,26 +42,39 @@ public class LoanService {
   }
 
   @Transactional
-  public LoanResponseDto createLoan(int customerId, int artworkId, int numOfDays, Date startDate, Date endDate, double rentalFee) {
-    Customer customer = customerRepository.findCustomerByPersonRoleId(customerId);
+  public LoanResponseDto createLoan(LoanRequestDto request) {
+    
+    Customer customer = customerRepository.findCustomerByPersonRoleId(request.getCustomerId());
     if(customer == null) {
-      //throw new LoanException(HttpStatus.NOT_FOUND, "Customer not found");
+      throw new LoanException(HttpStatus.NOT_FOUND, "Customer not found");
     }
-    Artwork artwork = artworkRepository.findArtworkByArtworkId(artworkId);
+    Artwork artwork = artworkRepository.findArtworkByArtworkId(request.getArtworkId());
     if(artwork == null) {
-      //throw new LoanException(HttpStatus.NOT_FOUND, "Customer not found");
+      throw new LoanException(HttpStatus.NOT_FOUND, "Customer not found");
     }
-    if(numOfDays < 0) {
-      //throw new LoanException(HttpStatus.BAD_REQUEST, "Not enough days");
+    Museum museum = museumRepository.findMuseumByMuseumId(request.getMuseumId());
+    
+    if(request.getNumOfDays() < 0) {
+      throw new LoanException(HttpStatus.BAD_REQUEST, "Not enough days");
     }
     Loan loan = new Loan();
+    
+    
+    artwork.addLoan(loan);
+    artwork.setMuseum(museum);
+    artworkRepository.save(artwork);
     loan.setArtwork(artwork);
+    loan.setMuseum(museum);
+    customer.addLoan(loan);
+    customerRepository.save(customer);
+    
     loan.setCustomer(customer);
-    loan.setEndDate(endDate);
-    loan.setNumOfDays(numOfDays);
-    loan.setRentalFee(rentalFee);
-    loan.setStartDate(startDate);
+    loan.setEndDate(null);
+    loan.setNumOfDays(request.getNumOfDays());
+    loan.setRentalFee(request.getRentalFee());
+    loan.setStartDate(null);
     loan.setStatus(LoanStatus.Requested);
+    loanRepository.save(loan);
     return new LoanResponseDto(loan);
   }
   /*

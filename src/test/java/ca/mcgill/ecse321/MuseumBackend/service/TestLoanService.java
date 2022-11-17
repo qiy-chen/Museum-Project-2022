@@ -13,6 +13,8 @@ import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.*;
+import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
@@ -25,11 +27,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 
-/*
+
 @ExtendWith(MockitoExtension.class)
 public class TestLoanService {
   @Mock
   LoanRepository loanRepository;
+  @Mock
+  CustomerRepository cusRepo;
+  @Mock
+  ArtworkRepository artRepo;
   
   @InjectMocks
   LoanService loanService;
@@ -54,7 +60,16 @@ public class TestLoanService {
     assertNotNull(loan);
     assertEquals(loaniD, loan.getLoanId());
   }
-  
+  @Test
+  public void testCreateLoan() {
+    when(loanRepository.save(any(Loan.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
+    Artwork artwork = new Artwork();
+    int artworkId = artwork.getArtworkId();
+    Customer customer = new Customer();
+    int customerId = customer.getPersonRoleId();
+    
+  }
+  /*
   @Test
   public void testEndLoan() {
     double rentalfee = 200.0;
@@ -108,26 +123,7 @@ public class TestLoanService {
     assertEquals(loans.get(1),allloans.get(1));
   }
   
-  @Test
-  public void testCreateLoan() {
-    when(loanRepository.save(any(Loan.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
-    Loan loan = new Loan();
-    Artwork artwork = new Artwork();
-    Customer customer = new Customer();
-    int loanid = loan.getLoanId();
-    loan.setArtwork(artwork);
-    loan.setCustomer(customer);
-    when(loanRepository.findById(loanid)).thenAnswer((InvocationOnMock invocation) -> loan);
-    
-    LoanRequestDto request = new LoanRequestDto();
-    request.setLoanId(loanid);
-    
-    Loan returnedLoan = loanService.createLoan(loan);
-    assertNotNull(returnedLoan);
-    assertEquals(loanid, returnedLoan.getLoanId());
-    verify(loanRepository, times(1)).save(loan);
-    
-  }
+  
   
   @Test
   public void testApproveLoan() {
@@ -233,5 +229,6 @@ public class TestLoanService {
     assertNotNull(loanService.getLoanByLoanId(loaniD2));
     
   }
+  */
 }
-*/;
+;

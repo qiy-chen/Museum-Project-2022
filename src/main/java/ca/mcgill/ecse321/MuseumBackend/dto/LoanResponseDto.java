@@ -1,28 +1,42 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
 import java.sql.Date;
-import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
-import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 
 public class LoanResponseDto {
   
   private int id;
-  private CustomerDto customer;
-  private ArtworkDto artwork;
-  private LoanStatus status;
+  private int customerId;
+  private int artworkId;
+  private int museumId;
+  //private LoanStatus status;
+  private int statusNumber;
   private int numOfDays;
   private Date startDate;
   private Date endDate;
   private double rentalFee;
+  public LoanResponseDto() {}
   
   public LoanResponseDto(Loan loan) {
     this.id = loan.getLoanId();
-    this.customer = new CustomerDto(loan.getCustomer());
-    this.artwork = new ArtworkDto(loan.getArtwork());
-    this.status = loan.getStatus();
+    this.customerId = loan.getCustomer().getPersonRoleId();
+    
+    this.artworkId = loan.getArtwork().getArtworkId();
+    this.museumId = loan.getMuseum().getMuseumId();
+    
+    if (loan.getStatus()==LoanStatus.Approved) {
+      this.statusNumber =0;
+    }
+    if (loan.getStatus()==LoanStatus.Denied) {
+      this.statusNumber =1;
+    }
+    if (loan.getStatus()==LoanStatus.Requested) {
+      this.statusNumber =2;
+    }
+    if (loan.getStatus()==LoanStatus.Returned) {
+      this.statusNumber =3;
+    }
     this.numOfDays = loan.getNumOfDays();
     this.startDate = loan.getStartDate();
     this.endDate = loan.getEndDate();
@@ -37,28 +51,28 @@ public class LoanResponseDto {
     this.id = id;
   }
 
-  public CustomerDto getCustomer() {
-    return customer;
+  public int getCustomerId() {
+    return this.customerId;
   }
 
-  public void setCustomer(CustomerDto customer) {
-    this.customer = customer;
+  public void setCustomerId(int id) {
+    this.customerId = id;
   }
 
-  public ArtworkDto getArtwork() {
-    return artwork;
+  public int getArtworkId() {
+    return this.artworkId;
   }
 
-  public void setArtwork(ArtworkDto artwork) {
-    this.artwork = artwork;
+  public void setArtworkId(int id) {
+    this.artworkId = id;
   }
 
-  public LoanStatus getStatus() {
-    return status;
+  public int getStatus() {
+    return statusNumber;
   }
 
-  public void setStatus(LoanStatus status) {
-    this.status = status;
+  public void setStatus(int status) {
+    this.statusNumber = status;
   }
 
   public int getNumOfDays() {
@@ -91,6 +105,9 @@ public class LoanResponseDto {
 
   public void setRentalFee(double rentalFee) {
     this.rentalFee = rentalFee;
+  }
+  public int getMuseumId() {
+    return this.museumId;
   }
   
 }
