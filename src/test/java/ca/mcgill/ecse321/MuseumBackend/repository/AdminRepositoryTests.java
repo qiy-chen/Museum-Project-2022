@@ -19,22 +19,17 @@ public class AdminRepositoryTests {
     private AdminRepository adminRepository;
     @Autowired
     private PersonRepository personRepository;
-    @Autowired
-    private MuseumRepository museumRepository;
 
     @AfterEach
     public void clearDatabase() {
-        adminRepository.deleteAll();
         personRepository.deleteAll();
-        museumRepository.deleteAll();
+        adminRepository.deleteAll();
     }
     
     @Test
     public void testPersistAndLoadAdmin() {
         // Create object
-        int id = 125;
         Admin aAdmin = new Admin();
-        aAdmin.setPersonRoleId(id);
 
         // Save object
         adminRepository.save(aAdmin);
@@ -42,7 +37,7 @@ public class AdminRepositoryTests {
 
         // Read object from database
         aAdmin = null;
-        aAdmin = adminRepository.findAdminByPersonRoleId(id);
+        aAdmin = adminRepository.findAdminByPersonRoleId(adminId);
 
         // Assert that object has correct attributes
         assertNotNull(aAdmin);
@@ -53,19 +48,13 @@ public class AdminRepositoryTests {
     public void testAdminToPersonReference() {
       
         // Create object
-        int id = 1;
         Admin aAdmin = new Admin();
-        aAdmin.setPersonRoleId(id);
         adminRepository.save(aAdmin); // save before adding art so that it is present for the foreign key when saving the artwork
         
-        // create references
-        Museum aMuseum = new Museum(21);
-        museumRepository.save(aMuseum);
         
         String email = "sandy@hotmail.com";
         Person sandy = new Person();
         sandy.addPersonRole(aAdmin);
-        sandy.setMuseum(aMuseum);
         sandy.setEmail(email);
         personRepository.save(sandy);
         aAdmin.setPerson(sandy);

@@ -20,24 +20,19 @@ public class PersonRepositoryTests {
     private PersonRepository personRepository;
 
     @Autowired
-    private MuseumRepository museumRepository;
-
-    @Autowired
     private AdminRepository adminRepository;
 
 
     @AfterEach
     public void clearDatabase() {
-        adminRepository.deleteAll();
         personRepository.deleteAll();
-        museumRepository.deleteAll();
+        adminRepository.deleteAll();
     }
 
     @Test
     public void testPersonPersistAndLoad() {
-        // Create object
-        Museum museum = new Museum(12);
-        museum = museumRepository.save(museum);
+        
+    	// Create object
         String email = "samuel.faubert@mail.mcgill.ca";
         String name = "Samuel Faubert";
         String password = "MarwanisC00l";
@@ -45,14 +40,16 @@ public class PersonRepositoryTests {
         samuel.setEmail(email);
         samuel.setName(name);
         samuel.setPassword(password);
-        samuel.setMuseum(museum);
         // Save object
         samuel = personRepository.save(samuel);
 
         String idEmail = samuel.getEmail();
         samuel = null;
+        
         // Read object from database
         samuel = personRepository.findPersonByEmail(email);
+        
+        // check values
         assertNotNull(samuel);
         assertEquals(idEmail, samuel.getEmail());
         assertEquals(name, samuel.getName());
@@ -61,11 +58,11 @@ public class PersonRepositoryTests {
     }
     @Test
     public void testPersonAssociations() {
-        Museum museum = new Museum(12);
-        museum = museumRepository.save(museum);
-        Admin admin = new Admin();
-        admin.setPersonRoleId(23);
+        
+    	Admin admin = new Admin();
         admin = adminRepository.save(admin);
+        int adminId = admin.getPersonRoleId();
+        
         String email = "samuel.faubert@mail.mcgill.ca";
         String name = "Samuel Faubert";
         String password = "MarwanisC00l";
@@ -73,22 +70,19 @@ public class PersonRepositoryTests {
         samuel.setEmail(email);
         samuel.setName(name);
         samuel.setPassword(password);
-        samuel.setMuseum(museum);
         admin.setPerson(samuel);
         samuel = personRepository.save(samuel);
+        admin = adminRepository.save(admin);
         String idEmail = samuel.getEmail();
-        int adminId = admin.getPersonRoleId();
-        int museumId = museum.getMuseumId();
+        
         samuel = null;
         admin = null;
-        museum = null;
         samuel = personRepository.findPersonByEmail(idEmail);
         admin = adminRepository.findAdminByPersonRoleId(adminId);
-        museum = museumRepository.findMuseumByMuseumId(museumId);
+        
+        // check values
         assertNotNull(samuel);
         assertNotNull(admin);
-        assertNotNull(museum);
-        assertEquals(samuel.getEmail(),museum.getPerson(0).getEmail());
         assertEquals(samuel.getEmail(), admin.getPerson().getEmail());
 
     }

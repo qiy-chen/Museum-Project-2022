@@ -19,7 +19,7 @@ public abstract class Room
   //Room Attributes
   private int roomNumber;
   @Id
-  //@GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int roomId;
 
   //Room Associations

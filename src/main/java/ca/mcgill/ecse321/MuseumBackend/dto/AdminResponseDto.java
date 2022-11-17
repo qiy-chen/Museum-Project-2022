@@ -8,10 +8,12 @@ public class AdminResponseDto {
 
 	private int id;
 	private PersonDto person;
+	private String email;
 	
 	public AdminResponseDto(Admin admin) {
 		this.id = admin.getPersonRoleId();
 		this.person = new PersonDto(admin.getPerson());
+		this.email = this.person.getEmail();
 	}
 
 	public int getId() {
@@ -29,5 +31,14 @@ public class AdminResponseDto {
 	public void setPerson(PersonDto person) {
 		this.person = person;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 
 }

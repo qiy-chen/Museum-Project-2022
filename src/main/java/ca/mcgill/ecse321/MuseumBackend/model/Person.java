@@ -2,7 +2,6 @@
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse321.MuseumBackend.model;
-import org.hibernate.action.internal.OrphanRemovalAction;
 
 import javax.persistence.*;
 import java.util.*;
@@ -19,15 +18,14 @@ public class Person
 
   //Person Attributes
   @Id
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String email;
   private String password;
   private String name;
 
   //Person Associations
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private Museum museum;
-  @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
   private List<PersonRole> personRoles;
 
   //------------------------
@@ -112,6 +110,17 @@ public boolean setEmail(String aEmail)
   {
     List<PersonRole> newPersonRoles = Collections.unmodifiableList(personRoles);
     return newPersonRoles;
+  }
+  
+  // check if the person has each different role
+  public boolean isAdmin() {
+	  return personRoles.stream().anyMatch(role -> role.getClass().equals(Admin.class));
+  }
+  public boolean isCustomer() {
+	  return personRoles.stream().anyMatch(role -> role.getClass().equals(Customer.class));
+  }
+  public boolean isEmployee() {
+	  return personRoles.stream().anyMatch(role -> role.getClass().equals(Employee.class));
   }
 
   public int numberOfPersonRoles()

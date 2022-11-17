@@ -18,8 +18,6 @@ public class TicketRepositoryTests {
   private TicketRepository ticketRepository;
   @Autowired
   private CustomerRepository customerRepository;
-  @Autowired
-  private MuseumRepository museumRepository;
 
 
 
@@ -27,19 +25,9 @@ public class TicketRepositoryTests {
   public void clearDatabase() {
     ticketRepository.deleteAll();
     customerRepository.deleteAll();
-
-    museumRepository.deleteAll();
-    
   }
   @Test
   public void testPersistAndLoadTicket() {
-    //Setup museum instance
-    int museumId = 5;
-    Museum museumInstance = new Museum();
-    museumInstance.setMuseumId(museumId);
-    museumInstance = museumRepository.save(museumInstance);
-    museumId = museumInstance.getMuseumId();
-
 
     //Setup customer
     Customer customer = new Customer();
@@ -49,14 +37,12 @@ public class TicketRepositoryTests {
     
     //Setup ticket
     Ticket ticket = new Ticket();
-    ticket.setMuseum(museumInstance);
     ticket.setPrice(10.00);
     ticket.setTicketDate(new Date(4));
     ticket.setCustomer(customer);
-    ticket.setTicketId(13);
-    
     ticket = ticketRepository.save(ticket);
     
+    // get attributes
     int ticketId = ticket.getTicketId();
     double ticketPrice = ticket.getPrice();
     Date ticketDate = ticket.getTicketDate();
@@ -64,9 +50,7 @@ public class TicketRepositoryTests {
     //Set all values of objects to null
     ticket = null;
     customer = null;
-    museumInstance = null;
     
-
     //Search for the ticket in the database
     ticket = ticketRepository.findTicketByTicketId(ticketId);
     
@@ -78,9 +62,6 @@ public class TicketRepositoryTests {
     
     assertNotNull(ticket.getCustomer());
     assertEquals(customerId, ticket.getCustomer().getPersonRoleId());
-    
-    assertNotNull(ticket.getMuseum());
-    assertEquals(museumId, ticket.getMuseum().getMuseumId());
     
   }
   

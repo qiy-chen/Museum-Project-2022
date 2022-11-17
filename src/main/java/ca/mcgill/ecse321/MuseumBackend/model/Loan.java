@@ -5,7 +5,8 @@ package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -31,6 +32,7 @@ public class Loan
   private int numOfDays;
   private LoanStatus status;
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int loanId;
 
   //Loan Associations

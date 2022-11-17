@@ -23,9 +23,9 @@ public class Shift
   private int workDayId;
 
   //Shift Associations
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   private List<Employee> employees;
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private Museum museum;
 
   //------------------------
@@ -46,7 +46,7 @@ public class Shift
   }
   
   public Shift() {
-    
+    employees = new ArrayList<>();
   }
 
   //------------------------
