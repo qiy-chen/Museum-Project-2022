@@ -18,9 +18,6 @@ public class ArtworkRepositoryTests {
   
   @Autowired
   private ArtworkRepository artworkRepository;
-
-  @Autowired
-  private MuseumRepository museumRepository;
   
   @Autowired
   private DisplayRepository displayRepository;
@@ -29,59 +26,38 @@ public class ArtworkRepositoryTests {
   public void clearDatabase() {
       artworkRepository.deleteAll();
       displayRepository.deleteAll();
-      museumRepository.deleteAll();
   }
   
   @Test
   public void testPersistAndLoadArtwork() {
     
-    //create a museum 
-    Museum beauty = new Museum(1);
-    //beauty.setMuseumId(0);
-    beauty =  museumRepository.save(beauty);
     
     //create display room
-    Display frenchRoom = new Display(3,123,beauty,200);
-    //frenchRoom.setMaxArtworks(200);
-    //frenchRoom.setRoomNumber(3);
-    //frenchRoom.setRoomId(123);
-    //frenchRoom.setMuseum(beauty);
+    Display frenchRoom = new Display();
     frenchRoom = displayRepository.save(frenchRoom);
+    int roomId = frenchRoom.getRoomId();
   
     //create artwork
     Artwork monaLisa = new Artwork();
-    int artworkId = 555;
     String artName = "Mona Lisa";
     Boolean isLoanable = false;
-    int valueM = 12;
     monaLisa.setArtworkName(artName);
     monaLisa.setIsLoanable(isLoanable);
-    monaLisa.setMuseum(beauty);
     monaLisa.setRoom(frenchRoom);
-    monaLisa.setValue(valueM);
-    monaLisa.setArtworkId(artworkId);
     monaLisa = artworkRepository.save(monaLisa);
+    int artworkId = monaLisa.getArtworkId();
     
-    artworkId = monaLisa.getArtworkId();
- // Check if artwork is not null
-    assertNotNull(monaLisa);
-    
-//Check find method in repo
+    //Check find method in repo
     monaLisa = null;
     monaLisa = artworkRepository.findArtworkByArtworkId(artworkId);
-    assertNotNull(monaLisa);
-
-// Check attributes
+    
+    // Check attributes
     assertEquals(isLoanable, monaLisa.getIsLoanable());
     assertEquals(artName, monaLisa.getArtworkName());
     
     // Check Associations
-
-    assertNotNull(monaLisa.getMuseum());
-    assertEquals(1, monaLisa.getMuseum().getMuseumId());
-
-    //assertNotNull(monaLisa.getRoom());
-    //assertEquals(123, monaLisa.getRoom().getRoomId());
+    assertNotNull(monaLisa.getRoom());
+    assertEquals(roomId, monaLisa.getRoom().getRoomId());
     
     
   }

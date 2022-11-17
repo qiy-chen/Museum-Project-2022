@@ -25,22 +25,17 @@ public class CustomerRepositoryTests {
     private CustomerRepository customerRepository;
     @Autowired
     private PersonRepository personRepository;
-    @Autowired
-    private MuseumRepository museumRepository;
 
     @AfterEach
     public void clearDatabase() {
         customerRepository.deleteAll();
         personRepository.deleteAll();
-        museumRepository.deleteAll();
     }
     
     @Test
     public void testPersistAndLoadCustomer() {
         // Create object
-        int id = 125;
         Customer elie = new Customer();
-        elie.setPersonRoleId(id);
 
         // Save object
         customerRepository.save(elie);
@@ -48,7 +43,7 @@ public class CustomerRepositoryTests {
 
         // Read object from database
         elie = null;
-        elie = customerRepository.findCustomerByPersonRoleId(id);
+        elie = customerRepository.findCustomerByPersonRoleId(EmployeeId);
 
         // Assert that object has correct attributes
         assertNotNull(elie);
@@ -57,20 +52,14 @@ public class CustomerRepositoryTests {
     
     @Test
     public void testCustomerToPersonReference() {
-        // Create object
-        int id = 1;
+        
+    	// Create object
         Customer elie = new Customer();
-        elie.setPersonRoleId(id);
         customerRepository.save(elie); // save before adding art so that it is present for the foreign key when saving the artwork
         
-        // create references
-        Museum aMuseum = new Museum(21);
-        museumRepository.save(aMuseum);
-        
-        String email = "sandy@hotmail.com";
+        // create reference object
+        String email = "sandie@hotmail.com";
         Person sandy = new Person();
-        sandy.addPersonRole(elie);
-        sandy.setMuseum(aMuseum);
         sandy.setEmail(email);
         personRepository.save(sandy);
         elie.setPerson(sandy);

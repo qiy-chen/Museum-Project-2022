@@ -17,13 +17,14 @@ public class Ticket
   //Ticket Attributes
   private double price;
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int ticketId;
   private Date ticketDate;
 
   //Ticket Associations
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   private Museum museum;
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   private Customer customer;
 
   //------------------------

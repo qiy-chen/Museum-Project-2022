@@ -35,8 +35,8 @@ public class TestEmployeeIntegration {
 	@BeforeEach
 	@AfterEach
 	public void clearDatabase() {
-		employeeRepo.deleteAll();
 		personRepo.deleteAll();
+		employeeRepo.deleteAll();
 	}
 
 	@Test

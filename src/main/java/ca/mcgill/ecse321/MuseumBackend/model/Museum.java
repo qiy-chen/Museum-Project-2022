@@ -18,21 +18,21 @@ public class Museum
 
   //Museum Attributes
   @Id
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int museumId;
 
   //Museum Associations
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Room> rooms;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Shift> shifts;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Person> persons;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Ticket> tickets;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Loan> loans;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Artwork> artworks;
 
   //------------------------
@@ -45,7 +45,7 @@ public class Museum
     rooms = new ArrayList<Room>();
     shifts = new ArrayList<Shift>();
     persons = new ArrayList<Person>();
-    tickets = new ArrayList<Ticket>();
+    tickets = new ArrayList<>();
     loans = new ArrayList<Loan>();
     artworks = new ArrayList<Artwork>();
   }

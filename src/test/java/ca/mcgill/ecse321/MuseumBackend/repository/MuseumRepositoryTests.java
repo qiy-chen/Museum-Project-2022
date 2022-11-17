@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -24,38 +25,36 @@ public class MuseumRepositoryTests {
 
     @AfterEach
     public void clearDatabase() {
-      ticketRepository.deleteAll();
       museumRepository.deleteAll();
+      ticketRepository.deleteAll();
     }
     
     @Test
     public void testPersistAndLoadMuseum() {
-      //Creating the museum instance 
-
-      int id = 123;
-      Museum museum = new Museum(id);
-      museum = museumRepository.save(museum);
-
-      int ticketId = 456;
       
-      Ticket ticket = new Ticket ();
-      ticket.setTicketId(ticketId);
-      ticket.setMuseum(museum);
+    	//Creating the museum instance 
+      Museum museum = new Museum();
+      museum = museumRepository.save(museum);
+      
+      // create and add a ticket
+      Ticket ticket = new Ticket();
+      Boolean added = museum.addTicket(ticket);
+      System.out.println(added);
+      
+      // save the changes
       ticket = ticketRepository.save(ticket);
-      
-      //Save the museum instance in the MuseumRepository table 
+      int ticketId = ticket.getTicketId();
       museum = museumRepository.save(museum);
-      
-      //Obtain museumID of created museum object that was saved in MuseumRepository table 
       int museumID = museum.getMuseumId();
       
+      // Retrieve the museum from the database
       museum = null;
-      
       museum = museumRepository.findMuseumByMuseumId(museumID);
-            
-      //Assertion Tests
+
+      // Check results
       assertNotNull(museum);
       assertEquals(museumID, museum.getMuseumId());
+      assertTrue(museum.getTickets().size() > 0);
       assertEquals(ticketId, museum.getTicket(0).getTicketId());
     }
 }
