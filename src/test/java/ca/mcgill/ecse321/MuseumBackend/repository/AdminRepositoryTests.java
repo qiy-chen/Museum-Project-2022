@@ -19,14 +19,11 @@ public class AdminRepositoryTests {
     private AdminRepository adminRepository;
     @Autowired
     private PersonRepository personRepository;
-    @Autowired
-    private MuseumRepository museumRepository;
 
     @AfterEach
     public void clearDatabase() {
-        adminRepository.deleteAll();
         personRepository.deleteAll();
-        museumRepository.deleteAll();
+        adminRepository.deleteAll();
     }
     
     @Test
@@ -53,14 +50,10 @@ public class AdminRepositoryTests {
         Admin aAdmin = new Admin();
         adminRepository.save(aAdmin); // save before adding art so that it is present for the foreign key when saving the artwork
         
-        // create references
-        Museum aMuseum = new Museum(21);
-        museumRepository.save(aMuseum);
         
         String email = "sandy@hotmail.com";
         Person sandy = new Person();
         sandy.addPersonRole(aAdmin);
-        sandy.setMuseum(aMuseum);
         sandy.setEmail(email);
         personRepository.save(sandy);
         aAdmin.setPerson(sandy);

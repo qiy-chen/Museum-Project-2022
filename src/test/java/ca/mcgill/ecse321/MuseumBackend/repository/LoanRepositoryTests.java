@@ -21,23 +21,18 @@ public class LoanRepositoryTests {
 	private LoanRepository loanRepository;
 	@Autowired
 	private ArtworkRepository artworkRepository;
-	@Autowired
-	private MuseumRepository museumRepository;
 
 	@AfterEach
 	public void clearDatabase() {
-		// order matters : cannot delete entities that are referenced in another table, clear table first
 		artworkRepository.deleteAll();
 		loanRepository.deleteAll();
-		museumRepository.deleteAll();
 	}
 
 	@Test
 	public void testPersistAndLoadLoan() {
+		
 		// Create object
-		int id = 125;
 		Loan aLoan = new Loan();
-		aLoan.setLoanId(id);
 
 		// Save object
 		loanRepository.save(aLoan);
@@ -45,7 +40,7 @@ public class LoanRepositoryTests {
 
 		// Read object from database
 		aLoan = null;
-		aLoan = loanRepository.findLoanByLoanId(id);
+		aLoan = loanRepository.findLoanByLoanId(loanId);
 
 		// Assert that object has correct attributes
 		assertNotNull(aLoan);
@@ -54,28 +49,20 @@ public class LoanRepositoryTests {
 	
 	@Test
 	public void testLoanToArtworkReference() {
+		
 		// Create object
-		int id = 1;
 		Loan aLoan = new Loan();
-		aLoan.setLoanId(id);
 		loanRepository.save(aLoan); // save before adding art so that it is present for the foreign key when saving the artwork
+		int loanID = aLoan.getLoanId();
 		
-		// create references
-		Museum aMuseum = new Museum(21);
-		museumRepository.save(aMuseum);
-		
-		int artID = 56;
+		// create reference
 		Artwork art = new Artwork();
-		art.addLoan(aLoan);
-		art.setMuseum(aMuseum);
-		art.setArtworkId(artID);
 		artworkRepository.save(art);
-		
+		int artID = art.getArtworkId();
 		aLoan.setArtwork(art);
 
 		// Update object
 		loanRepository.save(aLoan);
-		int loanID = aLoan.getLoanId();
 
 		// Read object from database
 		aLoan = null;

@@ -8,8 +8,9 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
-
+import ca.mcgill.ecse321.MuseumBackend.model.Room;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 
 @SpringBootTest
@@ -17,37 +18,55 @@ public class DisplayRepositoryTests {
 	@Autowired
 	private DisplayRepository displayRepository;
 	@Autowired
-	private MuseumRepository museumRepository;
+	private ArtworkRepository artworkRepository;
 
 	@AfterEach
 	public void clearDatabase() {
 		displayRepository.deleteAll();
-		museumRepository.deleteAll();
 	}
 
 	@Test
 	public void testPersistAndLoadDisplay() {
-		int roomNumber = 5;
-		int maxArtworks = 300;
-		int roomId = 456;
-		int museumId = 789;
-		Museum museum = new Museum(museumId);
-		museum = museumRepository.save(museum);
+		
+		// create object
 		Display emmaRoom = new Display();
-		emmaRoom.setRoomNumber(roomNumber);
-		emmaRoom.setMaxArtworks(maxArtworks);
-		emmaRoom.setRoomId(roomId);
-		emmaRoom.setMuseum(museum);
 		emmaRoom = displayRepository.save(emmaRoom);
-		roomId = emmaRoom.getRoomId();
+		int roomId = emmaRoom.getRoomId();
+		
+		// retrieve from database
 		emmaRoom = null;
 		emmaRoom = displayRepository.findDisplayByRoomId(roomId);
 		
+		// check values
 		assertNotNull(emmaRoom);
 		assertEquals(roomId, emmaRoom.getRoomId());
-		assertEquals(roomNumber, emmaRoom.getRoomNumber());
-		assertEquals(maxArtworks, emmaRoom.getMaxArtworks());
-		assertEquals(museum.getMuseumId(), emmaRoom.getMuseum().getMuseumId());
 		
+	}
+	
+	@Test
+	public void testRoomToArtworkReference() {
+		
+		// Create object
+		Display aRoom = new Display();
+		displayRepository.save(aRoom); // save before adding art so that it is present for the foreign key when saving the artwork
+		int roomID = aRoom.getRoomId();
+		
+		// create reference
+		Artwork art = new Artwork();
+		artworkRepository.save(art);
+		int artID = art.getArtworkId();
+		aRoom.addArtwork(art);
+
+		// Update object
+		displayRepository.save(aRoom);
+
+		// Read object from database
+		aRoom = null;
+		aRoom = displayRepository.findDisplayByRoomId(roomID);
+
+		// Assert that object has correct attributes
+		assertNotNull(aRoom);
+		assertEquals(roomID, aRoom.getRoomId());
+		assertEquals(artID,aRoom.getArtwork(0).getArtworkId());
 	}
 }

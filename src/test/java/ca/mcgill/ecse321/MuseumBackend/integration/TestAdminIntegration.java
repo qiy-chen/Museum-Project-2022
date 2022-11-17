@@ -31,8 +31,8 @@ public class TestAdminIntegration {
 	@BeforeEach
 	@AfterEach
 	public void clearDatabase() {
-		adminRepo.deleteAll();
 		personRepo.deleteAll();
+		adminRepo.deleteAll();
 	}
 
 	@Test

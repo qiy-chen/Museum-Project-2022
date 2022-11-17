@@ -20,22 +20,17 @@ public class EmployeeRepositoryTests {
 	private EmployeeRepository employeeRepository;
 	@Autowired
 	private PersonRepository personRepository;
-	@Autowired
-	private MuseumRepository museumRepository;
 
 	@AfterEach
 	public void clearDatabase() {
-		employeeRepository.deleteAll();
 		personRepository.deleteAll();
-		museumRepository.deleteAll();
+		employeeRepository.deleteAll();
 	}
 	
 	@Test
 	public void testPersistAndLoadEmployee() {
 		// Create object
-		int id = 125;
 		Employee aEmployee = new Employee();
-		aEmployee.setPersonRoleId(id);
 
 		// Save object
 		employeeRepository.save(aEmployee);
@@ -43,7 +38,7 @@ public class EmployeeRepositoryTests {
 
 		// Read object from database
 		aEmployee = null;
-		aEmployee = employeeRepository.findEmployeeByPersonRoleId(id);
+		aEmployee = employeeRepository.findEmployeeByPersonRoleId(EmployeeId);
 
 		// Assert that object has correct attributes
 		assertNotNull(aEmployee);
@@ -53,26 +48,20 @@ public class EmployeeRepositoryTests {
 	@Test
 	public void testEmployeeToArtworkReference() {
 		// Create object
-		int id = 1;
 		Employee aEmployee = new Employee();
-		aEmployee.setPersonRoleId(id);
 		employeeRepository.save(aEmployee); // save before adding art so that it is present for the foreign key when saving the artwork
+		int employeeID = aEmployee.getPersonRoleId();
 		
-		// create references
-		Museum aMuseum = new Museum(21);
-		museumRepository.save(aMuseum);
 		
 		String email = "sandy@hotmail.com";
 		Person sandy = new Person();
 		sandy.addPersonRole(aEmployee);
-		sandy.setMuseum(aMuseum);
 		sandy.setEmail(email);
 		personRepository.save(sandy);
 		aEmployee.setPerson(sandy);
 
 		// Update object
 		employeeRepository.save(aEmployee);
-		int employeeID = aEmployee.getPersonRoleId();
 
 		// Read object from database
 		aEmployee = employeeRepository.findEmployeeByPersonRoleId(employeeID);

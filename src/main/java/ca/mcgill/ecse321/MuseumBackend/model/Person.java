@@ -18,15 +18,14 @@ public class Person
 
   //Person Attributes
   @Id
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String email;
   private String password;
   private String name;
 
   //Person Associations
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private Museum museum;
-  @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
   private List<PersonRole> personRoles;
 
   //------------------------

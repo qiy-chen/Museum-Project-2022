@@ -29,11 +29,10 @@ public class TestCustomerIntegration {
 	@Autowired
 	private PersonRepository personRepo;
 
-	@BeforeEach
 	@AfterEach
 	public void clearDatabase() {
-		customerRepo.deleteAll();
 		personRepo.deleteAll();
+		customerRepo.deleteAll();
 	}
 
 	@Test
