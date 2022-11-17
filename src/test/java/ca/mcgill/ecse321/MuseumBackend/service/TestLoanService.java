@@ -123,9 +123,9 @@ public class TestLoanService {
     request.setLoanId(loanid);
     
     LoanResponseDto returnedLoan = loanService.createLoan(request);
-    assertNotNull(loanReturned);
-    assertEquals(id, loanReturned.getLoanId());
-    verify(loanRepository, times(1)).save(loanReturned);
+    assertNotNull(returnedLoan);
+    assertEquals(loanid, returnedLoan.getLoanId());
+    verify(loanRepository, times(1)).save(loan);
     
   }
   
