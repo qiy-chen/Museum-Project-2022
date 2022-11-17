@@ -33,14 +33,14 @@ public class ShiftRepositoryTests {
     //Setup shift
     Date startDate = new Date(0);
     Date endDate = new Date(2);
-    
-    
+
+
     Shift shift = new Shift();
     shift.setMuseum(museumInstance);
     shift.setStartTime(startDate);
     shift.setEndTime(endDate);
-   
-    
+
+
     shift = shiftRepository.save(shift);
     int shiftId = shift.getWorkDayId();
     startDate = shift.getStartTime();
@@ -48,19 +48,19 @@ public class ShiftRepositoryTests {
     //Set all values of objects to null
     shift = null;
     museumInstance = null;
-    
+
     //Search for the ticket in the database
     shift = shiftRepository.findShiftByWorkDayId(shiftId);
-    
+
     //Test if the values are correct
     assertNotNull(shift);
     assertEquals(shiftId, shift.getWorkDayId());
     assertEquals(startDate.toString(), shift.getStartTime().toString());
     assertEquals(endDate.toString(), shift.getEndTime().toString());
-    
+
     assertNotNull(shift.getMuseum());
     assertEquals(museumId, shift.getMuseum().getMuseumId());
-    
+
   }
-  
+
 }

@@ -31,7 +31,6 @@ public class MuseumRepositoryTests {
       Museum museum = new Museum(id);
       museum = museumRepository.save(museum);
 
-      int ticketId = 456;
       
       museumRepository.save(museum);
       
@@ -44,6 +43,5 @@ public class MuseumRepositoryTests {
       //Assertion Tests
       assertNotNull(museum);
       assertEquals(museumID, museum.getMuseumId());
-      assertEquals(ticketId, museum.getTicket(0).getTicketId());
     }
 }

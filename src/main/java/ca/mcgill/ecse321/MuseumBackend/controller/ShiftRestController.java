@@ -5,7 +5,9 @@ import ca.mcgill.ecse321.MuseumBackend.dto.ShiftResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,9 @@ public class ShiftRestController {
 
     @GetMapping(value = "/shift/{workDayId}")
     public ResponseEntity<ShiftResponseDto> getShiftById(@PathVariable int workDayId) throws IllegalArgumentException {
-        return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)), HttpStatus.OK);
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)), httpHeaders, HttpStatus.OK);
     }
 
     //@PutMapping(value = "/shifts/{workDayId}")
@@ -49,9 +53,11 @@ public class ShiftRestController {
 
 
 
-    @PostMapping("/shifts")
+    @PostMapping(value = "/shifts")
     public ResponseEntity<ShiftResponseDto> createShift(@RequestBody ShiftRequestDto shiftRequestDto) throws IllegalArgumentException {
-        return new ResponseEntity<>(convertToResponseDto(service.createShift(shiftRequestDto.toModel())), HttpStatus.CREATED);
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(convertToResponseDto(service.createShift(shiftRequestDto.toModel())), httpHeaders,HttpStatus.CREATED);
     }
     private ShiftResponseDto convertToResponseDto(Shift s) {
         if(s==null) {
