@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,33 +32,35 @@ public class LoanService {
   public Loan getLoanByLoanId(int id) { //alex  
     Loan loan = loanRepository.findLoanByLoanId(id);
     if(loan == null) {
-     throw new LoanException(HttpStatus.NOT_FOUND, "Ticket not found");
+     throw new LoanException(HttpStatus.NOT_FOUND, "Loan not found");
     }
     return loan;
   }
 
   @Transactional
-  public Loan createLoan(Loan loan) {
-    int customerid = loan.getCustomer().getPersonRoleId();
-    Customer customer = customerRepository.findCustomerByPersonRoleId(customerid);
-    if (customer == null) {
-      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Customer with given id not found.");
+  public LoanResponseDto createLoan(int customerId, int artworkId, int numOfDays, Date startDate, Date endDate, double rentalFee) {
+    Customer customer = customerRepository.findCustomerByPersonRoleId(customerId);
+    if(customer == null) {
+      //throw new LoanException(HttpStatus.NOT_FOUND, "Customer not found");
     }
-    
-    int artworkid = loan.getArtwork().getArtworkId();
-    Artwork artwork = artworkRepository.findArtworkByArtworkId(artworkid);
-    if (artwork == null) {
-      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Artwork with given id not found.");
+    Artwork artwork = artworkRepository.findArtworkByArtworkId(artworkId);
+    if(artwork == null) {
+      //throw new LoanException(HttpStatus.NOT_FOUND, "Customer not found");
     }
-    if (artwork.isOnLoan()) {
-      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Artwork is already on loan.");
+    if(numOfDays < 0) {
+      //throw new LoanException(HttpStatus.BAD_REQUEST, "Not enough days");
     }
-    int numOfDays = loan.getNumOfDays();
-    if (numOfDays <=0) {
-      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Loans must be for more that 1 day(s).");
-    }
-    return loanRepository.save(loan);
+    Loan loan = new Loan();
+    loan.setArtwork(artwork);
+    loan.setCustomer(customer);
+    loan.setEndDate(endDate);
+    loan.setNumOfDays(numOfDays);
+    loan.setRentalFee(rentalFee);
+    loan.setStartDate(startDate);
+    loan.setStatus(LoanStatus.Requested);
+    return new LoanResponseDto(loan);
   }
+  /*
   @Transactional
   public boolean deleteLoan(int id) { //alex
     boolean success = false;
@@ -128,7 +131,7 @@ public class LoanService {
     }
     return resultList;
   }
-
+*/
 
 
 

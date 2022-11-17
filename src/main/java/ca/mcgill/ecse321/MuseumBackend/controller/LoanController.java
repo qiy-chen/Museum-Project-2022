@@ -26,13 +26,9 @@ public class LoanController {
     return new ResponseEntity<LoanResponseDto>(new LoanResponseDto(loan), HttpStatus.OK);
   }
   @PostMapping("/loan")
-  public Loan createLoan(@RequestBody Loan loan){
-    /*Loan loan = loanRequest.toModel();
-    Loan createdLoan = loanService.createLoan(loan);
-    LoanResponseDto response = new LoanResponseDto(createdLoan);
-    return new ResponseEntity<LoanResponseDto>(response, HttpStatus.CREATED);*/
-    Loan response = loanService.createLoan(loan);
-    return response;
+  public ResponseEntity<LoanResponseDto>createLoan(@RequestBody LoanRequestDto request){
+    LoanResponseDto response = loanService.createLoan(request.getCustomerId(), request.getArtworkId(), request.getNumOfDays(), request.getStartDate(), request.getEndDate(), request.getRentalFee());
+    return new ResponseEntity<LoanResponseDto>(response, HttpStatus.CREATED);
   }
-  
+
 }

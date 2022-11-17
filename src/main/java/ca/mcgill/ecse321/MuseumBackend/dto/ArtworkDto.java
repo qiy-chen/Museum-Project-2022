@@ -1,35 +1,25 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
+import java.util.List;
+import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+import ca.mcgill.ecse321.MuseumBackend.model.Room;
 
 public class ArtworkDto {
-  private int artworkId;
-  private String artworkName;
+  private int id;
+  private String name;
   private double value;
   private boolean isLoanable;
-  private Loan loan;
+  private List<Loan> loans;
+  private Room room;
   
-  public ArtworkDto() {}
-  
-  public ArtworkDto(int aArtworkId, String aArtworkName, double aValue, boolean aIsLoanable) {
-    this.artworkId = aArtworkId;
-    this.artworkName = aArtworkName;
-    this.value = aValue;
-    this.isLoanable = aIsLoanable;
-  }
-  public ArtworkDto(Loan loan) {
-    this.loan = loan;
-  }
-  public int getArtworkId() {
-    return artworkId;
-  }
-  public String getArtworkName() {
-    return artworkName;
-  }
-  public double getValue() {
-    return value;
-  }
-  public boolean getIsLoanable() {
-    return isLoanable;
+  public ArtworkDto(Artwork artwork) {
+    super();
+    this.id = artwork.getArtworkId();
+    this.name = artwork.getArtworkName();
+    this.value = artwork.getValue();
+    this.isLoanable = artwork.getIsLoanable();
+    this.loans = artwork.getLoans();
+    this.room = artwork.getRoom();
   }
 }
