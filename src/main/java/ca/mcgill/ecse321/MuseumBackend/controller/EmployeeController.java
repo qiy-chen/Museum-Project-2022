@@ -40,8 +40,8 @@ public class EmployeeController {
 	}
 	
 	// fire employee by ID
-	@DeleteMapping("/employee/fire")
-	public ResponseEntity<EmployeeResponseDto> fireEmployee(@RequestParam int id) {
+	@DeleteMapping("/employee/fire/{id}")
+	public ResponseEntity<EmployeeResponseDto> fireEmployee(@PathVariable int id) {
 		EmployeeResponseDto response = new EmployeeResponseDto(employeeService.fireEmployee(id));
 		return new ResponseEntity<EmployeeResponseDto>(response, HttpStatus.OK);
 	}

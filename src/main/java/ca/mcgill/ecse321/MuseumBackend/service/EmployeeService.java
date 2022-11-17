@@ -12,8 +12,10 @@ import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.ShiftRepository;
 
 @Service
 public class EmployeeService {
@@ -22,6 +24,8 @@ public class EmployeeService {
 	EmployeeRepository employeeRepo;
 	@Autowired
 	PersonRepository personRepo;
+	@Autowired
+	ShiftRepository shiftRepo;
 
 	// find one employee by their ID
 	@Transactional
@@ -60,9 +64,23 @@ public class EmployeeService {
 	// remove employee from database
 	@Transactional
 	public Employee fireEmployee(int ID) {
+		
+		// find employee if they exist
 		Employee employee = employeeRepo.findEmployeeByPersonRoleId(ID);
 		if (employee == null)
 			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Employee with given ID not found.");
+		
+		// untie references and update database
+		Person person = employee.getPerson();
+		person.removePersonRole(employee);
+		personRepo.save(person);
+		employeeRepo.save(employee);
+		List<Shift> shifts = employee.getShifts();
+		shifts.stream().map(s -> employee.removeShift(s));
+		shifts.stream().map(s -> shiftRepo.save(s));
+		employeeRepo.save(employee);
+		
+		// delete employee
 		employeeRepo.delete(employee);
 		return employee;
 	}

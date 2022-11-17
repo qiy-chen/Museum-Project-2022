@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -33,6 +35,11 @@ public class TestEmployeeIntegration {
 	private PersonRepository personRepo;
 
 	@BeforeEach
+	public void wipeDatabase() {
+		personRepo.deleteAll();
+		employeeRepo.deleteAll();
+	}
+	
 	@AfterEach
 	public void clearDatabase() {
 		personRepo.deleteAll();
@@ -41,15 +48,14 @@ public class TestEmployeeIntegration {
 
 	@Test
 	public void testCreateAndGetEmployee() {
-		int id = testCreateEmployee();
-		testGetEmployee(id);
+		int id = testCreateEmployee("obi@kenobi.com");
+		testGetEmployee(id, "obi@kenobi.com");
 	}
 
-	private int testCreateEmployee() {
+	private int testCreateEmployee(String email) {
 
 		// setup - first create and save person that will get the role employee
 		Person person = new Person();
-		String email = "obi@kenobi.com";
 		person.setEmail(email);
 		personRepo.save(person);
 
@@ -67,7 +73,7 @@ public class TestEmployeeIntegration {
 		return response.getBody().id;
 	}
 
-	private void testGetEmployee(int id) {
+	private void testGetEmployee(int id, String email) {
 
 		// call method: get the employee by their id
 		ResponseEntity<EmployeeDto> response = client.getForEntity("/employee/" + id, EmployeeDto.class);
@@ -76,7 +82,7 @@ public class TestEmployeeIntegration {
 		assertNotNull(response);
 		assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
-		assertEquals("obi@kenobi.com", response.getBody().email, "Response has correct email");
+		assertEquals(email, response.getBody().email, "Response has correct email");
 		assertTrue(response.getBody().id == id, "Response has correct ID");
 	}
 
@@ -89,7 +95,12 @@ public class TestEmployeeIntegration {
 
 	@Test
 	public void testGetInvalidEmployee() {
-		ResponseEntity<String> response = client.getForEntity("/employee/" + Integer.MAX_VALUE, String.class);
+		getInvalidEmployee(Integer.MAX_VALUE);
+	}
+	
+	public void getInvalidEmployee(int invalidID) {
+		
+		ResponseEntity<String> response = client.getForEntity("/employee/" + invalidID, String.class);
 
 		assertNotNull(response);
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
@@ -99,16 +110,11 @@ public class TestEmployeeIntegration {
 	// test get all employees
 	@Test
 	public void testGetAllEmployees() {
-		// setup: make list of employees to find
-		Employee baggins = new Employee();
-		Employee smeagol = new Employee();
-		int bagginsID = baggins.getPersonRoleId();
-		int smeagolsID = smeagol.getPersonRoleId();
 
-		ArrayList<Employee> hobbits = new ArrayList<>();
-		hobbits.add(baggins);
-		hobbits.add(smeagol);
-
+		// setup -  make two employees
+		int bilboID = testCreateEmployee("bilbo@baggins.com");
+		int gandalfID = testCreateEmployee("gandalf@grey.com");
+		
 		// call method: get the employee by their id
 		ResponseEntity<EmployeeDto[]> response = client.getForEntity("/employees", EmployeeDto[].class);
 
@@ -117,10 +123,28 @@ public class TestEmployeeIntegration {
 		assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
 		EmployeeDto[] employees = response.getBody();
-		assertTrue((employees.length == 2), "Response has all employees");
-		assertEquals(bagginsID, employees[0].id, "Response has correct first ID");
-		assertEquals(smeagolsID, employees[1].id, "Response has correct second ID");
+		assertEquals(2, employees.length, "Response has all employees");
+		assertEquals(bilboID, employees[0].id, "Correct ID");
+		assertEquals(gandalfID, employees[1].id, "Correct ID");
 	}
+	
+	// test fire employee
+//	@Test
+//	public void testFireEmployee() {
+//		
+//		// setup - make employee and check they are saved
+//		String email = "bilbo@baggins.com";
+//		int bilboID = testCreateEmployee(email);
+//		testGetEmployee(bilboID, email);
+//		
+//		// fire the employee
+//		ResponseEntity<EmployeeDto> response = client.exchange("/employee/fire/" + bilboID, HttpMethod.DELETE, null, EmployeeDto.class);
+//		
+//		System.out.println(response.getStatusCodeValue());
+//		
+//		//check that they cannot be found
+//		getInvalidEmployee(bilboID);
+//	}
 }
 
 class EmployeeDto {
