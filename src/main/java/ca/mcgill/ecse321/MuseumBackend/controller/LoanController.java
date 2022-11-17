@@ -22,17 +22,17 @@ public class LoanController {
   
   @GetMapping("/loan/{id}")
   public ResponseEntity<LoanResponseDto> getLoanByLoanId(@PathVariable int id){
-    Loan loan = loanService.getLoanById(id);
+    Loan loan = loanService.getLoanByLoanId(id);
     return new ResponseEntity<LoanResponseDto>(new LoanResponseDto(loan), HttpStatus.OK);
   }
   @PostMapping("/loan")
-  public ResponseEntity<LoanResponseDto> createLoan(@RequestBody LoanRequestDto loanRequest){
+  public Loan createLoan(@RequestBody Loan loan){
     /*Loan loan = loanRequest.toModel();
     Loan createdLoan = loanService.createLoan(loan);
     LoanResponseDto response = new LoanResponseDto(createdLoan);
     return new ResponseEntity<LoanResponseDto>(response, HttpStatus.CREATED);*/
-    LoanResponseDto response = loanService.createLoan(loanRequest);
-    return new ResponseEntity<LoanResponseDto>(response, HttpStatus.CREATED);
+    Loan response = loanService.createLoan(loan);
+    return response;
   }
   
 }

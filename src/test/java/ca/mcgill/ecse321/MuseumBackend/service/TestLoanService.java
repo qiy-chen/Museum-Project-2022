@@ -122,7 +122,7 @@ public class TestLoanService {
     LoanRequestDto request = new LoanRequestDto();
     request.setLoanId(loanid);
     
-    LoanResponseDto returnedLoan = loanService.createLoan(request);
+    Loan returnedLoan = loanService.createLoan(loan);
     assertNotNull(returnedLoan);
     assertEquals(loanid, returnedLoan.getLoanId());
     verify(loanRepository, times(1)).save(loan);
