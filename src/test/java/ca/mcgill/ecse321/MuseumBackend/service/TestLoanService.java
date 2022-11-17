@@ -49,7 +49,7 @@ public class TestLoanService {
     Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
     when(loanRepository.findLoanByLoanId(loaniD)).thenAnswer((InvocationOnMock invocation) -> loan1);
     
-    Loan loan = loanService.getLoanById(loaniD);
+    Loan loan = loanService.getLoanByLoanId(loaniD);
     
     assertNotNull(loan);
     assertEquals(loaniD, loan.getLoanId());
@@ -227,10 +227,10 @@ public class TestLoanService {
     when(loanRepository.findLoanByLoanId(loaniD)).thenAnswer((InvocationOnMock invocation) -> null);
     when(loanRepository.findLoanByLoanId(loaniD2)).thenAnswer((InvocationOnMock invocation) -> loan2);
     
-    loanService.deleteLoan(loan1);
+    loanService.deleteLoan(loan1.getLoanId());
     
-    assertNull(loanService.getLoanById(loaniD));
-    assertNotNull(loanService.getLoanById(loaniD2));
+    assertNull(loanService.getLoanByLoanId(loaniD));
+    assertNotNull(loanService.getLoanByLoanId(loaniD2));
     
   }
 }

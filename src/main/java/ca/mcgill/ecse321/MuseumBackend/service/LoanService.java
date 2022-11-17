@@ -11,6 +11,7 @@ import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+import ca.mcgill.ecse321.MuseumBackend.Exception.LoanException;
 import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
@@ -27,51 +28,44 @@ public class LoanService {
   
 
   @Transactional
-  public Loan getLoanById(int id) { //alex
+  public Loan getLoanByLoanId(int id) { //alex  
     Loan loan = loanRepository.findLoanByLoanId(id);
+    if(loan == null) {
+     throw new LoanException(HttpStatus.NOT_FOUND, "Ticket not found");
+    }
     return loan;
   }
 
   @Transactional
-  public LoanResponseDto createLoan(LoanRequestDto loanDto) {
-    int id = loanDto.getCustomerid();
-    Customer customer = customerRepository.findCustomerByPersonRoleId(id);
+  public Loan createLoan(Loan loan) {
+    int customerid = loan.getCustomer().getPersonRoleId();
+    Customer customer = customerRepository.findCustomerByPersonRoleId(customerid);
     if (customer == null) {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Customer with given id not found.");
     }
     
-    int id2 = loanDto.getArtworkid();
-    Artwork artwork = artworkRepository.findArtworkByArtworkId(id2);
-    
+    int artworkid = loan.getArtwork().getArtworkId();
+    Artwork artwork = artworkRepository.findArtworkByArtworkId(artworkid);
     if (artwork == null) {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Artwork with given id not found.");
     }
     if (artwork.isOnLoan()) {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Artwork is already on loan.");
     }
-    int numOfDays = loanDto.getNumOfDays();
-    
+    int numOfDays = loan.getNumOfDays();
     if (numOfDays <=0) {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Loans must be for more that 1 day(s).");
     }
-    
-    Loan loan = new Loan();
-    loan.setArtwork(artwork);
-    loan.setCustomer(customer);
-    loan.setNumOfDays(numOfDays);
-    artwork.addLoan(loan);
-    customer.addLoan(loan);
-    
-    artworkRepository.save(artwork);
-    customerRepository.save(customer);
-    loanRepository.save(loan);
-    return new LoanResponseDto(loan);
+    return loanRepository.save(loan);
   }
   @Transactional
-  public Loan deleteLoan(Loan loan) { //alex
-    loanRepository.delete(loan);
-    loan.delete();
-    return loan;
+  public boolean deleteLoan(int id) { //alex
+    boolean success = false;
+    Loan canceledLoan = getLoanByLoanId(id);
+    canceledLoan.delete();
+    loanRepository.delete(canceledLoan);
+    success=true;
+    return success;
   }
 
   @Transactional
