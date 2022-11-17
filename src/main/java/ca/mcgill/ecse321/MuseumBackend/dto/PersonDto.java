@@ -6,7 +6,9 @@ public class PersonDto {
 
 	private String email;
 	private String name;
-	
+
+	public PersonDto() {
+	}
 	public PersonDto(Person person) {
 		this.email = person.getEmail();
 		this.name = person.getName();

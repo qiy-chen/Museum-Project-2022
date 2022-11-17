@@ -14,6 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @CrossOrigin(origins = "*")
 @RestController
 public class ShiftRestController {
@@ -27,9 +30,13 @@ public class ShiftRestController {
         return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)), httpHeaders, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/employee_shifts/{workDayId}")
-    public void addEmployeeToShift(@PathVariable int workDayId, @RequestParam int employeeId) throws IllegalArgumentException {
-
+    @PostMapping(value = "/shift/employees")
+    public ResponseEntity<ShiftResponseDto> addEmployeeToShift(@RequestBody Map<String,Integer> idMap) throws IllegalArgumentException {
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        int employeeId = idMap.get("employeeId");
+        int workDayId = idMap.get("workDayId");
+        return new ResponseEntity<>(convertToResponseDto(service.addEmployeeToShift(workDayId,employeeId)), httpHeaders, HttpStatus.OK);
     }
 
 
@@ -55,7 +62,7 @@ public class ShiftRestController {
 
 
 
-    @PostMapping(value = "/shifts")
+    @PostMapping(value = "/shift")
     public ResponseEntity<ShiftResponseDto> createShift(@RequestBody ShiftRequestDto shiftRequestDto) throws IllegalArgumentException {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);

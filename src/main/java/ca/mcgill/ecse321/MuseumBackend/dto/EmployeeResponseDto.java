@@ -11,7 +11,8 @@ public class EmployeeResponseDto {
 	private PersonDto person;
 	private List<ShiftResponseDto> shifts;
 	private String email;
-	
+	public EmployeeResponseDto() {
+	}
 	public EmployeeResponseDto(Employee employee) {
 		this.id = employee.getPersonRoleId();
 		this.person = new PersonDto(employee.getPerson());
