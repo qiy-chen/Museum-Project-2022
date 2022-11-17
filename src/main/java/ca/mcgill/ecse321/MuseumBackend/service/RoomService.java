@@ -48,6 +48,7 @@ public class RoomService {
     display.setMaxArtworks(aMaxArtworks);
    
     displayRepository.save(display);
+    roomRepository.save(display);
     return display;
   }
   
@@ -67,6 +68,7 @@ public class RoomService {
     }
     
     displayRepository.delete(display);
+    roomRepository.delete(display);
   }
   
   @Transactional

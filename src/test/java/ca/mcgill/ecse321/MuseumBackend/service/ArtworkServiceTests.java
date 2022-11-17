@@ -1,6 +1,7 @@
-package ca.mcgill.ecse321.MuseumBackend;
+package ca.mcgill.ecse321.MuseumBackend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -17,8 +18,6 @@ import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
-import ca.mcgill.ecse321.MuseumBackend.service.ArtworkService;
-import ca.mcgill.ecse321.MuseumBackend.service.RoomService;
 
 @ExtendWith(MockitoExtension.class)
 public class ArtworkServiceTests {

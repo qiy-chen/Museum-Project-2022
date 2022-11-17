@@ -2,15 +2,12 @@ package ca.mcgill.ecse321.MuseumBackend.dto;
 
 import java.util.List;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
-import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
-import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 
 public class ArtworkDto {
   
   private String artworkName;
-  private DisplayDto disD;
-  private StorageDto stD;
+  private int roomId;
   private int artworkId;
   private double value;
   private boolean isLoanable;
@@ -22,8 +19,7 @@ public class ArtworkDto {
     this.value = art.getValue();
     this.isLoanable= art.getIsLoanable();
     
-    if (art.getRoom() instanceof Display) {this.disD = new DisplayDto( (Display) art.getRoom());}
-    if (art.getRoom() instanceof Storage) {this.stD = new StorageDto( (Storage) art.getRoom());}
+    this.roomId = art.getRoom().getRoomId();
     
     for (Loan l : art.getLoans()) {
       LoanDto lDto = new LoanDto(l);
@@ -51,12 +47,7 @@ public boolean getIsLoanable() {
   return isLoanable;
 }
 
-public DisplayDto getDisplayroom() {
-  return disD;
+public int getRoomId() {
+  return this.roomId;
 }
-
-public StorageDto getStorageroom() {
-  return stD;
-}
-  
 }

@@ -6,14 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.exception.ArtworkException;
+import ca.mcgill.ecse321.MuseumBackend.exception.DisplayException;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.Room;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 
@@ -28,9 +30,6 @@ public class ArtworkService {
   
   @Autowired
   DisplayRepository displayRepository;
-  
-  @Autowired
-  MuseumRepository museumRepository;
   
   @Autowired
   LoanRepository loanRepository;
@@ -50,6 +49,8 @@ public class ArtworkService {
     art.setValue(0);                     //value is 0, not loanable   
     
     Room room = roomRepository.findRoomByRoomId(roomId);
+    
+    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
     
     if (room instanceof Display) {           //if we're adding to a display room 
       
@@ -74,20 +75,50 @@ public class ArtworkService {
   }
   
   @Transactional
-  public Room getRoom(int roomId) {
-    Room room = roomRepository.findRoomByRoomId(roomId);
-    //if (room==null) {throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork is in storage");}
-    return room;
+  public List<Artwork> getArtworksNotAvailableForLoan(){
+    
+    List<Artwork> listOfArtworks = getAllArtwork();
+    List<Artwork> r = new ArrayList<Artwork>();
+    
+    for (Artwork a : listOfArtworks) {
+      for (Loan loan : a.getLoans()) {
+        
+        if (loan.getStatus()== LoanStatus.Approved) {
+          r.add(a);
+        }
+      }
+    }
+    return r;
   }
   
   @Transactional
   public List<Artwork> getArtworksAvailableForLoan(){
     
-    List<Artwork> l = getAllArtwork();
+    List<Artwork> listOfArtworks = getAllArtwork();
     List<Artwork> r = new ArrayList<Artwork>();
     
-    for (Artwork a : l) {
-      if (a.getLoans().size()==0) {
+    for (Artwork a : listOfArtworks) {
+      int count =0;
+      
+      for (Loan loan : a.getLoans()) {
+        
+        if (loan.getStatus() != LoanStatus.Approved) {count+=1;}  
+        if (count== a.getLoans().size()) {r.add(a);}
+        
+      }
+    }
+    return r;
+  }
+  
+  @Transactional
+  public List<Artwork> getArtworksOnDisplay(){
+    
+    List<Artwork> listOfArtworks = getAllArtwork();
+    List<Artwork> r = new ArrayList<Artwork>();
+    
+    for (Artwork a : listOfArtworks) {
+     
+      if (a.getRoom() instanceof Display) {
         r.add(a);
       }
     }
@@ -161,7 +192,7 @@ public class ArtworkService {
   }
   
   @Transactional
-  public boolean deleteArtwork(int artId) {
+  public Artwork deleteArtwork(int artId) {
       Artwork art = artworkRepository.findArtworkByArtworkId(artId);
       
       if (art == null) {
@@ -176,7 +207,7 @@ public class ArtworkService {
       
       art.delete();
       artworkRepository.delete(art);        //delete artwork from repo
-      return true;
+      return art;
   }
   
   //helper method 
