@@ -35,7 +35,7 @@ public class LoanServiceTest {
   @Test
   public void testGetArtById() {
     final Loan loan = new Loan();
-    loan.setLoanId(1);
+    //loan.setLoanId(1);
     int loanId = loan.getLoanId();
     
     when(loanRepository.findLoanByLoanId(loanId)).thenAnswer( (InvocationOnMock invocation) -> loan);
@@ -48,14 +48,13 @@ public class LoanServiceTest {
   @Test 
   public void testCreateLoan() {
     Museum museum = new Museum();
-    museum.setMuseumId(1);
+    //museum.setMuseumId(1);
     int museumid = museum.getMuseumId();
     
     
     Artwork artwork = new Artwork();
-    artwork.setArtworkId(2);
+    //artwork.setArtworkId(2);
     int artworkid = artwork.getArtworkId();
-    
     
     LoanRequestDto loanRequest = new LoanRequestDto();
     
