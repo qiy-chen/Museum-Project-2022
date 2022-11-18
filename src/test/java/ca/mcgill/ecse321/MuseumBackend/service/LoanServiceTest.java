@@ -169,7 +169,7 @@ public class LoanServiceTest {
    * 
    */
   @Test
-  public void testApproveLoanInvalIsLonable() {
+  public void testApproveLoanInvalidIsLonable() {
     try {
       final Loan loan = new Loan();
       Artwork artwork = new Artwork();
@@ -183,6 +183,48 @@ public class LoanServiceTest {
     }
     catch (Exception e){
       assertEquals(e.getMessage(), "Can't approve this loan");
+    }
+  }
+  /**
+   * @author alextsah
+   * 
+   */
+  @Test
+  public void testApproveLoanInvalidStatus() {
+    try {
+      final Loan loan = new Loan();
+      Artwork artwork = new Artwork();
+      artwork.setIsLoanable(false);
+      loan.setArtwork(artwork);
+      artwork.addLoan(loan);
+      
+      loan.setStatus(LoanStatus.Denied);
+      when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
+      loanService.approveLoan(loan.getLoanId());
+    }
+    catch (Exception e){
+      assertEquals(e.getMessage(), "Can't approve this loan");
+    }
+  }
+  /**
+   * @author alextsah
+   * 
+   */
+  @Test
+  public void testReturnArtworkandEndLoanInvalidStatus() {
+    try {
+      final Loan loan = new Loan();
+      Artwork artwork = new Artwork();
+      artwork.setIsLoanable(false);
+      loan.setArtwork(artwork);
+      artwork.addLoan(loan);
+      
+      loan.setStatus(LoanStatus.Denied);
+      when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
+      loanService.returnArtworkandEndLoan(loan.getLoanId());
+    }
+    catch (Exception e){
+      assertEquals(e.getMessage(), "Can't return this loan");
     }
   }
 }
