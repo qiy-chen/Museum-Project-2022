@@ -58,8 +58,8 @@ public class ShiftIntegrationTest {
     @BeforeEach
     @AfterEach
     public void clearDatabase() {
-        employeeRepository.deleteAll();
         shiftRepository.deleteAll();
+        employeeRepository.deleteAll();
         personRepository.deleteAll();
         museumRepository.deleteAll();
     }

@@ -3,7 +3,9 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 
 // line 64 "../../../../../Museum.ump"
@@ -17,7 +19,7 @@ public class Employee extends PersonRole
   //------------------------
 
   //Employee Associations
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   private List<Shift> shifts;
 
   //------------------------

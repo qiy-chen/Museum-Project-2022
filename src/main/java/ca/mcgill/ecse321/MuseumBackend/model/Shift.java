@@ -154,6 +154,17 @@ public class Shift
     return wasAdded;
   }
   /* Code from template association_RemoveMany */
+  @PreRemove
+  private void removeShiftFromEmployees() {
+    List<Employee> employeeList = new ArrayList<>();
+    for(Employee e: employees) {
+      employeeList.add(e);
+    }
+    for(Employee e : employeeList) {
+      removeEmployee(e);
+    }
+  }
+
   public boolean removeEmployee(Employee aEmployee)
   {
     boolean wasRemoved = false;
