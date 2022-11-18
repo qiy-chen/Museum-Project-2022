@@ -39,13 +39,14 @@ public class ArtworkService {
   LoanRepository loanRepository;
   
   @Autowired
-  RoomRepository roomRepository;  //make private
-  
-  @Autowired
   MuseumRepository museumRepository;
   
+  @Autowired 
+  RoomRepository roomRepository;
+  
   @Transactional
-  public ArtworkResponseDto createArtwork(ArtworkRequestDto artworkRequest) { 
+  public Artwork createArtwork(ArtworkRequestDto artworkRequest) { 
+    
     Artwork art = new Artwork();
     
     if (artworkRequest.getArtworkName() == null) {
@@ -59,38 +60,25 @@ public class ArtworkService {
     
     art.setMuseum(mus);
     
-    Display d = null;
-    Storage s = null;
+    Room r = roomRepository.findRoomByRoomId(artworkRequest.getRoomId());
     
-    if (displayRepository.findDisplayByRoomId(artworkRequest.getRoomId()) != null) {
-      d = displayRepository.findDisplayByRoomId(artworkRequest.getRoomId());
-    }
+    if (r == null) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
     
-    if (storageRepository.findStorageByRoomId(artworkRequest.getRoomId()) != null) {
-      s = storageRepository.findStorageByRoomId(artworkRequest.getRoomId());
-    }
+    if (r.isFull()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
     
-    if (d == null && s== null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
-    
-    if (d != null) {
-      
-      if (d.numberOfArtworks() >= d.getMaxArtworks()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
-      
-      art.setRoom(d);
-      d.addArtwork(art);
-      displayRepository.save(d);
-    } 
-    
-    if (s != null) {
-      art.setRoom(s);
-      s.addArtwork(art);
-      storageRepository.save(s);
-    }
+    art.setRoom(r);
     
     art = artworkRepository.save(art);
+    r.addArtwork(art);
+    mus.addArtwork(art);
     
-    return new ArtworkResponseDto(art);
+    roomRepository.save(r);
+    museumRepository.save(mus);
+    
+    return art;
   }
+  
+   
   
   @Transactional
   public List<Artwork> getArtworksNotAvailableForLoan(){
@@ -172,24 +160,35 @@ public class ArtworkService {
   @Transactional
   public Artwork moveArtwork(int artId, int roomId) {
     Artwork art = artworkRepository.findArtworkByArtworkId(artId);
-    Room room = roomRepository.findRoomByRoomId(roomId);
     
-    if (room instanceof Display) {           //if we're adding to a display room 
-      if (room.numberOfArtworks() < 200) {   //if room is not full
-        
-        art.setRoom(room);
-        room.addArtwork(art);
-        displayRepository.save((Display) room);  //save the room
-      }
+    Display d = null;
+    Storage s = null;
+    
+    if (displayRepository.findDisplayByRoomId(roomId) != null) {
+      d = displayRepository.findDisplayByRoomId(roomId);
     }
     
-    if (room instanceof Storage) {
+    if (storageRepository.findStorageByRoomId(roomId) != null) {
+      s = storageRepository.findStorageByRoomId(roomId);
+    }
+    
+    if (d == null && s== null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
+    
+    if (d != null) {
       
-      art.setRoom(room);
-      room.addArtwork(art);
-      storageRepository.save((Storage) room);   //save the storage
+      if (d.numberOfArtworks() >= d.getMaxArtworks()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
+      
+      art.setRoom(d);
+      d.addArtwork(art);
+      displayRepository.save(d);
+    } 
+    
+    if (s != null) {
+      art.setRoom(s);
+      s.addArtwork(art);
+      storageRepository.save(s);
     }
-  
+    
     artworkRepository.save(art);
     return art;
   }

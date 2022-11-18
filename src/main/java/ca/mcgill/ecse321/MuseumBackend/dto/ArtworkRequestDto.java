@@ -3,16 +3,17 @@ package ca.mcgill.ecse321.MuseumBackend.dto;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 
 public class ArtworkRequestDto {
   
   @Min(1)
   private int roomId;
+  
   @NotNull
   @NotBlank
   private String artworkName;
   
+  @NotNull
   @Min(1)
   private int museumId;
   

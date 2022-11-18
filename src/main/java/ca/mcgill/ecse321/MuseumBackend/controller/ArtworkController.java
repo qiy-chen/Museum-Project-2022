@@ -38,9 +38,9 @@ public class ArtworkController {
       @Valid @RequestBody ArtworkRequestDto artworkRequestDto
     )   throws IllegalArgumentException {
 
-    ArtworkResponseDto a = service.createArtwork(artworkRequestDto);
+    Artwork a = service.createArtwork(artworkRequestDto);
     
-    return new ResponseEntity<ArtworkResponseDto>(a, HttpStatus.CREATED);
+    return new ResponseEntity<ArtworkResponseDto>(convertToDto(a), HttpStatus.CREATED);
 }
   
   /**

@@ -15,10 +15,13 @@ import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class ArtworkServiceTests {
@@ -30,7 +33,7 @@ public class ArtworkServiceTests {
   @Mock
   private DisplayRepository displayDao;
   @Mock 
-  private RoomRepository roomDao;
+  private StorageRepository storageDao;
   
   @InjectMocks
   private ArtworkService service;
@@ -57,18 +60,6 @@ public class ArtworkServiceTests {
     
   }
   
-//  public void testGetArtByIdNull() {
-// // Tell the mocked repository how to behave
-//    final Artwork mona = null;
-//    
-//    when(artworkDao.findArtworkByArtworkId(ART_ID)).thenAnswer( (InvocationOnMock invocation) -> mona); 
-//      
-//    //test
-//    Artwork art = service.getArtwork(ART_ID);
-//    
-//    assertNull(art);
-//  }
-  
   @Test
   public void testCreateArtwork() {
  // Tell the mocked repository how to behave
@@ -76,23 +67,33 @@ public class ArtworkServiceTests {
     
     final Display french = new Display();
     french.setRoomId(1);
+    french.setMaxArtworks(200);
     
-    when(roomDao.findRoomByRoomId(1)).thenAnswer( (InvocationOnMock invocation) -> french);  
+    final Museum m = new Museum();
+    m.setMuseumId(0);
+    
+    final Storage str = new Storage();
+    str.setRoomId(2);
+    
+    when(displayDao.findDisplayByRoomId(1)).thenAnswer( (InvocationOnMock invocation) -> french);
+    when(museumDao.findMuseumByMuseumId(0)).thenAnswer( (InvocationOnMock invocation) -> m);
+    when(storageDao.findStorageByRoomId(1)).thenAnswer( (InvocationOnMock invocation) -> null);
     when(artworkDao.save(any(Artwork.class))).thenAnswer( (InvocationOnMock invocation) -> invocation.getArgument(0)); 
     //test
     
     ArtworkRequestDto artRequest = new ArtworkRequestDto();
     artRequest.setArtworkName(name);
     artRequest.setRoomId(1);
+    artRequest.setMuseumId(0);
     
-    ArtworkResponseDto art = service.createArtwork(artRequest);
+    Artwork art = service.createArtwork(artRequest);
     
     assertNotNull(art);
     assertNotNull(art.getArtworkId());
     assertEquals(name, art.getArtworkName());
     assertEquals(false, art.getIsLoanable());
     assertEquals(0, art.getValue());
-    assertEquals(1, art.getRoomId());
+    assertEquals(1, art.getRoom().getRoomId());
     
   }
   
@@ -125,9 +126,14 @@ public class ArtworkServiceTests {
     
     final Display french = new Display();
     french.setRoomId(1);
+    french.setMaxArtworks(200);
     
     final Display english = new Display();
     english.setRoomId(2);
+    english.setMaxArtworks(200);
+    
+    final Storage arab = new Storage();
+    arab.setRoomId(3);
     
     Artwork art = new Artwork();
     art.setArtworkId(ART_ID);
@@ -135,13 +141,13 @@ public class ArtworkServiceTests {
     art.setArtworkName("Mona lisa");
     
     when(artworkDao.findArtworkByArtworkId(ART_ID)).thenAnswer( (InvocationOnMock invocation) -> art);
-    when(roomDao.findRoomByRoomId(2)).thenAnswer( (InvocationOnMock invocation) -> english);
+    when(displayDao.findDisplayByRoomId(2)).thenAnswer( (InvocationOnMock invocation) -> english);
+    when(storageDao.findStorageByRoomId(2)).thenAnswer( (InvocationOnMock invocation) -> null);
     
     //test
     service.moveArtwork(ART_ID, 2);
     
     assertEquals(2, art.getRoom().getRoomId());
-    
   }
   
   @Test
@@ -160,7 +166,5 @@ public class ArtworkServiceTests {
     
     assertNull(art.getRoom());
   }
-  
-  
 }
 

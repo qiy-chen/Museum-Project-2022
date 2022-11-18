@@ -18,21 +18,22 @@ public class Museum
 
   //Museum Attributes
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   //@GeneratedValue(strategy = GenerationType.IDENTITY)
   private int museumId;
 
   //Museum Associations
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Room> rooms;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Shift> shifts;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Person> persons;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Ticket> tickets;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Loan> loans;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Artwork> artworks;
 
   //------------------------

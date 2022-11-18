@@ -15,11 +15,11 @@ import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.model.Room;
+import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ArtworkIntegrationTest {
@@ -31,20 +31,21 @@ public class ArtworkIntegrationTest {
   private ArtworkRepository artworkRepository;
   
   @Autowired
-  private RoomRepository roomRepository;
-  
-  @Autowired
   private DisplayRepository displayRepository;
   
   @Autowired
   private MuseumRepository museumRepository;
   
+  @Autowired
+  private StorageRepository storageRepository;
+  
   @BeforeEach
   @AfterEach
   public void clearDatabase() {
-      artworkRepository.deleteAll();
+      museumRepository.deleteAll();
       displayRepository.deleteAll();
-      roomRepository.deleteAll();
+      storageRepository.deleteAll();
+      artworkRepository.deleteAll();
   }
   
   @Test
@@ -56,24 +57,30 @@ public class ArtworkIntegrationTest {
 
   private int testCreateArtwork() {
     
+    Museum m = new Museum();
+    //m.setMuseumId(1);
+    m= museumRepository.save(m);
+    
     Display d = new Display();
-    d.setRoomId(123);
     d.setRoomNumber(3);
     d.setMaxArtworks(200);
-    displayRepository.save((Display) d);
+    d = displayRepository.save(d);
+
+    Storage s = new Storage();
+    s = storageRepository.save(s);
     
-    Museum m = new Museum();
-    m.setMuseumId(1);
-    museumRepository.save(m);
+    assertTrue(d.getRoomId()>=1);
+    assertTrue(m.getMuseumId()>=1);
+    ResponseEntity<ArtworkResponseDto> response = client.postForEntity("/artworks", new ArtworkRequestDto("Mona Lisa", d.getRoomId(), m.getMuseumId()), ArtworkResponseDto.class);
     
-    ResponseEntity<ArtworkResponseDto> response = client.postForEntity("/artworks", new ArtworkRequestDto("Mona Lisa", 123, 1), ArtworkResponseDto.class);
+    //ResponseEntity<String> response = client.postForEntity("/artworks", new ArtworkRequestDto("Mona Lisa", 12, 1), String.class);
     
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
     assertNotNull(response.getBody(), "Response has body");
     assertEquals("Mona Lisa", response.getBody().getArtworkName(), "Response has correct name");
     assertTrue(response.getBody().getArtworkId() > 0, "Response has valid ID");
-    assertEquals(123, response.getBody().getRoomId(), "Response has correct room ID");
+    assertEquals(d.getRoomId(), response.getBody().getRoomId(), "Response has correct room ID");
     assertEquals(false, response.getBody().getIsLoanable(), "Response has correct loan availability");
     assertEquals(0, response.getBody().getValue(), "Response has correct value");
     
@@ -89,7 +96,7 @@ public class ArtworkIntegrationTest {
     assertNotNull(response.getBody(), "Response has body");
     assertEquals("Mona Lisa", response.getBody().getArtworkName(), "Response has correct name");
     assertTrue(response.getBody().getArtworkId() == id, "Response has correct ID");
-    assertEquals(123, response.getBody().getRoomId(), "Response has correct room ID");
+    //assertEquals(, response.getBody().getRoomId(), "Response has correct room ID");
     assertEquals(false, response.getBody().getIsLoanable(), "Response has correct loan availability");
     assertEquals(0, response.getBody().getValue(), "Response has correct value");
     

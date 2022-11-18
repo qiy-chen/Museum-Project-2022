@@ -19,13 +19,14 @@ public abstract class Room
   //Room Attributes
   private int roomNumber;
   @Id
-  //@GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int roomId;
 
   //Room Associations
   @ManyToOne
   private Museum museum;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  
+  @OneToMany(fetch = FetchType.EAGER)
   private List<Artwork> artworks;
 
   //------------------------
@@ -61,6 +62,8 @@ public abstract class Room
     wasSet = true;
     return wasSet;
   }
+  
+  public abstract boolean isFull();
 
   public boolean setRoomId(int aRoomId)
   {
