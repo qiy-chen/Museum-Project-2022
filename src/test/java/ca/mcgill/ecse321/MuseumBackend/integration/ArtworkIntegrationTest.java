@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
@@ -42,10 +46,10 @@ public class ArtworkIntegrationTest {
   @BeforeEach
   @AfterEach
   public void clearDatabase() {
-      museumRepository.deleteAll();
+      artworkRepository.deleteAll();
       displayRepository.deleteAll();
       storageRepository.deleteAll();
-      artworkRepository.deleteAll();
+      museumRepository.deleteAll();
   }
   
   @Test
@@ -58,7 +62,6 @@ public class ArtworkIntegrationTest {
   private int testCreateArtwork() {
     
     Museum m = new Museum();
-    //m.setMuseumId(1);
     m= museumRepository.save(m);
     
     Display d = new Display();
@@ -96,9 +99,46 @@ public class ArtworkIntegrationTest {
     assertNotNull(response.getBody(), "Response has body");
     assertEquals("Mona Lisa", response.getBody().getArtworkName(), "Response has correct name");
     assertTrue(response.getBody().getArtworkId() == id, "Response has correct ID");
-    //assertEquals(, response.getBody().getRoomId(), "Response has correct room ID");
     assertEquals(false, response.getBody().getIsLoanable(), "Response has correct loan availability");
     assertEquals(0, response.getBody().getValue(), "Response has correct value");
     
   }
+  
+  @Test
+  public void testUpdateArtwork() {
+    
+    Museum m = new Museum();
+    m= museumRepository.save(m);
+    
+    Display d = new Display();
+    d.setRoomNumber(3);
+    d.setMaxArtworks(200);
+    d = displayRepository.save(d);
+    
+    Artwork art = new Artwork();
+    art.setArtworkName("Mona Lisa");
+    art.setIsLoanable(false);
+    art.setValue(0);
+    art.setMuseum(m);
+    art.setRoom(d);
+    art = artworkRepository.save(art);
+    
+    HttpHeaders mHttpHeaders = new HttpHeaders();
+    mHttpHeaders.add("Content-Type", "application/json");
+    HttpEntity<ArtworkRequestDto> entity = new HttpEntity<ArtworkRequestDto>(new ArtworkRequestDto("La Joconde", 10, true),mHttpHeaders);
+    
+    ResponseEntity<ArtworkResponseDto> responseAfterUpdate = client.exchange("/artworks/update/"+ art.getArtworkId(), HttpMethod.PUT, entity, ArtworkResponseDto.class);
+    
+    assertNotNull(responseAfterUpdate);
+    assertEquals(HttpStatus.OK, responseAfterUpdate.getStatusCode(), "Response has correct status");
+    assertNotNull(responseAfterUpdate.getBody(), "Response has body");
+    assertEquals("La Joconde", responseAfterUpdate.getBody().getArtworkName(), "Response has correct name");
+    assertEquals(art.getArtworkId(), responseAfterUpdate.getBody().getArtworkName(), "Response has valid ID");
+    assertEquals(d.getRoomId(), responseAfterUpdate.getBody().getRoomId(), "Response has correct room ID");
+    assertEquals(true, responseAfterUpdate.getBody().getIsLoanable(), "Response has correct loan availability");
+    assertEquals(10, responseAfterUpdate.getBody().getValue(), "Response has correct value");
+        
+  }
+  
+  
 }

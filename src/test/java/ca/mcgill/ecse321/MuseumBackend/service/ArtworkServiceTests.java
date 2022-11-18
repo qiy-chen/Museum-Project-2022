@@ -34,6 +34,8 @@ public class ArtworkServiceTests {
   private DisplayRepository displayDao;
   @Mock 
   private StorageRepository storageDao;
+  @Mock
+  private RoomRepository roomDao;
   
   @InjectMocks
   private ArtworkService service;
@@ -75,9 +77,8 @@ public class ArtworkServiceTests {
     final Storage str = new Storage();
     str.setRoomId(2);
     
-    when(displayDao.findDisplayByRoomId(1)).thenAnswer( (InvocationOnMock invocation) -> french);
+    when(roomDao.findRoomByRoomId(1)).thenAnswer( (InvocationOnMock invocation) -> french);
     when(museumDao.findMuseumByMuseumId(0)).thenAnswer( (InvocationOnMock invocation) -> m);
-    when(storageDao.findStorageByRoomId(1)).thenAnswer( (InvocationOnMock invocation) -> null);
     when(artworkDao.save(any(Artwork.class))).thenAnswer( (InvocationOnMock invocation) -> invocation.getArgument(0)); 
     //test
     

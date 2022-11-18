@@ -17,6 +17,11 @@ public class ArtworkRequestDto {
   @Min(1)
   private int museumId;
   
+  private int value;
+  
+  @NotNull
+  private boolean isLoanable;
+  
   public ArtworkRequestDto() {}
   
   public ArtworkRequestDto(String name, int roomId, int museumId) {
@@ -25,9 +30,23 @@ public class ArtworkRequestDto {
     this.museumId = museumId;
   }
   
+  public ArtworkRequestDto(String name, int value, boolean isLoanable) {
+    this.artworkName = name;
+    this.value = value;
+    this.isLoanable = isLoanable;
+  }
+  
   public int getRoomId() {
     return this.roomId;
 }
+  
+  public int getValue() {
+    return this.value;
+  }
+  
+  public boolean getIsLoanable() {
+    return this.isLoanable;
+  } 
 
 public void setRoomId(int roomId) {
     this.roomId = roomId;

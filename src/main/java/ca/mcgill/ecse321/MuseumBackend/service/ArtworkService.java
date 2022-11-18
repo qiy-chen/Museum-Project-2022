@@ -134,25 +134,47 @@ public class ArtworkService {
   //update fields 
   @Transactional
   public Artwork updateFields(int artId, String name, double value, boolean isLoanable) {
-    Artwork art = artworkRepository.findArtworkByArtworkId(artId);
     
-    //if (name != art.getArtworkName()) {art.setArtworkName(name);}  //if the name is different 
+    Artwork art = artworkRepository.findArtworkByArtworkId(artId);
+    art = artworkRepository.save(art);
+    
+    if (art == null) {
+      throw new ArtworkException(HttpStatus.NOT_FOUND, "Artwork not found.");
+  }
+
+//    if (name == null) {
+//      throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
+//  }  
+//    
+//    if (name != art.getArtworkName()) {
+//    art.setArtworkName(name);} 
+//    
+//    if (value != art.getValue()) {                                 //if the value is different 
+//      if ((art.getIsLoanable() == true ) || (isLoanable == true)) {
+//        art.setValue(value);
+//      } else {
+//        throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork is not available for loan.");
+//    }
+//      }
+//    
+//    if (isLoanable != art.getIsLoanable()) {
+//      
+//      if (isLoanable != true  && isLoanable != false) {throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork needs to be set to loanable or not loanable");}
+//      
+//    if (isLoanable == true) {
+//      art.setIsLoanable(true);
+//    } else {art.setIsLoanable(false); art.setValue(0.0);}
+//    }
     
     art.setArtworkName(name);
+    art.setIsLoanable(isLoanable);
+    art.setValue(value);
     
-    if (isLoanable == true) {
-      art.setIsLoanable(true);
-    } else {art.setIsLoanable(false); art.setValue(0);}
+    art = artworkRepository.save(art);
     
-    if (value != art.getValue()) {                                 //if the value is different 
-      if ((art.getIsLoanable() == true ) || (isLoanable == true)) {
-        art.setValue(value);
-      } else {
-        throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork is not available for loan.");
-    }
-      }
-    
-    artworkRepository.save(art);
+    roomRepository.save(art.getRoom());
+    museumRepository.save(art.getMuseum());
+ 
     return art;
   }
   

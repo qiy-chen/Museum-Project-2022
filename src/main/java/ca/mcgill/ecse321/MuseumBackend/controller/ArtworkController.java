@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,14 +53,12 @@ public class ArtworkController {
   * @return ArtworkDto
   * @throws IllegalArgumentException
   */
-  @PostMapping(value = {"/artworks/update/{id}/", "/artworks/update/{id}"})
+  @PutMapping(value = {"/artworks/update/{id}", "/artworks/update/{id}/"})
   public ResponseEntity<ArtworkResponseDto> updateArtwork(
-    @PathVariable("id") int artId,
-    @RequestParam String name,
-    @RequestParam double value,
-    @RequestParam boolean isLoanable
+      @PathVariable int id,
+      @Valid @RequestBody ArtworkRequestDto artworkRequestDto
     )   throws IllegalArgumentException {
-    Artwork a = service.updateFields(artId, name, value, isLoanable);
+    Artwork a = service.updateFields(id, artworkRequestDto.getArtworkName(), artworkRequestDto.getValue(), artworkRequestDto.getIsLoanable());
     return new ResponseEntity<ArtworkResponseDto>(convertToDto(a), HttpStatus.OK);
 }
   
