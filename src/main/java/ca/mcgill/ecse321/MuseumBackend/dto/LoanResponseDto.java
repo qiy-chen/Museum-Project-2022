@@ -5,62 +5,44 @@ import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 
 public class LoanResponseDto {
-  
-  private int id;
-  private int customerId;
-  private int artworkId;
-  private int museumId;
-  private int statusNumber;
+  private int loanId;
+  private int LoanStatusAsNumber;
   private int numOfDays;
   private Date startDate;
   private Date endDate;
   private double rentalFee;
+  private int artworkId;
+  private int customerId;
+  private int museumId;
   
   public LoanResponseDto() {}
   
   public LoanResponseDto(Loan loan) {
-    this.id = loan.getLoanId();
-    this.artworkId = loan.getArtwork().getArtworkId();
-    this.customerId = (int) loan.getCustomer().getPersonRoleId();
-    this.museumId = loan.getMuseum().getMuseumId();
-    
-    if (loan.getStatus()==LoanStatus.Approved) {
-      this.statusNumber =0;
-    }
-    if (loan.getStatus()==LoanStatus.Denied) {
-      this.statusNumber =1;
-    }
-    if (loan.getStatus()==LoanStatus.Requested) {
-      this.statusNumber =2;
-    }
-    if (loan.getStatus()==LoanStatus.Returned) {
-      this.statusNumber =3;
-    }
-    
+    this.loanId = loan.getLoanId();
     this.numOfDays = loan.getNumOfDays();
     this.startDate = loan.getStartDate();
     this.endDate = loan.getEndDate();
     this.rentalFee = loan.getRentalFee();
+    if (loan.getStatus()==LoanStatus.Approved) {
+      this.LoanStatusAsNumber =1;
+    }
+    if (loan.getStatus()==LoanStatus.Denied) {
+      this.LoanStatusAsNumber =3;
+    }
+    if (loan.getStatus()==LoanStatus.Requested) {
+      this.LoanStatusAsNumber =0;
+    }
+    if (loan.getStatus()==LoanStatus.Returned) {
+      this.LoanStatusAsNumber =2;
+    }
   }
 
-  public int getId() {
-    return id;
+  public int getLoanId() {
+    return loanId;
   }
 
-  public int getCustomerId() {
-    return customerId;
-  }
-
-  public int getArtworkId() {
-    return artworkId;
-  }
-
-  public int getMuseumId() {
-    return museumId;
-  }
-
-  public int getStatusNumber() {
-    return statusNumber;
+  public int getLoanStatusAsNumber() {
+    return LoanStatusAsNumber;
   }
 
   public int getNumOfDays() {
@@ -79,6 +61,16 @@ public class LoanResponseDto {
     return rentalFee;
   }
 
-  
+  public int getArtworkId() {
+    return artworkId;
+  }
+
+  public int getCustomerId() {
+    return customerId;
+  }
+
+  public int getMuseumId() {
+    return museumId;
+  }
   
 }
