@@ -76,7 +76,7 @@ HTTP Method: POST
 
 Description: Create a ticket based on the TicketRequestDto object, associate it with the customer (from the id given in the URL) and store it in the ticket repository. The service returns a TicketResponseDto object of the Ticket saved.
 
-## Purchase a Ticket
+## Cancel a Ticket
 URL: /customers/{roleId}
 
 Path Variable: roleId: The id of the customer that want to cancel a Ticket.
