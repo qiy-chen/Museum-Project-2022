@@ -7,25 +7,26 @@ public class LoanRequestDto {
   private int LoanStatusAsNumber;
   private int numOfDays;
   private String startDate;
-  private Date endDate;
+  private String endDate;
   private double rentalFee;
   private int artworkId;
   private int customerId;
   private int museumId;
-  private String dateAsString;
+  //private String dateAsString;
   
   public LoanRequestDto() {}
   
-  public LoanRequestDto(int LoanStatusAsNumber, String dateAsString, int numOfDays, double rentalFee, int artworkId, int customerId, int museumId ) {
+  public LoanRequestDto(int LoanStatusAsNumber, String startDate, String endDate,int numOfDays, double rentalFee, int artworkId, int customerId, int museumId ) {
     this.LoanStatusAsNumber = LoanStatusAsNumber;
-    this.dateAsString = dateAsString;
+    this.startDate = startDate;
+    this.endDate = endDate;
     this.numOfDays = numOfDays;
     this.rentalFee = rentalFee;
     this.artworkId = artworkId;
     this.customerId = customerId;
     this.museumId = museumId;
   }
-
+/*
   public String getDateAsString() {
     return dateAsString;
   }
@@ -33,7 +34,7 @@ public class LoanRequestDto {
   public void setDateAsString(String dateAsString) {
     this.dateAsString = dateAsString;
   }
-
+*/
   public int getLoanId() {
     return loanId;
   }
@@ -58,19 +59,19 @@ public class LoanRequestDto {
     this.numOfDays = numOfDays;
   }
 
-  /*public Date getStartDate() {
+  public String getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(String startDate) {
     this.startDate = startDate;
-  }*/
+  }
 
-  public Date getEndDate() {
+  public String getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(Date endDate) {
+  public void setEndDate(String endDate) {
     this.endDate = endDate;
   }
 

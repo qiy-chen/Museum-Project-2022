@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,8 @@ import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
-
+import java.sql.Date;
+  
 @Service
 public class LoanService {
   @Autowired
@@ -44,11 +46,27 @@ public class LoanService {
     Loan loan = new Loan();
     loan.setRentalFee(loanRequest.getRentalFee());
     loan.setNumOfDays(loanRequest.getNumOfDays());
-    //loan.setStartDate(loanRequest.getDateAsString());
+    String date = loanRequest.getStartDate();
+    Date startDate = Date.valueOf(date);  
+    loan.setStartDate(startDate);
+    String date2 = loanRequest.getEndDate();
+    Date endDate = Date.valueOf(date2);
+    loan.setEndDate(endDate);
     loan.setArtwork(artwork);
     loan.setCustomer(customer);
     loan.setMuseum(museum);
-    
+    if(loanRequest.getLoanStatusAsNumber() == 0) {
+      loan.setStatus(LoanStatus.Approved);
+    }
+    if(loanRequest.getLoanStatusAsNumber() == 1) {
+      loan.setStatus(LoanStatus.Denied);
+    }
+    if(loanRequest.getLoanStatusAsNumber() == 2) {
+      loan.setStatus(LoanStatus.Requested);
+    }
+    if(loanRequest.getLoanStatusAsNumber() == 3) {
+      loan.setStatus(LoanStatus.Returned);
+    }
     loanRepository.save(loan);
     return new LoanResponseDto(loan);
     

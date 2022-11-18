@@ -32,8 +32,8 @@ public class LoanController {
   @GetMapping(value = {"/loans/{id}", "/loans/{id}/"})  
   public ResponseEntity<LoanResponseDto> getArtworkById(@PathVariable("id") int id) {
      Loan a = service.getLoan(id);
-     LoanResponseDto artDto = convertToDto(a);
-     return new ResponseEntity<LoanResponseDto>(artDto, HttpStatus.OK);
+     LoanResponseDto loanDto = convertToDto(a);
+     return new ResponseEntity<LoanResponseDto>(loanDto, HttpStatus.OK);
   } 
   
   @PostMapping(value = {"/loans/delete/{id}/", "/loans/delete/{id}"})
@@ -44,10 +44,10 @@ public class LoanController {
   
   private LoanResponseDto convertToDto(Loan a) {
     if (a == null) {
-      throw new IllegalArgumentException("There is no such Artwork!");
+      throw new IllegalArgumentException("There is no such Loan!");
     }
-    LoanResponseDto artworkDto = new LoanResponseDto(a);
-    return artworkDto;
+    LoanResponseDto loanDto = new LoanResponseDto(a);
+    return loanDto;
   }
   
 }

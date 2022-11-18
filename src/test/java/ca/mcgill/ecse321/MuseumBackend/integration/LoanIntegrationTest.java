@@ -18,6 +18,8 @@ import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.repository.*;
 
@@ -43,12 +45,15 @@ public class LoanIntegrationTest {
     loanRepository.deleteAll();
     museumRepository.deleteAll();
   }
-  
+  /**
+   * @author alextsah and emmakawczynski
+   * 
+   */
   @Test
   public void testGetAndCreateLoan() {
     int id= testCreateLoan();
     testGetLoanById(id);
-    testCreateLoan();
+    //testCreateLoan();
   }
   
   private int testCreateLoan() {
@@ -64,25 +69,32 @@ public class LoanIntegrationTest {
     
     Customer customer = new Customer();
     int customerId = customer.getPersonRoleId();
-    Date startDate = new Date(4);
-    
     
     customerRepository.save(customer);
+    String startDate="2015-03-31"; 
+    String endDate = "2015-04-29";
+    int statusNumber = 1;
+    int numOfDays = 3;
+    double rentalFee = 2.5;
     
-    LoanRequestDto dto = new LoanRequestDto(0,"3",2,2,customerId,artworkId,museumId);
+    LoanRequestDto dto = new LoanRequestDto(statusNumber,startDate,endDate, numOfDays, rentalFee,customerId,artworkId,museumId);
     
     ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans", dto, LoanResponseDto.class);
- 
+    startDate = "2015-03-30";
+    endDate = "2015-04-28";
+    
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
     assertNotNull(response.getBody());
-    assertEquals(0,response.getBody().getLoanStatusAsNumber());
-    assertEquals(2, response.getBody().getNumOfDays());
-    assertEquals(2, response.getBody().getRentalFee());
+    assertEquals(LoanStatus.Denied,response.getBody().getStatus());
+    assertEquals(numOfDays, response.getBody().getNumOfDays());
+    assertEquals(rentalFee, response.getBody().getRentalFee());
     assertEquals(artworkId, response.getBody().getArtworkId());
     assertEquals(customerId, response.getBody().getCustomerId());
     assertEquals(museumId,response.getBody().getMuseumId());
-    assertNotNull(response.getBody().getDateAsString());
+    assertNotNull(response.getBody().getStartDate());
+    assertEquals(startDate, response.getBody().getStartDate().toString());
+    assertEquals(endDate, response.getBody().getEndDate().toString());
     return response.getBody().getLoanId();
   }
   
@@ -94,11 +106,15 @@ public class LoanIntegrationTest {
     assertTrue(response.getBody().getLoanId() == id);
     assertEquals(0, response.getBody().getArtworkId());
     assertEquals(0, response.getBody().getCustomerId());
-    assertEquals(2, response.getBody().getNumOfDays());
-    assertEquals(2, response.getBody().getRentalFee());
+    assertEquals(3, response.getBody().getNumOfDays());
+    assertEquals(2.5, response.getBody().getRentalFee());
     assertEquals(0,response.getBody().getMuseumId());
-    assertNotNull(response.getBody().getStartDate());
+    assertEquals("2015-03-30",response.getBody().getStartDate().toString());
+    assertEquals("2015-04-28",response.getBody().getEndDate().toString());
+    assertEquals(LoanStatus.Denied,response.getBody().getStatus());
     
   }
+  
+  
   
 }

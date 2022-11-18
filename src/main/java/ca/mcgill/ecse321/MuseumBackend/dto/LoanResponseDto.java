@@ -6,7 +6,8 @@ import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 
 public class LoanResponseDto {
   private int loanId;
-  private int LoanStatusAsNumber;
+  //private int LoanStatusAsNumber;
+  private LoanStatus status;
   private int numOfDays;
   private Date startDate;
   private Date endDate;
@@ -21,31 +22,22 @@ public class LoanResponseDto {
   public LoanResponseDto(Loan loan) {
     this.loanId = loan.getLoanId();
     this.numOfDays = loan.getNumOfDays();
-    //this.startDate = loan.getStartDate();
-    this.dateAsString = loan.getStartDate().toString();
+    this.startDate = loan.getStartDate();
+    this.endDate = loan.getEndDate();
+    System.out.println("hehe"+startDate);
+    //this.dateAsString = loan.getStartDate().toString();
     this.endDate = loan.getEndDate();
     this.rentalFee = loan.getRentalFee();
-    if (loan.getStatus()==LoanStatus.Approved) {
-      this.LoanStatusAsNumber =1;
-    }
-    if (loan.getStatus()==LoanStatus.Denied) {
-      this.LoanStatusAsNumber =3;
-    }
-    if (loan.getStatus()==LoanStatus.Requested) {
-      this.LoanStatusAsNumber =0;
-    }
-    if (loan.getStatus()==LoanStatus.Returned) {
-      this.LoanStatusAsNumber =2;
-    }
+    this.status = loan.getStatus();
   }
 
   public int getLoanId() {
     return loanId;
   }
 
-  public int getLoanStatusAsNumber() {
-    return LoanStatusAsNumber;
-  }
+ public LoanStatus getStatus() {
+   return this.status;
+ }
 
   public int getNumOfDays() {
     return numOfDays;
