@@ -36,6 +36,12 @@ public class LoanController {
      return new ResponseEntity<LoanResponseDto>(artDto, HttpStatus.OK);
   } 
   
+  @PostMapping(value = {"/loans/delete/{id}/", "/loans/delete/{id}"})
+  public ResponseEntity<LoanResponseDto> deleteLoan(@PathVariable("id") int loanId) throws IllegalArgumentException{
+    Loan loan = service.deleteLoan(loanId);
+    return new ResponseEntity<LoanResponseDto>(convertToDto(loan), HttpStatus.OK);
+  }
+  
   private LoanResponseDto convertToDto(Loan a) {
     if (a == null) {
       throw new IllegalArgumentException("There is no such Artwork!");
