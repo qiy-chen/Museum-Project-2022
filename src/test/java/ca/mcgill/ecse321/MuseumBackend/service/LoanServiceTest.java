@@ -78,5 +78,6 @@ public class LoanServiceTest {
     when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
     loanService.deleteLoan(loan.getLoanId());
     assertTrue(customer.getLoans().size() == 0);
+    assertTrue(customer.getLoans().isEmpty());
   }
 }
