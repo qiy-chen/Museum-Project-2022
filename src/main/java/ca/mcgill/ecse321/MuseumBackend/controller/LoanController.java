@@ -36,9 +36,9 @@ public class LoanController {
      return new ResponseEntity<LoanResponseDto>(loanDto, HttpStatus.OK);
   } 
   
-  @PostMapping(value = {"/loans/delete/{id}/", "/loans/delete/{id}"})
-  public ResponseEntity<LoanResponseDto> deleteLoan(@PathVariable("id") int loanId) throws IllegalArgumentException{
-    Loan loan = service.deleteLoan(loanId);
+  @PostMapping(value = {"/loans/{id}", "/loans/{id}/"})
+  public ResponseEntity<LoanResponseDto> deleteLoan(@PathVariable("id") int id) throws IllegalArgumentException{
+    Loan loan = service.deleteLoan(id);
     return new ResponseEntity<LoanResponseDto>(convertToDto(loan), HttpStatus.OK);
   }
   

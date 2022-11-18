@@ -66,12 +66,21 @@ public class LoanServiceTest {
     //artwork.setArtworkId(2);
     int artworkid = artwork.getArtworkId();
     
-    LoanRequestDto loanRequest = new LoanRequestDto();
+    Customer customer = new Customer();
+    
+    LoanRequestDto loanRequest = new LoanRequestDto(2, "2019-08-14", "2020-12-20", 60, 2.5, customer.getPersonRoleId(), artworkid, museumid);
     
     LoanResponseDto loan = loanService.createLoan(loanRequest);
     
     assertNotNull(loan);
-    
+    assertEquals( "2019-08-14", loan.getStartDate().toString());
+    assertEquals("2020-12-20", loan.getEndDate().toString());
+    assertEquals(LoanStatus.Requested, loan.getStatus());
+    assertEquals(60, loan.getNumOfDays());
+    assertEquals(2.5, loan.getRentalFee());
+    assertEquals(customer.getPersonRoleId(), loan.getCustomerId());
+    assertEquals(artworkid, loan.getArtworkId());
+    assertEquals(museumid, loan.getMuseumId());
   }
   /**
    * @author emmakawczynski
