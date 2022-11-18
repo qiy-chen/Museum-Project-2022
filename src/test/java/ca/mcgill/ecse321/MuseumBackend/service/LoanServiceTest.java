@@ -35,6 +35,10 @@ public class LoanServiceTest {
   @InjectMocks
   private LoanService loanService;
   
+  /**
+   * @author alextsah
+   * 
+   */
   @Test
   public void testGetArtById() {
     final Loan loan = new Loan();
@@ -47,7 +51,10 @@ public class LoanServiceTest {
     assertNotNull(loanreturn);
     assertEquals(loanId, loanreturn.getLoanId());
   }
-  
+  /**
+   * @author alextsah
+   * 
+   */
   @Test 
   public void testCreateLoan() {
     Museum museum = new Museum();
@@ -66,6 +73,10 @@ public class LoanServiceTest {
     assertNotNull(loan);
     
   }
+  /**
+   * @author emmakawczynski
+   * 
+   */
   @Test
   public void testDeleteLoan() {
     Loan loan = new Loan();
@@ -81,6 +92,10 @@ public class LoanServiceTest {
     assertTrue(customer.getLoans().size() == 0);
     assertTrue(customer.getLoans().isEmpty());
   }
+  /**
+   * @author emmakawczynski
+   * 
+   */
   @Test
   public void testApproveLoan() {
     final Loan loan = new Loan();
@@ -95,6 +110,10 @@ public class LoanServiceTest {
     assertEquals(loan.getStatus(), LoanStatus.Approved);
     assertEquals(artwork.getIsLoanable(), false);
   }
+  /**
+   * @author emmakawczynski
+   * 
+   */
   @Test 
   public void testReturnArtworkandEndLoan() {
     final Loan loan = new Loan();
@@ -107,6 +126,10 @@ public class LoanServiceTest {
     assertEquals(loan.getStatus(), LoanStatus.Returned);
     assertEquals(artwork.getIsLoanable(), true);
   }
+  /**
+   * @author emmakawczynski
+   * 
+   */
   @Test
   public void testDenyLoan() {
     final Loan loan = new Loan();
@@ -114,5 +137,26 @@ public class LoanServiceTest {
     when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
     loanService.denyLoan(loan.getLoanId());
     assertEquals(loan.getStatus(), LoanStatus.Denied);
+  }
+  /**
+   * @author emmakawczynski
+   * 
+   */
+  @Test
+  public void testDeleteLoanInvalid() {
+    try {
+      loanService.deleteLoan(390);
+    }
+    catch (Exception e){
+      assertEquals(e.getMessage(), "Loan not found");
+    }
+  }
+  /**
+   * @author emmakawczynski
+   * 
+   */
+  @Test
+  public void testApproveLoanInvalid() {
+    
   }
 }

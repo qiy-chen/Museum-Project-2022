@@ -31,6 +31,11 @@ public class LoanService {
   @Autowired
   MuseumRepository museumRepository;
   
+  /**
+   * @author alextsah
+   * @param LoanRequestDto loanRequest that contains the loan that is going to be created
+   * @return LoanResponseDto returns the loan created as a loan respoonse
+   */
   @Transactional
   public LoanResponseDto createLoan(LoanRequestDto loanRequest) {
     Museum museum = museumRepository.findMuseumByMuseumId(loanRequest.getMuseumId());
@@ -48,11 +53,22 @@ public class LoanService {
     return new LoanResponseDto(loan);
     
   }
+  /**
+   * @author alextsah
+   * @param int loanId to find the loan in the repository
+   * @return Loan returns the loan you wanted to get
+   */
   @Transactional
   public Loan getLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     return loan;
   }
+  
+  /**
+   * @author emmakawczynski
+   * @param int loanId to find the loan from the repository
+   * @return Loan returns the loan that was deleted
+   */
   @Transactional
   public Loan deleteLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
@@ -70,6 +86,11 @@ public class LoanService {
     return loan;
   }
   
+  /**
+   * @author emmakawczynski
+   * @param int loanId to find the loan from the repository
+   * @return Loan returns the loan that was approved
+   */
   @Transactional
   public Loan approveLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
@@ -84,6 +105,12 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't approve this loan");
     }
   }
+  
+  /**
+   * @author emmakawczynski
+   * @param int loanId to find the loan from the repository
+   * @return Loan returns the loan that was approved
+   */
   @Transactional
   public Loan returnArtworkandEndLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
@@ -98,6 +125,11 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't return this loan");
     }
   }
+  /**
+   * @author emmakawczynski
+   * @param int loanId to find the loan from the repository
+   * @return Loan returns the loan that was approved
+   */
   @Transactional
   public Loan denyLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
