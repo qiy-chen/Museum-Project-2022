@@ -10,19 +10,18 @@ public class LoanResponseDto {
   private int customerId;
   private int artworkId;
   private int museumId;
-  //private LoanStatus status;
   private int statusNumber;
   private int numOfDays;
   private Date startDate;
   private Date endDate;
   private double rentalFee;
+  
   public LoanResponseDto() {}
   
   public LoanResponseDto(Loan loan) {
     this.id = loan.getLoanId();
-    this.customerId = loan.getCustomer().getPersonRoleId();
-    
     this.artworkId = loan.getArtwork().getArtworkId();
+    this.customerId = (int) loan.getCustomer().getPersonRoleId();
     this.museumId = loan.getMuseum().getMuseumId();
     
     if (loan.getStatus()==LoanStatus.Approved) {
@@ -37,6 +36,7 @@ public class LoanResponseDto {
     if (loan.getStatus()==LoanStatus.Returned) {
       this.statusNumber =3;
     }
+    
     this.numOfDays = loan.getNumOfDays();
     this.startDate = loan.getStartDate();
     this.endDate = loan.getEndDate();
@@ -47,67 +47,38 @@ public class LoanResponseDto {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
   public int getCustomerId() {
-    return this.customerId;
-  }
-
-  public void setCustomerId(int id) {
-    this.customerId = id;
+    return customerId;
   }
 
   public int getArtworkId() {
-    return this.artworkId;
+    return artworkId;
   }
 
-  public void setArtworkId(int id) {
-    this.artworkId = id;
+  public int getMuseumId() {
+    return museumId;
   }
 
-  public int getStatus() {
+  public int getStatusNumber() {
     return statusNumber;
-  }
-
-  public void setStatus(int status) {
-    this.statusNumber = status;
   }
 
   public int getNumOfDays() {
     return numOfDays;
   }
 
-  public void setNumOfDays(int numOfDays) {
-    this.numOfDays = numOfDays;
-  }
-
   public Date getStartDate() {
     return startDate;
-  }
-
-  public void setStartDate(Date startDate) {
-    this.startDate = startDate;
   }
 
   public Date getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-  }
-
   public double getRentalFee() {
     return rentalFee;
   }
 
-  public void setRentalFee(double rentalFee) {
-    this.rentalFee = rentalFee;
-  }
-  public int getMuseumId() {
-    return this.museumId;
-  }
+  
   
 }

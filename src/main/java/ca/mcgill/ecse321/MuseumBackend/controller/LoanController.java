@@ -26,7 +26,7 @@ public class LoanController {
   }
   @PostMapping("/loan")
   public ResponseEntity<LoanResponseDto>createLoan(@RequestBody LoanRequestDto request){
-    System.out.println(request);
+    
     LoanResponseDto response = loanService.createLoan(request);
     
     return new ResponseEntity<LoanResponseDto>(response, HttpStatus.CREATED);

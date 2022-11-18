@@ -53,24 +53,25 @@ public class LoanIntegrationTest {
   }
   
   public int testCreateLoan() {
-    Artwork artwork = new Artwork();
-    artwork.setArtworkId(2);
-    artRepo.save(artwork);
-    
-    Customer customer = new Customer();
-    customer.setPersonRoleId(3);
-    customerRepo.save(customer);
     
     Museum museum = new Museum();
-    museum.setMuseumId(2);
+    museum.setMuseumId(5);
     museumRepo.save(museum);
-     
     
-    LoanRequestDto dto = new LoanRequestDto(2,3,10,20.0,2);
+    Artwork artwork = new Artwork();
+    artwork.setArtworkId(2);
+    artwork.setMuseum(museum);
+    artRepo.save(artwork);
+    
+    //Customer customer = new Customer();
+    //customer.setPersonRoleId(3);
+    
+    //customerRepo.save(customer);
+    
+    LoanRequestDto dto = new LoanRequestDto(2,3,10,20.0,5);
     
     ResponseEntity<LoanResponseDto> response = client.postForEntity("/loan", dto, LoanResponseDto.class);
     
-  
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
     assertNotNull(response.getBody());
@@ -78,7 +79,7 @@ public class LoanIntegrationTest {
     assertEquals(3, response.getBody().getCustomerId());
     assertEquals(10, response.getBody().getNumOfDays());
     assertEquals(20.0, response.getBody().getRentalFee());
-    assertEquals(2,response.getBody().getMuseumId());
+    assertEquals(5,response.getBody().getMuseumId());
     assertNull(response.getBody().getStartDate());
     return response.getBody().getId();
   }
@@ -93,7 +94,7 @@ public class LoanIntegrationTest {
     assertEquals(3, response.getBody().getCustomerId());
     assertEquals(10, response.getBody().getNumOfDays());
     assertEquals(20.0, response.getBody().getRentalFee());
-    assertEquals(2,response.getBody().getMuseumId());
+    assertEquals(5,response.getBody().getMuseumId());
     assertNull(response.getBody().getStartDate());
     
   }

@@ -1,22 +1,21 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ca.mcgill.ecse321.MuseumBackend.Exception.LoanException;
+import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
-import ca.mcgill.ecse321.MuseumBackend.model.*;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
-import ca.mcgill.ecse321.MuseumBackend.Exception.LoanException;
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 @Service
 public class LoanService {
   @Autowired
@@ -66,9 +65,8 @@ public class LoanService {
     loan.setArtwork(artwork);
     loan.setMuseum(museum);
     customer.addLoan(loan);
-    customerRepository.save(customer);
-    
     loan.setCustomer(customer);
+    customerRepository.save(customer);
     loan.setEndDate(null);
     loan.setNumOfDays(request.getNumOfDays());
     loan.setRentalFee(request.getRentalFee());
