@@ -152,11 +152,37 @@ public class LoanServiceTest {
     }
   }
   /**
-   * @author emmakawczynski
+   * @author alextsah
    * 
    */
   @Test
   public void testApproveLoanInvalid() {
-    
+    try {
+      loanService.approveLoan(390);
+    }
+    catch (Exception e){
+      assertEquals(e.getMessage(), "Loan not found");
+    }
+  }
+  /**
+   * @author alextsah
+   * 
+   */
+  @Test
+  public void testApproveLoanInvalIsLonable() {
+    try {
+      final Loan loan = new Loan();
+      Artwork artwork = new Artwork();
+      artwork.setIsLoanable(false);
+      loan.setArtwork(artwork);
+      artwork.addLoan(loan);
+      
+      loan.setStatus(LoanStatus.Requested);
+      when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
+      loanService.approveLoan(loan.getLoanId());
+    }
+    catch (Exception e){
+      assertEquals(e.getMessage(), "Can't approve this loan");
+    }
   }
 }

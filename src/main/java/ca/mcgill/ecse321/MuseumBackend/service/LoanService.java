@@ -94,9 +94,12 @@ public class LoanService {
   @Transactional
   public Loan approveLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
+    if(loan == null) {
+      throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
+    }
     Artwork artwork = loan.getArtwork();
     LoanStatus status = loan.getStatus();
-    if(status.equals(LoanStatus.Requested) && artwork.getIsLoanable() == true) {
+    if(status.equals(LoanStatus.Requested) && artwork.getIsLoanable() == true && loan != null) {
       loan.setStatus(LoanStatus.Approved);
       artwork.setIsLoanable(false);
       return loan;
