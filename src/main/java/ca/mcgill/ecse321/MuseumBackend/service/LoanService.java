@@ -97,4 +97,16 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't return this loan");
     }
   }
+  @Transactional
+  public Loan denyLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    LoanStatus status = loan.getStatus();
+    if(status.equals(LoanStatus.Requested)) {
+      loan.setStatus(LoanStatus.Denied);
+      return loan;
+    }
+    else {
+      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't deny this loan");
+    }
+  }
 }
