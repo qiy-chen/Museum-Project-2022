@@ -14,6 +14,7 @@ public class LoanResponseDto {
   private int artworkId;
   private int customerId;
   private int museumId;
+  private String dateAsString;
   
   public LoanResponseDto() {}
   
@@ -21,6 +22,7 @@ public class LoanResponseDto {
     this.loanId = loan.getLoanId();
     this.numOfDays = loan.getNumOfDays();
     this.startDate = loan.getStartDate();
+    this.dateAsString = startDate.toString();
     this.endDate = loan.getEndDate();
     this.rentalFee = loan.getRentalFee();
     if (loan.getStatus()==LoanStatus.Approved) {
@@ -71,6 +73,9 @@ public class LoanResponseDto {
 
   public int getMuseumId() {
     return museumId;
+  }
+  public String getDateAsString() {
+    return dateAsString;
   }
   
 }

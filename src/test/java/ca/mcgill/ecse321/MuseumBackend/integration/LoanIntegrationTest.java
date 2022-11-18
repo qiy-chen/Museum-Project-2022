@@ -64,10 +64,12 @@ public class LoanIntegrationTest {
     
     Customer customer = new Customer();
     int customerId = customer.getPersonRoleId();
+    Date startDate = new Date(4);
+    
     
     customerRepository.save(customer);
     
-    LoanRequestDto dto = new LoanRequestDto(0,2,2,customerId,artworkId,museumId);
+    LoanRequestDto dto = new LoanRequestDto(0,startDate.toString(),2,2,customerId,artworkId,museumId);
     
     ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans", dto, LoanResponseDto.class);
  
@@ -80,7 +82,7 @@ public class LoanIntegrationTest {
     assertEquals(artworkId, response.getBody().getArtworkId());
     assertEquals(customerId, response.getBody().getCustomerId());
     assertEquals(museumId,response.getBody().getMuseumId());
-    assertNull(response.getBody().getStartDate());
+    assertNotNull(response.getBody().getDateAsString());
     return response.getBody().getLoanId();
   }
   
@@ -95,11 +97,8 @@ public class LoanIntegrationTest {
     assertEquals(2, response.getBody().getNumOfDays());
     assertEquals(2, response.getBody().getRentalFee());
     assertEquals(0,response.getBody().getMuseumId());
-    assertNull(response.getBody().getStartDate());
+    assertNotNull(response.getBody().getStartDate());
     
   }
-  @Test
-  public void testDeleteLoan(int loanId) {
-    
-  }
+  
 }

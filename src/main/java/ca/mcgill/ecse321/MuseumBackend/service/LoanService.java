@@ -39,6 +39,7 @@ public class LoanService {
     Loan loan = new Loan();
     loan.setRentalFee(loanRequest.getRentalFee());
     loan.setNumOfDays(loanRequest.getNumOfDays());
+    loan.setStartDate(loanRequest.getStartDate());
     loan.setArtwork(artwork);
     loan.setCustomer(customer);
     loan.setMuseum(museum);

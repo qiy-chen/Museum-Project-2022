@@ -12,16 +12,26 @@ public class LoanRequestDto {
   private int artworkId;
   private int customerId;
   private int museumId;
+  private String dateAsString;
   
   public LoanRequestDto() {}
   
-  public LoanRequestDto(int LoanStatusAsNumber, int numOfDays, double rentalFee, int artworkId, int customerId, int museumId ) {
+  public LoanRequestDto(int LoanStatusAsNumber, String dateAsString, int numOfDays, double rentalFee, int artworkId, int customerId, int museumId ) {
     this.LoanStatusAsNumber = LoanStatusAsNumber;
+    this.dateAsString = dateAsString;
     this.numOfDays = numOfDays;
     this.rentalFee = rentalFee;
     this.artworkId = artworkId;
     this.customerId = customerId;
     this.museumId = museumId;
+  }
+
+  public String getDateAsString() {
+    return dateAsString;
+  }
+
+  public void setDateAsString(String dateAsString) {
+    this.dateAsString = dateAsString;
   }
 
   public int getLoanId() {
