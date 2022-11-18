@@ -28,7 +28,7 @@ public class LoanController {
     return new ResponseEntity<LoanResponseDto>(a, HttpStatus.CREATED);
   }
   
-  @GetMapping(value = {"/artworks/{id}", "/artworks/{id}/"})  
+  @GetMapping(value = {"/loans/{id}", "/loans/{id}/"})  
   public ResponseEntity<LoanResponseDto> getArtworkById(@PathVariable("id") int id) {
      Loan a = service.getLoan(id);
      LoanResponseDto artDto = convertToDto(a);

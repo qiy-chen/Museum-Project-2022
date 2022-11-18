@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.sql.Date;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,8 +46,8 @@ public class LoanIntegrationTest {
   
   @Test
   public void testGetAndCreateLoan() {
-    //int id= testCreateLoan();
-    //testGetLoanById(id);
+    int id= testCreateLoan();
+    testGetLoanById(id);
     testCreateLoan();
   }
   
@@ -69,14 +70,15 @@ public class LoanIntegrationTest {
     LoanRequestDto dto = new LoanRequestDto(0,2,2,customerId,artworkId,museumId);
     
     ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans", dto, LoanResponseDto.class);
-    
+ 
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
     assertNotNull(response.getBody());
-    assertEquals(artworkId, response.getBody().getArtworkId());
-    assertEquals(customerId, response.getBody().getCustomerId());
+    assertEquals(0,response.getBody().getLoanStatusAsNumber());
     assertEquals(2, response.getBody().getNumOfDays());
     assertEquals(2, response.getBody().getRentalFee());
+    assertEquals(artworkId, response.getBody().getArtworkId());
+    assertEquals(customerId, response.getBody().getCustomerId());
     assertEquals(museumId,response.getBody().getMuseumId());
     assertNull(response.getBody().getStartDate());
     return response.getBody().getLoanId();
@@ -88,11 +90,11 @@ private void testGetLoanById(int id) {
   assertEquals(HttpStatus.OK, response.getStatusCode());
   assertNotNull(response.getBody());
   assertTrue(response.getBody().getLoanId() == id);
-  assertEquals(2, response.getBody().getArtworkId());
-  assertEquals(3, response.getBody().getCustomerId());
-  assertEquals(10, response.getBody().getNumOfDays());
-  assertEquals(20.0, response.getBody().getRentalFee());
-  assertEquals(5,response.getBody().getMuseumId());
+  assertEquals(0, response.getBody().getArtworkId());
+  assertEquals(0, response.getBody().getCustomerId());
+  assertEquals(2, response.getBody().getNumOfDays());
+  assertEquals(2, response.getBody().getRentalFee());
+  assertEquals(0,response.getBody().getMuseumId());
   assertNull(response.getBody().getStartDate());
     
   }
