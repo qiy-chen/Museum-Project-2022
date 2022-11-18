@@ -16,6 +16,7 @@ import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.repository.*;
 
@@ -79,5 +80,18 @@ public class LoanServiceTest {
     loanService.deleteLoan(loan.getLoanId());
     assertTrue(customer.getLoans().size() == 0);
     assertTrue(customer.getLoans().isEmpty());
+  }
+  @Test
+  public void testApproveLoan() {
+    final Loan loan = new Loan();
+    Artwork artwork = new Artwork();
+    artwork.setIsLoanable(true);
+    loan.setArtwork(artwork);
+    artwork.addLoan(loan);
+    
+    loan.setStatus(LoanStatus.Requested);
+    when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
+    loanService.approveLoan(loan.getLoanId());
+    assertEquals(loan.getStatus(), LoanStatus.Approved);
   }
 }
