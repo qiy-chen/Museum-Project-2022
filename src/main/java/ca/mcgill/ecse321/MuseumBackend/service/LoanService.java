@@ -76,6 +76,7 @@ public class LoanService {
     LoanStatus status = loan.getStatus();
     if(status.equals(LoanStatus.Requested) && artwork.getIsLoanable() == true) {
       loan.setStatus(LoanStatus.Approved);
+      artwork.setIsLoanable(false);
       return loan;
     }
     else {

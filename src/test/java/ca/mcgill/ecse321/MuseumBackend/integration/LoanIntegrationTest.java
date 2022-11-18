@@ -84,19 +84,22 @@ public class LoanIntegrationTest {
     return response.getBody().getLoanId();
   }
   
-private void testGetLoanById(int id) {
-  ResponseEntity<LoanResponseDto> response = client.getForEntity("/loans/" + id, LoanResponseDto.class);
-  assertNotNull(response);
-  assertEquals(HttpStatus.OK, response.getStatusCode());
-  assertNotNull(response.getBody());
-  assertTrue(response.getBody().getLoanId() == id);
-  assertEquals(0, response.getBody().getArtworkId());
-  assertEquals(0, response.getBody().getCustomerId());
-  assertEquals(2, response.getBody().getNumOfDays());
-  assertEquals(2, response.getBody().getRentalFee());
-  assertEquals(0,response.getBody().getMuseumId());
-  assertNull(response.getBody().getStartDate());
+  private void testGetLoanById(int id) {
+    ResponseEntity<LoanResponseDto> response = client.getForEntity("/loans/" + id, LoanResponseDto.class);
+    assertNotNull(response);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertNotNull(response.getBody());
+    assertTrue(response.getBody().getLoanId() == id);
+    assertEquals(0, response.getBody().getArtworkId());
+    assertEquals(0, response.getBody().getCustomerId());
+    assertEquals(2, response.getBody().getNumOfDays());
+    assertEquals(2, response.getBody().getRentalFee());
+    assertEquals(0,response.getBody().getMuseumId());
+    assertNull(response.getBody().getStartDate());
     
   }
-  
+  @Test
+  public void testDeleteLoan(int loanId) {
+    
+  }
 }
