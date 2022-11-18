@@ -6,6 +6,8 @@ public class StorageDto {
   private int roomNumber;
   private int roomId;
 
+  public StorageDto() {}
+  
   public StorageDto(Storage s) {
    this.roomNumber = s.getRoomNumber();
    this.roomId = s.getRoomId();

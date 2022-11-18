@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -12,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
@@ -29,7 +30,7 @@ public class ArtworkServiceTests {
   @Mock
   private DisplayRepository displayDao;
   @Mock 
-  private RoomRepository roomRepository;
+  private RoomRepository roomDao;
   
   @InjectMocks
   private ArtworkService service;
@@ -76,17 +77,22 @@ public class ArtworkServiceTests {
     final Display french = new Display();
     french.setRoomId(1);
     
-    when(roomRepository.findRoomByRoomId(1)).thenAnswer( (InvocationOnMock invocation) -> french);  
+    when(roomDao.findRoomByRoomId(1)).thenAnswer( (InvocationOnMock invocation) -> french);  
     when(artworkDao.save(any(Artwork.class))).thenAnswer( (InvocationOnMock invocation) -> invocation.getArgument(0)); 
     //test
-    Artwork art = service.createArtwork(name, 1);
+    
+    ArtworkRequestDto artRequest = new ArtworkRequestDto();
+    artRequest.setArtworkName(name);
+    artRequest.setRoomId(1);
+    
+    ArtworkResponseDto art = service.createArtwork(artRequest);
     
     assertNotNull(art);
     assertNotNull(art.getArtworkId());
     assertEquals(name, art.getArtworkName());
     assertEquals(false, art.getIsLoanable());
     assertEquals(0, art.getValue());
-    assertEquals(1, art.getRoom().getRoomId());
+    assertEquals(1, art.getRoomId());
     
   }
   
@@ -129,7 +135,7 @@ public class ArtworkServiceTests {
     art.setArtworkName("Mona lisa");
     
     when(artworkDao.findArtworkByArtworkId(ART_ID)).thenAnswer( (InvocationOnMock invocation) -> art);
-    when(roomRepository.findRoomByRoomId(2)).thenAnswer( (InvocationOnMock invocation) -> english);
+    when(roomDao.findRoomByRoomId(2)).thenAnswer( (InvocationOnMock invocation) -> english);
     
     //test
     service.moveArtwork(ART_ID, 2);

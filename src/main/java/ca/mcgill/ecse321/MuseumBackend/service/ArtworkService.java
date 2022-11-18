@@ -5,17 +5,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.exception.ArtworkException;
 import ca.mcgill.ecse321.MuseumBackend.exception.DisplayException;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Room;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 
@@ -37,41 +41,55 @@ public class ArtworkService {
   @Autowired
   RoomRepository roomRepository;  //make private
   
+  @Autowired
+  MuseumRepository museumRepository;
+  
   @Transactional
-  public Artwork createArtwork(String name, int roomId) { //remove museum param
+  public ArtworkResponseDto createArtwork(ArtworkRequestDto artworkRequest) { 
     Artwork art = new Artwork();
     
-    if (name == null) {
+    if (artworkRequest.getArtworkName() == null) {
       throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
   }  
-    art.setArtworkName(name);
+    art.setArtworkName(artworkRequest.getArtworkName());
     art.setIsLoanable(false);            //automatically set to not loanable
     art.setValue(0);                     //value is 0, not loanable   
     
-    Room room = roomRepository.findRoomByRoomId(roomId);
+    Museum mus = museumRepository.findMuseumByMuseumId(artworkRequest.getMuseumId());
     
-    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
+    art.setMuseum(mus);
     
-    if (room instanceof Display) {           //if we're adding to a display room 
-      
-      if (room.numberOfArtworks() < 200) {   //if room is not full
-        
-        art.setRoom(room);
-        room.addArtwork(art);
-        displayRepository.save((Display) room);  //save the room
-      }
-      
-    }
-    if (room instanceof Storage) {
-      
-      art.setRoom(room);
-      room.addArtwork(art);
-      storageRepository.save((Storage) room);   //save the storage
+    Display d = null;
+    Storage s = null;
+    
+    if (displayRepository.findDisplayByRoomId(artworkRequest.getRoomId()) != null) {
+      d = displayRepository.findDisplayByRoomId(artworkRequest.getRoomId());
     }
     
-    roomRepository.save(room);
+    if (storageRepository.findStorageByRoomId(artworkRequest.getRoomId()) != null) {
+      s = storageRepository.findStorageByRoomId(artworkRequest.getRoomId());
+    }
+    
+    if (d == null && s== null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
+    
+    if (d != null) {
+      
+      if (d.numberOfArtworks() >= d.getMaxArtworks()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
+      
+      art.setRoom(d);
+      d.addArtwork(art);
+      displayRepository.save(d);
+    } 
+    
+    if (s != null) {
+      art.setRoom(s);
+      s.addArtwork(art);
+      storageRepository.save(s);
+    }
+    
     art = artworkRepository.save(art);
-    return art;
+    
+    return new ArtworkResponseDto(art);
   }
   
   @Transactional
@@ -113,7 +131,7 @@ public class ArtworkService {
   @Transactional
   public List<Artwork> getArtworksOnDisplay(){
     
-    List<Artwork> listOfArtworks = getAllArtwork();
+    List<Artwork> listOfArtworks = (List<Artwork>) artworkRepository.findAll();
     List<Artwork> r = new ArrayList<Artwork>();
     
     for (Artwork a : listOfArtworks) {

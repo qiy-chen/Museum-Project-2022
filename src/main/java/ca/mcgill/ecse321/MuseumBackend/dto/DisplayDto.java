@@ -8,6 +8,8 @@ public class DisplayDto {
   private int roomId;
   private int maxArtworks;
 
+  public DisplayDto () {}
+  
   public DisplayDto(Display d) {
    this.roomNumber = d.getRoomNumber();
    this.roomId = d.getRoomId();

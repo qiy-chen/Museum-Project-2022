@@ -44,7 +44,7 @@ public class RoomController {
   * @param roomNumber
   * @throws IllegalArgumentException
   */
-  @PostMapping(value = {"/displays/", "/displays"})
+  @PostMapping(value = {"/storages/", "/storage"})
   public StorageDto createStorage(
     @RequestParam int roomNumber
     )   throws IllegalArgumentException {

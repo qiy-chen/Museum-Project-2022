@@ -11,14 +11,18 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Room;
 import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ArtworkIntegrationTests {
+public class ArtworkIntegrationTest {
   
   @Autowired
   private TestRestTemplate client;
@@ -32,14 +36,19 @@ public class ArtworkIntegrationTests {
   @Autowired
   private DisplayRepository displayRepository;
   
+  @Autowired
+  private MuseumRepository museumRepository;
+  
   @BeforeEach
   @AfterEach
   public void clearDatabase() {
       artworkRepository.deleteAll();
+      displayRepository.deleteAll();
+      roomRepository.deleteAll();
   }
   
   @Test
-  private void testAndCreateArtwork() {
+  public void testGetAndCreateArtwork() {
     
     int id= testCreateArtwork();
     testGetArtworkById(id);
@@ -47,78 +56,42 @@ public class ArtworkIntegrationTests {
 
   private int testCreateArtwork() {
     
-    Room r = new Display();
-    r.setRoomId(123);
-    r.setRoomNumber(3);
-    roomRepository.save(r);
-    displayRepository.save((Display) r);
+    Display d = new Display();
+    d.setRoomId(123);
+    d.setRoomNumber(3);
+    d.setMaxArtworks(200);
+    displayRepository.save((Display) d);
     
-    ResponseEntity<ArtworkDto> response = client.postForEntity("/artworks", new ArtworkDto("Mona Lisa", 123), ArtworkDto.class);
+    Museum m = new Museum();
+    m.setMuseumId(1);
+    museumRepository.save(m);
+    
+    ResponseEntity<ArtworkResponseDto> response = client.postForEntity("/artworks", new ArtworkRequestDto("Mona Lisa", 123, 1), ArtworkResponseDto.class);
     
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
     assertNotNull(response.getBody(), "Response has body");
-    assertEquals("Mona Lisa", response.getBody().getName(), "Response has correct name");
-    assertTrue(response.getBody().getId() > 0, "Response has valid ID");
+    assertEquals("Mona Lisa", response.getBody().getArtworkName(), "Response has correct name");
+    assertTrue(response.getBody().getArtworkId() > 0, "Response has valid ID");
     assertEquals(123, response.getBody().getRoomId(), "Response has correct room ID");
     assertEquals(false, response.getBody().getIsLoanable(), "Response has correct loan availability");
-    assertEquals(0, response.getBody().getvalue(), "Response has correct value");
+    assertEquals(0, response.getBody().getValue(), "Response has correct value");
     
-    return response.getBody().getId();
+    return response.getBody().getArtworkId();
   }
 
   private void testGetArtworkById(int id) {
     
-    ResponseEntity<ArtworkDto> response = client.getForEntity("/artworks/" + id, ArtworkDto.class);
+    ResponseEntity<ArtworkResponseDto> response = client.getForEntity("/artworks/" + id, ArtworkResponseDto.class);
     
     assertNotNull(response);
     assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
     assertNotNull(response.getBody(), "Response has body");
-    assertEquals("Mona Lisa", response.getBody().getName(), "Response has correct name");
-    assertTrue(response.getBody().getId() == id, "Response has correct ID");
+    assertEquals("Mona Lisa", response.getBody().getArtworkName(), "Response has correct name");
+    assertTrue(response.getBody().getArtworkId() == id, "Response has correct ID");
     assertEquals(123, response.getBody().getRoomId(), "Response has correct room ID");
     assertEquals(false, response.getBody().getIsLoanable(), "Response has correct loan availability");
-    assertEquals(0, response.getBody().getvalue(), "Response has correct value");
+    assertEquals(0, response.getBody().getValue(), "Response has correct value");
     
   }
 }
-  
-
-  class ArtworkDto {
-    
-    private String artworkName;
-    private int roomId;
-    private int artworkId;
-    private double value;
-    private boolean isLoanable;
-    
-    public ArtworkDto() {}
-
-    public ArtworkDto(String artworkName, int roomId) {
-      this.artworkName = artworkName;
-      this.roomId = roomId;
-      }
-     
-
-  public String getName() {
-      return this.artworkName;
-  }
-
-  public int getId() {
-    return this.artworkId;
-  }
-
-  public double getvalue() {
-    return this.value;
-  }
-
-  public boolean getIsLoanable() {
-    return this.isLoanable;
-  }
-
-  public int getRoomId() {
-    return this.roomId;
-  }
-    
-}
-
