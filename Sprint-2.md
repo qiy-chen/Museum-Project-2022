@@ -4,6 +4,6 @@
 ### Links:  
 [Project Report](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Deliverable-2-Report)
 
-[RESTful Service Documentation](placeholder.com)
+[RESTful Service Documentation](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/RESTful-Documentation-Links)
 
 [Quality Assurance Documentation](placeholder.com)
