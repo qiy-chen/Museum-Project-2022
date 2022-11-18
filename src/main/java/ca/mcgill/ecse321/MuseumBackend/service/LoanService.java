@@ -83,4 +83,18 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't approve this loan");
     }
   }
+  @Transactional
+  public Loan returnArtworkandEndLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    Artwork artwork = loan.getArtwork();
+    LoanStatus status = loan.getStatus();
+    if(status.equals(LoanStatus.Approved)) {
+      loan.setStatus(LoanStatus.Returned);
+      artwork.setIsLoanable(true);
+      return loan;
+    }
+    else {
+      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't return this loan");
+    }
+  }
 }

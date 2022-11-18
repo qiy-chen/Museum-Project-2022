@@ -95,4 +95,16 @@ public class LoanServiceTest {
     assertEquals(loan.getStatus(), LoanStatus.Approved);
     assertEquals(artwork.getIsLoanable(), false);
   }
+  @Test 
+  public void testReturnArtworkandEndLoan() {
+    final Loan loan = new Loan();
+    Artwork artwork = new Artwork();
+    loan.setStatus(LoanStatus.Approved);
+    loan.setArtwork(artwork);
+    artwork.addLoan(loan);
+    when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
+    loanService.returnArtworkandEndLoan(loan.getLoanId());
+    assertEquals(loan.getStatus(), LoanStatus.Returned);
+    assertEquals(artwork.getIsLoanable(), true);
+  }
 }
