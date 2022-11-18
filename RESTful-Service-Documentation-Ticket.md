@@ -59,7 +59,7 @@ URL: /customers/{roleId}
 
 Path Variable: roleId: The id of the customer that want to browse their tickets.
 
-Request Body: TicketRequestDto object
+Request Body: None
 
 HTTP Method: GET
 
