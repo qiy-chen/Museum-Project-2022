@@ -69,7 +69,7 @@ public class LoanIntegrationTest {
     
     customerRepository.save(customer);
     
-    LoanRequestDto dto = new LoanRequestDto(0,startDate.toString(),2,2,customerId,artworkId,museumId);
+    LoanRequestDto dto = new LoanRequestDto(0,"3",2,2,customerId,artworkId,museumId);
     
     ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans", dto, LoanResponseDto.class);
  

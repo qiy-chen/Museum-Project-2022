@@ -21,8 +21,8 @@ public class LoanResponseDto {
   public LoanResponseDto(Loan loan) {
     this.loanId = loan.getLoanId();
     this.numOfDays = loan.getNumOfDays();
-    this.startDate = loan.getStartDate();
-    this.dateAsString = startDate.toString();
+    //this.startDate = loan.getStartDate();
+    this.dateAsString = loan.getStartDate().toString();
     this.endDate = loan.getEndDate();
     this.rentalFee = loan.getRentalFee();
     if (loan.getStatus()==LoanStatus.Approved) {

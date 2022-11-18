@@ -6,7 +6,7 @@ public class LoanRequestDto {
   private int loanId;
   private int LoanStatusAsNumber;
   private int numOfDays;
-  private Date startDate;
+  private String startDate;
   private Date endDate;
   private double rentalFee;
   private int artworkId;
@@ -58,13 +58,13 @@ public class LoanRequestDto {
     this.numOfDays = numOfDays;
   }
 
-  public Date getStartDate() {
+  /*public Date getStartDate() {
     return startDate;
   }
 
   public void setStartDate(Date startDate) {
     this.startDate = startDate;
-  }
+  }*/
 
   public Date getEndDate() {
     return endDate;
