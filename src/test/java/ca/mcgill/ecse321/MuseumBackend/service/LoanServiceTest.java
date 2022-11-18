@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.repository.*;
@@ -63,5 +64,18 @@ public class LoanServiceTest {
     assertNotNull(loan);
     
   }
-  
+  @Test
+  public void testDeleteLoan() {
+    Loan loan = new Loan();
+    Artwork artwork = new Artwork();
+    Customer customer = new Customer();
+    customer.addLoan(loan);
+    artwork.addLoan(loan);
+    loan.setNumOfDays(12);
+    loan.setArtwork(artwork);
+    loan.setCustomer(customer);
+    when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
+    loanService.deleteLoan(loan.getLoanId());
+    
+  }
 }

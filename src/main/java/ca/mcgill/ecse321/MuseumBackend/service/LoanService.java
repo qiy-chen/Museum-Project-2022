@@ -1,8 +1,10 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
@@ -44,12 +46,26 @@ public class LoanService {
     return new LoanResponseDto(loan);
     
   }
-  
   @Transactional
   public Loan getLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     return loan;
   }
+  @Transactional
+  public Loan deleteLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    if(loan == null) {
+      throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
+    }
+    Artwork artwork = loan.getArtwork();
+    artwork.removeLoan(loan);
+    Customer customer = loan.getCustomer();
+    customer.removeLoan(loan);
+    artworkRepository.save(artwork);
+    customerRepository.save(customer);
+    loan.delete();
+    loanRepository.delete(loan);
+    return loan;
+  }
   
-
 }
