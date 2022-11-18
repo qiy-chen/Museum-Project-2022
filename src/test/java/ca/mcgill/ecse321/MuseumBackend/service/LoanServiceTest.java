@@ -76,6 +76,6 @@ public class LoanServiceTest {
     loan.setCustomer(customer);
     when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
     loanService.deleteLoan(loan.getLoanId());
-    
+    assertNull(customer.getLoan(0));
   }
 }
