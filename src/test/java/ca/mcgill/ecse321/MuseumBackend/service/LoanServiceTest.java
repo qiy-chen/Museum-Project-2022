@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.MuseumBackend.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -76,6 +77,6 @@ public class LoanServiceTest {
     loan.setCustomer(customer);
     when(loanRepository.findLoanByLoanId(loan.getLoanId())).thenAnswer( (InvocationOnMock invocation) -> loan);
     loanService.deleteLoan(loan.getLoanId());
-    assertNull(customer.getLoan(0));
+    assertTrue(customer.getLoans().size() == 0);
   }
 }
