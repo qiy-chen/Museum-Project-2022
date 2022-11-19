@@ -15,7 +15,6 @@ import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.service.LoanService;
-import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;

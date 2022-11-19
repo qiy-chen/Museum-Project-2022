@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ArtworkResponseDto</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.dto</a>
+</div>
+
+<h1>Coverage Summary for Class: ArtworkResponseDto (ca.mcgill.ecse321.MuseumBackend.dto)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArtworkResponseDto</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (17/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.dto;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+&nbsp;
+&nbsp;public class ArtworkResponseDto {
+&nbsp;  
+&nbsp;  private String artworkName;
+&nbsp;  private int roomId;
+&nbsp;  private int artworkId;
+&nbsp;  private double value;
+&nbsp;  private boolean isLoanable;
+&nbsp;  private List&lt;LoanDto&gt; loans;
+&nbsp;  private int museumId;
+&nbsp;
+<b class="fc">&nbsp;  public ArtworkResponseDto(){} </b>
+&nbsp;  
+<b class="fc">&nbsp;  public ArtworkResponseDto(Artwork art) {</b>
+<b class="fc">&nbsp;    this.artworkName = art.getArtworkName();</b>
+<b class="fc">&nbsp;    this.artworkId = art.getArtworkId();</b>
+<b class="fc">&nbsp;    this.value = art.getValue();</b>
+<b class="fc">&nbsp;    this.isLoanable= art.getIsLoanable();</b>
+&nbsp;    
+<b class="fc">&nbsp;    this.roomId = art.getRoom().getRoomId();</b>
+&nbsp;    
+<b class="fc">&nbsp;    this.museumId = art.getMuseum().getMuseumId();</b>
+&nbsp;    
+<b class="fc">&nbsp;    for (Loan l : art.getLoans()) {</b>
+<b class="nc">&nbsp;      LoanDto lDto = new LoanDto(l);</b>
+<b class="nc">&nbsp;      this.loans.add(lDto);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="fc">&nbsp;  } </b>
+&nbsp;  
+&nbsp;public List&lt;LoanDto&gt; getLoans() {
+<b class="fc">&nbsp;  return loans;</b>
+&nbsp;}  
+&nbsp;
+&nbsp;public String getArtworkName() {
+<b class="fc">&nbsp;    return artworkName;</b>
+&nbsp;}
+&nbsp;
+&nbsp;public int getArtworkId() {
+<b class="fc">&nbsp;  return artworkId;</b>
+&nbsp;}
+&nbsp;
+&nbsp;public double getValue() {
+<b class="fc">&nbsp;  return value;</b>
+&nbsp;}
+&nbsp;
+&nbsp;public boolean getIsLoanable() {
+<b class="fc">&nbsp;  return isLoanable;</b>
+&nbsp;}
+&nbsp;
+&nbsp;public int getRoomId() {
+<b class="fc">&nbsp;  return this.roomId;</b>
+&nbsp;}
+&nbsp;
+&nbsp;public int getMuseumId() {
+<b class="fc">&nbsp;  return this.museumId;</b>
+&nbsp;}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 15:34</div>
+</div>
+</body>
+</html>

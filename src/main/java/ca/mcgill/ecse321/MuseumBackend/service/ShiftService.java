@@ -19,8 +19,13 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+
 @Service
 public class ShiftService {
+
+	/**
+	 * @author Samuel Faubert
+	 */
 
 	@Autowired
 	ShiftRepository shiftRepo;

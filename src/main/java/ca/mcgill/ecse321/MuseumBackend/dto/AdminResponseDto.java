@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import java.util.List;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 

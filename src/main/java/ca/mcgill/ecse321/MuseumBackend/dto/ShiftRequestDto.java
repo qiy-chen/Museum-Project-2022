@@ -6,10 +6,8 @@ import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ShiftRequestDto {

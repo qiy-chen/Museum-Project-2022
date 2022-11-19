@@ -27,7 +27,7 @@ public class ShiftRestController {
     public ResponseEntity<ShiftResponseDto> getShiftById(@PathVariable int workDayId) throws IllegalArgumentException, HttpMessageNotReadableException {
         /**
          * Takes an identifying integer corresponding to a shift from the shift repository from the request to find the corresponding
-         * shift, and returns a shift response transfer object with the details of the requested Shift object in the body of the ResponseEntity
+         * shift, and returns a shift response transfer object with the details of the requested Shift object in the body of a ResponseEntity
          * @param workDayId An identifying integer equal to the value corresponding to a shift
          * @return A ResponseEntity with a body of a shift response transfer object with the details of the requested Shift object
          */
@@ -38,6 +38,14 @@ public class ShiftRestController {
 
     @PostMapping(value = "/shift/employees/{workDayId}")
     public ResponseEntity<ShiftResponseDto> addEmployeeToShift(@PathVariable int workDayId, @RequestBody int employeeId) throws IllegalArgumentException {
+        /**
+         * Takes 2 identifying integers corresponding to a shift and employee from the shift repository and employee repository respectively
+         * from the request to add that employee to the shift, and returns a shift response transfer object with the details of the Shift object
+         * with the newly added employee in the body of a ResponseEntity
+         * @param workDayId An identifying integer equal to the value corresponding to a shift
+         * @param employeeId An identifying integer equal to the value corresponding to an employee
+         * @return 
+         */
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(convertToResponseDto(service.addEmployeeToShift(workDayId,employeeId)), httpHeaders, HttpStatus.OK);

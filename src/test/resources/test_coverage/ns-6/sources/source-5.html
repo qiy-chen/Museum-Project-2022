@@ -1,0 +1,312 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > LoanService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.service</a>
+</div>
+
+<h1>Coverage Summary for Class: LoanService (ca.mcgill.ecse321.MuseumBackend.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoanService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.5%
+  </span>
+  <span class="absValue">
+    (69/73)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LoanService$$EnhancerBySpringCGLIB$$2e39d41f</td>
+  </tr>
+  <tr>
+    <td class="name">LoanService$$EnhancerBySpringCGLIB$$2e39d41f$$FastClassBySpringCGLIB$$e0737f69</td>
+  </tr>
+  <tr>
+    <td class="name">LoanService$$FastClassBySpringCGLIB$$2380a8ce</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.5%
+  </span>
+  <span class="absValue">
+    (69/73)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.service;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.transaction.annotation.Transactional;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
+&nbsp;import java.sql.Date;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class LoanService {</b>
+&nbsp;  @Autowired
+&nbsp;  LoanRepository loanRepository;
+&nbsp;
+&nbsp;  @Autowired
+&nbsp;  CustomerRepository customerRepository;
+&nbsp;
+&nbsp;  @Autowired
+&nbsp;  ArtworkRepository artworkRepository;
+&nbsp;
+&nbsp;  @Autowired
+&nbsp;  MuseumRepository museumRepository;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * @author alextsah
+&nbsp;   * @param LoanRequestDto loanRequest that contains the loan that is going to be created
+&nbsp;   * @return LoanResponseDto returns the loan created as a loan respoonse
+&nbsp;   */
+&nbsp;  @Transactional
+&nbsp;  public LoanResponseDto createLoan(LoanRequestDto loanRequest) {
+<b class="fc">&nbsp;    Museum museum = museumRepository.findMuseumByMuseumId(loanRequest.getMuseumId());</b>
+<b class="fc">&nbsp;    Artwork artwork = artworkRepository.findArtworkByArtworkId(loanRequest.getArtworkId());</b>
+<b class="fc">&nbsp;    Customer customer = customerRepository.findCustomerByPersonRoleId(loanRequest.getCustomerId());</b>
+<b class="fc">&nbsp;    Loan loan = new Loan();</b>
+<b class="fc">&nbsp;    loan.setRentalFee(loanRequest.getRentalFee());</b>
+<b class="fc">&nbsp;    loan.setNumOfDays(loanRequest.getNumOfDays());</b>
+<b class="fc">&nbsp;    String date = loanRequest.getStartDate();</b>
+<b class="fc">&nbsp;    Date startDate = Date.valueOf(date);  </b>
+<b class="fc">&nbsp;    loan.setStartDate(startDate);</b>
+<b class="fc">&nbsp;    String date2 = loanRequest.getEndDate();</b>
+<b class="fc">&nbsp;    Date endDate = Date.valueOf(date2);</b>
+<b class="fc">&nbsp;    loan.setEndDate(endDate);</b>
+<b class="fc">&nbsp;    loan.setArtwork(artwork);</b>
+<b class="fc">&nbsp;    loan.setCustomer(customer);</b>
+<b class="fc">&nbsp;    loan.setMuseum(museum);</b>
+<b class="fc">&nbsp;    if(loanRequest.getLoanStatusAsNumber() == 0) {</b>
+<b class="fc">&nbsp;      loan.setStatus(LoanStatus.Approved);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    if(loanRequest.getLoanStatusAsNumber() == 1) {</b>
+<b class="nc">&nbsp;      loan.setStatus(LoanStatus.Denied);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    if(loanRequest.getLoanStatusAsNumber() == 2) {</b>
+<b class="fc">&nbsp;      loan.setStatus(LoanStatus.Requested);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    if(loanRequest.getLoanStatusAsNumber() == 3) {</b>
+<b class="nc">&nbsp;      loan.setStatus(LoanStatus.Returned);</b>
+&nbsp;    }
+&nbsp;    // System.out.println(loanRequest.getLoanStatusAsNumber() + &quot;THIS IS THE IDENTIFIER ALEX&quot;);
+<b class="fc">&nbsp;    loanRepository.save(loan);</b>
+<b class="fc">&nbsp;    return new LoanResponseDto(loan);</b>
+&nbsp;
+&nbsp;  }
+&nbsp;  /**
+&nbsp;   * @author alextsah
+&nbsp;   * @param int loanId to find the loan in the repository
+&nbsp;   * @return Loan returns the loan you wanted to get
+&nbsp;   */
+&nbsp;  @Transactional
+&nbsp;  public Loan getLoan(int loanId) {
+<b class="fc">&nbsp;    Loan loan = loanRepository.findLoanByLoanId(loanId);</b>
+<b class="fc">&nbsp;    return loan;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * @author emmakawczynski
+&nbsp;   * @param int loanId to find the loan from the repository
+&nbsp;   * @return Loan returns the loan that was deleted
+&nbsp;   */
+&nbsp;  @Transactional
+&nbsp;  public Loan deleteLoan(int loanId) {
+<b class="fc">&nbsp;    Loan loan = loanRepository.findLoanByLoanId(loanId);</b>
+<b class="fc">&nbsp;    System.out.println(loan + &quot;HEY GUYS ITS ME AGAI&quot;);</b>
+<b class="fc">&nbsp;    if(loan == null) {</b>
+<b class="fc">&nbsp;      throw new MuseumBackendException(HttpStatus.NOT_FOUND, &quot;Loan not found&quot;);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    Customer customer = loan.getCustomer();</b>
+<b class="fc">&nbsp;    Artwork artwork = loan.getArtwork();</b>
+<b class="fc">&nbsp;    customer.removeLoan(loan);</b>
+<b class="fc">&nbsp;    artwork.removeLoan(loan);</b>
+<b class="fc">&nbsp;    loanRepository.delete(loan);</b>
+&nbsp;
+<b class="fc">&nbsp;    loan.delete();</b>
+<b class="fc">&nbsp;    System.out.println(&quot;reach here&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;    return loan;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * @author emmakawczynski
+&nbsp;   * @param int loanId to find the loan from the repository
+&nbsp;   * @return Loan returns the loan that was approved
+&nbsp;   */
+&nbsp;  @Transactional
+&nbsp;  public Loan approveLoan(int loanId) {
+<b class="fc">&nbsp;    Loan loan = loanRepository.findLoanByLoanId(loanId);</b>
+<b class="fc">&nbsp;    if(loan == null) {</b>
+<b class="fc">&nbsp;      throw new MuseumBackendException(HttpStatus.NOT_FOUND, &quot;Loan not found&quot;);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    System.out.println(loan.getArtwork() + &quot;THIS IS WRONG&quot;);</b>
+<b class="fc">&nbsp;    Artwork artwork = loan.getArtwork();</b>
+&nbsp;    
+<b class="fc">&nbsp;    LoanStatus status = loan.getStatus();</b>
+<b class="fc">&nbsp;    if(status.equals(LoanStatus.Requested) &amp;&amp; artwork.getIsLoanable() == true) {</b>
+<b class="fc">&nbsp;      loan.setStatus(LoanStatus.Approved);</b>
+<b class="fc">&nbsp;      artwork.setIsLoanable(false);</b>
+<b class="fc">&nbsp;      return loan;</b>
+&nbsp;    }
+&nbsp;    else {
+<b class="fc">&nbsp;      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, &quot;Can&#39;t approve this loan&quot;);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * @author emmakawczynski
+&nbsp;   * @param int loanId to find the loan from the repository
+&nbsp;   * @return Loan returns the loan that was approved
+&nbsp;   */
+&nbsp;  @Transactional
+&nbsp;  public Loan returnArtworkandEndLoan(int loanId) {
+&nbsp;
+<b class="fc">&nbsp;    Loan loan = loanRepository.findLoanByLoanId(loanId);</b>
+<b class="fc">&nbsp;    Artwork artwork = loan.getArtwork();</b>
+<b class="fc">&nbsp;    LoanStatus status = loan.getStatus();</b>
+<b class="fc">&nbsp;    if(status.equals(LoanStatus.Approved)) {</b>
+<b class="fc">&nbsp;      loan.setStatus(LoanStatus.Returned);</b>
+&nbsp;      //artwork.setIsLoanable(true);
+<b class="fc">&nbsp;      return loan;</b>
+&nbsp;    }
+&nbsp;    else {
+<b class="fc">&nbsp;      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, &quot;Can&#39;t return this loan&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;  }
+&nbsp;  /**
+&nbsp;   * @author emmakawczynski
+&nbsp;   * @param int loanId to find the loan from the repository
+&nbsp;   * @return Loan returns the loan that was approved
+&nbsp;   */
+&nbsp;  @Transactional
+&nbsp;  public Loan denyLoan(int loanId) {
+<b class="fc">&nbsp;    Loan loan = loanRepository.findLoanByLoanId(loanId);</b>
+<b class="fc">&nbsp;    System.out.println(loan.getStatus());</b>
+<b class="fc">&nbsp;    LoanStatus status = loan.getStatus();</b>
+<b class="fc">&nbsp;    if(status.equals(LoanStatus.Requested)) {</b>
+<b class="fc">&nbsp;      loan.setStatus(LoanStatus.Denied);</b>
+<b class="fc">&nbsp;      System.out.println(&quot;Alex is a stupid bitch&quot;);</b>
+<b class="fc">&nbsp;      return loan;</b>
+&nbsp;    }
+&nbsp;    else {
+<b class="nc">&nbsp;      System.out.println(&quot;HI GUYS ITS ME&quot;);</b>
+<b class="nc">&nbsp;      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, &quot;Can&#39;t deny this loan&quot;);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;  /**
+&nbsp;   * @author emmakawczynski and alextsah
+&nbsp;   * @return List&lt;Loans&gt; returns all the loans
+&nbsp;   */
+&nbsp;  @Transactional
+&nbsp;  public List&lt;Loan&gt; getAllLoans() {
+<b class="fc">&nbsp;    return toList(loanRepository.findAll());</b>
+&nbsp;  }
+&nbsp;  private &lt;T&gt; List&lt;T&gt; toList(Iterable&lt;T&gt; iterable){
+<b class="fc">&nbsp;    List&lt;T&gt; resultList = new ArrayList&lt;T&gt;();</b>
+<b class="fc">&nbsp;    for(T t: iterable) {</b>
+<b class="fc">&nbsp;      resultList.add(t);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    return resultList;</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 15:34</div>
+</div>
+</body>
+</html>
