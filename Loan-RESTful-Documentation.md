@@ -21,68 +21,57 @@ HTTP Method: GET
 
 Description: Read a loan stored in the loan repository, found using its id. The service returns a LoanResponseDto object of the loan found.
 
-## Create a Ticket
-URL: /tickets
+## Delete a loan
+URL: "/loans/delete/{id}/", "/loans/delete/{id}"
+
+Path Variable: id
+
+Request Body: None
+
+HTTP Method: Post
+
+Description: Delete a loan using the service method delete. The artwork and customer have the loan removed from their lists. Return a LoanResponseDto of the same loan.
+
+## Deny a loan
+URL: "/loans/deny/{id}", "/loans/deny/{id}"
+
+Path Variable: id: The ID of the loan.
+
+Request Body: none
+
+HTTP Method: Post
+
+Description: Take a loanId as input and find it from the repository. This status will be checked and the loan will be denied depending on if the status is Approved or Requested. A LoanResponseDto is returned from the loan.
+
+## Approve a Loan
+URL: "/loans/approve/{id}", "/loans/approve/{id}"
+
+Path Variable: id: The ID of the loan.
+
+Request Body: None
+
+HTTP Method: Post
+
+Description: Set the status of the loan with loanId to Approved, but will only change if the status is requested. Returns a LoanResponseDto of the updated loan.
+
+## Return an Artwork and End loan
+URL: "/loans/return/{id}", "/loans/return/{id}"
+
+Path Variable: id: the ID of the loan
+
+Request Body: None
+
+HTTP Method: Post
+
+Description: Find a loan from the loan id and set the status to returned. Only change if the loan is currently approved. Return a LoanResponseDto of the loan.
+
+## Get all Loans
+URL: "/loans"
 
 Path Variable: None
 
-Request Body: TicketRequestDto object
-
-HTTP Method: POST
-
-Description: Create a ticket based on the TicketRequestDto object and store it in the ticket repository. The service returns a TicketResponseDto object of the Ticket created.
-
-## Replace/Update a Ticket
-URL: /tickets/{ticketId}
-
-Path Variable: ticketId: The id of the ticket to be replaced.
-
-Request Body: TicketRequestDto object
-
-HTTP Method: PUT
-
-Description: Replace the ticket that has the ticketId with the attributes of the ticket based on the TicketRequestDto object and store it in the ticket repository. If the Ticket with ticketId doesn't exist, a new Ticket with ticketId will be created. The target id is kept. The service returns a TicketResponseDto object of the Ticket saved.
-
-## Delete a Ticket
-URL: /tickets/{ticketId}
-
-Path Variable: ticketId: The id of the ticket to be deleted.
-
 Request Body: None
 
-HTTP Method: DELETE
+HTTP Method: Get
 
-Description: Delete the ticket with ticket id. Note that this operation also removes the associations the ticket had with other classes. The service returns true after the deletion is done.
-
-## Browse all Tickets of a customer
-URL: /customers/{roleId}
-
-Path Variable: roleId: The id of the customer that want to browse their tickets.
-
-Request Body: None
-
-HTTP Method: GET
-
-Description: Read all tickets that are stored in the ticket repository associated with the customer (from the id given in the URL). The service returns a list of all TicketResponseDto objects stored in the ticket repository associated with the customer.
-
-## Purchase a Ticket
-URL: /customers/{roleId}
-
-Path Variable: roleId: The id of the customer that want to purchase a Ticket.
-
-Request Body: TicketRequestDto object
-
-HTTP Method: POST
-
-Description: Create a ticket based on the TicketRequestDto object, associate it with the customer (from the id given in the URL) and store it in the ticket repository. The service returns a TicketResponseDto object of the Ticket saved.
-
-## Cancel a Ticket
-URL: /customers/{roleId}
-
-Path Variable: roleId: The id of the customer that want to cancel a Ticket.
-
-Request Body: IdRequestDto object
-
-HTTP Method: DELETE
-
-Description: If the ticket's date is at least 3 days later than the current date and is associated with the customer (from the id given in the URL) , delete the ticket with the id given by the IdRequestDto object. The service returns true after the deletion is done.
+Description: Returns a list of all the loans as a list of LoanResponseDto.
