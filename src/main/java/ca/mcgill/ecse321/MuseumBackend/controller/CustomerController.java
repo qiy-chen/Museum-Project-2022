@@ -61,11 +61,11 @@ public class CustomerController {
 	// get all tickets for customer
 	@GetMapping("/customer/tickets/{id}")
 	public ResponseEntity<List<TicketResponseDto>> getTicketsForCustomer(@PathVariable int id) {
-		List<Ticket> shifts = customerService.getTicketsForCustomer(id);
-		ArrayList<TicketResponseDto> shiftDtos = new ArrayList<>();
-		for (Ticket s : shifts)
-			shiftDtos.add(new TicketResponseDto(s));
-		return new ResponseEntity<List<TicketResponseDto>>(toList(shiftDtos), HttpStatus.OK);
+		List<Ticket> tickets = customerService.getTicketsForCustomer(id);
+		ArrayList<TicketResponseDto> ticketDtos = new ArrayList<>();
+		for (Ticket s : tickets)
+			ticketDtos.add(new TicketResponseDto(s));
+		return new ResponseEntity<List<TicketResponseDto>>(toList(ticketDtos), HttpStatus.OK);
 	}
 
 	// get all loans for customer

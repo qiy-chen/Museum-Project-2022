@@ -181,41 +181,5 @@ public class ShiftIntegrationTest {
 
 		}
 	}
-
-	// test get all employees for shift
-	@Test
-	private void testGetEmployeesForShift() {
-
-		int shiftID = testCreateShift();
-		Shift shift = shiftRepository.findShiftByWorkDayId(shiftID);
-
-		// give the shift employees
-		Employee bilbo = new Employee();
-		Employee gandalf = new Employee();
-		employeeRepository.save(bilbo);
-		employeeRepository.save(gandalf);
-		int bilboID = bilbo.getPersonRoleId();
-		int gandalfID = gandalf.getPersonRoleId();
-		shift.addEmployee(bilbo);
-		shift.addEmployee(gandalf);
-		shiftRepository.save(shift);
-
-		// set up what we expect to get
-		List<EmployeeDto> employeeDtos = new ArrayList<>();
-		employeeDtos.add(new EmployeeDto(bilboID));
-		employeeDtos.add(new EmployeeDto(gandalfID));
-
-		// call method: get the employee by their id
-		ResponseEntity<ShiftDto[]> response = client.getForEntity("/shift/employees/" + shiftID, ShiftDto[].class);
-
-		// check response
-		assertNotNull(response);
-		assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
-		assertNotNull(response.getBody(), "Response has body");
-		ShiftDto[] shifts = response.getBody();
-		assertEquals(2, shifts.length, "Response has all shifts");
-		assertEquals(bilboID, shifts[0].id, "Correct ID");
-		assertEquals(gandalfID, shifts[1].id, "Correct ID");
-	}
 }
 
