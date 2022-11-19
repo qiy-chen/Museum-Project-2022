@@ -50,7 +50,7 @@ public class TestShiftService {
     public void testCreateShift() {
         Shift shift = initializeTestShift();
         when(shiftRepository.save(shift)).thenAnswer((InvocationOnMock invocation) -> shift);
-        assertEquals(shift, shiftService.createShift(shift));
+        assertEquals(shift.getWorkDayId(), shiftService.createShift(shift).getWorkDayId());
     }
 
     @Test

@@ -67,8 +67,8 @@ public class ShiftService {
 		 * @param shift A Shift object to be persisted
 		 * @return shift The same Shift object after it has been persisted
 		 */
-		shift = shiftRepo.save(shift);
 		shiftArgumentErrorTest(shift);
+		shift = shiftRepo.save(shift);
 		return shift;
 	}
 
@@ -82,6 +82,7 @@ public class ShiftService {
 		 * 	@return shift The Shift object corresponding to the workDayId with its start and end times now updated
 		 */
 		Shift shift = getShiftById(workDayId);
+		shiftArgumentErrorTest(shift);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
 		shift.setStartTime(LocalDateTime.parse(startTimeValue,formatter));
 		shift.setEndTime(LocalDateTime.parse(endTimeValue,formatter));
@@ -98,9 +99,9 @@ public class ShiftService {
 		 * @return shift The Shift object corresponding to the workDayId with the requested employee added
 		 */
 		Shift shift = getShiftById(workDayId);
+		shiftArgumentErrorTest(shift);
 		Employee employee = employeeRepository.findEmployeeByPersonRoleId(employeeId);
 		shift.addEmployee(employee);
-		shiftArgumentErrorTest(shift);
 		return shift;
 	}
 
@@ -113,9 +114,9 @@ public class ShiftService {
 		 * @return shift The Shift object corresponding to the workDayId with the requested employee removed
 		 */
 		Shift shift = getShiftById(workDayId);
+		shiftArgumentErrorTest(shift);
 		Employee employee = employeeRepository.findEmployeeByPersonRoleId(employeeId);
 		shift.removeEmployee(employee);
-		shiftArgumentErrorTest(shift);
 		return shift;
 	}
 	@Transactional
@@ -125,6 +126,7 @@ public class ShiftService {
 		 * @param workDayId An integer equal to the unique value corresponding to a shift
 		 */
 		Shift shift = getShiftById(workDayId);
+		shiftArgumentErrorTest(shift);
 		shiftRepo.delete(shift);
 		shift.delete();
 	}

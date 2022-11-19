@@ -29,21 +29,21 @@ public class EmployeeController {
 	@GetMapping("/employee/{id}")
 	public ResponseEntity<EmployeeResponseDto> getEmployeeByID(@PathVariable int id) {
 		Employee employee = employeeService.getEmployeeById(id);
-		return new ResponseEntity<EmployeeResponseDto>(new EmployeeResponseDto(employee), HttpStatus.OK);
+		return new ResponseEntity<>(new EmployeeResponseDto(employee), HttpStatus.OK);
 	}
 	
 	// create new employee
 	@PostMapping("/employee")
 	public ResponseEntity<EmployeeResponseDto> createEmployee(@RequestBody EmployeeRequestDto request) {
 		EmployeeResponseDto response = employeeService.createEmployee(request.getEmail());
-		return new ResponseEntity<EmployeeResponseDto>(response, HttpStatus.CREATED);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 	
 	// fire employee by ID
 	@DeleteMapping("/employee/fire/{id}")
 	public ResponseEntity<EmployeeResponseDto> fireEmployee(@PathVariable int id) {
 		EmployeeResponseDto response = new EmployeeResponseDto(employeeService.fireEmployee(id));
-		return new ResponseEntity<EmployeeResponseDto>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	// get all employees
@@ -53,7 +53,7 @@ public class EmployeeController {
 		ArrayList<EmployeeResponseDto> employeeDtos = new ArrayList<>();
 		for (Employee e : employees)
 			employeeDtos.add(new EmployeeResponseDto(e));
-		return new ResponseEntity<List<EmployeeResponseDto>>(toList(employeeDtos), HttpStatus.OK);
+		return new ResponseEntity<>(toList(employeeDtos), HttpStatus.OK);
 	}
 	
 	// convert ArrayList to List

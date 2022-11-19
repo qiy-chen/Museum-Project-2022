@@ -29,7 +29,7 @@ public class EmployeeService {
 
 	// find one employee by their ID
 	@Transactional
-	public Employee getEmployeeById(int id) {
+	public Employee getEmployeeById(int id) throws MuseumBackendException {
 		Employee employee = employeeRepo.findEmployeeByPersonRoleId(id);
 		if (employee == null) {
 			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Employee not found.");
