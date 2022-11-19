@@ -75,7 +75,7 @@ public class ShiftRestController {
         service.changeShiftDate(workDayId, dateMap.get("startTimeValue"),dateMap.get("endTimeValue"));
 
     }
-    
+
     @PutMapping(value = "/shift/{workDayId}")
     public void deleteShift(@PathVariable int workDayId) throws IllegalArgumentException {
         service.deleteShift(workDayId);
