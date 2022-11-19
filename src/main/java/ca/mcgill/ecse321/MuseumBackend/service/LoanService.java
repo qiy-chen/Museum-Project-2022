@@ -175,6 +175,10 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't deny this loan");
     }
   }
+  /**
+   * @author emmakawczynski and alextsah
+   * @return List<Loans> returns all the loans
+   */
   @Transactional
   public List<Loan> getAllLoans() {
     return toList(loanRepository.findAll());
