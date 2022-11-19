@@ -38,9 +38,9 @@ public class PersonRestController {
     public void deletePerson(@PathVariable String email) throws  IllegalArgumentException {
         service.deletePerson(email);
     }
-    @GetMapping(value = "person/person_roles/{email}")
-    public ResponseEntity<Integer[]> getAllPersonPersonRoles() {
-        return null;
+    @GetMapping(value = "/person/person_roles/{email}")
+    public ResponseEntity<Integer[]> getAllPersonPersonRoles(@PathVariable String email) {
+        return new ResponseEntity<>(convertToResponseDto(service.getPersonByEmail(email)).getPersonRoleIds().toArray(new Integer[0]), HttpStatus.OK);
     }
 
     private PersonResponseDto convertToResponseDto(Person p) {

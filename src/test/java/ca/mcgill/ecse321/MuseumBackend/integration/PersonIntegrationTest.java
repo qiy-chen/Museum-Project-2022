@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.integration;
 
-import ca.mcgill.ecse321.MuseumBackend.dto.PersonRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.PersonResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.*;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
@@ -15,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,6 +122,23 @@ public class PersonIntegrationTest {
         }catch (RestClientException|IllegalArgumentException e) {
 
         }
+    }
+    @Test
+    public void testCreateAndGetPersonAndCreateAndGetPersonRoles() {
+        String email = testCreatePerson();
+        testCreateGiveAndGetPersonRoles(email);
+
+    }
+    private void testCreateGiveAndGetPersonRoles(String email) {
+        CustomerRequestDto customerRequestDto = new CustomerRequestDto();
+        customerRequestDto.setEmail(email);
+        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
+        employeeRequestDto.setEmail(email);
+        ResponseEntity<CustomerResponseDto> customerResponse = client.postForEntity("/customer",customerRequestDto,CustomerResponseDto.class);
+        ResponseEntity<EmployeeResponseDto> employeeResponse = client.postForEntity("/employee",employeeRequestDto,EmployeeResponseDto.class);
+        ResponseEntity<Integer[]> personRolesResponse = client.getForEntity("/person/person_roles/"+email,Integer[].class);
+        assertTrue(Arrays.stream(personRolesResponse.getBody()).toList().contains(employeeResponse.getBody().getId()));
+        assertTrue(Arrays.stream(personRolesResponse.getBody()).toList().contains(customerResponse.getBody().getId()));
     }
 
 }
