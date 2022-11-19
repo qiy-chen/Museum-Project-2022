@@ -1,74 +1,110 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
 import java.sql.Date;
-import org.springframework.beans.factory.annotation.Autowired;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
-import ca.mcgill.ecse321.MuseumBackend.service.LoanService;
 
 public class LoanRequestDto {
-  @Autowired
-  private LoanService loanService;
-  
   private int loanId;
-  private LoanStatus status;
+  private int LoanStatusAsNumber;
   private int numOfDays;
-  private Date startDate;
-  private Date endDate;
+  private String startDate;
+  private String endDate;
   private double rentalFee;
+  private int artworkId;
+  private int customerId;
+  private int museumId;
+  //private String dateAsString;
   
+  public LoanRequestDto() {}
+  
+  public LoanRequestDto(int LoanStatusAsNumber, String startDate, String endDate,int numOfDays, double rentalFee, int artworkId, int customerId, int museumId ) {
+    this.LoanStatusAsNumber = LoanStatusAsNumber;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.numOfDays = numOfDays;
+    this.rentalFee = rentalFee;
+    this.artworkId = artworkId;
+    this.customerId = customerId;
+    this.museumId = museumId;
+  }
+/*
+  public String getDateAsString() {
+    return dateAsString;
+  }
+
+  public void setDateAsString(String dateAsString) {
+    this.dateAsString = dateAsString;
+  }
+*/
   public int getLoanId() {
     return loanId;
   }
-  
-  public void setLoanId(int id) {
-    loanId = id;
+
+  public void setLoanId(int loanId) {
+    this.loanId = loanId;
   }
-  
-  public LoanStatus getLoanStatus() {
-    return status;
+
+  public int getLoanStatusAsNumber() {
+    return LoanStatusAsNumber;
   }
-  
-  public void setLoanStatus(LoanStatus stat) {
-    status = stat;
+
+  public void setLoanStatusAsNumber(int loanStatusAsNumber) {
+    LoanStatusAsNumber = loanStatusAsNumber;
   }
-  
-  public int getNumofDays() {
+
+  public int getNumOfDays() {
     return numOfDays;
   }
-  
-  public void setNumOfDays(int nOfDays) {
-    numOfDays = nOfDays;
+
+  public void setNumOfDays(int numOfDays) {
+    this.numOfDays = numOfDays;
   }
-  
-  public Date getStartDate() {
+
+  public String getStartDate() {
     return startDate;
   }
-  
-  public void setStartDate(Date date) {
-    startDate = date;
+
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
   }
-  
-  public Date getEndDate() {
+
+  public String getEndDate() {
     return endDate;
   }
-  
-  public void setEndDate(Date date) {
-    endDate = date;
+
+  public void setEndDate(String endDate) {
+    this.endDate = endDate;
   }
-  
+
   public double getRentalFee() {
     return rentalFee;
   }
-  
-  public void setRentalFee(double fee) {
-    rentalFee = fee;
+
+  public void setRentalFee(double rentalFee) {
+    this.rentalFee = rentalFee;
   }
-  
-  public Loan toModel() {
-   Loan loan = new Loan();
-   Loan loanForModel = loanService.createLoan(loan);
-   return loanForModel; 
+
+  public int getArtworkId() {
+    return artworkId;
+  }
+
+  public void setArtworkId(int artworkId) {
+    this.artworkId = artworkId;
+  }
+
+  public int getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(int customerId) {
+    this.customerId = customerId;
+  }
+
+  public int getMuseumId() {
+    return museumId;
+  }
+
+  public void setMuseumId(int museumId) {
+    this.museumId = museumId;
   }
   
 }
