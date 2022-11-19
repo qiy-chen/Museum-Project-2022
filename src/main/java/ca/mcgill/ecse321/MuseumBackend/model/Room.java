@@ -25,7 +25,8 @@ public abstract class Room
   //Room Associations
   @ManyToOne(cascade = CascadeType.MERGE)
   private Museum museum;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  
+  @OneToMany(fetch = FetchType.EAGER)
   private List<Artwork> artworks;
 
   //------------------------
@@ -61,6 +62,8 @@ public abstract class Room
     wasSet = true;
     return wasSet;
   }
+  
+  public abstract boolean isFull();
 
   public boolean setRoomId(int aRoomId)
   {

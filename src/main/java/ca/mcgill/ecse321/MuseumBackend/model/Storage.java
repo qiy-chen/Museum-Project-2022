@@ -23,6 +23,10 @@ public class Storage extends Room
     super(aRoomNumber, aRoomId, aMuseum);
   }
   
+  public boolean isFull() {
+    return false;
+  }
+  
   public Storage() {
     super();
   }

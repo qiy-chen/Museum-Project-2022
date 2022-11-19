@@ -1,20 +1,12 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
-import java.sql.Date;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.UUID;
-
-import org.junit.jupiter.api.*; 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
-import ca.mcgill.ecse321.MuseumBackend.model.Employee;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.model.PersonRole;
-import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 
 
