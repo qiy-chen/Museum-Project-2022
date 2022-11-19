@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
@@ -33,7 +33,7 @@ public class ArtworkController {
   * @return ArtworkDto
   * @throws IllegalArgumentException
   */
-  @PostMapping(value = {"/artworks", "/artworks/"})
+  @PostMapping(value = "/artwork")
   public ResponseEntity<ArtworkResponseDto> createArtwork(
      @RequestBody ArtworkRequestDto artworkRequestDto
     )   throws IllegalArgumentException {
@@ -61,12 +61,12 @@ public class ArtworkController {
     return new ResponseEntity<ArtworkResponseDto>(convertToDto(a), HttpStatus.OK);
 }
   
-  @PostMapping(value= {"/artworks/delete/{id}/", "/artworks/delete/{id}"})
+  @DeleteMapping(value= "/artwork/{id}")
   public ResponseEntity<ArtworkResponseDto> deleteArtwork(
-      @PathVariable("id") int artId
+      @PathVariable int id
       )   throws IllegalArgumentException {
-      Artwork a = service.deleteArtwork(artId);
-      return new ResponseEntity<ArtworkResponseDto>(convertToDto(a), HttpStatus.OK);
+      service.deleteArtwork(id);
+      return new ResponseEntity<ArtworkResponseDto>(HttpStatus.OK);
   }
   
   /**
@@ -76,12 +76,12 @@ public class ArtworkController {
   * @return ArtworkDto
   * @throws IllegalArgumentException
   */
-  @PostMapping(value = {"/artworks/move/{id}/", "/artworks/move/{id}"})
+  @PutMapping(value = "/artwork/room/{id}")
   public ResponseEntity<ArtworkResponseDto> moveArtwork(
-    @PathVariable("id") int artId,
-    @RequestParam int roomId
+    @PathVariable int id,
+    @RequestBody ArtworkRequestDto artworkRequestDto
     )   throws IllegalArgumentException {
-    Artwork a = service.moveArtwork(artId, roomId);
+    Artwork a = service.moveArtwork(id, artworkRequestDto.getRoomId());
     return new ResponseEntity<ArtworkResponseDto>(convertToDto(a), HttpStatus.OK);
 }
 
@@ -90,7 +90,7 @@ public class ArtworkController {
 * @param 
 * @return
 */
-@GetMapping(value = { "/artworks", "/artworks/" })
+@GetMapping(value = "/artwork")
 public ResponseEntity<List<ArtworkResponseDto>> getAllArtwork() {
   List<ArtworkResponseDto> artDto = new ArrayList<>();
   for (Artwork art : service.getAllArtwork()) {
@@ -104,35 +104,7 @@ public ResponseEntity<List<ArtworkResponseDto>> getAllArtwork() {
 * @param 
 * @return
 */
-@GetMapping(value = { "/artworks/Available", "/artworks/Available/" })
-public ResponseEntity<List<ArtworkResponseDto>> getAllArtworkNotAvailableForLoan() {
-  List<ArtworkResponseDto> artDto = new ArrayList<>();
-  for (Artwork art : service.getArtworksNotAvailableForLoan()) {
-      artDto.add(convertToDto(art));
-  }
-  return new ResponseEntity<List<ArtworkResponseDto>>(artDto, HttpStatus.OK);
-}
-
-/**
-*
-* @param 
-* @return
-*/
-@GetMapping(value = { "/artworks/NotAvailable", "/artworks/NotAvailable/" })
-public ResponseEntity<List<ArtworkResponseDto>> getAllArtworkAvailableForLoan() {
-  List<ArtworkResponseDto> artDto = new ArrayList<>();
-  for (Artwork art : service.getArtworksAvailableForLoan()) {
-      artDto.add(convertToDto(art));
-  }
-  return new ResponseEntity<List<ArtworkResponseDto>>(artDto, HttpStatus.OK);
-}
-
-/**
-*
-* @param 
-* @return
-*/
-@GetMapping(value = { "/artworks/OnDisplay", "/artworks/OnDisplay/" })
+@GetMapping(value = "/display/artworks")
 public ResponseEntity<List<ArtworkResponseDto>> getAllArtworkOnDisplay() {
   List<ArtworkResponseDto> artDto = new ArrayList<>();
   for (Artwork art : service.getArtworksOnDisplay()) {
@@ -143,10 +115,39 @@ public ResponseEntity<List<ArtworkResponseDto>> getAllArtworkOnDisplay() {
 
 /**
 *
+* @param 
+* @return
+*/
+@GetMapping(value = "/room/artworks/{roomId}")
+public ResponseEntity<List<ArtworkResponseDto>> getAllArtworkByRoomId(
+    @PathVariable int roomId) {
+  List<ArtworkResponseDto> artDto = new ArrayList<>();
+  for (Artwork art : service.getArtworksByRoomId(roomId)) {
+      artDto.add(convertToDto(art));
+  }
+  return new ResponseEntity<List<ArtworkResponseDto>>(artDto, HttpStatus.OK);
+}
+
+/**
+*
+* @param 
+* @return
+*/
+@GetMapping(value = "/storage/artworks")
+public ResponseEntity<List<ArtworkResponseDto>> getAllArtworkOnStorage() {
+  List<ArtworkResponseDto> artDto = new ArrayList<>();
+  for (Artwork art : service.getArtworksOnStorage()) {
+      artDto.add(convertToDto(art));
+  }
+  return new ResponseEntity<List<ArtworkResponseDto>>(artDto, HttpStatus.OK);
+}
+
+/**
+*
 * @param id
 * @return
 */
-@GetMapping(value = {"/artworks/{id}", "/artworks/{id}/"})  
+@GetMapping(value = "/artwork/{id}")
 public ResponseEntity<ArtworkResponseDto> getArtworkById(@PathVariable("id") int id) {
    Artwork a = service.getArtwork(id);
    ArtworkResponseDto artDto = convertToDto(a);

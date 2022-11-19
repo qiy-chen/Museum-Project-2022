@@ -25,12 +25,12 @@ Role Responsibilities<br />
 ## Time Contributions
 | Name  | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |
 | ------------- | --- | --- | --- | --- |
-| Abdo Elie-Dimitri  | 20 |  |  |  |
-| Chen Qi  | 20 |  |  |  |
-| Faubert Samuel  | 24 |  |  |  |
-| Kawczynski Emma  | 19 |  |  |  |
-| Looman Jeanine  | 18 |  |  |  |
-| Tsahageas Alex | 20 |  |  |  |
+| Abdo Elie-Dimitri  | 20 | 30 |  |  |
+| Chen Qi  | 20 | 30 |  |  |
+| Faubert Samuel  | 24 | 30 |  |  |
+| Kawczynski Emma  | 19 | 30 |  |  |
+| Looman Jeanine  | 18 | 30 |  |  |
+| Tsahageas Alex | 20 | 30 |  |  |
 
 # Project Reports
 

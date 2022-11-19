@@ -1,25 +1,15 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 public class ArtworkRequestDto {
   
-  @Min(1)
   private int roomId;
-  
-  @NotNull
-  @NotBlank
+
   private String artworkName;
   
-  @NotNull
-  @Min(1)
   private int museumId;
   
   private int value;
-  
-  @NotNull
+
   private boolean isLoanable;
   
   public ArtworkRequestDto() {}
@@ -34,6 +24,10 @@ public class ArtworkRequestDto {
     this.artworkName = name;
     this.value = value;
     this.isLoanable = isLoanable;
+  }
+  
+  public ArtworkRequestDto(int roomId) {
+    this.roomId = roomId;
   }
   
   public int getRoomId() {

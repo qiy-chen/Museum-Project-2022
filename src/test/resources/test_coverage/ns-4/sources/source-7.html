@@ -1,0 +1,134 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DisplayDto</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.dto</a>
+</div>
+
+<h1>Coverage Summary for Class: DisplayDto (ca.mcgill.ecse321.MuseumBackend.dto)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DisplayDto</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.dto;
+&nbsp;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Display;
+&nbsp;
+&nbsp;public class DisplayDto {
+&nbsp;  
+&nbsp;  private int roomNumber;
+&nbsp;  private int roomId;
+&nbsp;  private int maxArtworks;
+&nbsp;
+<b class="nc">&nbsp;  public DisplayDto () {}</b>
+&nbsp;  
+<b class="nc">&nbsp;  public DisplayDto(Display d) {</b>
+<b class="nc">&nbsp;   this.roomNumber = d.getRoomNumber();</b>
+<b class="nc">&nbsp;   this.roomId = d.getRoomId();</b>
+<b class="nc">&nbsp;   this.maxArtworks = d.getMaxArtworks();</b>
+<b class="nc">&nbsp; }</b>
+&nbsp; 
+&nbsp; public int getNumber() {
+<b class="nc">&nbsp;   return roomNumber;</b>
+&nbsp;}
+&nbsp; 
+&nbsp; public int getMaxArtworks() {
+<b class="nc">&nbsp;   return maxArtworks;</b>
+&nbsp;}
+&nbsp; 
+&nbsp; public int getId() {
+<b class="nc">&nbsp;   return roomId;</b>
+&nbsp;}
+&nbsp; 
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 15:34</div>
+</div>
+</body>
+</html>

@@ -17,9 +17,15 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 
 @Service
 public class ShiftService {
+
+	/**
+	 * @author Samuel Faubert
+	 */
 
 	@Autowired
 	ShiftRepository shiftRepo;
@@ -89,6 +95,9 @@ public class ShiftService {
 		shiftArgumentErrorTest(shift);
 		return shift;
 	}
+
+
+
 
 	@Transactional
 	public Shift addEmployeeToShift(int workDayId, int employeeId) {

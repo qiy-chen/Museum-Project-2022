@@ -163,7 +163,7 @@ public class TestEmployeeIntegration {
 	}
 
 	// test get all shifts for employee
-	@Test
+	/*@Test
 	public void testGetShiftsForEmployee() {
 
 		String email = "hey@bud.com";
@@ -198,7 +198,7 @@ public class TestEmployeeIntegration {
 		assertEquals(nightID, shifts[1].workDayId, "Correct ID");
 		assertEquals(dayID, shifts[0].workDayId, "Correct ID");
 	}
-
+*/
 }
 
 class EmployeeDto {

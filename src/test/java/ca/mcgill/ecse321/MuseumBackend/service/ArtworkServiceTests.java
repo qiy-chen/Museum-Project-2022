@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
@@ -102,23 +101,22 @@ public class ArtworkServiceTests {
   public void testUpdateFields() {
     
     final Display french = new Display();
-    french.setRoomId(1);
+    french.setMaxArtworks(200);
+    french.setRoomNumber(2);
     
     Artwork art = new Artwork();
-    art.setArtworkId(ART_ID);
     art.setRoom(french);
     art.setArtworkName("Mona lisa");
+    art.setArtworkId(2);
     
-    when(artworkDao.findArtworkByArtworkId(ART_ID)).thenAnswer( (InvocationOnMock invocation) -> art); 
-    
+    when(artworkDao.findArtworkByArtworkId(2)).thenAnswer( (InvocationOnMock invocation) -> art); 
     //test
-    service.updateFields(art.getArtworkId(), "La Joconde", 10, true);
+    service.updateFields(art.getArtworkId(), "La Joconde", 10.0, true);
     
     assertNotNull(art);
     assertEquals("La Joconde", art.getArtworkName());
     assertEquals(true, art.getIsLoanable());
-    assertEquals(10, art.getValue());
-    assertEquals(1, art.getRoom().getRoomId());
+    assertEquals(10.0, art.getValue());
     
   }
   
@@ -137,16 +135,14 @@ public class ArtworkServiceTests {
     arab.setRoomId(3);
     
     Artwork art = new Artwork();
-    art.setArtworkId(ART_ID);
     art.setRoom(french);
     art.setArtworkName("Mona lisa");
     
-    when(artworkDao.findArtworkByArtworkId(ART_ID)).thenAnswer( (InvocationOnMock invocation) -> art);
-    when(displayDao.findDisplayByRoomId(2)).thenAnswer( (InvocationOnMock invocation) -> english);
-    when(storageDao.findStorageByRoomId(2)).thenAnswer( (InvocationOnMock invocation) -> null);
+    when(artworkDao.findArtworkByArtworkId(art.getArtworkId())).thenAnswer( (InvocationOnMock invocation) -> art);
+    when(roomDao.findRoomByRoomId(2)).thenAnswer( (InvocationOnMock invocation) -> english);
     
     //test
-    service.moveArtwork(ART_ID, 2);
+    service.moveArtwork(art.getArtworkId(), 2);
     
     assertEquals(2, art.getRoom().getRoomId());
   }
@@ -155,17 +151,20 @@ public class ArtworkServiceTests {
   public void testDeleteArtwork() {
     
     final Display french = new Display();
-    french.setRoomId(1);
+    
+    final Museum mus = new Museum();
     
     Artwork art = new Artwork();
     art.setArtworkId(ART_ID);
     art.setRoom(french);
     art.setArtworkName("Mona lisa");
+    art.setMuseum(mus);
     
     when(artworkDao.findArtworkByArtworkId(ART_ID)).thenAnswer( (InvocationOnMock invocation) -> art);
     service.deleteArtwork(ART_ID);
     
     assertNull(art.getRoom());
+    assertNull(art.getMuseum());
   }
 }
 

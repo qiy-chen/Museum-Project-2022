@@ -1,10 +1,10 @@
 package ca.mcgill.ecse321.MuseumBackend.integration;
 
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.*;
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
@@ -15,171 +15,197 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.util.Assert;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ShiftIntegrationTest {
 
-	private int workDayId = 54;
-	private double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
-	private long workHours = (long) sixHoursInMillisecond;
-	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
-	private LocalDateTime startTime = LocalDateTime.parse("2022-11-18 8:00", formatter);
-	private LocalDateTime endTime = LocalDateTime.parse("2022-11-18 17:00", formatter);
+    /**
+     * @author Samuel Faubert
+     */
+    private int workDayId = 1;
+    private double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
+    private long workHours = (long) sixHoursInMillisecond;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
+    private LocalDateTime startTime = LocalDateTime.parse("2022-11-18 8:00",formatter);
+    private LocalDateTime endTime = LocalDateTime.parse("2022-11-18 17:00",formatter);
 
-	@Autowired
-	private TestRestTemplate client;
 
-	@Autowired
-	private MuseumRepository museumRepository;
+    @Autowired
+    private TestRestTemplate client;
 
-	@Autowired
-	private PersonRepository personRepository;
+    @Autowired
+    private MuseumRepository museumRepository;
 
-	@Autowired
-	private EmployeeRepository employeeRepository;
+    @Autowired
+    private PersonRepository personRepository;
 
-	@Autowired
-	private ShiftRepository shiftRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
-	@BeforeEach
-	@AfterEach
-	public void clearDatabase() {
-		shiftRepository.deleteAll();
-		employeeRepository.deleteAll();
-		personRepository.deleteAll();
-		museumRepository.deleteAll();
-	}
+    @Autowired
+    private ShiftRepository shiftRepository;
+    private int museumId;
 
-	@Test
-	public void testCreateAndGetShift() {
-		int workDayId = testCreateShift();
-		testGetShift(workDayId);
-	}
+    @BeforeEach
+    @AfterEach
+    public void clearDatabase() {
+        shiftRepository.deleteAll();
+        employeeRepository.deleteAll();
+        personRepository.deleteAll();
+        museumRepository.deleteAll();
+    }
 
-	private int testCreateShift() {
-		Museum museum = new Museum(12);
-		museum = museumRepository.save(museum);
-		ResponseEntity<ShiftResponseDto> response = client.postForEntity("/shift",
-				new ShiftRequestDto(this.startTime, this.endTime, this.workDayId, museum), ShiftResponseDto.class);
-		assertNotNull(response);
-		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
-		assertNotNull(response.getBody(), "Response has body");
-		assertEquals(this.workDayId, response.getBody().getWorkDayId(), "Response has correct id");
-		assertTrue(response.getBody().getWorkDayId() > 0, "Response has valid ID");
-		return response.getBody().getWorkDayId();
-	}
+    @Test
+    public void testCreateAndGetShift() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+    }
+    private int testCreateShift() {
+        Museum museum = new Museum();
+        museum = museumRepository.save(museum);
+        this.museumId = museum.getMuseumId();
+        ResponseEntity<ShiftResponseDto> response = client.postForEntity("/shift", new ShiftRequestDto(this.startTime,this.endTime,this.workDayId,museum), ShiftResponseDto.class);
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
+        assertNotNull(response.getBody(), "Response has body");
+        assertTrue(response.getBody().getWorkDayId() > 0, "Response has valid ID");
+        return response.getBody().getWorkDayId();
+    }
 
-	private void testGetShift(int workDayId) {
-		ResponseEntity<ShiftResponseDto> response = client.getForEntity("/shift/" + workDayId, ShiftResponseDto.class);
-		assertNotNull(response);
-		assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
-		assertNotNull(response.getBody(), "Response has body");
-		assertEquals(this.workDayId, response.getBody().getWorkDayId(), "Response has correct id");
+    private void testGetShift(int workDayId) {
+        ResponseEntity<ShiftResponseDto> response = client.getForEntity("/shift/" + workDayId, ShiftResponseDto.class);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
+        assertNotNull(response.getBody(), "Response has body");
+        assertEquals(workDayId, response.getBody().getWorkDayId(), "Response has correct id");
 
-	}
+    }
 
-	@Test
-	public void testCreateAndGetShiftAndChangeShiftDate() {
-		int workDayId = testCreateShift();
-		testGetShift(workDayId);
-		testChangeDateOfShift(workDayId, "2022-11-17 8:00", "2022-11-17 17:00");
-	}
+    @Test
+    public void testCreateAndGetShiftAndChangeShiftDate() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+        testChangeDateOfShift(workDayId, "2022-11-17 8:00", "2022-11-17 17:00");
+    }
 
-	@Test
-	public void testCreateAndGetShiftAndAddEmployeeToShift() {
-		int workDayId = testCreateShift();
-		testGetShift(workDayId);
-		Person sam = new Person();
-		sam.setEmail("sfaubert9@gmail.com");
-		personRepository.save(sam);
-		EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
-		employeeRequestDto.setEmail("sfaubert9@gmail.com");
-		testAddEmployeeToShift(workDayId, employeeRequestDto);
-	}
+    @Test
+    public void testCreateAndGetShiftAndAddEmployeeToShift() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+        PersonRequestDto personRequestDto = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",museumRepository.findMuseumByMuseumId(this.museumId));
+        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
+        employeeRequestDto.setEmail("sfaubert9@gmail.com");
+        testAddEmployeeToShift(workDayId,personRequestDto,employeeRequestDto);
+    }
 
-	private void testAddEmployeeToShift(int workDayId, EmployeeRequestDto employeeRequestDto) {
-		ResponseEntity<EmployeeResponseDto> employeeResponse = client.postForEntity("/employee", employeeRequestDto,
-				EmployeeResponseDto.class);
-		Map<String, Integer> idMap = new HashMap<>();
-		idMap.put("workDayId", workDayId);
-		idMap.put("employeeId", employeeResponse.getBody().getId());
-		ResponseEntity<ShiftResponseDto> shiftResponseDtoResponseEntity = client.postForEntity("/shift/employees",
-				idMap, ShiftResponseDto.class);
-		assertEquals(HttpStatus.OK, shiftResponseDtoResponseEntity.getStatusCode());
-		assertEquals(employeeResponse.getBody().getId(),
-				shiftResponseDtoResponseEntity.getBody().getEmployees().get(0));
-	}
+    private int testAddEmployeeToShift(int workDayId, PersonRequestDto personRequestDto, EmployeeRequestDto employeeRequestDto) {
+        ResponseEntity<PersonResponseDto> personResponse = client.postForEntity("/person", personRequestDto, PersonResponseDto.class);
+        ResponseEntity<EmployeeResponseDto> employeeResponse = client.postForEntity("/employee", employeeRequestDto, EmployeeResponseDto.class);
+        ResponseEntity<ShiftResponseDto> shiftResponseDtoResponseEntity = client.postForEntity("/shift/employees/"+workDayId, employeeResponse.getBody().getId(), ShiftResponseDto.class);
+        assertEquals(HttpStatus.OK, shiftResponseDtoResponseEntity.getStatusCode());
+        int index = shiftResponseDtoResponseEntity.getBody().getEmployees().indexOf(employeeResponse.getBody().getId());
+        assertEquals(employeeResponse.getBody().getId(), shiftResponseDtoResponseEntity.getBody().getEmployees().get(index));
+        return employeeResponse.getBody().getId();
+    }
 
-	private void testChangeDateOfShift(int workDayId, String startTimeValue, String endTimeValue) {
-		Map<String, String> dateMap = new HashMap<>();
-		dateMap.put("startTimeValue", startTimeValue);
-		dateMap.put("endTimeValue", endTimeValue);
-		ResponseEntity<ShiftResponseDto> response0 = client.getForEntity("/shift/" + workDayId, ShiftResponseDto.class);
-		client.put("/shift/" + workDayId + "/", dateMap);
-		ResponseEntity<ShiftResponseDto> response = client.getForEntity("/shift/" + workDayId, ShiftResponseDto.class);
-		assertEquals(LocalDateTime.parse(startTimeValue, formatter), response.getBody().getStartTime());
-		assertEquals(LocalDateTime.parse(endTimeValue, formatter), response.getBody().getEndTime());
-		assertNotEquals(response0.getBody().getStartTime(), response.getBody().getStartTime());
-		assertNotEquals(response0.getBody().getEndTime(), response.getBody().getEndTime());
-	}
+    private void testChangeDateOfShift(int workDayId, String startTimeValue, String endTimeValue) {
+        Map<String, String> dateMap = new HashMap<>();
+        dateMap.put("startTimeValue", startTimeValue);
+        dateMap.put("endTimeValue", endTimeValue);
+        ResponseEntity<ShiftResponseDto> response0 = client.getForEntity("/shift/"+workDayId, ShiftResponseDto.class);
+        client.put("/shift/"+workDayId+"/", dateMap);
+        ResponseEntity<ShiftResponseDto> response = client.getForEntity("/shift/"+workDayId, ShiftResponseDto.class);
+        assertEquals(LocalDateTime.parse(startTimeValue,formatter), response.getBody().getStartTime());
+        assertEquals(LocalDateTime.parse(endTimeValue,formatter), response.getBody().getEndTime());
+        assertNotEquals(response0.getBody().getStartTime(), response.getBody().getStartTime());
+        assertNotEquals(response0.getBody().getEndTime(),response.getBody().getEndTime());
+    }
 
-	@Test
-	public void testCreateAndGetShiftAndRemoveEmployeeFromShift() {
-		int workDayId = testCreateShift();
-		testGetShift(workDayId);
-		Person sam = new Person();
-		sam.setEmail("sfaubert9@gmail.com");
-		personRepository.save(sam);
-		EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
-		employeeRequestDto.setEmail("sfaubert9@gmail.com");
-		testRemoveEmployeeFromShift(workDayId, employeeRequestDto);
 
-	}
+    @Test
+    public void testCreateAndGetShiftAndRemoveEmployeeFromShift() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+        PersonRequestDto personRequestDto = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",museumRepository.findMuseumByMuseumId(this.museumId));
+        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
+        employeeRequestDto.setEmail("sfaubert9@gmail.com");
+        int employeeId = testAddEmployeeToShift(workDayId,personRequestDto,employeeRequestDto);
+        testRemoveEmployeeFromShift(workDayId, employeeId);
 
-	private void testRemoveEmployeeFromShift(int workDayId, EmployeeRequestDto employeeRequestDto) {
-		ResponseEntity<EmployeeResponseDto> employeeResponse = client.postForEntity("/employee", employeeRequestDto,
-				EmployeeResponseDto.class);
-		Map<String, Integer> idMap = new HashMap<>();
-		idMap.put("workDayId", workDayId);
-		idMap.put("employeeId", employeeResponse.getBody().getId());
-		ResponseEntity<ShiftResponseDto> shiftResponse0 = client.postForEntity("/shift/employees", idMap,
-				ShiftResponseDto.class);
-		int employeeId = shiftResponse0.getBody().getEmployees().get(0);
-		client.put("/shift/employees", idMap);
-		ResponseEntity<ShiftResponseDto> shiftResponse = client.getForEntity("/shift/" + workDayId,
-				ShiftResponseDto.class);
-		assertFalse(shiftResponse.getBody().getEmployees().contains(employeeId));
+    }
 
-	}
+    private void testRemoveEmployeeFromShift(int workDayId, int employeeId) {
+        ResponseEntity<ShiftResponseDto> shiftResponse0 = client.getForEntity("/shift/"+workDayId, ShiftResponseDto.class);
+        ResponseEntity<EmployeeResponseDto> employeeResponse = client.getForEntity("/employee/"+employeeId,EmployeeResponseDto.class);
+        client.put("/shift/employees/"+workDayId, employeeResponse.getBody().getId());
+        ResponseEntity<ShiftResponseDto> shiftResponse = client.getForEntity("/shift/"+workDayId, ShiftResponseDto.class);
+        assertFalse(shiftResponse.getBody().getEmployees().contains(employeeId));
 
-	@Test
-	public void testCreateGetAndDeleteShift() {
-		int workDayId = testCreateShift();
-		testGetShift(workDayId);
-		testDeleteShift(workDayId);
+    }
 
-	}
+    @Test
+    public void testCreateGetAndDeleteShift() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+        testDeleteShift(workDayId);
 
-	private void testDeleteShift(int workDayId) {
-		client.put("/shift/" + workDayId, null);
-		try {
-			client.getForEntity("/shift/" + workDayId, ShiftResponseDto.class);
-			fail("Shift was found");
-		} catch (RestClientException | IllegalArgumentException e) {
+    }
+    private void testDeleteShift(int workDayId) {
+        client.put("/shift/"+workDayId,null);
+        try {
+            client.getForEntity("/shift/"+workDayId,ShiftResponseDto.class);
+            fail("Shift was found");
+        } catch(RestClientException | IllegalArgumentException e) {
 
-		}
-	}
+        }
+    }
+
+    @Test
+    public void testCreateAndGetShiftAndCreateAndGetEmployees() {
+       List<Integer> employeeIds = new ArrayList<>();
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+        PersonRequestDto personRequestDto0 = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",museumRepository.findMuseumByMuseumId(this.museumId));
+        EmployeeRequestDto employeeRequestDto0 = new EmployeeRequestDto();
+        employeeRequestDto0.setEmail("sfaubert9@gmail.com");
+        employeeIds.add(testAddEmployeeToShift(workDayId,personRequestDto0,employeeRequestDto0));
+        PersonRequestDto personRequestDto1 = new PersonRequestDto("alex@gmail.com","yoyoA","Alex",museumRepository.findMuseumByMuseumId(this.museumId));
+        EmployeeRequestDto employeeRequestDto1 = new EmployeeRequestDto();
+        employeeRequestDto1.setEmail("alex@gmail.com");
+        employeeIds.add(testAddEmployeeToShift(workDayId,personRequestDto1,employeeRequestDto1));
+        PersonRequestDto personRequestDto2 = new PersonRequestDto("emma@gmail.com","yoyoE","Emma",museumRepository.findMuseumByMuseumId(this.museumId));
+        EmployeeRequestDto employeeRequestDto2 = new EmployeeRequestDto();
+        employeeRequestDto2.setEmail("emma@gmail.com");
+        employeeIds.add(testAddEmployeeToShift(workDayId,personRequestDto2,employeeRequestDto2));
+        testGetShiftEmployees(workDayId, employeeIds);
+
+    }
+    private void testGetShiftEmployees(int workDayId, List<Integer> employeeIds) {
+        ResponseEntity<Integer[]> employeeListResponse = client.getForEntity("/shift/employees/"+workDayId, Integer[].class);
+        List<Integer> responseEmployeeIds = Arrays.stream(employeeListResponse.getBody()).toList();
+        for(Integer e : employeeIds) {
+            assertTrue(responseEmployeeIds.contains(e));
+        }
+
+    }
+
+
 }
+
 

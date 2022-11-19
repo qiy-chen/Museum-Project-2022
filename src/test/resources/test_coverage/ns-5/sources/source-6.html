@@ -1,0 +1,409 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Loan</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Loan (ca.mcgill.ecse321.MuseumBackend.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Loan</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (20/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80.2%
+  </span>
+  <span class="absValue">
+    (85/106)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Loan$HibernateProxy$NWLyjMUq</td>
+  </tr>
+  <tr>
+    <td class="name">Loan$HibernateProxy$TcVMq9SM</td>
+  </tr>
+  <tr>
+    <td class="name">Loan$LoanStatus</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    91.3%
+  </span>
+  <span class="absValue">
+    (21/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80.4%
+  </span>
+  <span class="absValue">
+    (86/107)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*PLEASE DO NOT EDIT THIS CODE*/
+&nbsp;/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+&nbsp;
+&nbsp;package ca.mcgill.ecse321.MuseumBackend.model;
+&nbsp;import java.sql.Date;
+&nbsp;import javax.persistence.CascadeType;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.ManyToOne;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
+&nbsp;
+&nbsp;// line 42 &quot;../../../../../Museum.ump&quot;
+&nbsp;@Entity
+&nbsp;public class Loan
+&nbsp;{
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // ENUMERATIONS
+&nbsp;  //------------------------
+&nbsp;
+<b class="fc">&nbsp;  public enum LoanStatus { Requested, Approved, Denied, Returned }</b>
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // MEMBER VARIABLES
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;  //Loan Attributes
+&nbsp;  private double rentalFee;
+&nbsp;  private Date startDate;
+&nbsp;  private Date endDate;
+&nbsp;  private int numOfDays;
+&nbsp;  private LoanStatus status;
+&nbsp;  @Id
+&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)
+&nbsp;  private int loanId;
+&nbsp;
+&nbsp;  //Loan Associations
+&nbsp;  @ManyToOne(cascade = CascadeType.MERGE)
+&nbsp;  private Museum museum;
+&nbsp;  @ManyToOne(cascade = CascadeType.MERGE)
+&nbsp;  private Customer customer;
+&nbsp;  @ManyToOne(cascade = CascadeType.MERGE)
+&nbsp;  private Artwork artwork;
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // CONSTRUCTOR
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;  public Loan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, LoanStatus aStatus, int aLoanId, Museum aMuseum, Customer aCustomer, Artwork aArtwork)
+<b class="nc">&nbsp;  {</b>
+<b class="nc">&nbsp;    rentalFee = aRentalFee;</b>
+<b class="nc">&nbsp;    startDate = aStartDate;</b>
+<b class="nc">&nbsp;    endDate = aEndDate;</b>
+<b class="nc">&nbsp;    numOfDays = aNumOfDays;</b>
+<b class="nc">&nbsp;    status = aStatus;</b>
+<b class="nc">&nbsp;    loanId = aLoanId;</b>
+<b class="nc">&nbsp;    boolean didAddMuseum = setMuseum(aMuseum);</b>
+<b class="nc">&nbsp;    if (!didAddMuseum)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      throw new RuntimeException(&quot;Unable to create loan due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html&quot;);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    boolean didAddCustomer = setCustomer(aCustomer);</b>
+<b class="nc">&nbsp;    if (!didAddCustomer)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      throw new RuntimeException(&quot;Unable to create loan due to customer. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html&quot;);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    boolean didAddArtwork = setArtwork(aArtwork);</b>
+<b class="nc">&nbsp;    if (!didAddArtwork)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      throw new RuntimeException(&quot;Unable to create loan due to artwork. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html&quot;);</b>
+&nbsp;    }
+<b class="nc">&nbsp;  }</b>
+&nbsp;  
+<b class="fc">&nbsp;  public Loan() {</b>
+<b class="fc">&nbsp;    this.status = LoanStatus.Requested;</b>
+<b class="fc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // INTERFACE
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;	// TODO Auto-generated constructor stub
+&nbsp;
+&nbsp;
+&nbsp;public boolean setRentalFee(double aRentalFee)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    rentalFee = aRentalFee;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean setStartDate(Date aStartDate)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    startDate = aStartDate;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean setEndDate(Date aEndDate)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    endDate = aEndDate;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean setNumOfDays(int aNumOfDays)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    numOfDays = aNumOfDays;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean setStatus(LoanStatus aStatus)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    status = aStatus;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean setLoanId(int aLoanId)
+&nbsp;  {
+<b class="nc">&nbsp;    boolean wasSet = false;</b>
+<b class="nc">&nbsp;    loanId = aLoanId;</b>
+<b class="nc">&nbsp;    wasSet = true;</b>
+<b class="nc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public double getRentalFee()
+&nbsp;  {
+<b class="fc">&nbsp;    return rentalFee;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Date getStartDate()
+&nbsp;  {
+<b class="fc">&nbsp;    return startDate;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Date getEndDate()
+&nbsp;  {
+<b class="fc">&nbsp;    return endDate;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public int getNumOfDays()
+&nbsp;  {
+<b class="fc">&nbsp;    return numOfDays;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public LoanStatus getStatus()
+&nbsp;  {
+<b class="fc">&nbsp;    return status;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;  public int getLoanId()
+&nbsp;  {
+<b class="fc">&nbsp;    return loanId;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_GetOne */
+&nbsp;  public Museum getMuseum()
+&nbsp;  {
+<b class="fc">&nbsp;    return museum;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_GetOne */
+&nbsp;  public Customer getCustomer()
+&nbsp;  {
+<b class="fc">&nbsp;    return customer;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_GetOne */
+&nbsp;  public Artwork getArtwork()
+&nbsp;  {
+<b class="fc">&nbsp;    return artwork;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_SetOneToMany */
+&nbsp;  public boolean setMuseum(Museum aMuseum)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    if (aMuseum == null)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      return wasSet;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    Museum existingMuseum = museum;</b>
+<b class="fc">&nbsp;    museum = aMuseum;</b>
+<b class="fc">&nbsp;    if (existingMuseum != null &amp;&amp; !existingMuseum.equals(aMuseum))</b>
+&nbsp;    {
+<b class="fc">&nbsp;      existingMuseum.removeLoan(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    museum.addLoan(this);</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_SetOneToMany */
+&nbsp;  public boolean setCustomer(Customer aCustomer)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    if (aCustomer == null)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      return wasSet;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    Customer existingCustomer = customer;</b>
+<b class="fc">&nbsp;    customer = aCustomer;</b>
+<b class="fc">&nbsp;    if (existingCustomer != null &amp;&amp; !existingCustomer.equals(aCustomer))</b>
+&nbsp;    {
+<b class="fc">&nbsp;      existingCustomer.removeLoan(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    customer.addLoan(this);</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_SetOneToMany */
+&nbsp;  public boolean setArtwork(Artwork aArtwork)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    if (aArtwork == null)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      return wasSet;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    Artwork existingArtwork = artwork;</b>
+<b class="fc">&nbsp;    artwork = aArtwork;</b>
+<b class="fc">&nbsp;    if (existingArtwork != null &amp;&amp; !existingArtwork.equals(aArtwork))</b>
+&nbsp;    {
+<b class="fc">&nbsp;      existingArtwork.removeLoan(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    artwork.addLoan(this);</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void delete()
+&nbsp;  {
+<b class="fc">&nbsp;    Museum placeholderMuseum = museum;</b>
+<b class="fc">&nbsp;    this.museum = null;</b>
+<b class="fc">&nbsp;    if(placeholderMuseum != null)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      placeholderMuseum.removeLoan(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    Customer placeholderCustomer = customer;</b>
+<b class="fc">&nbsp;    this.customer = null;</b>
+<b class="fc">&nbsp;    if(placeholderCustomer != null)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      placeholderCustomer.removeLoan(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    Artwork placeholderArtwork = artwork;</b>
+<b class="fc">&nbsp;    this.artwork = null;</b>
+<b class="fc">&nbsp;    if(placeholderArtwork != null)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      placeholderArtwork.removeLoan(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;  }</b>
+&nbsp;
+&nbsp;
+&nbsp;  public String toString()
+&nbsp;  {
+<b class="fc">&nbsp;    return super.toString() + &quot;[&quot;+</b>
+<b class="fc">&nbsp;            &quot;rentalFee&quot; + &quot;:&quot; + getRentalFee()+ &quot;,&quot; +</b>
+<b class="fc">&nbsp;            &quot;numOfDays&quot; + &quot;:&quot; + getNumOfDays()+ &quot;,&quot; +</b>
+<b class="fc">&nbsp;            &quot;loanId&quot; + &quot;:&quot; + getLoanId()+ &quot;]&quot; + System.getProperties().getProperty(&quot;line.separator&quot;) +</b>
+<b class="fc">&nbsp;            &quot;  &quot; + &quot;startDate&quot; + &quot;=&quot; + (getStartDate() != null ? !getStartDate().equals(this)  ? getStartDate().toString().replaceAll(&quot;  &quot;,&quot;    &quot;) : &quot;this&quot; : &quot;null&quot;) + System.getProperties().getProperty(&quot;line.separator&quot;) +</b>
+<b class="fc">&nbsp;            &quot;  &quot; + &quot;endDate&quot; + &quot;=&quot; + (getEndDate() != null ? !getEndDate().equals(this)  ? getEndDate().toString().replaceAll(&quot;  &quot;,&quot;    &quot;) : &quot;this&quot; : &quot;null&quot;) + System.getProperties().getProperty(&quot;line.separator&quot;) +</b>
+<b class="fc">&nbsp;            &quot;  &quot; + &quot;status&quot; + &quot;=&quot; + (getStatus() != null ? !getStatus().equals(this)  ? getStatus().toString().replaceAll(&quot;  &quot;,&quot;    &quot;) : &quot;this&quot; : &quot;null&quot;) + System.getProperties().getProperty(&quot;line.separator&quot;) +</b>
+<b class="fc">&nbsp;            &quot;  &quot; + &quot;museum = &quot;+(getMuseum()!=null?Integer.toHexString(System.identityHashCode(getMuseum())):&quot;null&quot;) + System.getProperties().getProperty(&quot;line.separator&quot;) +</b>
+<b class="fc">&nbsp;            &quot;  &quot; + &quot;customer = &quot;+(getCustomer()!=null?Integer.toHexString(System.identityHashCode(getCustomer())):&quot;null&quot;) + System.getProperties().getProperty(&quot;line.separator&quot;) +</b>
+<b class="fc">&nbsp;            &quot;  &quot; + &quot;artwork = &quot;+(getArtwork()!=null?Integer.toHexString(System.identityHashCode(getArtwork())):&quot;null&quot;);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 15:34</div>
+</div>
+</body>
+</html>

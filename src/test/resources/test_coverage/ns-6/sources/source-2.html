@@ -1,0 +1,354 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ArtworkService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.service</a>
+</div>
+
+<h1>Coverage Summary for Class: ArtworkService (ca.mcgill.ecse321.MuseumBackend.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArtworkService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.5%
+  </span>
+  <span class="absValue">
+    (86/91)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ArtworkService$$EnhancerBySpringCGLIB$$e304f6fd</td>
+  </tr>
+  <tr>
+    <td class="name">ArtworkService$$EnhancerBySpringCGLIB$$e304f6fd$$FastClassBySpringCGLIB$$d0016421</td>
+  </tr>
+  <tr>
+    <td class="name">ArtworkService$$FastClassBySpringCGLIB$$855ff258</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.5%
+  </span>
+  <span class="absValue">
+    (86/91)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.service;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.Exception.ArtworkException;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.Exception.DisplayException;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.transaction.annotation.Transactional;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Display;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Room;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Storage;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class ArtworkService {</b>
+&nbsp;  
+&nbsp;  @Autowired
+&nbsp;  ArtworkRepository artworkRepository;
+&nbsp;  
+&nbsp;  @Autowired
+&nbsp;  StorageRepository storageRepository;
+&nbsp;  
+&nbsp;  @Autowired
+&nbsp;  DisplayRepository displayRepository;
+&nbsp;  
+&nbsp;  @Autowired
+&nbsp;  LoanRepository loanRepository;
+&nbsp;  
+&nbsp;  @Autowired
+&nbsp;  MuseumRepository museumRepository;
+&nbsp;  
+&nbsp;  @Autowired 
+&nbsp;  RoomRepository roomRepository;
+&nbsp;  
+&nbsp;  @Transactional
+&nbsp;  public Artwork createArtwork(ArtworkRequestDto artworkRequest) { 
+&nbsp;    
+<b class="fc">&nbsp;    Artwork art = new Artwork();</b>
+&nbsp;    
+<b class="fc">&nbsp;    if (artworkRequest.getArtworkName() == null || artworkRequest.getArtworkName() == &quot;&quot;) {</b>
+<b class="nc">&nbsp;      throw new ArtworkException(HttpStatus.BAD_REQUEST, &quot;Artwork must have a name.&quot;);</b>
+&nbsp;  }  
+<b class="fc">&nbsp;    art.setArtworkName(artworkRequest.getArtworkName());</b>
+<b class="fc">&nbsp;    art.setIsLoanable(false);            //automatically set to not loanable</b>
+<b class="fc">&nbsp;    art.setValue(0);                     //value is 0, not loanable   </b>
+&nbsp;    
+<b class="fc">&nbsp;    Museum mus = museumRepository.findMuseumByMuseumId(artworkRequest.getMuseumId());</b>
+&nbsp;    
+<b class="fc">&nbsp;    art.setMuseum(mus);</b>
+&nbsp;    
+<b class="fc">&nbsp;    Room r = roomRepository.findRoomByRoomId(artworkRequest.getRoomId());</b>
+&nbsp;    
+<b class="fc">&nbsp;    if (r == null) {throw new DisplayException(HttpStatus.NOT_FOUND, &quot;Room not found.&quot;);}</b>
+&nbsp;    
+<b class="fc">&nbsp;    if (r.isFull()) {throw new DisplayException(HttpStatus.BAD_REQUEST, &quot;Room is full&quot;);}</b>
+&nbsp;    
+<b class="fc">&nbsp;    art.setRoom(r);</b>
+&nbsp;    
+<b class="fc">&nbsp;    art = artworkRepository.save(art);</b>
+<b class="fc">&nbsp;    r.addArtwork(art);</b>
+<b class="fc">&nbsp;    mus.addArtwork(art);</b>
+&nbsp;    
+<b class="fc">&nbsp;    roomRepository.save(r);</b>
+<b class="fc">&nbsp;    museumRepository.save(mus);</b>
+&nbsp;    
+<b class="fc">&nbsp;    return art;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  @Transactional
+&nbsp;  public List&lt;Artwork&gt; getArtworksOnDisplay(){
+&nbsp;    
+<b class="fc">&nbsp;    List&lt;Artwork&gt; listOfArtworks = toList(artworkRepository.findAll());</b>
+<b class="fc">&nbsp;    List&lt;Artwork&gt; r = new ArrayList&lt;Artwork&gt;();</b>
+&nbsp;    
+<b class="fc">&nbsp;    for (Artwork a : listOfArtworks) {</b>
+&nbsp;     
+<b class="fc">&nbsp;      if (a.getRoom() instanceof Display) {</b>
+<b class="fc">&nbsp;        r.add(a);</b>
+&nbsp;      }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    return r;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  @Transactional
+&nbsp;  public List&lt;Artwork&gt; getArtworksByRoomId(int roomId){
+&nbsp;    
+<b class="fc">&nbsp;    List&lt;Artwork&gt; listOfArtworks = toList(artworkRepository.findAll());</b>
+<b class="fc">&nbsp;    List&lt;Artwork&gt; r = new ArrayList&lt;Artwork&gt;();</b>
+&nbsp;    
+<b class="fc">&nbsp;    for (Artwork a : listOfArtworks) {</b>
+&nbsp;     
+<b class="fc">&nbsp;      if (a.getRoom().getRoomId()== roomId) {</b>
+<b class="fc">&nbsp;        r.add(a);</b>
+&nbsp;      }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    return r;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  @Transactional
+&nbsp;  public List&lt;Artwork&gt; getArtworksOnStorage(){
+&nbsp;    
+<b class="fc">&nbsp;    List&lt;Artwork&gt; listOfArtworks = toList(artworkRepository.findAll());</b>
+<b class="fc">&nbsp;    List&lt;Artwork&gt; r = new ArrayList&lt;Artwork&gt;();</b>
+&nbsp;    
+<b class="fc">&nbsp;    for (Artwork a : listOfArtworks) {</b>
+&nbsp;     
+<b class="fc">&nbsp;      if (a.getRoom() instanceof Storage) {</b>
+<b class="fc">&nbsp;        r.add(a);</b>
+&nbsp;      }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    return r;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  //update fields 
+&nbsp;  @Transactional
+&nbsp;  public Artwork updateFields(int artId, String name, double value, boolean isLoanable) {
+&nbsp;    
+<b class="fc">&nbsp;    Artwork art = artworkRepository.findArtworkByArtworkId(artId);</b>
+&nbsp;    
+<b class="fc">&nbsp;    if (art == null) {</b>
+<b class="nc">&nbsp;      throw new ArtworkException(HttpStatus.NOT_FOUND, &quot;Artwork not found.&quot;);</b>
+&nbsp;  }
+&nbsp;
+<b class="fc">&nbsp;    if (name == &quot;&quot; || name == null) {</b>
+<b class="fc">&nbsp;      throw new ArtworkException(HttpStatus.BAD_REQUEST, &quot;Artwork must have a name.&quot;);</b>
+&nbsp;  }  
+&nbsp;    
+<b class="fc">&nbsp;    if (name != art.getArtworkName()) {</b>
+<b class="fc">&nbsp;    art.setArtworkName(name);} </b>
+&nbsp;    
+<b class="fc">&nbsp;    if (value != art.getValue()) {                                 //if the value is different </b>
+<b class="fc">&nbsp;      if ((art.getIsLoanable() == true ) || (isLoanable == true)) {</b>
+<b class="fc">&nbsp;        art.setValue(value);</b>
+&nbsp;      } else {
+<b class="fc">&nbsp;        throw new ArtworkException(HttpStatus.BAD_REQUEST, &quot;Artwork is not available for loan.&quot;);</b>
+&nbsp;    }
+&nbsp;      }
+&nbsp;    
+<b class="fc">&nbsp;    if (isLoanable != art.getIsLoanable()) {</b>
+&nbsp;      
+<b class="fc">&nbsp;      if (isLoanable != true  &amp;&amp; isLoanable != false) {throw new ArtworkException(HttpStatus.BAD_REQUEST, &quot;Artwork needs to be set to loanable or not loanable&quot;);}</b>
+&nbsp;      
+<b class="fc">&nbsp;    if (isLoanable == true) {</b>
+<b class="fc">&nbsp;      art.setIsLoanable(true);</b>
+<b class="nc">&nbsp;    } else {art.setIsLoanable(false); art.setValue(0.0);}</b>
+&nbsp;    }
+&nbsp;    
+<b class="fc">&nbsp;    art = artworkRepository.save(art);</b>
+&nbsp;    
+&nbsp;    //roomRepository.save(art.getRoom());
+&nbsp;    //museumRepository.save(art.getMuseum());
+&nbsp; 
+<b class="fc">&nbsp;    return art;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  //move art to another room
+&nbsp;  @Transactional
+&nbsp;  public Artwork moveArtwork(int artId, int roomId) {
+<b class="fc">&nbsp;    Artwork art = artworkRepository.findArtworkByArtworkId(artId);</b>
+&nbsp;    
+<b class="fc">&nbsp;    if (art == null) {</b>
+<b class="nc">&nbsp;      throw new ArtworkException(HttpStatus.NOT_FOUND, &quot;Artwork not found.&quot;);</b>
+&nbsp;  }
+<b class="fc">&nbsp;    Room r = roomRepository.findRoomByRoomId(roomId);</b>
+&nbsp;    
+<b class="fc">&nbsp;    if (r == null) {throw new DisplayException(HttpStatus.NOT_FOUND, &quot;Room not found.&quot;);}</b>
+&nbsp;    
+<b class="fc">&nbsp;    if (r.isFull()) {throw new DisplayException(HttpStatus.BAD_REQUEST, &quot;Room is full&quot;);}</b>
+&nbsp;    
+<b class="fc">&nbsp;    art.getRoom().removeArtwork(art);</b>
+<b class="fc">&nbsp;    roomRepository.save(art.getRoom());</b>
+&nbsp;    
+<b class="fc">&nbsp;    art.setRoom(r);</b>
+<b class="fc">&nbsp;    r.addArtwork(art);</b>
+&nbsp;    
+<b class="fc">&nbsp;    art = artworkRepository.save(art);</b>
+<b class="fc">&nbsp;    roomRepository.save(r);</b>
+<b class="fc">&nbsp;    return art;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  @Transactional
+&nbsp;  public Artwork getArtwork(int artId) {
+<b class="fc">&nbsp;    Artwork art = artworkRepository.findArtworkByArtworkId(artId);</b>
+&nbsp;    
+<b class="fc">&nbsp;    if (art == null) {</b>
+<b class="fc">&nbsp;      throw new ArtworkException(HttpStatus.NOT_FOUND, &quot;Artwork not found.&quot;);</b>
+&nbsp;  }
+<b class="fc">&nbsp;    return art; </b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  @Transactional
+&nbsp;  public List&lt;Artwork&gt; getAllArtwork() {
+<b class="fc">&nbsp;    return toList(artworkRepository.findAll());</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  @Transactional
+&nbsp;  public boolean deleteArtwork(int artId) {
+&nbsp;
+<b class="fc">&nbsp;      Artwork art = artworkRepository.findArtworkByArtworkId(artId);</b>
+&nbsp;      
+<b class="fc">&nbsp;      if (art == null) {</b>
+<b class="nc">&nbsp;        throw new ArtworkException(HttpStatus.NOT_FOUND, &quot;Artwork not found.&quot;);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;      Room room = art.getRoom();</b>
+<b class="fc">&nbsp;      room.removeArtwork(art);</b>
+&nbsp;      
+<b class="fc">&nbsp;      Museum mus = art.getMuseum();</b>
+<b class="fc">&nbsp;      mus.removeArtwork(art);</b>
+&nbsp;      
+<b class="fc">&nbsp;      art.delete();</b>
+<b class="fc">&nbsp;      artworkRepository.delete(art);        //delete artwork from repo</b>
+<b class="fc">&nbsp;      return true;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  //helper method 
+&nbsp;  private &lt;T&gt; List&lt;T&gt; toList(Iterable&lt;T&gt; iterable){
+<b class="fc">&nbsp;    List&lt;T&gt; resultList = new ArrayList&lt;T&gt;();</b>
+<b class="fc">&nbsp;    for (T t : iterable) {</b>
+<b class="fc">&nbsp;        resultList.add(t);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    return resultList;</b>
+&nbsp;}
+&nbsp;  
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 15:34</div>
+</div>
+</body>
+</html>

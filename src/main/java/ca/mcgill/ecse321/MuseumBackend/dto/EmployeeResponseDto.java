@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
@@ -11,7 +12,7 @@ public class EmployeeResponseDto {
 
 	private int id;
 	private PersonDto person;
-	private List<ShiftResponseDto> shifts;
+	private List<ShiftResponseDto> shifts = new ArrayList<>();
 	private String email;
 	public EmployeeResponseDto() {
 	}
