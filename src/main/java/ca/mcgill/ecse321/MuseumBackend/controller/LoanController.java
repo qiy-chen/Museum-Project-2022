@@ -42,6 +42,7 @@ public class LoanController {
   @PostMapping(value = {"/loans/delete/{id}/", "/loans/delete/{id}"})
   public ResponseEntity<LoanResponseDto> deleteLoan(@PathVariable("id") int loanId) throws IllegalArgumentException{
     Loan loan = service.deleteLoan(loanId);
+    System.out.println(loan + "THIS IS LNE IN CONTROLLER");
     return new ResponseEntity<LoanResponseDto>(convertToDto(loan), HttpStatus.OK);
   }
   @PostMapping(value = {"/loans/deny/{id}", "/loans/deny/{id}"})

@@ -27,9 +27,16 @@ public class LoanResponseDto {
     this.endDate = loan.getEndDate();
     this.rentalFee = loan.getRentalFee();
     this.status = loan.getStatus();
-    System.out.println("BYE BYE HOE" +loan.getArtwork());
-    //this.artworkId = loan.getArtwork().getArtworkId();
-    //this.customerId = loan.getCustomer().getPersonRoleId();
+    if(loan.getArtwork() != null) {
+      this.artworkId = loan.getArtwork().getArtworkId();
+    }
+    if(loan.getCustomer() != null) {
+      this.customerId = loan.getCustomer().getPersonRoleId();
+    }
+    if(loan.getMuseum() != null) {
+      this.museumId = loan.getMuseum().getMuseumId();
+    }
+   
   }
 
   public int getLoanId() {

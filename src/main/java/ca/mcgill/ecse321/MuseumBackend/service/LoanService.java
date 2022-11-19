@@ -93,13 +93,18 @@ public class LoanService {
   @Transactional
   public Loan deleteLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
+    System.out.println(loan + "HEY GUYS ITS ME AGAI");
     if(loan == null) {
       throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
     }
-
+    Customer customer = loan.getCustomer();
+    Artwork artwork = loan.getArtwork();
+    customer.removeLoan(loan);
+    artwork.removeLoan(loan);
     loanRepository.delete(loan);
 
     loan.delete();
+    System.out.println("reach here");
 
     return loan;
   }
@@ -116,11 +121,12 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
     }
     System.out.println(loan.getArtwork() + "THIS IS WRONG");
-    //Artwork artwork = loan.getArtwork();
+    Artwork artwork = loan.getArtwork();
+    
     LoanStatus status = loan.getStatus();
-    if(status.equals(LoanStatus.Requested) /*&& artwork.getIsLoanable() == true*/) {
+    if(status.equals(LoanStatus.Requested) && artwork.getIsLoanable() == true) {
       loan.setStatus(LoanStatus.Approved);
-      //artwork.setIsLoanable(false);
+      artwork.setIsLoanable(false);
       return loan;
     }
     else {
@@ -137,7 +143,7 @@ public class LoanService {
   public Loan returnArtworkandEndLoan(int loanId) {
 
     Loan loan = loanRepository.findLoanByLoanId(loanId);
-    //Artwork artwork = loan.getArtwork();
+    Artwork artwork = loan.getArtwork();
     LoanStatus status = loan.getStatus();
     if(status.equals(LoanStatus.Approved)) {
       loan.setStatus(LoanStatus.Returned);
