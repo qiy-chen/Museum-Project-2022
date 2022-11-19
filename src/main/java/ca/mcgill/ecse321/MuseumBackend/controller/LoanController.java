@@ -18,7 +18,7 @@ import ca.mcgill.ecse321.MuseumBackend.service.LoanService;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -27,7 +27,7 @@ public class LoanController {
   private LoanService service;
   
   @PostMapping(value = {"/loans", "/loans/"})
-  public ResponseEntity<LoanResponseDto> createLoan(@RequestBody LoanRequestDto loanRequestDto)throws IllegalArgumentException{
+  public ResponseEntity<LoanResponseDto> createLoan(@Valid @RequestBody LoanRequestDto loanRequestDto)throws IllegalArgumentException{
     LoanResponseDto a = service.createLoan(loanRequestDto);
     return new ResponseEntity<LoanResponseDto>(a, HttpStatus.CREATED);
   }
@@ -42,6 +42,7 @@ public class LoanController {
   @PostMapping(value = {"/loans/delete/{id}/", "/loans/delete/{id}"})
   public ResponseEntity<LoanResponseDto> deleteLoan(@PathVariable("id") int loanId) throws IllegalArgumentException{
     Loan loan = service.deleteLoan(loanId);
+    System.out.println(loan + "THIS IS LNE IN CONTROLLER");
     return new ResponseEntity<LoanResponseDto>(convertToDto(loan), HttpStatus.OK);
   }
   @PostMapping(value = {"/loans/deny/{id}", "/loans/deny/{id}"})

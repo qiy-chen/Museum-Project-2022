@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class MuseumBackendExceptionHandler extends ResponseEntityExceptionHandler {
+public class DisplayExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(MuseumBackendException.class)
-	public ResponseEntity<String> handleMuseumBackendException(MuseumBackendException ex) {
-		return new ResponseEntity<String>(ex.getMessage(), ex.getStatus());
-	}
-	
+    @ExceptionHandler(DisplayException.class)
+    public ResponseEntity<String> handleEventRegistrationException(DisplayException ex) {
+        return new ResponseEntity<String>(ex.getMessage(), ex.getStatus());
+    }
+    
 }

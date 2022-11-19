@@ -79,7 +79,7 @@ public class TestAdminIntegration {
 	public void testCreateInvalidAdmin() {
 		ResponseEntity<String> response = client.postForEntity("/admin", new AdminDto("   "), String.class);
 		assertNotNull(response);
-		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode(), "Response has correct status");
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
 	}
 
 	@Test

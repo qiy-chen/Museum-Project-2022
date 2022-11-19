@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
@@ -44,7 +44,7 @@ public class EmployeeService {
 		// don't want to create people from the role end)
 		Person person = personRepo.findPersonByEmail(email);
 		if (person == null) {
-			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Person with given email not found.");
+			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Person not found.");
 		}
 		if (person.isEmployee()) {
 			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Person with given email is already an employee.");
@@ -60,29 +60,25 @@ public class EmployeeService {
 	public List<Employee> getAllEmployees() {
 		return toList(employeeRepo.findAll());
 	}
+	
+	// find all shifts for one employee
+	@Transactional
+	public List<Shift> getShiftsForEmployee(int id) {
+		Employee employee = employeeRepo.findEmployeeByPersonRoleId(id);
+		if (employee == null)
+			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Employee not Found");
+		return employee.getShifts();
+	}
 
 	// remove employee from database
 	@Transactional
-	public Employee fireEmployee(int ID) {
-		
+	public void fireEmployee(int ID) {
 		// find employee if they exist
 		Employee employee = employeeRepo.findEmployeeByPersonRoleId(ID);
 		if (employee == null)
-			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Employee with given ID not found.");
-		
-		// untie references and update database
-		Person person = employee.getPerson();
-		person.removePersonRole(employee);
-		personRepo.save(person);
-		employeeRepo.save(employee);
-		List<Shift> shifts = employee.getShifts();
-		shifts.stream().map(s -> employee.removeShift(s));
-		shifts.stream().map(s -> shiftRepo.save(s));
-		employeeRepo.save(employee);
-		
-		// delete employee
+			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Employee not found.");
 		employeeRepo.delete(employee);
-		return employee;
+		employee.delete();
 	}
 
 	// convert ArrayList to List

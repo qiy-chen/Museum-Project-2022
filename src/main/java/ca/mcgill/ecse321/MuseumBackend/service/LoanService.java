@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
@@ -37,7 +37,7 @@ public class LoanService {
 
   /**
    * @author alextsah
-   * @param  LoanRequestDto loanRequest that contains the loan that is going to be created
+   * @param LoanRequestDto loanRequest that contains the loan that is going to be created
    * @return LoanResponseDto returns the loan created as a loan respoonse
    */
   @Transactional
@@ -93,13 +93,18 @@ public class LoanService {
   @Transactional
   public Loan deleteLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
+    System.out.println(loan + "HEY GUYS ITS ME AGAI");
     if(loan == null) {
       throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
     }
-
+    Customer customer = loan.getCustomer();
+    Artwork artwork = loan.getArtwork();
+    customer.removeLoan(loan);
+    artwork.removeLoan(loan);
     loanRepository.delete(loan);
 
     loan.delete();
+    System.out.println("reach here");
 
     return loan;
   }
@@ -116,11 +121,12 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
     }
     System.out.println(loan.getArtwork() + "THIS IS WRONG");
-    //Artwork artwork = loan.getArtwork();
+    Artwork artwork = loan.getArtwork();
+    
     LoanStatus status = loan.getStatus();
-    if(status.equals(LoanStatus.Requested) /*&& artwork.getIsLoanable() == true*/) {
+    if(status.equals(LoanStatus.Requested) && artwork.getIsLoanable() == true) {
       loan.setStatus(LoanStatus.Approved);
-      //artwork.setIsLoanable(false);
+      artwork.setIsLoanable(false);
       return loan;
     }
     else {
@@ -137,7 +143,7 @@ public class LoanService {
   public Loan returnArtworkandEndLoan(int loanId) {
 
     Loan loan = loanRepository.findLoanByLoanId(loanId);
-    //Artwork artwork = loan.getArtwork();
+    Artwork artwork = loan.getArtwork();
     LoanStatus status = loan.getStatus();
     if(status.equals(LoanStatus.Approved)) {
       loan.setStatus(LoanStatus.Returned);
@@ -169,6 +175,10 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't deny this loan");
     }
   }
+  /**
+   * @author emmakawczynski and alextsah
+   * @return List<Loans> returns all the loans
+   */
   @Transactional
   public List<Loan> getAllLoans() {
     return toList(loanRepository.findAll());

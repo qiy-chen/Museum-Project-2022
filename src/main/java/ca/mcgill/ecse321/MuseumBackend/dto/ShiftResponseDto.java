@@ -7,6 +7,7 @@ import java.util.List;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 
 public class ShiftResponseDto {
 
@@ -33,7 +34,17 @@ public class ShiftResponseDto {
 			}
 		}
 
-
+	public ShiftResponseDto(Shift shift) {
+		
+		this.startTime = shift.getStartTime();
+		this.endTime = shift.getEndTime();
+		this.workDayId = shift.getWorkDayId();
+		this.museum = shift.getMuseum();
+			for (Employee e : shift.getEmployees()) {
+				Integer employeeId = e.getPersonRoleId();
+				this.employeeIds.add(employeeId);
+			}
+		}
 
 
 	public int getWorkDayId() {

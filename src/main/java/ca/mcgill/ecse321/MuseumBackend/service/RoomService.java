@@ -4,7 +4,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.Exception.DisplayException;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Room;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
@@ -61,11 +61,11 @@ public class RoomService {
     Display display = displayRepository.findDisplayByRoomId(aRoomId);
     
     if (display == null) {
-      throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Display not found.");
+      throw new DisplayException(HttpStatus.NOT_FOUND, "Display not found.");
     }
     
     if (display.numberOfArtworks() > 0) {
-      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Display room is not empty");
+      throw new DisplayException(HttpStatus.BAD_REQUEST, "Display room is not empty");
       
     }
     
@@ -77,7 +77,7 @@ public class RoomService {
   public Room getRoom(int aRoomId) {
     Room room = roomRepository.findRoomByRoomId(aRoomId);
     
-    if (room ==null ) {throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Room not found.");}
+    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
     
     return room; 
   }
@@ -85,7 +85,7 @@ public class RoomService {
   @Transactional
   public Storage createStorageRoom(int aRoomNumber) {
     
-    if (storageRepository.count() >= 1 ) {throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Already one existing storage room.");}
+    if (storageRepository.count() >= 1 ) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Already one existing storage room.");}
     
     Storage storage = new Storage();
     
