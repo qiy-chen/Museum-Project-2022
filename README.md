@@ -27,7 +27,7 @@ Role Responsibilities<br />
 | ------------- | --- | --- | --- | --- |
 | Abdo Elie-Dimitri  | 20 | 30 |  |  |
 | Chen Qi  | 20 | 30 |  |  |
-| Faubert Samuel  | 24 | 30 |  |  |
+| Faubert Samuel  | 24 | 45 |  |  |
 | Kawczynski Emma  | 19 | 30 |  |  |
 | Looman Jeanine  | 18 | 30 |  |  |
 | Tsahageas Alex | 20 | 30 |  |  |
