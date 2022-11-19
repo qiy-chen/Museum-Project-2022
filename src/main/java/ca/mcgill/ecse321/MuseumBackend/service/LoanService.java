@@ -18,21 +18,23 @@ import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import java.sql.Date;
-  
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class LoanService {
   @Autowired
   LoanRepository loanRepository;
-  
+
   @Autowired
   CustomerRepository customerRepository;
-  
+
   @Autowired
   ArtworkRepository artworkRepository;
-  
+
   @Autowired
   MuseumRepository museumRepository;
-  
+
   /**
    * @author alextsah
    * @param LoanRequestDto loanRequest that contains the loan that is going to be created
@@ -67,10 +69,10 @@ public class LoanService {
     if(loanRequest.getLoanStatusAsNumber() == 3) {
       loan.setStatus(LoanStatus.Returned);
     }
-   // System.out.println(loanRequest.getLoanStatusAsNumber() + "THIS IS THE IDENTIFIER ALEX");
+    // System.out.println(loanRequest.getLoanStatusAsNumber() + "THIS IS THE IDENTIFIER ALEX");
     loanRepository.save(loan);
     return new LoanResponseDto(loan);
-    
+
   }
   /**
    * @author alextsah
@@ -82,7 +84,7 @@ public class LoanService {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     return loan;
   }
-  
+
   /**
    * @author emmakawczynski
    * @param int loanId to find the loan from the repository
@@ -94,14 +96,14 @@ public class LoanService {
     if(loan == null) {
       throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
     }
-    
+
     loanRepository.delete(loan);
-    
+
     loan.delete();
-    
+
     return loan;
   }
-  
+
   /**
    * @author emmakawczynski
    * @param int loanId to find the loan from the repository
@@ -125,7 +127,7 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't approve this loan");
     }
   }
-  
+
   /**
    * @author emmakawczynski
    * @param int loanId to find the loan from the repository
@@ -133,7 +135,7 @@ public class LoanService {
    */
   @Transactional
   public Loan returnArtworkandEndLoan(int loanId) {
-    
+
     Loan loan = loanRepository.findLoanByLoanId(loanId);
     //Artwork artwork = loan.getArtwork();
     LoanStatus status = loan.getStatus();
@@ -145,7 +147,7 @@ public class LoanService {
     else {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't return this loan");
     }
-    
+
   }
   /**
    * @author emmakawczynski
@@ -167,4 +169,16 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't deny this loan");
     }
   }
+  @Transactional
+  public List<Loan> getAllLoans() {
+    return toList(loanRepository.findAll());
+  }
+    
+  private <T> List<T> toList(Iterable<T> iterable){
+       List<T> resultList = new ArrayList<T>();
+        for (T t : iterable) {
+              resultList.add(t);
+          }
+        return resultList;
+      }
 }
