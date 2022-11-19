@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.exception.ArtworkException;
-import ca.mcgill.ecse321.MuseumBackend.exception.DisplayException;
+import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
@@ -50,7 +49,7 @@ public class ArtworkService {
     Artwork art = new Artwork();
     
     if (artworkRequest.getArtworkName() == null) {
-      throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
+      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
   }  
     art.setArtworkName(artworkRequest.getArtworkName());
     art.setIsLoanable(false);            //automatically set to not loanable
@@ -62,9 +61,9 @@ public class ArtworkService {
     
     Room r = roomRepository.findRoomByRoomId(artworkRequest.getRoomId());
     
-    if (r == null) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
+    if (r == null) {throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Room not found.");}
     
-    if (r.isFull()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
+    if (r.isFull()) {throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Room is full");}
     
     art.setRoom(r);
     
@@ -139,11 +138,11 @@ public class ArtworkService {
 
     
     if (art == null) {
-      throw new ArtworkException(HttpStatus.NOT_FOUND, "Artwork not found.");
+      throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Artwork not found.");
   }
 
 //    if (name == null) {
-//      throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
+//      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
 //  }  
 //    
 //    if (name != art.getArtworkName()) {
@@ -153,13 +152,13 @@ public class ArtworkService {
 //      if ((art.getIsLoanable() == true ) || (isLoanable == true)) {
 //        art.setValue(value);
 //      } else {
-//        throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork is not available for loan.");
+//        throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Artwork is not available for loan.");
 //    }
 //      }
 //    
 //    if (isLoanable != art.getIsLoanable()) {
 //      
-//      if (isLoanable != true  && isLoanable != false) {throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork needs to be set to loanable or not loanable");}
+//      if (isLoanable != true  && isLoanable != false) {throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Artwork needs to be set to loanable or not loanable");}
 //      
 //    if (isLoanable == true) {
 //      art.setIsLoanable(true);
@@ -190,11 +189,11 @@ public class ArtworkService {
       s = storageRepository.findStorageByRoomId(roomId);
     }
     
-    if (d == null && s== null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
+    if (d == null && s== null ) {throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Room not found.");}
     
     if (d != null) {
       
-      if (d.numberOfArtworks() >= d.getMaxArtworks()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
+      if (d.numberOfArtworks() >= d.getMaxArtworks()) {throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Room is full");}
       
       art.setRoom(d);
       d.addArtwork(art);
@@ -216,7 +215,7 @@ public class ArtworkService {
     Artwork art = artworkRepository.findArtworkByArtworkId(artId);
     
     if (art == null) {
-      throw new ArtworkException(HttpStatus.NOT_FOUND, "Artwork not found.");
+      throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Artwork not found.");
   }
     return art; 
   }
@@ -231,7 +230,7 @@ public class ArtworkService {
       Artwork art = artworkRepository.findArtworkByArtworkId(artId);
       
       if (art == null) {
-        throw new ArtworkException(HttpStatus.NOT_FOUND, "Artwork not found.");
+        throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Artwork not found.");
     }
 
       Room room = art.getRoom();

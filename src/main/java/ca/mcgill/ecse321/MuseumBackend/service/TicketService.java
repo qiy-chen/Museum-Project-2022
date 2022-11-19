@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ca.mcgill.ecse321.MuseumBackend.exception.TicketException;
+import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
@@ -42,7 +42,7 @@ public class TicketService {
   public Ticket getTicketByTicketId(int id) {
     Ticket ticket = ticketRepository.findTicketByTicketId(id);
     if (ticket == null) {
-      throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
+      throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Ticket not found.");
     }
     return ticket;
   }
@@ -50,7 +50,7 @@ public class TicketService {
   @Transactional
   public Ticket createTicket(Ticket ticket) {
     if (ticket.getTicketDate()==null||ticket.getPrice()<0) {
-      throw new TicketException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
+      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
     }
     return ticketRepository.save(ticket);
   }
@@ -60,7 +60,7 @@ public class TicketService {
     //Replace old ticket with id, 'id', with the new ticket
     Ticket oldTicket = ticketRepository.findTicketByTicketId(id);
     if (ticket.getTicketDate()==null||ticket.getPrice()<0) {
-      throw new TicketException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
+      throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "The ticket to be created contains invalid data.");
     }
     else if (oldTicket == null) {
       //Create a new ticket
@@ -103,11 +103,11 @@ public class TicketService {
         return success;
       }
       else {
-        throw new TicketException(HttpStatus.FORBIDDEN, "Too late to make cancelation.");
+        throw new MuseumBackendException(HttpStatus.FORBIDDEN, "Too late to make cancelation.");
       }
     }
     else {
-      throw new TicketException(HttpStatus.FORBIDDEN, "Wrong customer id.");
+      throw new MuseumBackendException(HttpStatus.FORBIDDEN, "Wrong customer id.");
     }
 
   }

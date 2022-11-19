@@ -24,7 +24,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.http.HttpStatus;
 
-import ca.mcgill.ecse321.MuseumBackend.exception.TicketException;
+import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
@@ -67,7 +67,7 @@ public class TestTicketService {
     when(ticketRepo.findTicketByTicketId(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
 
     // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.getTicketByTicketId(invalidId));
+    MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> ticketService.getTicketByTicketId(invalidId));
 
     // check results
     assertEquals("Ticket not found.", ex.getMessage());
@@ -169,7 +169,7 @@ public class TestTicketService {
     ticket.setPrice(-1);
 
     // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.createTicket(ticket));
+    MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> ticketService.createTicket(ticket));
 
     // check results
     assertEquals("The ticket to be created contains invalid data.", ex.getMessage());
@@ -184,7 +184,7 @@ public class TestTicketService {
     ticket.setPrice(10);
 
     // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.createTicket(ticket));
+    MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> ticketService.createTicket(ticket));
 
     // check results
     assertEquals("The ticket to be created contains invalid data.", ex.getMessage());
@@ -261,7 +261,7 @@ public class TestTicketService {
     ticketTwo.setPrice(-9);
     
     // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.replaceTicket(ticketTwo, id));
+    MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> ticketService.replaceTicket(ticketTwo, id));
 
     // check results
     assertEquals("The ticket to be created contains invalid data.", ex.getMessage());
@@ -281,7 +281,7 @@ public class TestTicketService {
     ticketTwo.setPrice(10.00);
     
     // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.replaceTicket(ticketTwo, id));
+    MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> ticketService.replaceTicket(ticketTwo, id));
 
     // check results
     assertEquals("The ticket to be created contains invalid data.", ex.getMessage());
@@ -305,7 +305,7 @@ public class TestTicketService {
 
     when(ticketRepo.findTicketByTicketId(id)).thenAnswer((InvocationOnMock invocation) -> null);
     // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.deleteTicket(id));
+    MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> ticketService.deleteTicket(id));
 
     // check results
     assertEquals("Ticket not found.", ex.getMessage());
@@ -380,7 +380,7 @@ public class TestTicketService {
     Mockito.doReturn(currentDate).when(ticketService).getCurrentDate();
     
     // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.cancelTicket(id, customerId1));
+    MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> ticketService.cancelTicket(id, customerId1));
 
     // check results
     assertEquals("Wrong customer id.", ex.getMessage());
@@ -416,7 +416,7 @@ public class TestTicketService {
     Mockito.doReturn(currentDate).when(ticketService).getCurrentDate();
     
     // call method, and obtain resulting exception
-    TicketException ex = assertThrows(TicketException.class, () -> ticketService.cancelTicket(id, customerId));
+    MuseumBackendException ex = assertThrows(MuseumBackendException.class, () -> ticketService.cancelTicket(id, customerId));
 
     // check results
     assertEquals("Too late to make cancelation.", ex.getMessage());
