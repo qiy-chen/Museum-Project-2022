@@ -173,12 +173,13 @@ public class LoanService {
   public List<Loan> getAllLoans() {
     return toList(loanRepository.findAll());
   }
-    
   private <T> List<T> toList(Iterable<T> iterable){
-       List<T> resultList = new ArrayList<T>();
-        for (T t : iterable) {
-              resultList.add(t);
-          }
-        return resultList;
-      }
+    List<T> resultList = new ArrayList<T>();
+    for(T t: iterable) {
+      resultList.add(t);
+    }
+    return resultList;
+  }
+  
+  
 }
