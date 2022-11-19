@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
+import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
 
 @RestController
@@ -40,10 +41,9 @@ public class EmployeeController {
 	}
 	
 	// fire employee by ID
-	@DeleteMapping("/employee/fire/{id}")
-	public ResponseEntity<EmployeeResponseDto> fireEmployee(@PathVariable int id) {
-		EmployeeResponseDto response = new EmployeeResponseDto(employeeService.fireEmployee(id));
-		return new ResponseEntity<EmployeeResponseDto>(response, HttpStatus.OK);
+	@DeleteMapping("/employee/{id}")
+	public void fireEmployee(@PathVariable int id) {
+		employeeService.fireEmployee(id);
 	}
 	
 	// get all employees
@@ -51,6 +51,16 @@ public class EmployeeController {
 	public ResponseEntity<List<EmployeeResponseDto>> getAllEmployees() {
 		List<Employee> employees = employeeService.getAllEmployees();
 		ArrayList<EmployeeResponseDto> employeeDtos = new ArrayList<>();
+		for (Employee e : employees)
+			employeeDtos.add(new EmployeeResponseDto(e));
+		return new ResponseEntity<List<EmployeeResponseDto>>(toList(employeeDtos), HttpStatus.OK);
+	}
+	
+	// get all shifts for employee
+	@GetMapping("/employee/{id}")
+	public ResponseEntity<List<EmployeeResponseDto>> getShiftsForEmployee(@PathVariable int id) {
+		List<Shift> shifts = employeeService.getShiftsForEmployee(id);
+		ArrayList<ShiftResponseDto> employeeDtos = new ArrayList<>();
 		for (Employee e : employees)
 			employeeDtos.add(new EmployeeResponseDto(e));
 		return new ResponseEntity<List<EmployeeResponseDto>>(toList(employeeDtos), HttpStatus.OK);

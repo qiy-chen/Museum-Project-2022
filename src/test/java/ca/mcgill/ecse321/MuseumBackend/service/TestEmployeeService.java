@@ -158,11 +158,9 @@ public class TestEmployeeService {
 		when(employeeRepo.findEmployeeByPersonRoleId(id)).thenAnswer(x -> smith);
 		
 		// call method
-		Employee returnedEmployee = employeeService.fireEmployee(id);
+		employeeService.fireEmployee(id);
 		
 		// check results
-		assertNotNull(returnedEmployee);
-		assertEquals(id, returnedEmployee.getPersonRoleId());
 		verify(employeeRepo,times(1)).delete(smith);
 	}
 	

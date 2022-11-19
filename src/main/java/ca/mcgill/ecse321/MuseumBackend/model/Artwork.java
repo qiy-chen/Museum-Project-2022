@@ -27,11 +27,11 @@ public class Artwork
   private String artworkName;
 
   //Artwork Associations
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private Museum museum;
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private Room room;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Loan> loans;
 
   //------------------------
