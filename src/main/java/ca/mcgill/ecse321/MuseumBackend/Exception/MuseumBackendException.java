@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.MuseumBackend.exception;
+package ca.mcgill.ecse321.MuseumBackend.Exception;
 
 import org.springframework.http.HttpStatus;
 

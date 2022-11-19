@@ -19,7 +19,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
-import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
@@ -143,8 +143,8 @@ public class TestEmployeeService {
 				() -> employeeService.createEmployee(email));
 
 		// check results
-		assertEquals(ex.getMessage(), "Person with given email not found.");
-		assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+		assertEquals(ex.getMessage(), "Person not found.");
+		assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
 	}
 	
 	// test delete employee
@@ -164,11 +164,9 @@ public class TestEmployeeService {
 		when(employeeRepo.findEmployeeByPersonRoleId(id)).thenAnswer(x -> smith);
 		
 		// call method
-		Employee returnedEmployee = employeeService.fireEmployee(id);
+		employeeService.fireEmployee(id);
 		
 		// check results
-		assertNotNull(returnedEmployee);
-		assertEquals(id, returnedEmployee.getPersonRoleId());
 		verify(employeeRepo,times(1)).delete(smith);
 	}
 	
@@ -183,8 +181,8 @@ public class TestEmployeeService {
 				() -> employeeService.fireEmployee(Integer.MAX_VALUE));
 
 		// check results
-		assertEquals(ex.getMessage(), "Employee with given ID not found.");
-		assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+		assertEquals(ex.getMessage(), "Employee not found.");
+		assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
 	}
 	
 	// test get all employees

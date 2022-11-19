@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.MuseumBackend.integration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 
+import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
@@ -90,7 +93,7 @@ public class TestEmployeeIntegration {
 	public void testCreateInvalidEmployee() {
 		ResponseEntity<String> response = client.postForEntity("/employee", new EmployeeDto("   "), String.class);
 		assertNotNull(response);
-		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode(), "Response has correct status");
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
 	}
 
 	@Test
@@ -129,22 +132,28 @@ public class TestEmployeeIntegration {
 	}
 	
 	// test fire employee
-//	@Test
-//	public void testFireEmployee() {
-//		
-//		// setup - make employee and check they are saved
-//		String email = "bilbo@baggins.com";
-//		int bilboID = testCreateEmployee(email);
-//		testGetEmployee(bilboID, email);
-//		
-//		// fire the employee
-//		ResponseEntity<EmployeeDto> response = client.exchange("/employee/fire/" + bilboID, HttpMethod.DELETE, null, EmployeeDto.class);
-//		
-//		System.out.println(response.getStatusCodeValue());
-//		
-//		//check that they cannot be found
-//		getInvalidEmployee(bilboID);
-//	}
+	@Test
+	public void testFireEmployee() {
+		
+		// setup - make employee and check they are saved
+		String email = "bilbo@baggins.com";
+		int bilboID = testCreateEmployee(email);
+		testGetEmployee(bilboID, email);
+		
+		// fire the employee
+		testFireEmployee(bilboID);
+		
+		//check that they cannot be found
+		getInvalidEmployee(bilboID);
+	}
+	
+	private void testFireEmployee(int id) {
+        client.delete("/employee/"+id);
+        try {
+            client.getForEntity("/employee/"+id,EmployeeResponseDto.class);
+            fail("Person was found!");
+        }catch (RestClientException|IllegalArgumentException e) {}
+    }
 }
 
 class EmployeeDto {
