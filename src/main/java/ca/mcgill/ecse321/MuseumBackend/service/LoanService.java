@@ -93,14 +93,11 @@ public class LoanService {
     if(loan == null) {
       throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
     }
-    Artwork artwork = loan.getArtwork();
-    artwork.removeLoan(loan);
-    Customer customer = loan.getCustomer();
-    customer.removeLoan(loan);
-    artworkRepository.save(artwork);
-    customerRepository.save(customer);
-    loan.delete();
+    
     loanRepository.delete(loan);
+    
+    loan.delete();
+    
     return loan;
   }
   
@@ -115,9 +112,10 @@ public class LoanService {
     if(loan == null) {
       throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
     }
+    System.out.println(loan.getArtwork() + "THIS IS WRONG");
     Artwork artwork = loan.getArtwork();
     LoanStatus status = loan.getStatus();
-    if(status.equals(LoanStatus.Requested) && artwork.getIsLoanable() == true && loan != null) {
+    if(status.equals(LoanStatus.Requested) && artwork.getIsLoanable() == true) {
       loan.setStatus(LoanStatus.Approved);
       artwork.setIsLoanable(false);
       return loan;
@@ -154,12 +152,15 @@ public class LoanService {
   @Transactional
   public Loan denyLoan(int loanId) {
     Loan loan = loanRepository.findLoanByLoanId(loanId);
+    System.out.println(loan.getStatus());
     LoanStatus status = loan.getStatus();
     if(status.equals(LoanStatus.Requested)) {
       loan.setStatus(LoanStatus.Denied);
+      System.out.println("Alex is a stupid bitch");
       return loan;
     }
     else {
+      System.out.println("HI GUYS ITS ME");
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't deny this loan");
     }
   }

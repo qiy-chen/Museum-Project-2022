@@ -24,11 +24,12 @@ public class LoanResponseDto {
     this.numOfDays = loan.getNumOfDays();
     this.startDate = loan.getStartDate();
     this.endDate = loan.getEndDate();
-    System.out.println("hehe"+startDate);
-    //this.dateAsString = loan.getStartDate().toString();
     this.endDate = loan.getEndDate();
     this.rentalFee = loan.getRentalFee();
     this.status = loan.getStatus();
+    System.out.println("BYE BYE HOE" +loan.getArtwork());
+    this.artworkId = loan.getArtwork().getArtworkId();
+    //this.customerId = loan.getCustomer().getPersonRoleId();
   }
 
   public int getLoanId() {

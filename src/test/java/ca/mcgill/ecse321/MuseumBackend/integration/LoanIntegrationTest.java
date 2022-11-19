@@ -73,7 +73,7 @@ public class LoanIntegrationTest {
     customerRepository.save(customer);
     String startDate="2015-03-31"; 
     String endDate = "2015-04-29";
-    int statusNumber = 1;
+    int statusNumber = 2;
     int numOfDays = 3;
     double rentalFee = 2.5;
     
@@ -86,7 +86,7 @@ public class LoanIntegrationTest {
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
     assertNotNull(response.getBody());
-    assertEquals(LoanStatus.Denied,response.getBody().getStatus());
+    assertEquals(LoanStatus.Requested,response.getBody().getStatus());
     assertEquals(numOfDays, response.getBody().getNumOfDays());
     assertEquals(rentalFee, response.getBody().getRentalFee());
     assertEquals(artworkId, response.getBody().getArtworkId());
@@ -111,10 +111,75 @@ public class LoanIntegrationTest {
     assertEquals(0,response.getBody().getMuseumId());
     assertEquals("2015-03-30",response.getBody().getStartDate().toString());
     assertEquals("2015-04-28",response.getBody().getEndDate().toString());
-    assertEquals(LoanStatus.Denied,response.getBody().getStatus());
+    assertEquals(LoanStatus.Requested,response.getBody().getStatus());
     
   }
-  
-  
-  
+  @Test
+  public void testCreateandDeleteLoan() {
+    int id= testCreateLoan();
+    testDeleteLoan(id);
+  }
+  private void testDeleteLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    Museum museum = new Museum();
+    loan.setMuseum(museum);
+    Artwork artwork = new Artwork();
+    loan.setArtwork(artwork);
+    artwork.addLoan(loan);
+    Customer customer = new Customer();
+    loan.setCustomer(customer);
+    customer.addLoan(loan);
+    LoanRequestDto loanreq = new LoanRequestDto(1, "2015-03-31","2015-04-29", 3, 2.5, artwork.getArtworkId(), customer.getPersonRoleId(), 0);
+    ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans/delete/" + loanId, loanreq, LoanResponseDto.class);
+    assertNotNull(response);
+    assertNull(loanRepository.findLoanByLoanId(loanId));
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+  }
+ 
+  @Test
+  public void testCreateandDenyLoan() {
+    int id= testCreateLoan();
+    testDenyLoan(id);
+  }
+  private void testDenyLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    Museum museum = new Museum();
+    loan.setMuseum(museum);
+    Artwork artwork = new Artwork();
+    loan.setArtwork(artwork);
+    artwork.addLoan(loan);
+    Customer customer = new Customer();
+    loan.setCustomer(customer);
+    customer.addLoan(loan);
+    LoanRequestDto loanreq = new LoanRequestDto(2, "2015-03-31","2015-04-29", 3, 2.5, artwork.getArtworkId(), customer.getPersonRoleId(), 0);
+    ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans/deny/" + loanId, loanreq, LoanResponseDto.class);
+    assertNotNull(response);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertEquals(LoanStatus.Denied,response.getBody().getStatus());
+  }
+  /*
+  @Test
+  public void testCreateAndApproveLoan() {
+    int id = testCreateLoan();
+    testApproveLoan(id);
+  }
+  private void testApproveLoan(int loanId) {
+    Loan loan = loanRepository.findLoanByLoanId(loanId);
+    Museum museum = new Museum();
+    loan.setMuseum(museum);
+    Artwork artwork = new Artwork();
+    artwork.setIsLoanable(true);
+    loan.setArtwork(artwork);
+    artwork.addLoan(loan);
+    Customer customer = new Customer();
+    loan.setCustomer(customer);
+    customer.addLoan(loan);
+    LoanRequestDto loanreq = new LoanRequestDto(2, "2015-03-31","2015-04-29", 3, 2.5, artwork.getArtworkId(), customer.getPersonRoleId(), 0);
+    ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans/approve/" + loanId, loanreq, LoanResponseDto.class);
+    assertNotNull(response);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertEquals(LoanStatus.Approved,response.getBody().getStatus());
+    assertEquals(loan.getArtwork().getIsLoanable(), false);
+  }
+  */
 }
