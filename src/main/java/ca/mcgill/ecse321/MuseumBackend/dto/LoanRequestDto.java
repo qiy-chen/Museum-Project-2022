@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import java.sql.Date;
 
 public class LoanRequestDto {
   private int loanId;

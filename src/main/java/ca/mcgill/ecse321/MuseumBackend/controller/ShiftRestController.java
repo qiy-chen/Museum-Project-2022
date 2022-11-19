@@ -1,8 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.controller;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
@@ -15,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
