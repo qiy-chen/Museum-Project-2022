@@ -28,7 +28,7 @@ public class LoanResponseDto {
     this.rentalFee = loan.getRentalFee();
     this.status = loan.getStatus();
     System.out.println("BYE BYE HOE" +loan.getArtwork());
-    this.artworkId = loan.getArtwork().getArtworkId();
+    //this.artworkId = loan.getArtwork().getArtworkId();
     //this.customerId = loan.getCustomer().getPersonRoleId();
   }
 

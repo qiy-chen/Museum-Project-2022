@@ -67,6 +67,7 @@ public class LoanService {
     if(loanRequest.getLoanStatusAsNumber() == 3) {
       loan.setStatus(LoanStatus.Returned);
     }
+   // System.out.println(loanRequest.getLoanStatusAsNumber() + "THIS IS THE IDENTIFIER ALEX");
     loanRepository.save(loan);
     return new LoanResponseDto(loan);
     
@@ -113,11 +114,11 @@ public class LoanService {
       throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Loan not found");
     }
     System.out.println(loan.getArtwork() + "THIS IS WRONG");
-    Artwork artwork = loan.getArtwork();
+    //Artwork artwork = loan.getArtwork();
     LoanStatus status = loan.getStatus();
-    if(status.equals(LoanStatus.Requested) && artwork.getIsLoanable() == true) {
+    if(status.equals(LoanStatus.Requested) /*&& artwork.getIsLoanable() == true*/) {
       loan.setStatus(LoanStatus.Approved);
-      artwork.setIsLoanable(false);
+      //artwork.setIsLoanable(false);
       return loan;
     }
     else {
@@ -132,17 +133,19 @@ public class LoanService {
    */
   @Transactional
   public Loan returnArtworkandEndLoan(int loanId) {
+    
     Loan loan = loanRepository.findLoanByLoanId(loanId);
-    Artwork artwork = loan.getArtwork();
+    //Artwork artwork = loan.getArtwork();
     LoanStatus status = loan.getStatus();
     if(status.equals(LoanStatus.Approved)) {
       loan.setStatus(LoanStatus.Returned);
-      artwork.setIsLoanable(true);
+      //artwork.setIsLoanable(true);
       return loan;
     }
     else {
       throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Can't return this loan");
     }
+    
   }
   /**
    * @author emmakawczynski

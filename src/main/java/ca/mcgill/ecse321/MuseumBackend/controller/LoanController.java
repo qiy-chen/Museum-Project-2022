@@ -52,6 +52,13 @@ public class LoanController {
     Loan loan = service.approveLoan(loanId);
     return new ResponseEntity<LoanResponseDto>(convertToDto(loan), HttpStatus.OK);
   }
+  @PostMapping(value = {"/loans/return/{id}", "/loans/return/{id}"})
+  public ResponseEntity<LoanResponseDto> returnArtworkandEndLoan(@PathVariable("id") int loanId) throws IllegalArgumentException{
+    Loan loan = service.returnArtworkandEndLoan(loanId);
+    return new ResponseEntity<LoanResponseDto>(convertToDto(loan), HttpStatus.OK);
+  }
+  
+  
   private LoanResponseDto convertToDto(Loan a) {
     if (a == null) {
       throw new IllegalArgumentException("There is no such Loan!");
