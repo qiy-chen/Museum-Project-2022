@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 
 // line 42 "../../../../../Museum.ump"
 @Entity
@@ -73,7 +74,7 @@ public class Loan
   }
   
   public Loan() {
-    
+    this.status = LoanStatus.Requested;
   }
 
   //------------------------
