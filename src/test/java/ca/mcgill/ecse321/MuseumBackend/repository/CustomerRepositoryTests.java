@@ -30,7 +30,7 @@ public class CustomerRepositoryTests {
         Customer elie = new Customer();
 
         // Save object
-        customerRepository.save(elie);
+        elie = customerRepository.save(elie);
         int EmployeeId = elie.getPersonRoleId();
 
         // Read object from database
@@ -57,7 +57,7 @@ public class CustomerRepositoryTests {
         elie.setPerson(sandy);
 
         // Update object
-        customerRepository.save(elie);
+        elie = customerRepository.save(elie);
         int customerID = elie.getPersonRoleId();
 
         // Read object from database

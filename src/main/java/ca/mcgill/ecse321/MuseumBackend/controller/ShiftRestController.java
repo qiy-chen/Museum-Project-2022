@@ -1,6 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.controller;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftRequestDto;

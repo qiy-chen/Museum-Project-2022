@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;

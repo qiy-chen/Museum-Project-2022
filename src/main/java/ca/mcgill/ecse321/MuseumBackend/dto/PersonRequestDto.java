@@ -1,6 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.service.AdminService;
 import ca.mcgill.ecse321.MuseumBackend.service.CustomerService;

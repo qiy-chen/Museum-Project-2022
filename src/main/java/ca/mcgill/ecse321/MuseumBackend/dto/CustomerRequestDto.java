@@ -4,13 +4,11 @@ public class CustomerRequestDto {
 
 	// attributes
 	private String email;
+	public CustomerRequestDto() {}
 	public int[] getLoanIDs() {
 		return loanIDs;
 	}
 
-	public void setLoanIDs(int[] loanIDs) {
-		this.loanIDs = loanIDs;
-	}
 
 	public String getEmail() {
 		return email;

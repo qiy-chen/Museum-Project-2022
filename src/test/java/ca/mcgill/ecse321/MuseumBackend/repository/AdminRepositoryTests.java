@@ -22,8 +22,9 @@ public class AdminRepositoryTests {
 
     @AfterEach
     public void clearDatabase() {
+      adminRepository.deleteAll();
         personRepository.deleteAll();
-        adminRepository.deleteAll();
+        
     }
     
     @Test
@@ -32,7 +33,7 @@ public class AdminRepositoryTests {
         Admin aAdmin = new Admin();
 
         // Save object
-        adminRepository.save(aAdmin);
+        aAdmin = adminRepository.save(aAdmin);
         int adminId = aAdmin.getPersonRoleId();
 
         // Read object from database
@@ -47,20 +48,19 @@ public class AdminRepositoryTests {
     @Test
     public void testAdminToPersonReference() {
       
-        // Create object
-        Admin aAdmin = new Admin();
-        adminRepository.save(aAdmin); // save before adding art so that it is present for the foreign key when saving the artwork
-        
-        
+        // Create person object
+
         String email = "sandy@hotmail.com";
         Person sandy = new Person();
-        sandy.addPersonRole(aAdmin);
         sandy.setEmail(email);
-        personRepository.save(sandy);
+        sandy = personRepository.save(sandy);
+        
+        //Create Admin
+        Admin aAdmin = new Admin();
         aAdmin.setPerson(sandy);
 
         // Update object
-        adminRepository.save(aAdmin);
+        aAdmin = adminRepository.save(aAdmin);
         int adminID = aAdmin.getPersonRoleId();
 
         // Read object from database
