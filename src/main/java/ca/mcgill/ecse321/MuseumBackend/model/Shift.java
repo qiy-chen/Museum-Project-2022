@@ -2,10 +2,12 @@
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse321.MuseumBackend.model;
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.*;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // line 34 "../../../../../Museum.ump"
 // line 127 "../../../../../Museum.ump"

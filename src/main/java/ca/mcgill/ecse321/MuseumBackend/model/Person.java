@@ -4,7 +4,9 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // line 11 "../../../../../Museum.ump"
 // line 115 "../../../../../Museum.ump"

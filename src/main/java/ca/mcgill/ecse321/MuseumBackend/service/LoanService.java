@@ -1,10 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
@@ -17,6 +12,11 @@ import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.MuseumBackend.Exception.DisplayException;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Room;
@@ -12,6 +8,11 @@ import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 public class RoomService {

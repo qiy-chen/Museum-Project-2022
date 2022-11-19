@@ -1,10 +1,16 @@
 package ca.mcgill.ecse321.MuseumBackend.integration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.sql.Date;
+import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,14 +20,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
-import ca.mcgill.ecse321.MuseumBackend.model.Customer;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.repository.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class LoanIntegrationTest {

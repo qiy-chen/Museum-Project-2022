@@ -1,11 +1,10 @@
 package ca.mcgill.ecse321.MuseumBackend.integration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.List;
+import ca.mcgill.ecse321.MuseumBackend.dto.*;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,20 +13,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import ca.mcgill.ecse321.MuseumBackend.dto.CustomerRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.IdRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.TicketRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.TicketResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
+import org.springframework.http.*;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 
