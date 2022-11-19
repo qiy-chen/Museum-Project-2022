@@ -7,6 +7,7 @@ import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,13 +16,13 @@ public class ShiftRequestDto {
     @Autowired
     private EmployeeService employeeService;
     private int workDayId;
-    private Date startTime;
-    private Date endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     private Museum museum;
     private List<Integer> employeeIds = new ArrayList<>();
 
-    public ShiftRequestDto(Date startTime, Date endTime, int workDayId, Museum museum) {
+    public ShiftRequestDto(LocalDateTime startTime, LocalDateTime endTime, int workDayId, Museum museum) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.workDayId = workDayId;
@@ -45,11 +46,11 @@ public class ShiftRequestDto {
         return museum;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
@@ -57,7 +58,7 @@ public class ShiftRequestDto {
         return workDayId;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
@@ -65,7 +66,7 @@ public class ShiftRequestDto {
         this.museum = museum;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

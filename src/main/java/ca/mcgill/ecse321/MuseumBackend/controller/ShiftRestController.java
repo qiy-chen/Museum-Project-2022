@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,12 @@ public class ShiftRestController {
 
     @GetMapping(value = "/shift/{workDayId}")
     public ResponseEntity<ShiftResponseDto> getShiftById(@PathVariable int workDayId) throws IllegalArgumentException, MuseumBackendException {
+        /**
+         * Takes an identifying integer corresponding to a shift from the shift repository from the request to find the corresponding
+         * shift, and returns a shift response transfer object with the details of the requested Shift object in the body of the ResponseEntity
+         * @param workDayId An identifying integer equal to the value corresponding to a shift
+         * @return A ResponseEntity with a body of a shift response transfer object with the details of the requested Shift object
+         */
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)), httpHeaders, HttpStatus.OK);
@@ -41,14 +48,13 @@ public class ShiftRestController {
 
 
 
-    //@PutMapping(value = "/shifts/{workDayId}")
-    //public ShiftDto removeEmployeeFromShift(@PathVariable("workDayId") int workDayId, @RequestParam EmployeeRequestDto employee) throws IllegalArgumentException {
-        //Employee modelEmployee = employee.toModel();
-        //return convertToDto(service.removeEmployeeFromShift(workDayId, modelEmployee));
-    //}
+    @PutMapping(value = "/shift/{workDayId}/")
+    public void changeShiftDate(@PathVariable int workDayId, @RequestBody Map<String, String> dateMap) throws IllegalArgumentException {
+        service.changeShiftDate(workDayId, dateMap.get("startTimeValue"),dateMap.get("endTimeValue"));
+    }
 
 
-    @DeleteMapping(value = "/shifts/{workDayId}")
+    @DeleteMapping(value = "/shift/{workDayId}")
     public void deleteShift(@PathVariable int workDayId) throws IllegalArgumentException {
         service.deleteShift(workDayId);
     }
@@ -65,11 +71,22 @@ public class ShiftRestController {
 
     @PostMapping(value = "/shift")
     public ResponseEntity<ShiftResponseDto> createShift(@RequestBody ShiftRequestDto shiftRequestDto) throws IllegalArgumentException {
+        /**
+         * Takes a shift request transfer object with the details corresponding to a Shift object to be created,
+         * and returns a shift response transfer object with the details of the created shift in the body of a ResponseEntity
+         * @param shiftRequestDto a shift request transfer object with the details corresponding to a Shift object to be created
+         * @return A ResponseEntity with a body of a shift response transfer object with the details of the created Shift object
+         */
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(convertToResponseDto(service.createShift(shiftRequestDto.toModel())), httpHeaders,HttpStatus.CREATED);
     }
     private ShiftResponseDto convertToResponseDto(Shift s) {
+        /**
+         * Takes a Shift object to create a new shift response transfer object with corresponding details
+         * @param s A Shift object to be modeled for the shift response transfer object
+         * @return A shift response transfer object with the details corresponding to the inputted Shift object
+         */
         if(s==null) {
             throw new IllegalArgumentException("There is no such Shift!");
         }

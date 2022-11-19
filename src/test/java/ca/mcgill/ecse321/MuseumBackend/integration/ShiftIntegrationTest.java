@@ -23,6 +23,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,8 +38,9 @@ public class ShiftIntegrationTest {
     private int workDayId = 54;
     private double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
     private long workHours = (long) sixHoursInMillisecond;
-    private Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
-    private Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
+    private LocalDateTime startTime = LocalDateTime.parse("2022-11-18 8:00",formatter);
+    private LocalDateTime endTime = LocalDateTime.parse("2022-11-18 17:00",formatter);
 
 
     @Autowired
@@ -91,6 +94,13 @@ public class ShiftIntegrationTest {
     }
 
     @Test
+    public void testCreateAndGetShiftAndChangeShiftDate() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+        testChangeDateOfShift(workDayId, "2022-11-17 8:00", "2022-11-17 17:00");
+    }
+
+    @Test
     public void testCreateAndGetShiftAndAddEmployeeToShift() {
         int workDayId = testCreateShift();
         testGetShift(workDayId);
@@ -104,12 +114,25 @@ public class ShiftIntegrationTest {
 
     private void testAddEmployeeToShift(int workDayId, EmployeeRequestDto employeeRequestDto) {
         ResponseEntity<EmployeeResponseDto> employeeResponse = client.postForEntity("/employee", employeeRequestDto, EmployeeResponseDto.class);
-        Map<String,Integer> idMap = new HashMap<>();
-        idMap.put("workDayId",workDayId);
-        idMap.put("employeeId",employeeResponse.getBody().getId());
+        Map<String, Integer> idMap = new HashMap<>();
+        idMap.put("workDayId", workDayId);
+        idMap.put("employeeId", employeeResponse.getBody().getId());
         ResponseEntity<ShiftResponseDto> shiftResponseDtoResponseEntity = client.postForEntity("/shift/employees", idMap, ShiftResponseDto.class);
         assertEquals(HttpStatus.OK, shiftResponseDtoResponseEntity.getStatusCode());
         assertEquals(employeeResponse.getBody().getId(), shiftResponseDtoResponseEntity.getBody().getEmployees().get(0));
+    }
+
+    private void testChangeDateOfShift(int workDayId, String startTimeValue, String endTimeValue) {
+        Map<String, String> dateMap = new HashMap<>();
+        dateMap.put("startTimeValue", startTimeValue);
+        dateMap.put("endTimeValue", endTimeValue);
+        ResponseEntity<ShiftResponseDto> response0 = client.getForEntity("/shift/"+workDayId, ShiftResponseDto.class);
+        client.put("/shift/"+workDayId+"/", dateMap);
+        ResponseEntity<ShiftResponseDto> response = client.getForEntity("/shift/"+workDayId, ShiftResponseDto.class);
+        assertEquals(LocalDateTime.parse(startTimeValue,formatter), response.getBody().getStartTime());
+        assertEquals(LocalDateTime.parse(endTimeValue,formatter), response.getBody().getEndTime());
+        assertNotEquals(response0.getBody().getStartTime(), response.getBody().getStartTime());
+        assertNotEquals(response0.getBody().getEndTime(),response.getBody().getEndTime());
     }
 
     /*@Test

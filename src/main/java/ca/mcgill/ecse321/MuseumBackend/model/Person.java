@@ -192,7 +192,7 @@ public boolean setEmail(String aEmail)
       personRoleList.add(e);
     }
     for(PersonRole e : personRoleList) {
-      removePersonRole(e);
+      if(e.getPerson() == this)removePersonRole(e);
     }
   }
 

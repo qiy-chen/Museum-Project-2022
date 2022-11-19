@@ -56,7 +56,7 @@ public abstract class PersonRole
 
   @PreRemove
   private void removePersonRoleFromPerson() {
-    person.removePersonRole(this);
+    if(person !=null && person.getPersonRoles().contains(this))person.removePersonRole(this);
   }
 
   public int getPersonRoleId()

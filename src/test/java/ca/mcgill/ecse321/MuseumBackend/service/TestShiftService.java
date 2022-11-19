@@ -15,6 +15,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,8 +40,9 @@ public class TestShiftService {
         museum.setMuseumId(12);
         double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
         long workHours = (long) sixHoursInMillisecond;
-        Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
-        Date endTime = new Date(Calendar.getInstance().getTimeInMillis() + workHours);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
+        LocalDateTime startTime = LocalDateTime.parse("2022-11-18 8:00",formatter);
+        LocalDateTime endTime = LocalDateTime.parse("2022-11-18 17:00",formatter);
         return new Shift(startTime, endTime, 54, museum);
     }
 
@@ -60,11 +63,11 @@ public class TestShiftService {
     @Test
     public void testChangeShiftDate() {
         Shift shift0 = initializeTestShift();
-        Date startTime = shift0.getStartTime();
-        Date endTime = shift0.getEndTime();
+        LocalDateTime startTime = shift0.getStartTime();
+        LocalDateTime endTime = shift0.getEndTime();
         when(shiftRepository.findShiftByWorkDayId(shift0.getWorkDayId())).thenAnswer((InvocationOnMock invocation) -> shift0);
-        Date startTime1 = new Date(5);
-        Date endTime1 = new Date(6);
+        String startTime1 = "2022-11-17 8:00";
+        String endTime1 = "2022-11-17 17:00";
         shiftService.changeShiftDate(shift0.getWorkDayId(), startTime1, endTime1);
         assertEquals(54, shift0.getWorkDayId());
         assertNotEquals(startTime,shift0.getStartTime());

@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,8 @@ import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 public class ShiftResponseDto {
 
 	private int workDayId;
-	private Date startTime;
-	private Date endTime;
+	private LocalDateTime startTime;
+	private LocalDateTime endTime;
 
 	private Museum museum;
 	private List<Integer> employeeIds = new ArrayList<>();
@@ -20,7 +21,7 @@ public class ShiftResponseDto {
 
 	}
 
-	public ShiftResponseDto(Date startTime, Date endTime, int workDayId, Museum museum, List<Employee> employees) {
+	public ShiftResponseDto(LocalDateTime startTime, LocalDateTime endTime, int workDayId, Museum museum, List<Employee> employees) {
 		
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -43,19 +44,19 @@ public class ShiftResponseDto {
 		this.workDayId = workdayId;
 	}
 
-	public Date getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public LocalDateTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 
