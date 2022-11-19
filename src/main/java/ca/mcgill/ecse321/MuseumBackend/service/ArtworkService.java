@@ -1,13 +1,14 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 import java.util.ArrayList;
 import java.util.List;
+
+import ca.mcgill.ecse321.MuseumBackend.Exception.ArtworkException;
+import ca.mcgill.ecse321.MuseumBackend.Exception.DisplayException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.exception.ArtworkException;
-import ca.mcgill.ecse321.MuseumBackend.exception.DisplayException;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
