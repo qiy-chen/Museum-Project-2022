@@ -8,18 +8,18 @@ Request Body: LoanRequestDto loanRequestDto
 
 HTTP Method: POST
 
-Description: Read a ticket that is stored in the ticket repository, found using its id. The service returns a TicketResponseDto object of the Ticket found.
+Description: Create a loan that is stored in the loan repository. The service returns a LoanResponseDto object of the loan created.
 
-## Read all Tickets
-URL: /tickets
+## Read a loan
+URL: /loans/{id}
 
-Path Variable: None
+Path Variable: id
 
 Request Body: None
 
 HTTP Method: GET
 
-Description: Read all tickets that are stored in the ticket repository. The service returns a list of all TicketResponseDto objects stored in the ticket repository.
+Description: Read a loan stored in the loan repository, found using its id. The service returns a LoanResponseDto object of the loan found.
 
 ## Create a Ticket
 URL: /tickets
