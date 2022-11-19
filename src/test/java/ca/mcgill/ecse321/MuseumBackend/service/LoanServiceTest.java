@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -235,5 +236,34 @@ public class LoanServiceTest {
     catch (Exception e){
       assertEquals(e.getMessage(), "Can't return this loan");
     }
+  }
+  
+  @Test
+  public void testGetAllLoans() {
+    final Loan loan = new Loan();
+    Artwork artwork = new Artwork();
+    artwork.setIsLoanable(false);
+    loan.setArtwork(artwork);
+    artwork.addLoan(loan);
+    
+    loan.setStatus(LoanStatus.Denied);
+    
+    final Loan loan2 = new Loan();
+    Artwork artwork2 = new Artwork();
+    artwork2.setIsLoanable(false);
+    loan2.setArtwork(artwork);
+    artwork2.addLoan(loan);
+    
+    loan2.setStatus(LoanStatus.Approved);
+    
+    List<Loan> loans = loanService.getAllLoans();
+    loans.add(loan);
+    loans.add(loan2);
+    
+    when(loanRepository.findAll()).thenAnswer((InvocationOnMock invocation) -> loans);
+    
+    List<Loan> allloans = loanService.getAllLoans();
+    
+    assertEquals(allloans.size(), 2);
   }
 }
