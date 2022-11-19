@@ -12,6 +12,7 @@ public class CustomerResponseDto {
 	private List<LoanResponseDto> loans;
 	private String email;
 	
+	public CustomerResponseDto() {}
 	public CustomerResponseDto(Customer customer) {
 		this.id = customer.getPersonRoleId();
 		this.person = new PersonDto(customer.getPerson());

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 // line 54 "../../../../../Museum.ump"
 // line 134 "../../../../../Museum.ump"
@@ -113,7 +114,7 @@ public class Customer extends PersonRole
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(double aPrice, int aTicketId, Date aTicketDate, Museum aMuseum)
+  public Ticket addTicket(double aPrice, int aTicketId, LocalDateTime aTicketDate, Museum aMuseum)
   {
     return new Ticket(aPrice, aTicketId, aTicketDate, aMuseum, this);
   }
