@@ -23,8 +23,9 @@ public class EmployeeRepositoryTests {
 
 	@AfterEach
 	public void clearDatabase() {
+	  employeeRepository.deleteAll();
 		personRepository.deleteAll();
-		employeeRepository.deleteAll();
+		
 	}
 	
 	@Test
@@ -33,7 +34,7 @@ public class EmployeeRepositoryTests {
 		Employee aEmployee = new Employee();
 
 		// Save object
-		employeeRepository.save(aEmployee);
+		aEmployee = employeeRepository.save(aEmployee);
 		int EmployeeId = aEmployee.getPersonRoleId();
 
 		// Read object from database
@@ -48,20 +49,18 @@ public class EmployeeRepositoryTests {
 	@Test
 	public void testEmployeeToArtworkReference() {
 		// Create object
-		Employee aEmployee = new Employee();
-		employeeRepository.save(aEmployee); // save before adding art so that it is present for the foreign key when saving the artwork
-		int employeeID = aEmployee.getPersonRoleId();
-		
 		
 		String email = "sandy@hotmail.com";
 		Person sandy = new Person();
-		sandy.addPersonRole(aEmployee);
 		sandy.setEmail(email);
-		personRepository.save(sandy);
+		sandy = personRepository.save(sandy);
+		
+		Employee aEmployee = new Employee();
 		aEmployee.setPerson(sandy);
 
 		// Update object
-		employeeRepository.save(aEmployee);
+		aEmployee = employeeRepository.save(aEmployee);
+		int employeeID = aEmployee.getPersonRoleId();
 
 		// Read object from database
 		aEmployee = employeeRepository.findEmployeeByPersonRoleId(employeeID);

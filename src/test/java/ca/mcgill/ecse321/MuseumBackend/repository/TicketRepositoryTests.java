@@ -29,7 +29,7 @@ public class TicketRepositoryTests {
     customerRepository.deleteAll();
   }
   @Test
-  public void testPersistAndLoadTicket() {
+  public void testPersistAndLoadTicketPlusReferences() {
 
     //Setup customer
     Customer customer = new Customer();

@@ -220,7 +220,7 @@ public class TicketIntegrationTests {
     
     String personEmail = "qi@mail.com";
     
-    //Creating a person directly, since person controller does not exist as for now
+    //Creating a person directly
     Person person = new Person();
     person.setEmail(personEmail);
     person.setName("Qi Yuan");
@@ -272,7 +272,7 @@ public class TicketIntegrationTests {
     
     String personEmail = "qi@mail.com";
     
-    //Creating a person directly, since person controller does not exist as for now
+    //Creating a person directly
     Person person = new Person();
     person.setEmail(personEmail);
     person.setName("Qi Yuan");
@@ -314,7 +314,7 @@ public class TicketIntegrationTests {
     
     String personEmail = "qi@mail.com";
     
-    //Creating a person directly, since person controller does not exist as for now
+    //Creating a person directly
     Person person = new Person();
     person.setEmail(personEmail);
     person.setName("Qi Yuan");
@@ -347,7 +347,7 @@ public class TicketIntegrationTests {
     
     String personEmail = "qi@mail.com";
     
-    //Creating a person directly, since person controller does not exist as for now
+    //Creating a person directly
     Person person = new Person();
     person.setEmail(personEmail);
     person.setName("Qi Yuan");
@@ -392,7 +392,7 @@ public class TicketIntegrationTests {
     
     String personEmail = "qi@mail.com";
     
-    //Creating a person directly, since person controller does not exist as for now
+    //Creating a person directly
     Person person = new Person();
     person.setEmail(personEmail);
     person.setName("Qi Yuan");
@@ -428,7 +428,7 @@ public class TicketIntegrationTests {
     
     String personEmail = "qi@mail.com";
     
-    //Creating a person directly, since person controller does not exist as for now
+    //Creating a person directly
     Person person = new Person();
     person.setEmail(personEmail);
     person.setName("Qi Yuan");
@@ -437,7 +437,7 @@ public class TicketIntegrationTests {
     
     String personEmail2 = "random@mail.com";
     
-    //Creating a person directly, since person controller does not exist as for now
+    //Creating a person directly
     Person person2 = new Person();
     person2.setEmail(personEmail2);
     person2.setName("Random");
