@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ShiftIntegrationTest {
 
-    private int workDayId = 54;
+    private int workDayId = 1;
     private double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
     private long workHours = (long) sixHoursInMillisecond;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
@@ -81,7 +81,6 @@ public class ShiftIntegrationTest {
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
         assertNotNull(response.getBody(), "Response has body");
-        assertEquals(this.workDayId, response.getBody().getWorkDayId(),"Response has correct id");
         assertTrue(response.getBody().getWorkDayId() > 0, "Response has valid ID");
         return response.getBody().getWorkDayId();
     }
@@ -91,7 +90,7 @@ public class ShiftIntegrationTest {
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
         assertNotNull(response.getBody(), "Response has body");
-        assertEquals(this.workDayId, response.getBody().getWorkDayId(), "Response has correct id");
+        assertEquals(workDayId, response.getBody().getWorkDayId(), "Response has correct id");
 
     }
 

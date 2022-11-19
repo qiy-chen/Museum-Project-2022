@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CustomerController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: CustomerController (ca.mcgill.ecse321.MuseumBackend.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CustomerController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63%
+  </span>
+  <span class="absValue">
+    (17/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.controller;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.DeleteMapping;
+&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;import org.springframework.web.bind.annotation.PostMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.TicketResponseDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.CustomerRequestDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.service.CustomerService;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class CustomerController {</b>
+&nbsp;
+&nbsp;	@Autowired
+&nbsp;	CustomerService customerService;
+&nbsp;
+&nbsp;	// find customer by customer ID
+&nbsp;	@GetMapping(&quot;/customer/{id}&quot;)
+&nbsp;	public ResponseEntity&lt;CustomerResponseDto&gt; getCustomerByID(@PathVariable int id) {
+<b class="fc">&nbsp;		Customer customer = customerService.getCustomerById(id);</b>
+<b class="fc">&nbsp;		return new ResponseEntity&lt;CustomerResponseDto&gt;(new CustomerResponseDto(customer), HttpStatus.OK);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	// create new customer
+&nbsp;	@PostMapping(&quot;/customer&quot;)
+&nbsp;	public ResponseEntity&lt;CustomerResponseDto&gt; createCustomer(@RequestBody CustomerRequestDto request) {
+<b class="fc">&nbsp;		CustomerResponseDto response = customerService.createCustomer(request.getEmail());</b>
+<b class="fc">&nbsp;		return new ResponseEntity&lt;CustomerResponseDto&gt;(response, HttpStatus.CREATED);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	// delete customer by ID
+&nbsp;	@DeleteMapping(&quot;/customer/{id}&quot;)
+&nbsp;	public void deleteCustomer(@PathVariable int id) {
+<b class="fc">&nbsp;		customerService.deleteCustomer(id);</b>
+<b class="fc">&nbsp;	}</b>
+&nbsp;
+&nbsp;	// get all customers
+&nbsp;	@GetMapping(&quot;/customers&quot;)
+&nbsp;	public ResponseEntity&lt;List&lt;CustomerResponseDto&gt;&gt; getAllCustomers() {
+<b class="fc">&nbsp;		List&lt;Customer&gt; customers = customerService.getAllCustomers();</b>
+<b class="fc">&nbsp;		ArrayList&lt;CustomerResponseDto&gt; customerDtos = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;		for (Customer e : customers)</b>
+<b class="fc">&nbsp;			customerDtos.add(new CustomerResponseDto(e));</b>
+<b class="fc">&nbsp;		return new ResponseEntity&lt;List&lt;CustomerResponseDto&gt;&gt;(toList(customerDtos), HttpStatus.OK);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	// get all tickets for customer
+&nbsp;	@GetMapping(&quot;/customer/tickets/{id}&quot;)
+&nbsp;	public ResponseEntity&lt;List&lt;TicketResponseDto&gt;&gt; getTicketsForCustomer(@PathVariable int id) {
+<b class="nc">&nbsp;		List&lt;Ticket&gt; shifts = customerService.getTicketsForCustomer(id);</b>
+<b class="nc">&nbsp;		ArrayList&lt;TicketResponseDto&gt; shiftDtos = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;		for (Ticket s : shifts)</b>
+<b class="nc">&nbsp;			shiftDtos.add(new TicketResponseDto(s));</b>
+<b class="nc">&nbsp;		return new ResponseEntity&lt;List&lt;TicketResponseDto&gt;&gt;(toList(shiftDtos), HttpStatus.OK);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	// get all loans for customer
+&nbsp;	@GetMapping(&quot;/customer/loans/{id}&quot;)
+&nbsp;	public ResponseEntity&lt;List&lt;LoanResponseDto&gt;&gt; getLoansForCustomer(@PathVariable int id) {
+<b class="nc">&nbsp;		List&lt;Loan&gt; loans = customerService.getLoansForCustomer(id);</b>
+<b class="nc">&nbsp;		ArrayList&lt;LoanResponseDto&gt; loanDtos = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;		for (Loan s : loans)</b>
+<b class="nc">&nbsp;			loanDtos.add(new LoanResponseDto(s));</b>
+<b class="nc">&nbsp;		return new ResponseEntity&lt;List&lt;LoanResponseDto&gt;&gt;(toList(loanDtos), HttpStatus.OK);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	// convert ArrayList to List
+&nbsp;	private &lt;T&gt; List&lt;T&gt; toList(Iterable&lt;T&gt; iterable) {
+<b class="fc">&nbsp;		List&lt;T&gt; resultList = new ArrayList&lt;T&gt;();</b>
+<b class="fc">&nbsp;		for (T t : iterable) {</b>
+<b class="fc">&nbsp;			resultList.add(t);</b>
+<b class="fc">&nbsp;		}</b>
+<b class="fc">&nbsp;		return resultList;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 15:34</div>
+</div>
+</body>
+</html>

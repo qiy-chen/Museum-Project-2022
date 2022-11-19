@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
@@ -58,7 +57,7 @@ public class EmployeeController {
 	}
 	
 	// get all shifts for employee
-	@GetMapping("/employee/shifts{id}")
+	@GetMapping("/employee/shifts/{id}")
 	public ResponseEntity<List<ShiftResponseDto>> getShiftsForEmployee(@PathVariable int id) {
 		List<Shift> shifts = employeeService.getShiftsForEmployee(id);
 		ArrayList<ShiftResponseDto> shiftDtos = new ArrayList<>();

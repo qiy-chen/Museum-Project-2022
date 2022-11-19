@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.MuseumBackend.integration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 
+import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
@@ -36,9 +39,10 @@ public class TestAdminIntegration {
 	}
 
 	@Test
-	public void testCreateAndGetAdmin() {
+	public void testCreateAndGetAndDeleteAdmin() {
 		int id = testCreateAdmin();
 		testGetAdmin(id);
+		testDeleteAdmin(id);
 	}
 
 	private int testCreateAdmin() {
@@ -89,6 +93,16 @@ public class TestAdminIntegration {
 		assertNotNull(response);
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
 		assertEquals("Admin not found.", response.getBody(), "Response has correct error message");
+	}
+
+	// test fire admin
+	private void testDeleteAdmin(int id) {
+		client.delete("/admin/" + id);
+		try {
+			client.getForEntity("/admin/" + id, AdminResponseDto.class);
+			fail("Person was found!");
+		} catch (RestClientException | IllegalArgumentException e) {
+		}
 	}
 }
 

@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
