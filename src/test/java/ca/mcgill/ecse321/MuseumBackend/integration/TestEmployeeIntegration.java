@@ -32,7 +32,6 @@ public class TestEmployeeIntegration {
 
 	@Autowired
 	private TestRestTemplate client;
-
 	@Autowired
 	private EmployeeRepository employeeRepo;
 	@Autowired
@@ -194,8 +193,8 @@ public class TestEmployeeIntegration {
 		assertNotNull(response.getBody(), "Response has body");
 		ShiftDto[] shifts = response.getBody();
 		assertEquals(2, shifts.length, "Response has all shifts");
-		assertEquals(nightID, shifts[0].id, "Correct ID");
-		assertEquals(dayID, shifts[1].id, "Correct ID");
+		assertEquals(nightID, shifts[1].workDayId, "Correct ID");
+		assertEquals(dayID, shifts[0].workDayId, "Correct ID");
 	}
 */
 }
@@ -218,12 +217,12 @@ class EmployeeDto {
 }
 
 class ShiftDto {
-	public int id;
+	public int workDayId;
 
 	public ShiftDto() {
 	}
 
-	public ShiftDto(int id) {
-		this.id = id;
+	public ShiftDto(int workDayId) {
+		this.workDayId = workDayId;
 	}
 }

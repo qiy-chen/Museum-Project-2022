@@ -165,7 +165,7 @@ public class TestCustomerIntegration {
 
 	// test get all tickets for customer
 	@Test
-	private void testGetTicketsForCustomer() {
+	public void testGetTicketsForCustomer() {
 
 		String email = "hey@bud.com";
 		int customerID = testCreateCustomer(email);
@@ -176,11 +176,11 @@ public class TestCustomerIntegration {
 		Ticket dayTicket = new Ticket();
 		ticketRepo.save(nightTicket);
 		ticketRepo.save(dayTicket);
-		int nightID = nightTicket.getTicketId();
-		int dayID = dayTicket.getTicketId();
 		customer.addTicket(nightTicket);
 		customer.addTicket(dayTicket);
 		customerRepo.save(customer);
+		int nightID = nightTicket.getTicketId();
+		int dayID = dayTicket.getTicketId();
 
 		// set up what we expect to get
 		List<TicketDto> ticketDtos = new ArrayList<>();
@@ -197,13 +197,13 @@ public class TestCustomerIntegration {
 		assertNotNull(response.getBody(), "Response has body");
 		TicketDto[] tickets = response.getBody();
 		assertEquals(2, tickets.length, "Response has all tickets");
-		assertEquals(nightID, tickets[0].id, "Correct ID");
-		assertEquals(dayID, tickets[1].id, "Correct ID");
+		assertEquals(nightID, tickets[1].ticketId, "Correct ID");
+		assertEquals(dayID, tickets[0].ticketId, "Correct ID");
 	}
 
 	// test get all loans for customer
 	@Test
-	private void testGetLoansForCustomer() {
+	public void testGetLoansForCustomer() {
 
 		String email = "hey@bud.com";
 		int customerID = testCreateCustomer(email);
@@ -214,11 +214,11 @@ public class TestCustomerIntegration {
 		Loan dayLoan = new Loan();
 		loanRepo.save(nightLoan);
 		loanRepo.save(dayLoan);
-		int nightID = nightLoan.getLoanId();
-		int dayID = dayLoan.getLoanId();
 		customer.addLoan(nightLoan);
 		customer.addLoan(dayLoan);
 		customerRepo.save(customer);
+		int nightID = nightLoan.getLoanId();
+		int dayID = dayLoan.getLoanId();
 
 		// set up what we expect to get
 		List<LoanDto> loanDtos = new ArrayList<>();
@@ -234,8 +234,8 @@ public class TestCustomerIntegration {
 		assertNotNull(response.getBody(), "Response has body");
 		LoanDto[] loans = response.getBody();
 		assertEquals(2, loans.length, "Response has all loans");
-		assertEquals(nightID, loans[0].id, "Correct ID");
-		assertEquals(dayID, loans[1].id, "Correct ID");
+		assertEquals(nightID, loans[1].loanId, "Correct ID");
+		assertEquals(dayID, loans[0].loanId, "Correct ID");
 	}
 }
 
@@ -253,23 +253,23 @@ class CustomerDto {
 }
 
 class TicketDto {
-	public int id;
+	public int ticketId;
 
 	public TicketDto() {
 	}
 
-	public TicketDto(int id) {
-		this.id = id;
+	public TicketDto(int ticketId) {
+		this.ticketId = ticketId;
 	}
 }
 
 class LoanDto {
-	public int id;
+	public int loanId;
 
 	public LoanDto() {
 	}
 
-	public LoanDto(int id) {
-		this.id = id;
+	public LoanDto(int loanId) {
+		this.loanId = loanId;
 	}
 }
