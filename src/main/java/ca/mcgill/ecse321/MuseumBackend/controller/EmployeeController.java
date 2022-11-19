@@ -58,7 +58,7 @@ public class EmployeeController {
 	}
 	
 	// get all shifts for employee
-	@GetMapping("/employee/{id}/shifts")
+	@GetMapping("/employee/shifts{id}")
 	public ResponseEntity<List<ShiftResponseDto>> getShiftsForEmployee(@PathVariable int id) {
 		List<Shift> shifts = employeeService.getShiftsForEmployee(id);
 		ArrayList<ShiftResponseDto> shiftDtos = new ArrayList<>();

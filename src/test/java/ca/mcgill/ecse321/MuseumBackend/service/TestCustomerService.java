@@ -19,7 +19,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
-import ca.mcgill.ecse321.MuseumBackend.exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.CustomerRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
