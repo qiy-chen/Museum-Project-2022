@@ -18,3 +18,7 @@ Nov. 11:
 * Action Items: 
   * Alex will setup the project backlog
   * Everyone will finish service methods and tests tomorrow, and integration tests and controller methods for Sunday
+
+Nov. 15:
+* Present: Sam, Elie, Emma, Alex, Jeanine
+* Topics: integration tests debugging
