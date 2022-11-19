@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 // line 2 "../../../../../Museum.ump"
 // line 106 "../../../../../Museum.ump"
@@ -479,7 +480,7 @@ public class Museum
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(double aPrice, int aTicketId, Date aTicketDate, Customer aCustomer)
+  public Ticket addTicket(double aPrice, int aTicketId, LocalDateTime aTicketDate, Customer aCustomer)
   {
     return new Ticket(aPrice, aTicketId, aTicketDate, this, aCustomer);
   }
