@@ -27,7 +27,9 @@ import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
-
+/**
+ * @Author Jeanine Looman
+ */
 @ExtendWith(MockitoExtension.class)
 public class TestCustomerService {
 

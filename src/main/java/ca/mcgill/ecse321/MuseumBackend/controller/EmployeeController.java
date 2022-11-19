@@ -20,6 +20,9 @@ import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
 
+/**
+ * @Author Jeanine Looman
+ */
 @RestController
 public class EmployeeController {
 

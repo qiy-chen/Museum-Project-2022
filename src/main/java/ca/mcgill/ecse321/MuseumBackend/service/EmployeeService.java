@@ -16,7 +16,9 @@ import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.ShiftRepository;
-
+/**
+ * @Author Jeanine Looman
+ */
 @Service
 public class EmployeeService {
 

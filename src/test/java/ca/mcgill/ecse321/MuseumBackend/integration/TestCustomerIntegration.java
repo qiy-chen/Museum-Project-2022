@@ -28,7 +28,9 @@ import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
-
+/**
+ * @Author Jeanine Looman
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // set random port
 public class TestCustomerIntegration {
 

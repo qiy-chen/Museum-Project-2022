@@ -4,7 +4,9 @@ import java.util.List;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
-
+/**
+ * @Author Jeanine Looman
+ */
 public class EmployeeResponseDto {
 
 	private int id;

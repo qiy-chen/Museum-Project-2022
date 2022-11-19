@@ -22,6 +22,9 @@ import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.service.CustomerService;
 
+/**
+ * @Author Jeanine Looman
+ */
 @RestController
 public class CustomerController {
 

@@ -24,7 +24,9 @@ import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
-
+/**
+ * @Author Jeanine Looman
+ */
 @ExtendWith(MockitoExtension.class)
 public class TestAdminService {
 

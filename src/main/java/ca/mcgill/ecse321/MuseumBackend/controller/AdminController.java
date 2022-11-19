@@ -15,6 +15,9 @@ import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 import ca.mcgill.ecse321.MuseumBackend.service.AdminService;
 
+/**
+ * @Author Jeanine Looman
+ */
 @RestController
 public class AdminController {
 
@@ -24,8 +27,11 @@ public class AdminController {
 	// find admin by their ID
 	@GetMapping("/admin/{id}")
 	public ResponseEntity<AdminResponseDto> getAdminByID(@PathVariable int id) {
+
 		Admin admin = adminService.getAdminById(id);
-		return new ResponseEntity<AdminResponseDto>(new AdminResponseDto(admin), HttpStatus.OK);
+		ResponseEntity<AdminResponseDto> response = new ResponseEntity<AdminResponseDto>(new AdminResponseDto(admin),
+				HttpStatus.OK);
+		return response;
 	}
 
 	// create admin

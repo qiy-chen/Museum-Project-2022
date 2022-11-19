@@ -16,7 +16,9 @@ import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
-
+/**
+ * @Author Jeanine Looman
+ */
 @Service
 public class CustomerService {
 
