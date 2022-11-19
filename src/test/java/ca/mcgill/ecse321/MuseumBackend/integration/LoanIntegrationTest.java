@@ -251,4 +251,5 @@ public class LoanIntegrationTest {
     assertEquals(endDate, response.getBody().getEndDate().toString());
     return response.getBody().getLoanId();
   }
+
 }
