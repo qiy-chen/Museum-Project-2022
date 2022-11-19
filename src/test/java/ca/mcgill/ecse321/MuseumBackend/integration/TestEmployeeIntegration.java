@@ -163,7 +163,7 @@ public class TestEmployeeIntegration {
 
 	// test get all shifts for employee
 	@Test
-	private void testGetShiftsForEmployee() {
+	public void testGetShiftsForEmployee() {
 
 		String email = "hey@bud.com";
 		int employeeID = testCreateEmployee(email);
@@ -210,6 +210,10 @@ class EmployeeDto {
 
 	public EmployeeDto(String email) {
 		this.email = email;
+	}
+	
+	public EmployeeDto(int id) {
+		this.id = id;
 	}
 }
 
