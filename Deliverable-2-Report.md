@@ -23,3 +23,10 @@ Nov. 11:
 Nov. 15:
 * Present: Sam, Elie, Emma, Alex, Jeanine
 * Topics: integration tests debugging
+
+Nov. 19:
+* Present: Everyone
+* Topics: final merging and documentation 
+* Action Items: 
+  * Everyone should add their testing documentation to the Wiki
+  * Project Backlog should be updated 
