@@ -106,7 +106,7 @@ public class TestShiftService {
         when(employeeRepository.findEmployeeByPersonRoleId(Stacy.getPersonRole(0).getPersonRoleId())).thenAnswer((InvocationOnMock invocation) -> Stacy.getPersonRole(0));
         shiftService.addEmployeeToShift(shift0.getWorkDayId(), Stacy.getPersonRole(0).getPersonRoleId());
         int brockEmployeeIndex = shift0.getEmployees().indexOf(Brock.getPersonRole(0));
-        shiftService.removeEmployeeFromShift(shift0.getWorkDayId(), (Employee) Brock.getPersonRole(0));
+        shiftService.removeEmployeeFromShift(shift0.getWorkDayId(), Brock.getPersonRole(0).getPersonRoleId());
         assertNotEquals(shift0.getEmployee(brockEmployeeIndex).getPersonRoleId(), Brock.getPersonRole(0).getPersonRoleId());
         assertNotEquals(-1, shift0.getEmployees().indexOf(Sam.getPersonRole(0)));
         assertNotEquals(-1, shift0.getEmployees().indexOf(Stacy.getPersonRole(0)));

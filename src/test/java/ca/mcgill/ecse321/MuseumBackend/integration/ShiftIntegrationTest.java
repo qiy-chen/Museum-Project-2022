@@ -19,8 +19,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -135,7 +138,34 @@ public class ShiftIntegrationTest {
         assertNotEquals(response0.getBody().getEndTime(),response.getBody().getEndTime());
     }
 
-    /*@Test
+
+    @Test
+    public void testCreateAndGetShiftAndRemoveEmployeeFromShift() {
+        int workDayId = testCreateShift();
+        testGetShift(workDayId);
+        Person sam = new Person();
+        sam.setEmail("sfaubert9@gmail.com");
+        personRepository.save(sam);
+        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
+        employeeRequestDto.setEmail("sfaubert9@gmail.com");
+        testRemoveEmployeeFromShift(workDayId, employeeRequestDto);
+
+    }
+
+    private void testRemoveEmployeeFromShift(int workDayId, EmployeeRequestDto employeeRequestDto) {
+        ResponseEntity<EmployeeResponseDto> employeeResponse = client.postForEntity("/employee", employeeRequestDto, EmployeeResponseDto.class);
+        Map<String, Integer> idMap = new HashMap<>();
+        idMap.put("workDayId", workDayId);
+        idMap.put("employeeId", employeeResponse.getBody().getId());
+        ResponseEntity<ShiftResponseDto> shiftResponse0 = client.postForEntity("/shift/employees", idMap, ShiftResponseDto.class);
+        int employeeId = shiftResponse0.getBody().getEmployees().get(0);
+        client.put("/shift/employees", idMap);
+        ResponseEntity<ShiftResponseDto> shiftResponse = client.getForEntity("/shift/"+workDayId, ShiftResponseDto.class);
+        assertFalse(shiftResponse.getBody().getEmployees().contains(employeeId));
+
+    }
+
+    @Test
     public void testCreateGetAndDeleteShift() {
         int workDayId = testCreateShift();
         testGetShift(workDayId);
@@ -144,15 +174,14 @@ public class ShiftIntegrationTest {
     }
 
     private void testDeleteShift(int workDayId) {
-        client.delete("/shift/"+workDayId);
+        client.put("/shift/"+workDayId,null);
         try {
             client.getForEntity("/shift/"+workDayId,ShiftResponseDto.class);
             fail("Shift was found");
-        } catch(MuseumBackendException e) {
-            assertEquals(HttpStatus.NOT_FOUND,e.getStatus());
-            assertEquals("Shift not found.", e.getMessage());
+        } catch(RestClientException e) {
+
         }
-    }*/
+    }
 }
 
 

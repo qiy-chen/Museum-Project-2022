@@ -105,7 +105,7 @@ public class ShiftService {
 	}
 
 	@Transactional
-	public Shift removeEmployeeFromShift(int workDayId, Employee employee) {
+	public Shift removeEmployeeFromShift(int workDayId, int employeeId) {
 		/**
 		 * Takes 2 identifying integers to find the corresponding shift in the shift repository to remove the corresponding employee from the shift
 		 * @param workDayId An integer equal to the unique value corresponding to a shift
@@ -113,6 +113,7 @@ public class ShiftService {
 		 * @return shift The Shift object corresponding to the workDayId with the requested employee removed
 		 */
 		Shift shift = getShiftById(workDayId);
+		Employee employee = employeeRepository.findEmployeeByPersonRoleId(employeeId);
 		shift.removeEmployee(employee);
 		shiftArgumentErrorTest(shift);
 		return shift;

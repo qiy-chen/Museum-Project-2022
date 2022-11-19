@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -25,7 +26,7 @@ public class ShiftRestController {
     private ShiftService service;
 
     @GetMapping(value = "/shift/{workDayId}")
-    public ResponseEntity<ShiftResponseDto> getShiftById(@PathVariable int workDayId) throws IllegalArgumentException, MuseumBackendException {
+    public ResponseEntity<ShiftResponseDto> getShiftById(@PathVariable int workDayId) throws IllegalArgumentException, HttpMessageNotReadableException {
         /**
          * Takes an identifying integer corresponding to a shift from the shift repository from the request to find the corresponding
          * shift, and returns a shift response transfer object with the details of the requested Shift object in the body of the ResponseEntity
@@ -51,22 +52,23 @@ public class ShiftRestController {
     @PutMapping(value = "/shift/{workDayId}/")
     public void changeShiftDate(@PathVariable int workDayId, @RequestBody Map<String, String> dateMap) throws IllegalArgumentException {
         service.changeShiftDate(workDayId, dateMap.get("startTimeValue"),dateMap.get("endTimeValue"));
+
     }
 
 
-    @DeleteMapping(value = "/shift/{workDayId}")
+    @PutMapping(value = "/shift/{workDayId}")
     public void deleteShift(@PathVariable int workDayId) throws IllegalArgumentException {
         service.deleteShift(workDayId);
     }
 
-
-
-    //@GetMapping(value = "/shifts/{workDayId}/")
-    //public List<EmployeeResponseDto> getShiftEmployeesById(@PathVariable("workDayId") int workDayId) throws IllegalArgumentException{
-    //ShiftDto shiftDto = convertToDto(service.getShiftById(workDayId));
-        //return shiftDto.getEmployees();
-    //}
-
+    @PutMapping(value = "/shift/employees")
+    public void removeEmployeeFromShift(@RequestBody Map<String,Integer> idMap) throws IllegalArgumentException {
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        int employeeId = idMap.get("employeeId");
+        int workDayId = idMap.get("workDayId");
+        service.removeEmployeeFromShift(workDayId,employeeId);
+    }
 
 
     @PostMapping(value = "/shift")
