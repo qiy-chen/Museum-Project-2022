@@ -35,6 +35,11 @@ public class Display extends Room
   // INTERFACE
   //------------------------
 
+  public boolean isFull() {
+    
+    return numberOfArtworks() >= getMaxArtworks();
+  }
+  
   public boolean setMaxArtworks(int aMaxArtworks)
   {
     boolean wasSet = false;

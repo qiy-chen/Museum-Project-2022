@@ -25,7 +25,7 @@ public class Person
   //Person Associations
   @ManyToOne
   private Museum museum;
-  @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<PersonRole> personRoles;
 
   //------------------------
@@ -183,6 +183,17 @@ public boolean setEmail(String aEmail)
     }
     wasAdded = true;
     return wasAdded;
+  }
+
+  @PreRemove
+  private void removePersonFromPersonRoles() {
+    List<PersonRole> personRoleList = new ArrayList<>();
+    for(PersonRole e : personRoles) {
+      personRoleList.add(e);
+    }
+    for(PersonRole e : personRoleList) {
+      if(e.getPerson() == this)removePersonRole(e);
+    }
   }
 
   public boolean removePersonRole(PersonRole aPersonRole)

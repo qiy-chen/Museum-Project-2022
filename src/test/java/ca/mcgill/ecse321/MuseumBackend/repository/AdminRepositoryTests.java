@@ -46,6 +46,7 @@ public class AdminRepositoryTests {
     
     @Test
     public void testAdminToPersonReference() {
+      
         // Create object
         Admin aAdmin = new Admin();
         adminRepository.save(aAdmin); // save before adding art so that it is present for the foreign key when saving the artwork

@@ -5,8 +5,7 @@ package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 
 import javax.persistence.*;
-
-
+import org.hibernate.annotations.Cascade;
 import java.sql.Date;
 
 // line 76 "../../../../../Museum.ump"
@@ -21,17 +20,19 @@ public class Artwork
   //Artwork Attributes
   private boolean isLoanable;
   private double value;
-  @Id
+  @Id 
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int artworkId;
   private String artworkName;
 
   //Artwork Associations
   @ManyToOne
+  @Cascade({org.hibernate.annotations.CascadeType.REMOVE})
   private Museum museum;
   @ManyToOne
+  @Cascade({org.hibernate.annotations.CascadeType.REMOVE})
   private Room room;
-  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Loan> loans;
 
   //------------------------

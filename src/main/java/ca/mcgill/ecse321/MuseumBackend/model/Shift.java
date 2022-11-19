@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.*;
 import javax.persistence.*;
 
@@ -17,10 +18,9 @@ public class Shift
   //------------------------
 
   //Shift Attributes
-  private Date startTime;
-  private Date endTime;
+  private LocalDateTime startTime;
+  private LocalDateTime endTime;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private int workDayId;
 
   //Shift Associations
@@ -33,7 +33,7 @@ public class Shift
   // CONSTRUCTOR
   //------------------------
 
-  public Shift(Date aStartTime, Date aEndTime, int aWorkDayId, Museum aMuseum)
+  public Shift(LocalDateTime aStartTime, LocalDateTime aEndTime, int aWorkDayId, Museum aMuseum)
   {
     startTime = aStartTime;
     endTime = aEndTime;
@@ -54,7 +54,7 @@ public class Shift
   // INTERFACE
   //------------------------
 
-  public boolean setStartTime(Date aStartTime)
+  public boolean setStartTime(LocalDateTime aStartTime)
   {
     boolean wasSet = false;
     startTime = aStartTime;
@@ -62,7 +62,7 @@ public class Shift
     return wasSet;
   }
 
-  public boolean setEndTime(Date aEndTime)
+  public boolean setEndTime(LocalDateTime aEndTime)
   {
     boolean wasSet = false;
     endTime = aEndTime;
@@ -78,12 +78,12 @@ public class Shift
     return wasSet;
   }
 
-  public Date getStartTime()
+  public LocalDateTime getStartTime()
   {
     return startTime;
   }
 
-  public Date getEndTime()
+  public LocalDateTime getEndTime()
   {
     return endTime;
   }
@@ -155,6 +155,17 @@ public class Shift
     return wasAdded;
   }
   /* Code from template association_RemoveMany */
+  @PreRemove
+  private void removeShiftFromEmployees() {
+    List<Employee> employeeList = new ArrayList<>();
+    for(Employee e: employees) {
+      employeeList.add(e);
+    }
+    for(Employee e : employeeList) {
+      if(e.getShifts().contains(this))removeEmployee(e);
+    }
+  }
+
   public boolean removeEmployee(Employee aEmployee)
   {
     boolean wasRemoved = false;

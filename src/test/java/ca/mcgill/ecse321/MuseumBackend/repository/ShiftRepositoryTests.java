@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,8 @@ public class ShiftRepositoryTests {
   @Autowired
   private EmployeeRepository employeeRepository;
 
+  private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
   @AfterEach
   public void clearDatabase() {
     shiftRepository.deleteAll();
@@ -29,11 +34,12 @@ public class ShiftRepositoryTests {
   public void testPersistAndLoadTicket() {
 
     //Setup shift
-    Date startDate = new Date(0);
-    Date endDate = new Date(2);
+    LocalDateTime startDate = LocalDateTime.parse("2022-11-15 08:00",formatter);
+    LocalDateTime endDate = LocalDateTime.parse("2022-11-15 17:00",formatter);
     Shift shift = new Shift();
     shift.setStartTime(startDate);
     shift.setEndTime(endDate);
+    shift.setWorkDayId(12);
     // save shift
     shift = shiftRepository.save(shift);
     int shiftId = shift.getWorkDayId();
@@ -60,5 +66,5 @@ public class ShiftRepositoryTests {
     assertTrue(shift.getEmployees().size() > 0);
     assertEquals(employeeId, shift.getEmployee(0).getPersonRoleId());
   }
-  
+
 }

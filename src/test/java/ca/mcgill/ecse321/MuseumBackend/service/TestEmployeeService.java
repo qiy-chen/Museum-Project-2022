@@ -151,8 +151,14 @@ public class TestEmployeeService {
 	@Test
 	public void testFireEmployee() {
 		// setup: create an employee to delete
+		Person person = new Person();
+		String email = "finnigan@mail.com";
+		String name = "Finn Igan";
+		person.setEmail(email);
+		person.setName(name);
 		Employee smith = new Employee();
 		int id = smith.getPersonRoleId();
+		smith.setPerson(person);
 		
 		// Mock: if looking for smith using their ID, return smith
 		when(employeeRepo.findEmployeeByPersonRoleId(id)).thenAnswer(x -> smith);

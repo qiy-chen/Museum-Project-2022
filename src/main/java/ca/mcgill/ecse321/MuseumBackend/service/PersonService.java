@@ -29,4 +29,23 @@ public class PersonService {
 		person = personRepo.save(person);
 		return person;
 	}
+
+	@Transactional
+	public Person changePersonPassword(String email, String newPassword) {
+		Person person = personRepo.findPersonByEmail(email);
+		person.setPassword(newPassword);
+		return person;
+	}
+	@Transactional
+	public Person changePersonName(String email, String newName) {
+		Person person = personRepo.findPersonByEmail(email);
+		person.setName(newName);
+		return person;
+	}
+	@Transactional
+	public void deletePerson(String email) {
+		Person person = personRepo.findPersonByEmail(email);
+		personRepo.delete(person);
+		person.delete();
+	}
 }
