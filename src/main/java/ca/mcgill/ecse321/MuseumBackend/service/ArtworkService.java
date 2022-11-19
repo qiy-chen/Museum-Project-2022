@@ -6,13 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.Exception.ArtworkException;
-import ca.mcgill.ecse321.MuseumBackend.Exception.DisplayException;
+import ca.mcgill.ecse321.MuseumBackend.exception.ArtworkException;
+import ca.mcgill.ecse321.MuseumBackend.exception.DisplayException;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Room;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
@@ -49,7 +46,7 @@ public class ArtworkService {
     
     Artwork art = new Artwork();
     
-    if (artworkRequest.getArtworkName() == null) {
+    if (artworkRequest.getArtworkName() == null || artworkRequest.getArtworkName() == "") {
       throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
   }  
     art.setArtworkName(artworkRequest.getArtworkName());
@@ -78,48 +75,10 @@ public class ArtworkService {
     return art;
   }
   
-   
-  
-  @Transactional
-  public List<Artwork> getArtworksNotAvailableForLoan(){
-    
-    List<Artwork> listOfArtworks = getAllArtwork();
-    List<Artwork> r = new ArrayList<Artwork>();
-    
-    for (Artwork a : listOfArtworks) {
-      for (Loan loan : a.getLoans()) {
-        
-        if (loan.getStatus()== LoanStatus.Approved) {
-          r.add(a);
-        }
-      }
-    }
-    return r;
-  }
-  
-  @Transactional
-  public List<Artwork> getArtworksAvailableForLoan(){
-    
-    List<Artwork> listOfArtworks = getAllArtwork();
-    List<Artwork> r = new ArrayList<Artwork>();
-    
-    for (Artwork a : listOfArtworks) {
-      int count =0;
-      
-      for (Loan loan : a.getLoans()) {
-        
-        if (loan.getStatus() != LoanStatus.Approved) {count+=1;}  
-        if (count== a.getLoans().size()) {r.add(a);}
-        
-      }
-    }
-    return r;
-  }
-  
   @Transactional
   public List<Artwork> getArtworksOnDisplay(){
     
-    List<Artwork> listOfArtworks = (List<Artwork>) artworkRepository.findAll();
+    List<Artwork> listOfArtworks = toList(artworkRepository.findAll());
     List<Artwork> r = new ArrayList<Artwork>();
     
     for (Artwork a : listOfArtworks) {
@@ -131,45 +90,74 @@ public class ArtworkService {
     return r;
   }
   
+  @Transactional
+  public List<Artwork> getArtworksByRoomId(int roomId){
+    
+    List<Artwork> listOfArtworks = toList(artworkRepository.findAll());
+    List<Artwork> r = new ArrayList<Artwork>();
+    
+    for (Artwork a : listOfArtworks) {
+     
+      if (a.getRoom().getRoomId()== roomId) {
+        r.add(a);
+      }
+    }
+    return r;
+  }
+  
+  @Transactional
+  public List<Artwork> getArtworksOnStorage(){
+    
+    List<Artwork> listOfArtworks = toList(artworkRepository.findAll());
+    List<Artwork> r = new ArrayList<Artwork>();
+    
+    for (Artwork a : listOfArtworks) {
+     
+      if (a.getRoom() instanceof Storage) {
+        r.add(a);
+      }
+    }
+    return r;
+  }
+  
   //update fields 
   @Transactional
   public Artwork updateFields(int artId, String name, double value, boolean isLoanable) {
     
     Artwork art = artworkRepository.findArtworkByArtworkId(artId);
-
     
     if (art == null) {
       throw new ArtworkException(HttpStatus.NOT_FOUND, "Artwork not found.");
   }
 
-//    if (name == null) {
-//      throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
-//  }  
-//    
-//    if (name != art.getArtworkName()) {
-//    art.setArtworkName(name);} 
-//    
-//    if (value != art.getValue()) {                                 //if the value is different 
-//      if ((art.getIsLoanable() == true ) || (isLoanable == true)) {
-//        art.setValue(value);
-//      } else {
-//        throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork is not available for loan.");
-//    }
-//      }
-//    
-//    if (isLoanable != art.getIsLoanable()) {
-//      
-//      if (isLoanable != true  && isLoanable != false) {throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork needs to be set to loanable or not loanable");}
-//      
-//    if (isLoanable == true) {
-//      art.setIsLoanable(true);
-//    } else {art.setIsLoanable(false); art.setValue(0.0);}
-//    }
+    if (name == "" || name == null) {
+      throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork must have a name.");
+  }  
     
-    art.setArtworkName(name);
-    art.setIsLoanable(isLoanable);
-    art.setValue(value);
-
+    if (name != art.getArtworkName()) {
+    art.setArtworkName(name);} 
+    
+    if (value != art.getValue()) {                                 //if the value is different 
+      if ((art.getIsLoanable() == true ) || (isLoanable == true)) {
+        art.setValue(value);
+      } else {
+        throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork is not available for loan.");
+    }
+      }
+    
+    if (isLoanable != art.getIsLoanable()) {
+      
+      if (isLoanable != true  && isLoanable != false) {throw new ArtworkException(HttpStatus.BAD_REQUEST, "Artwork needs to be set to loanable or not loanable");}
+      
+    if (isLoanable == true) {
+      art.setIsLoanable(true);
+    } else {art.setIsLoanable(false); art.setValue(0.0);}
+    }
+    
+    art = artworkRepository.save(art);
+    
+    //roomRepository.save(art.getRoom());
+    //museumRepository.save(art.getMuseum());
  
     return art;
   }
@@ -179,35 +167,23 @@ public class ArtworkService {
   public Artwork moveArtwork(int artId, int roomId) {
     Artwork art = artworkRepository.findArtworkByArtworkId(artId);
     
-    Display d = null;
-    Storage s = null;
+    if (art == null) {
+      throw new ArtworkException(HttpStatus.NOT_FOUND, "Artwork not found.");
+  }
+    Room r = roomRepository.findRoomByRoomId(roomId);
     
-    if (displayRepository.findDisplayByRoomId(roomId) != null) {
-      d = displayRepository.findDisplayByRoomId(roomId);
-    }
+    if (r == null) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
     
-    if (storageRepository.findStorageByRoomId(roomId) != null) {
-      s = storageRepository.findStorageByRoomId(roomId);
-    }
+    if (r.isFull()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
     
-    if (d == null && s== null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
+    art.getRoom().removeArtwork(art);
+    roomRepository.save(art.getRoom());
     
-    if (d != null) {
-      
-      if (d.numberOfArtworks() >= d.getMaxArtworks()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
-      
-      art.setRoom(d);
-      d.addArtwork(art);
-      displayRepository.save(d);
-    } 
+    art.setRoom(r);
+    r.addArtwork(art);
     
-    if (s != null) {
-      art.setRoom(s);
-      s.addArtwork(art);
-      storageRepository.save(s);
-    }
-    
-    artworkRepository.save(art);
+    art = artworkRepository.save(art);
+    roomRepository.save(r);
     return art;
   }
   
@@ -227,7 +203,8 @@ public class ArtworkService {
   }
   
   @Transactional
-  public Artwork deleteArtwork(int artId) {
+  public boolean deleteArtwork(int artId) {
+
       Artwork art = artworkRepository.findArtworkByArtworkId(artId);
       
       if (art == null) {
@@ -237,12 +214,12 @@ public class ArtworkService {
       Room room = art.getRoom();
       room.removeArtwork(art);
       
-      if (room instanceof Storage) {storageRepository.save( (Storage) room);}  //update rooms 
-      if (room instanceof Display) {displayRepository.save( (Display) room);}
+      Museum mus = art.getMuseum();
+      mus.removeArtwork(art);
       
       art.delete();
       artworkRepository.delete(art);        //delete artwork from repo
-      return art;
+      return true;
   }
   
   //helper method 
