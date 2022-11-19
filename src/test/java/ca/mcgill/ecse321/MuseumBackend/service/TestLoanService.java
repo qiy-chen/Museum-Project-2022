@@ -39,7 +39,7 @@ public class TestLoanService {
     Loan loan1 = new Loan(rentalfee,startDate,endDate,numOfDays,status,loaniD,museum,customer,artwork);
     when(loanRepository.findLoanByLoanId(loaniD)).thenAnswer((InvocationOnMock invocation) -> loan1);
     
-    Loan loan = loanService.getLoanById(loaniD);
+    Loan loan = loanService.getLoan(loaniD);
     
     assertNotNull(loan);
     assertEquals(loaniD, loan.getLoanId());

@@ -9,7 +9,7 @@ public class CustomerResponseDto {
 
 	private int id;
 	private PersonDto person;
-	private List<LoanDto> loans;
+	private List<LoanResponseDto> loans;
 	private String email;
 	
 	public CustomerResponseDto(Customer customer) {
@@ -17,7 +17,7 @@ public class CustomerResponseDto {
 		this.person = new PersonDto(customer.getPerson());
 		this.email = this.person.getEmail();
 		for (Loan loan : customer.getLoans()) {
-			this.loans.add(new LoanDto(loan));
+			this.loans.add(new LoanResponseDto(loan));
 		}
 	}
 
@@ -45,11 +45,11 @@ public class CustomerResponseDto {
 		this.person = person;
 	}
 
-	public List<LoanDto> getLoans() {
+	public List<LoanResponseDto> getLoans() {
 		return loans;
 	}
 
-	public void setLoans(List<LoanDto> loans) {
+	public void setLoans(List<LoanResponseDto> loans) {
 		this.loans = loans;
 	}
 	

@@ -37,7 +37,7 @@ public class LoanService {
 
   /**
    * @author alextsah
-   * @param LoanRequestDto loanRequest that contains the loan that is going to be created
+   * @param  LoanRequestDto loanRequest that contains the loan that is going to be created
    * @return LoanResponseDto returns the loan created as a loan respoonse
    */
   @Transactional
