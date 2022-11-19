@@ -1,16 +1,12 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Employee;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,13 +15,12 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Employee;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {

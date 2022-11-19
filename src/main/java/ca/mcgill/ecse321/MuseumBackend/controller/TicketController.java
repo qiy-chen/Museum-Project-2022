@@ -1,12 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import ca.mcgill.ecse321.MuseumBackend.dto.IdRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.TicketRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.TicketResponseDto;
@@ -14,6 +7,14 @@ import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.service.CustomerService;
 import ca.mcgill.ecse321.MuseumBackend.service.TicketService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class TicketController {

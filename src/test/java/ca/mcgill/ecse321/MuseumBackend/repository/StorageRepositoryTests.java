@@ -1,21 +1,14 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+import ca.mcgill.ecse321.MuseumBackend.model.Storage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-
-import ca.mcgill.ecse321.MuseumBackend.model.Storage;
-import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
-import ca.mcgill.ecse321.MuseumBackend.model.Storage;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @SpringBootTest

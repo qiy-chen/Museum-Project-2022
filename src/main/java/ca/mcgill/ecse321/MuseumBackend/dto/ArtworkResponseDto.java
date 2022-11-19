@@ -1,8 +1,9 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import java.util.List;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+
+import java.util.List;
 
 public class ArtworkResponseDto {
   

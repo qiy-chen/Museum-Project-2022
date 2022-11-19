@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

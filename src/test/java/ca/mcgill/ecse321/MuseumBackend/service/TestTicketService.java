@@ -1,17 +1,9 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
+import ca.mcgill.ecse321.MuseumBackend.Exception.TicketException;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
+import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,10 +16,15 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.http.HttpStatus;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.TicketException;
-import ca.mcgill.ecse321.MuseumBackend.model.Customer;
-import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
-import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestTicketService {

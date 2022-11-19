@@ -1,12 +1,12 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShiftResponseDto {
 

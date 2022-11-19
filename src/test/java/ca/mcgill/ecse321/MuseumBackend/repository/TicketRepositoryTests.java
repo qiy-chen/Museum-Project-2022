@@ -1,18 +1,17 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.Month;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ca.mcgill.ecse321.MuseumBackend.model.Customer;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class TicketRepositoryTests {

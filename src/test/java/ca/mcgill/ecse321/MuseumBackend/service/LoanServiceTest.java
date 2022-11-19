@@ -1,17 +1,5 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
-import java.util.List;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
@@ -19,7 +7,21 @@ import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.repository.*;
+import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class LoanServiceTest {

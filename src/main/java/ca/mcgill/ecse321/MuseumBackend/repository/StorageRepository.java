@@ -1,7 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.repository;
 
-import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
+import org.springframework.data.repository.CrudRepository;
 
 public interface StorageRepository extends CrudRepository<Storage, Integer>{
 

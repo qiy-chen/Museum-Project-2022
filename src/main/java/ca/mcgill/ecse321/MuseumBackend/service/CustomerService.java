@@ -1,21 +1,20 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
+import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Customer;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan;
-import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CustomerService {

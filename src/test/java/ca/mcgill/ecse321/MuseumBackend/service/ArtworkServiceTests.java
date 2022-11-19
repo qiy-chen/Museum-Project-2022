@@ -1,26 +1,21 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
+import ca.mcgill.ecse321.MuseumBackend.model.Display;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.model.Storage;
+import ca.mcgill.ecse321.MuseumBackend.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ca.mcgill.ecse321.MuseumBackend.dto.ArtworkRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
-import ca.mcgill.ecse321.MuseumBackend.model.Display;
-import ca.mcgill.ecse321.MuseumBackend.model.Museum;
-import ca.mcgill.ecse321.MuseumBackend.model.Storage;
-import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ArtworkServiceTests {

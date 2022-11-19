@@ -1,7 +1,8 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import java.sql.Date;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+
+import java.sql.Date;
 
 public class LoanDto {
 
