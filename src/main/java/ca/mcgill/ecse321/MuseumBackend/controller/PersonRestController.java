@@ -38,6 +38,10 @@ public class PersonRestController {
     public void deletePerson(@PathVariable String email) throws  IllegalArgumentException {
         service.deletePerson(email);
     }
+    @GetMapping(value = "person/person_roles/{email}")
+    public ResponseEntity<Integer[]> getAllPersonPersonRoles() {
+        return null;
+    }
 
     private PersonResponseDto convertToResponseDto(Person p) {
         if(p==null)throw new IllegalArgumentException("There is no such Person!");
