@@ -143,8 +143,8 @@ public class TestEmployeeService {
 				() -> employeeService.createEmployee(email));
 
 		// check results
-		assertEquals(ex.getMessage(), "Person with given email not found.");
-		assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+		assertEquals(ex.getMessage(), "Person not found.");
+		assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
 	}
 	
 	// test delete employee
@@ -181,8 +181,8 @@ public class TestEmployeeService {
 				() -> employeeService.fireEmployee(Integer.MAX_VALUE));
 
 		// check results
-		assertEquals(ex.getMessage(), "Employee with given ID not found.");
-		assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+		assertEquals(ex.getMessage(), "Employee not found.");
+		assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
 	}
 	
 	// test get all employees

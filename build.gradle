@@ -9,6 +9,7 @@ group = 'ca.mcgill.ecse321'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
 repositories {
 	mavenCentral()
 }

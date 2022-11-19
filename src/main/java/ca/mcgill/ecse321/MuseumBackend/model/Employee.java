@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.PreRemove;
 
 // line 64 "../../../../../Museum.ump"
 // line 144 "../../../../../Museum.ump"
@@ -97,6 +98,16 @@ public class Employee extends PersonRole
     return wasAdded;
   }
   /* Code from template association_RemoveMany */
+  @PreRemove
+  private void removeEmployeeFromShifts() {
+    List<Shift> shiftList = new ArrayList<>();
+    for(Shift s: shifts) {
+      shiftList.add(s);
+    }
+    for(Shift s : shiftList) {
+      if(s.getEmployees().equals(this))removeShift(s);
+    }
+  }
   public boolean removeShift(Shift aShift)
   {
     boolean wasRemoved = false;

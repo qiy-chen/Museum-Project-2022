@@ -12,6 +12,8 @@ import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 
@@ -40,7 +42,7 @@ public class CustomerService {
 		// don't want to create people from the role end)
 		Person person = personRepo.findPersonByEmail(email);
 		if (person == null) {
-			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Person with given email not found.");
+			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Person not found.");
 		}
 		if (person.isCustomer()) {
 			throw new MuseumBackendException(HttpStatus.BAD_REQUEST, "Person with given email is already a customer.");
@@ -56,14 +58,33 @@ public class CustomerService {
 	public Customer deleteCustomer(int ID) {
 		Customer customer = customerRepo.findCustomerByPersonRoleId(ID);
 		if (customer == null)
-			throw new NullPointerException("Customer not found");
+			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Customer not found.");
 		customerRepo.delete(customer);
+		customer.delete();
 		return customer;
 	}
 
 	// get all customers
 	public List<Customer> getAllCustomers() {
 		return toList(customerRepo.findAll());
+	}
+
+	// find all tickets for one customer
+	@Transactional
+	public List<Ticket> getTicketsForCustomer(int id) {
+		Customer customer = customerRepo.findCustomerByPersonRoleId(id);
+		if (customer == null)
+			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Customer not Found");
+		return customer.getTickets();
+	}
+
+	// find all loans for one customer
+	@Transactional
+	public List<Loan> getLoansForCustomer(int id) {
+		Customer customer = customerRepo.findCustomerByPersonRoleId(id);
+		if (customer == null)
+			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Customer not Found");
+		return customer.getLoans();
 	}
 
 	// convert ArrayList to List
