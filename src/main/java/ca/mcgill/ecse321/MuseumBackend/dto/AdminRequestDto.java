@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
-
+/**
+ * @Author Jeanine Looman
+ */
 public class AdminRequestDto {
 
 	// attributes

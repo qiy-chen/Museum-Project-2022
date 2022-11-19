@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author Jeanine Looman
+ */
 @RestController
 public class EmployeeController {
 

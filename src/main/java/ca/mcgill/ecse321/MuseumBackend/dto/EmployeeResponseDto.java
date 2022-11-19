@@ -1,11 +1,13 @@
 package ca.mcgill.ecse321.MuseumBackend.dto;
 
-import ca.mcgill.ecse321.MuseumBackend.model.Employee;
-import ca.mcgill.ecse321.MuseumBackend.model.Shift;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.mcgill.ecse321.MuseumBackend.model.Employee;
+import ca.mcgill.ecse321.MuseumBackend.model.Shift;
+/**
+ * @Author Jeanine Looman
+ */
 public class EmployeeResponseDto {
 
 	private int id;

@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @Author Jeanine Looman
+ */
 @RestController
 public class AdminController {
 
@@ -18,8 +21,11 @@ public class AdminController {
 	// find admin by their ID
 	@GetMapping("/admin/{id}")
 	public ResponseEntity<AdminResponseDto> getAdminByID(@PathVariable int id) {
+
 		Admin admin = adminService.getAdminById(id);
-		return new ResponseEntity<AdminResponseDto>(new AdminResponseDto(admin), HttpStatus.OK);
+		ResponseEntity<AdminResponseDto> response = new ResponseEntity<AdminResponseDto>(new AdminResponseDto(admin),
+				HttpStatus.OK);
+		return response;
 	}
 
 	// create admin

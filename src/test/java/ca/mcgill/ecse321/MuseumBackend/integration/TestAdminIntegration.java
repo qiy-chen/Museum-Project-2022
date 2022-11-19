@@ -1,9 +1,10 @@
 package ca.mcgill.ecse321.MuseumBackend.integration;
 
-import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+/**
+ * @Author Jeanine Looman
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // set random port
 public class TestAdminIntegration {
 

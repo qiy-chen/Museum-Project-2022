@@ -1,12 +1,13 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-import ca.mcgill.ecse321.MuseumBackend.dto.AdminRequestDto;
-import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Admin;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,10 +16,17 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.dto.AdminRequestDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Admin;
+import ca.mcgill.ecse321.MuseumBackend.model.Admin;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+/**
+ * @Author Jeanine Looman
+ */
 @ExtendWith(MockitoExtension.class)
 public class TestAdminService {
 

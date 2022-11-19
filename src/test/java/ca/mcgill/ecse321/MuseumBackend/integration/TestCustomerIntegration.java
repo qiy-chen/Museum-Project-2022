@@ -1,14 +1,13 @@
 package ca.mcgill.ecse321.MuseumBackend.integration;
 
-import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Customer;
-import ca.mcgill.ecse321.MuseumBackend.model.Loan;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
-import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,11 +19,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Customer;
+import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
+import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.LoanRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
+/**
+ * @Author Jeanine Looman
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // set random port
 public class TestCustomerIntegration {
 

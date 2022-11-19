@@ -2,7 +2,9 @@ package ca.mcgill.ecse321.MuseumBackend.dto;
 
 
 import ca.mcgill.ecse321.MuseumBackend.model.Admin;
-
+/**
+ * @Author Jeanine Looman
+ */
 public class AdminResponseDto {
 
 	private int id;

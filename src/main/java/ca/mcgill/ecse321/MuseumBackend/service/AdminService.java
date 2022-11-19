@@ -1,16 +1,20 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
-import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Admin;
-import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
-import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+import ca.mcgill.ecse321.MuseumBackend.dto.AdminResponseDto;
+import ca.mcgill.ecse321.MuseumBackend.model.Admin;
+import ca.mcgill.ecse321.MuseumBackend.model.Admin;
+import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+/**
+ * @Author Jeanine Looman
+ */
 @Service
 public class AdminService {
 
