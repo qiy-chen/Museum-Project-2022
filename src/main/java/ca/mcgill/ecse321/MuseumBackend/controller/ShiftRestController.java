@@ -14,9 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Date;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
@@ -38,15 +36,17 @@ public class ShiftRestController {
         return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)), httpHeaders, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/shift/employees")
-    public ResponseEntity<ShiftResponseDto> addEmployeeToShift(@RequestBody Map<String,Integer> idMap) throws IllegalArgumentException {
+    @PostMapping(value = "/shift/employees/{workDayId}")
+    public ResponseEntity<ShiftResponseDto> addEmployeeToShift(@PathVariable int workDayId, @RequestBody int employeeId) throws IllegalArgumentException {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        int employeeId = idMap.get("employeeId");
-        int workDayId = idMap.get("workDayId");
         return new ResponseEntity<>(convertToResponseDto(service.addEmployeeToShift(workDayId,employeeId)), httpHeaders, HttpStatus.OK);
     }
 
+    @GetMapping(value = "shift/employees/{workDayId}")
+    public ResponseEntity<Integer[]> getAllShiftEmployeeIds(@PathVariable int workDayId) throws IllegalArgumentException {
+        return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)).getEmployees().toArray(new Integer[0]),HttpStatus.OK);
+    }
 
 
     @PutMapping(value = "/shift/{workDayId}/")
@@ -61,12 +61,8 @@ public class ShiftRestController {
         service.deleteShift(workDayId);
     }
 
-    @PutMapping(value = "/shift/employees")
-    public void removeEmployeeFromShift(@RequestBody Map<String,Integer> idMap) throws IllegalArgumentException {
-        final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        int employeeId = idMap.get("employeeId");
-        int workDayId = idMap.get("workDayId");
+    @PutMapping(value = "/shift/employees/{workDayId}")
+    public void removeEmployeeFromShift(@PathVariable int workDayId, @RequestBody int employeeId) throws IllegalArgumentException {
         service.removeEmployeeFromShift(workDayId,employeeId);
     }
 
