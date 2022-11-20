@@ -63,7 +63,7 @@ Path Variable: int workDayId
 
 HTTP Method: GET
 
-Description: Takes an identfying integer corresponding to a shift from the shift repository from the request, and returns a list of Integers corresponding to all the id of the employees assigned to the shift in the body of a ResponseEntity.
+Description: Takes an identfying integer corresponding to a shift from the shift repository from the request, and returns a list of Integers corresponding to all the ids of the employees assigned to the shift in the body of a ResponseEntity.
 
 ## Delete Shift
 
