@@ -16,7 +16,7 @@ The Museum Management System development team is comprised of six skilled softwa
 | Looman Jeanine  | jeanine56 | U4 | Documentation |
 | Tsahageas Alex  | alextsah | U2 | Project Manager |
 
-Role Responsibilities<br />
+**Role Responsibilities**<br />
 <ins>Software Developer:</ins> Responsible for designing and implementing various software functionalities such as classes and tests.<br />
 <ins>Scrum Master:</ins> Responsible for 'unblocking' the software developers and allocating resources such as effort. May also help the software development.<br />
 <ins>Documentation:</ins> Responsible for keeping meeting minutes, providing documentation for all designs and organizing the Wiki. May also help the software development.<br />
