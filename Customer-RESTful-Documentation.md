@@ -1,17 +1,17 @@
-# Customer Service
-## Create a Customer
-URL: /customers
+# employee Service
+## Create a employee
+URL: /employees
 
 Path Variable: None 
 
-Request Body: CustomerRequestDto customerRequestDto 
+Request Body: employeeRequestDto employeeRequestDto 
 
 HTTP Method: POST
 
-Description: Create a customer that is stored in the customer repository. The service returns a CustomerResponseDto object of the customer created.
+Description: Create a employee that is stored in the employee repository. The service returns a employeeResponseDto object of the employee created.
 
-## Read a customer
-URL: /customer/{id}
+## Read a employee
+URL: /employee/{id}
 
 Path Variable: id
 
@@ -19,10 +19,10 @@ Request Body: None
 
 HTTP Method: GET
 
-Description: Read a customer stored in the customer repository, found using its id. The service returns a CustomerResponseDto object of the customer found.
+Description: Read a employee stored in the employee repository, found using its id. The service returns a employeeResponseDto object of the employee found.
 
-## Delete a customer
-URL: "/customer/{id}"
+## Delete a employee
+URL: "/employee/{id}"
 
 Path Variable: id
 
@@ -30,10 +30,10 @@ Request Body: None
 
 HTTP Method: Delete
 
-Description: Delete a customer using the service method delete. The artwork and customer have the customer removed from their lists. Return a CustomerResponseDto of the same customer.
+Description: Delete a employee using the service method delete. The artwork and employee have the employee removed from their lists. Return a employeeResponseDto of the same employee.
 
-## Get all Customers
-URL: "/customers"
+## Get all employees
+URL: "/employees"
 
 Path Variable: None
 
@@ -41,21 +41,10 @@ Request Body: None
 
 HTTP Method: Get
 
-Description: Returns a list of all the customers as a list of CustomerResponseDto.
+Description: Returns a list of all the employees as a list of employeeResponseDto.
 
-# Get all Loans for one customer
-URL: "/customer/loans/{id}"
-
-Path Variable: id
-
-Request Body: None
-
-HTTP Method: Get
-
-Description: Returns a list of all the loans as a list of LoanResponseDto.
-
-# Get all Tickets for one customer
-URL: "/customer/tickets/{id}"
+# Get all Shifts for one employee
+URL: "/employee/shifts/{id}"
 
 Path Variable: id
 
@@ -63,4 +52,4 @@ Request Body: None
 
 HTTP Method: Get
 
-Description: Returns a list of all the tickets as a list of TicketResponseDto.
+Description: Returns a list of all the shifts as a list of ShiftResponseDto.
