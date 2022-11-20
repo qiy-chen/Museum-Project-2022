@@ -30,7 +30,7 @@ The Museum Management System development team is comprised of six skilled softwa
 | Faubert Samuel  | 24 | 45 |  |  |
 | Kawczynski Emma  | 19 | 30 |  |  |
 | Looman Jeanine  | 18 | 40 |  |  |
-| Tsahageas Alex | 20 | 30 |  |  |
+| Tsahageas Alex | 20 | 38 |  |  |
 
 # Project Reports
 
