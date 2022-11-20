@@ -1,5 +1,5 @@
-# employee Service
-## Create a employee
+# Employee Service
+## Create an employee
 URL: /employees
 
 Path Variable: None 
@@ -8,9 +8,9 @@ Request Body: employeeRequestDto employeeRequestDto
 
 HTTP Method: POST
 
-Description: Create a employee that is stored in the employee repository. The service returns a employeeResponseDto object of the employee created.
+Description: Create an employee that is stored in the employee repository. The service returns a employeeResponseDto object of the employee created.
 
-## Read a employee
+## Read an Employee
 URL: /employee/{id}
 
 Path Variable: id
@@ -43,7 +43,7 @@ HTTP Method: Get
 
 Description: Returns a list of all the employees as a list of employeeResponseDto.
 
-# Get all Shifts for one employee
+## Get all Shifts for one employee
 URL: "/employee/shifts/{id}"
 
 Path Variable: id
