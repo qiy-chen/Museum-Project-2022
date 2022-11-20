@@ -23,14 +23,14 @@ The Museum Management System development team is comprised of six skilled softwa
 <ins>Project Manager:</ins> Responsible for allocating/handling issues, planning time so that deadlines are met and ensuring the team is functioning. May also help the software development.<br />
 
 ## Time Contributions
-| Name  | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |
-| ------------- | --- | --- | --- | --- |
-| Abdo Elie-Dimitri  | 20 | 35 |  |  |
-| Chen Qi  | 20 | 30 |  |  |
-| Faubert Samuel  | 24 | 45 |  |  |
-| Kawczynski Emma  | 19 | 30 |  |  |
-| Looman Jeanine  | 18 | 40 |  |  |
-| Tsahageas Alex | 20 | 38 |  |  |
+| Name  | Sprint 1 | Sprint 2 | Sprint 3 | 
+| ------------- | --- | --- | --- |
+| Abdo Elie-Dimitri  | 20 | 35 |  |  
+| Chen Qi  | 20 | 30 |  |  
+| Faubert Samuel  | 24 | 45 |  |  
+| Kawczynski Emma  | 19 | 30 |  |  
+| Looman Jeanine  | 18 | 40 |  |  
+| Tsahageas Alex | 20 | 38 |  | 
 
 # Project Reports
 
