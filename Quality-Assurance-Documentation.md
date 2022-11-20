@@ -14,6 +14,9 @@ We plan to have at least 95% coverage on all essential lines of the service clas
 
 We also plan to test at least 90% of the possible branches in the service class and controller class that it is testing on. The branch which leads to a successful operation must be covered by the test.
 
+### Overall Coverage Summary
+![](https://media.discordapp.net/attachments/1025068314185187401/1043688345307463771/Screenshot_2022-11-19_19-42-40.png?width=1440&height=306)
+
 # Report
 
 ### Unit Tests
