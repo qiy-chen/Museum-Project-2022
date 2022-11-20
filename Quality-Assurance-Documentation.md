@@ -22,3 +22,5 @@ Overall all our tests ran and passed successfully as seen below:
 
 ![Screen Shot 2022-11-19 at 8 21 54 PM](https://user-images.githubusercontent.com/98911345/202878374-97dda3d9-2da0-40a5-8de6-757405123921.png)
 
+## Unit Test Approaches
+For unit testing, we designed test classes for each Service class that would test the behaviour of each method along with invalid inputs and edge cases. We used Mockito to mimic the behaviour of the repository and assertion JUnit tests to check that the desired behaviour was being implemented. 
