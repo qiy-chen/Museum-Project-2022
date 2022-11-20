@@ -43,7 +43,7 @@ HTTP Method: Get
 
 Description: Returns a list of all the customers as a list of CustomerResponseDto.
 
-# Get all Loans for one customer
+## Get all Loans for one customer
 URL: "/customer/loans/{id}"
 
 Path Variable: id
