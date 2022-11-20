@@ -2,10 +2,10 @@ package ca.mcgill.ecse321.MuseumBackend.service;
 
 import ca.mcgill.ecse321.MuseumBackend.Exception.DisplayException;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
-import ca.mcgill.ecse321.MuseumBackend.model.Room;
+import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
-import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,7 @@ import javax.transaction.Transactional;
 
 @Service
 public class RoomService {
-  
-  @Autowired
-  ArtworkRepository artworkRepository;
-  
+
   @Autowired
   StorageRepository storageRepository;
   
@@ -29,72 +26,85 @@ public class RoomService {
   @Autowired
   RoomRepository roomRepository;
   
+  @Autowired
+  MuseumRepository museumRepository;
+  
   @Transactional
-  public Display createDisplayRoom(int aRoomNumber, int aMaxArtworks) {
+  public Display createDisplayRoom(int aRoomNumber, int aMaxArtworks, int museumId) {
+    
+    Museum mus = museumRepository.findMuseumByMuseumId(museumId);
+    
+    if (aRoomNumber < 1) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room number must be valid.");}
+    if (aMaxArtworks < 1) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room must have a maximum number of artworks.");}
     
     Display display = new Display();
     
     display.setRoomNumber(aRoomNumber);
     display.setMaxArtworks(aMaxArtworks);
+    display.setMuseum(mus);
     
-    displayRepository.save(display);
-    roomRepository.save(display);
+    display = displayRepository.save(display);
+    mus.addRoom(display);
+    
+    museumRepository.save(mus);
+    
     return display;
   }
   
   @Transactional
-  public Display updateDisplayRoom(int aRoomId, int aRoomNumber, int aMaxArtworks) {
-    
-    Display display = displayRepository.findDisplayByRoomId(aRoomId);
-    
-    display.setRoomNumber(aRoomNumber);
-    display.setMaxArtworks(aMaxArtworks);
-   
-    displayRepository.save(display);
-    roomRepository.save(display);
-    return display;
-  }
-  
-
-  //@SuppressWarnings("unused")
-  @Transactional
-  public void deleteDisplayRoom(int aRoomId) {
-    Display display = displayRepository.findDisplayByRoomId(aRoomId);
+  public void deleteDisplayRoom(int roomId) {
+    Display display = displayRepository.findDisplayByRoomId(roomId);
     
     if (display == null) {
       throw new DisplayException(HttpStatus.NOT_FOUND, "Display not found.");
     }
     
-    if (display.numberOfArtworks() > 0) {
+    if (display.numberOfArtworks() >= 1) {
       throw new DisplayException(HttpStatus.BAD_REQUEST, "Display room is not empty");
-      
     }
     
-    displayRepository.delete(display);
+    Museum m = display.getMuseum();
+    m.removeRoom(display);
+    
+    display.delete();
     roomRepository.delete(display);
   }
   
   @Transactional
-  public Room getRoom(int aRoomId) {
-    Room room = roomRepository.findRoomByRoomId(aRoomId);
+  public Storage getStorageById(int aRoomId) {
+    Storage room = storageRepository.findStorageByRoomId(aRoomId);
     
-    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
+    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Storage room not found.");}
     
     return room; 
   }
   
   @Transactional
-  public Storage createStorageRoom(int aRoomNumber) {
+  public Display getDisplayById(int aRoomId) {
+    Display room = displayRepository.findDisplayByRoomId(aRoomId);
+    
+    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, "Display room not found.");}
+    
+    return room; 
+  }
+  
+  @Transactional
+  public Storage createStorageRoom(int aRoomNumber, int museumId) {
     
     if (storageRepository.count() >= 1 ) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Already one existing storage room.");}
+    
+    Museum mus = museumRepository.findMuseumByMuseumId(museumId);
     
     Storage storage = new Storage();
     
     storage.setRoomNumber(aRoomNumber);
-    storage.setRoomId(storage.hashCode());
+    storage.setMuseum(mus);
     
-    storageRepository.save(storage);
-    roomRepository.save(storage);
+    storage = storageRepository.save(storage);
+    mus.addRoom(storage);
+    
+    museumRepository.save(mus);
+    
     return storage;
   }
 
