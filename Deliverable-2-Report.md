@@ -6,6 +6,12 @@ To build locally with Gradle, cd into the root directory and run the command ```
 
 > <img width="682" alt="Screen Shot 2022-11-19 at 8 30 41 PM" src="https://user-images.githubusercontent.com/98911345/202878586-9c530d5a-134b-4a9a-a158-1227bff1664b.png">
 
+## Test Run 
+As seen below the tests run locally using ```./gradlew test```
+
+![image](https://user-images.githubusercontent.com/98911345/202879412-026de01a-703e-41c4-8244-23b93e490f11.png)
+
+
 ## Meetings
 Nov. 2:  
 * Present: Sam, Emma, Alex, Jeanine
