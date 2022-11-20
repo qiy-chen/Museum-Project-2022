@@ -9,3 +9,7 @@
 [Customer Service](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Customer-RESTful-Documentation)
 
 [Employee Service](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Employee-RESTful-Documentation)
+
+[Artwork Service](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Artwork-RESTful-Documentation)
+
+[Room Service](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Room-RESTful-Documentation)
