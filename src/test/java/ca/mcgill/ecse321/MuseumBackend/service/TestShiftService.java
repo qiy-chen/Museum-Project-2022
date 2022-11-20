@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.MuseumBackend.service;
 
 
 import ca.mcgill.ecse321.MuseumBackend.model.Employee;
-
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
@@ -37,6 +36,8 @@ public class TestShiftService {
     private Shift initializeTestShift() {
         Museum museum = new Museum();
         museum.setMuseumId(12);
+        double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
+        long workHours = (long) sixHoursInMillisecond;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
         LocalDateTime startTime = LocalDateTime.parse("2022-11-18 8:00",formatter);
         LocalDateTime endTime = LocalDateTime.parse("2022-11-18 17:00",formatter);

@@ -60,16 +60,19 @@ public class LoanIntegrationTest {
   
   private int testCreateLoan() {
     Museum museum = new Museum();
+    int museumId = museum.getMuseumId();
     
     museumRepository.save(museum);
     
     Artwork artwork = new Artwork();
+    int artworkId = artwork.getArtworkId();
     artwork.setMuseum(museum);
     artwork.setIsLoanable(true);
     artworkRepository.save(artwork);
     
     
     Customer customer = new Customer();
+    int customerId = customer.getPersonRoleId();
     
     customerRepository.save(customer);
     String startDate="2015-03-31"; 
@@ -105,8 +108,11 @@ public class LoanIntegrationTest {
     assertEquals(HttpStatus.OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertTrue(response.getBody().getLoanId() == id);
+    //assertEquals(0, response.getBody().getArtworkId());
+    //assertEquals(0, response.getBody().getCustomerId());
     assertEquals(3, response.getBody().getNumOfDays());
     assertEquals(2.5, response.getBody().getRentalFee());
+    //assertEquals(0,response.getBody().getMuseumId());
     assertEquals("2015-03-30",response.getBody().getStartDate().toString());
     assertEquals("2015-04-28",response.getBody().getEndDate().toString());
     assertEquals(LoanStatus.Requested,response.getBody().getStatus());
@@ -217,14 +223,17 @@ public class LoanIntegrationTest {
   }
   private int testCreateLoan2() {
     Museum museum = new Museum();
+    int museumId = museum.getMuseumId();
     
     museumRepository.save(museum);
     
     Artwork artwork = new Artwork();
+    int artworkId = artwork.getArtworkId();
     artwork.setMuseum(museum);
     artworkRepository.save(artwork);
     
     Customer customer = new Customer();
+    int customerId = customer.getPersonRoleId();
     
     customerRepository.save(customer);
     String startDate="2015-03-31"; 

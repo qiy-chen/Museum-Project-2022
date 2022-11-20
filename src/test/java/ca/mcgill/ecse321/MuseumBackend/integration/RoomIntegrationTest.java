@@ -14,8 +14,10 @@ import org.springframework.http.ResponseEntity;
 import ca.mcgill.ecse321.MuseumBackend.dto.DisplayDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.StorageDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
+import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
+import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class RoomIntegrationTest {
@@ -23,10 +25,14 @@ public class RoomIntegrationTest {
   @Autowired
   private TestRestTemplate client;
   
+  @Autowired
+  private DisplayRepository displayRepository;
   
   @Autowired
   private MuseumRepository museumRepository;
   
+  @Autowired
+  private StorageRepository storageRepository;
   
   @Autowired
   private RoomRepository roomRepository;

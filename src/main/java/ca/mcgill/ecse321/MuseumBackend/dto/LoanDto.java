@@ -7,15 +7,10 @@ import java.sql.Date;
 public class LoanDto {
 
   public String status;
-  @SuppressWarnings("unused")
   private double rentalFee;
-  @SuppressWarnings("unused")
   private Date startDate;
-  @SuppressWarnings("unused")
   private Date endDate;
-  @SuppressWarnings("unused")
   private int numOfDays;
-  @SuppressWarnings("unused")
   private int loanId;
   
   public LoanDto(Loan loan) {
