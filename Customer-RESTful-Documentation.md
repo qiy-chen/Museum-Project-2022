@@ -54,7 +54,7 @@ HTTP Method: Get
 
 Description: Returns a list of all the loans as a list of LoanResponseDto.
 
-# Get all Tickets for one customer
+## Get all Tickets for one customer
 URL: "/customer/tickets/{id}"
 
 Path Variable: id
