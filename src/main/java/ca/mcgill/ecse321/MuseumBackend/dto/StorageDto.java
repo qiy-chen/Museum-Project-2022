@@ -20,11 +20,11 @@ public class StorageDto {
     this.museumId = museumId;
   }
  
- public int getNumber() {
+ public int getRoomNumber() {
    return roomNumber;
 }
  
- public int getId() {
+ public int getRoomId() {
    return roomId;
 }
  

@@ -24,7 +24,7 @@ public class DisplayDto {
     this.museumId = museumId;
   }
  
- public int getNumber() {
+ public int getRoomNumber() {
    return roomNumber;
 }
  

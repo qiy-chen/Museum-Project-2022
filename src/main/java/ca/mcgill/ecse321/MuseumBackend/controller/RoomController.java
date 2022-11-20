@@ -27,7 +27,6 @@ public class RoomController {
   *
   * @param name
   * @param roomNumber
-  * @return maxArtworks
   * @throws IllegalArgumentException
   */
   @PostMapping(value = {"/display/", "/display"})
@@ -35,7 +34,7 @@ public class RoomController {
       @RequestBody DisplayDto request
     )   throws IllegalArgumentException {
 
-    Display d = service.createDisplayRoom(request.getNumber(), request.getMaxArtworks(), request.getMuseumId());
+    Display d = service.createDisplayRoom(request.getRoomNumber(), request.getMaxArtworks(), request.getMuseumId());
     return new ResponseEntity<DisplayDto>(convertToDto(d), HttpStatus.CREATED);
 }
   
@@ -50,7 +49,7 @@ public class RoomController {
       @RequestBody StorageDto request
     )   throws IllegalArgumentException {
 
-    Storage s = service.createStorageRoom(request.getNumber(), request.getMuseumId());
+    Storage s = service.createStorageRoom(request.getRoomNumber(), request.getMuseumId());
     return new ResponseEntity<StorageDto>(convertToDto(s), HttpStatus.CREATED);
 }
   
@@ -80,7 +79,7 @@ public class RoomController {
      return new ResponseEntity<StorageDto>(convertToDto(s), HttpStatus.OK);
   }
   
-  @DeleteMapping(value = {"/display/{id}", "/display/{id}/"})  
+  @DeleteMapping(value = {"/display/delete/{id}", "/display/delete/{id}/"})  
   public ResponseEntity<DisplayDto> deleteDisplay(@PathVariable int id) 
       throws IllegalArgumentException {
     

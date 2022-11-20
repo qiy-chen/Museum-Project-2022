@@ -51,20 +51,21 @@ public class RoomService {
   }
   
   @Transactional
-  public void deleteDisplayRoom(int aRoomId) {
-    Display display = displayRepository.findDisplayByRoomId(aRoomId);
+  public void deleteDisplayRoom(int roomId) {
+    Display display = displayRepository.findDisplayByRoomId(roomId);
     
     if (display == null) {
       throw new DisplayException(HttpStatus.NOT_FOUND, "Display not found.");
     }
     
-    if (display.numberOfArtworks() > 0) {
+    if (display.numberOfArtworks() >= 1) {
       throw new DisplayException(HttpStatus.BAD_REQUEST, "Display room is not empty");
     }
     
-    display.getMuseum().removeRoom(display);
+    Museum m = display.getMuseum();
+    m.removeRoom(display);
     
-    displayRepository.delete(display);
+    display.delete();
     roomRepository.delete(display);
   }
   

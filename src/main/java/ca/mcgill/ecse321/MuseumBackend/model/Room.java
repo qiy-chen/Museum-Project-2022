@@ -4,6 +4,7 @@
 package ca.mcgill.ecse321.MuseumBackend.model;
 import java.util.*;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 // line 69 "../../../../../Museum.ump"
 // line 149 "../../../../../Museum.ump"
@@ -24,6 +25,7 @@ public abstract class Room
 
   //Room Associations
   @ManyToOne
+  @Cascade({org.hibernate.annotations.CascadeType.REMOVE})
   private Museum museum;
   
   @OneToMany(fetch = FetchType.EAGER)
