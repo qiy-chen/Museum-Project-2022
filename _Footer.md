@@ -1,4 +1,4 @@
-# Artwork Service
+# Artwork Restful 
 ## Read a Artwork
 URL: /artwork/{id}
 
