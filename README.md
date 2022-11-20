@@ -35,3 +35,4 @@ The Museum Management System development team is comprised of six skilled softwa
 # Project Reports
 
 - [Report for Deliverable 1](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Deliverable-1-Report)
+- [Report for Deliverable 2](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Deliverable-2-Report)
