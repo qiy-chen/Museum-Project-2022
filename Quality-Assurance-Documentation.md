@@ -1,6 +1,6 @@
 # Plan
 
-We plan to do white-box testing for the unit tests and integration tests.
+We plan to do white-box testing for the unit tests and integration tests. Our unit tests check if service methods work, using a test stub. The test stub is a Mock repository which returns expected outputs when prompted by the service methods.
 
 #### For each unit test
 
