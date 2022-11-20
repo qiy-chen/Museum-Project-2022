@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
 import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
+
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.LoanResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Artwork;
@@ -143,7 +144,6 @@ public class LoanService {
   public Loan returnArtworkandEndLoan(int loanId) {
 
     Loan loan = loanRepository.findLoanByLoanId(loanId);
-    Artwork artwork = loan.getArtwork();
     LoanStatus status = loan.getStatus();
     if(status.equals(LoanStatus.Approved)) {
       loan.setStatus(LoanStatus.Returned);

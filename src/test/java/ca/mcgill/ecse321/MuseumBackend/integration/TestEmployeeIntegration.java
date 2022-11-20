@@ -1,12 +1,10 @@
 package ca.mcgill.ecse321.MuseumBackend.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,11 +16,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
-
 import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
-import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
-import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.ShiftRepository;
@@ -161,44 +156,6 @@ public class TestEmployeeIntegration {
 		} catch (RestClientException | IllegalArgumentException e) {
 		}
 	}
-
-	// test get all shifts for employee
-	/*@Test
-	public void testGetShiftsForEmployee() {
-
-		String email = "hey@bud.com";
-		int employeeID = testCreateEmployee(email);
-
-		// give the employee shifts
-		Employee employee = employeeRepo.findEmployeeByPersonRoleId(employeeID);
-		Shift nightShift = new Shift();
-		Shift dayShift = new Shift();
-		shiftRepo.save(nightShift);
-		shiftRepo.save(dayShift);
-		int nightID = nightShift.getWorkDayId();
-		int dayID = dayShift.getWorkDayId();
-		employee.addShift(nightShift);
-		employee.addShift(dayShift);
-		employeeRepo.save(employee);
-
-		// set up what we expect to get
-		List<ShiftDto> shiftDtos = new ArrayList<>();
-		shiftDtos.add(new ShiftDto(nightID));
-		shiftDtos.add(new ShiftDto(dayID));
-
-		// call method: get the employee by their id
-		ResponseEntity<ShiftDto[]> response = client.getForEntity("/employee/shifts/" + employeeID, ShiftDto[].class);
-
-		// check response
-		assertNotNull(response);
-		assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
-		assertNotNull(response.getBody(), "Response has body");
-		ShiftDto[] shifts = response.getBody();
-		assertEquals(2, shifts.length, "Response has all shifts");
-		assertEquals(nightID, shifts[1].workDayId, "Correct ID");
-		assertEquals(dayID, shifts[0].workDayId, "Correct ID");
-	}
-*/
 }
 
 class EmployeeDto {

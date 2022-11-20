@@ -73,7 +73,6 @@ public class PersonIntegrationTest {
 
     private void testChangePassword(String email, String newPassword) {
         ResponseEntity<PersonResponseDto> response0 = client.getForEntity("/person/"+email,PersonResponseDto.class);
-        String oldPassword = response0.getBody().getPassword();
         String name = response0.getBody().getName();
         Map<String,String> inputMap = new HashMap<>();
         inputMap.put("name",name);
@@ -96,7 +95,6 @@ public class PersonIntegrationTest {
     private void testChangeName(String email, String newName) {
         ResponseEntity<PersonResponseDto> response0 = client.getForEntity("/person/"+email,PersonResponseDto.class);
         String password = response0.getBody().getPassword();
-        String oldName = response0.getBody().getName();
         Map<String,String> inputMap = new HashMap<>();
         inputMap.put("name",newName);
         inputMap.put("password",password);

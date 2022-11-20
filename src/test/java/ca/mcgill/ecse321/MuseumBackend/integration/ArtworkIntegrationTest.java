@@ -339,8 +339,7 @@ public class ArtworkIntegrationTest {
     assertTrue(m.getMuseumId()>=1);
     
     //create the artwork by using postmapping
-    ResponseEntity<ArtworkResponseDto> response = client.postForEntity("/artwork", new ArtworkRequestDto("Mona Lisa", d.getRoomId(), m.getMuseumId()), ArtworkResponseDto.class);
-    int id = response.getBody().getArtworkId();
+    
     ResponseEntity<ArtworkResponseDto> response2 = client.postForEntity("/artwork", new ArtworkRequestDto("La Joconde", s.getRoomId(), m.getMuseumId()), ArtworkResponseDto.class);
     int id2 = response2.getBody().getArtworkId();
     
@@ -376,7 +375,6 @@ public class ArtworkIntegrationTest {
     //create the artwork by using postmapping
     ResponseEntity<ArtworkResponseDto> response = client.postForEntity("/artwork", new ArtworkRequestDto("Mona Lisa", d.getRoomId(), m.getMuseumId()), ArtworkResponseDto.class);
     int id = response.getBody().getArtworkId();
-    ResponseEntity<ArtworkResponseDto> response2 = client.postForEntity("/artwork", new ArtworkRequestDto("La Joconde", s.getRoomId(), m.getMuseumId()), ArtworkResponseDto.class);
     
     ResponseEntity<List<ArtworkResponseDto>> response3 = client.exchange("/display/artworks",HttpMethod.GET, null, new ParameterizedTypeReference<List<ArtworkResponseDto>>() {});
     List<ArtworkResponseDto> responseList = response3.getBody();
@@ -406,7 +404,7 @@ public class ArtworkIntegrationTest {
     assertTrue(m.getMuseumId()>=1);
     
     //create the artwork by using postmapping
-    ResponseEntity<ArtworkResponseDto> response = client.postForEntity("/artwork", new ArtworkRequestDto("Mona Lisa", d.getRoomId(), m.getMuseumId()), ArtworkResponseDto.class);
+    
     ResponseEntity<ArtworkResponseDto> response2 = client.postForEntity("/artwork", new ArtworkRequestDto("La Joconde", s.getRoomId(), m.getMuseumId()), ArtworkResponseDto.class);
     int id2 = response2.getBody().getArtworkId();
     

@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,7 +24,6 @@ import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 import ca.mcgill.ecse321.MuseumBackend.dto.CustomerRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.CustomerResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
-import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
