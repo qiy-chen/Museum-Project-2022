@@ -1,7 +1,7 @@
 ## Key Design Decisions
 For this deliverable, our group made design decisions about the functionality of our controller. We decided that objects should be created in a specific order such as creating a person account before adding a person role. For example, when creating a customer, you must provide a valid person email for an existing person account. In testing, we decided to improve coverage by testing for all different exceptions using invalid inputs at the service layer, and checking for only for a successful input at the controller layer.
 ## Build System
-To run the application, you can use any command line, where you must open the project, and input the command ./gradlew bootRun. 
+To run the application, you can use any command line, where you must open the project, and input the command ./gradlew bootRun. The application will be deployed on a website but the website has not been built yet.  
 ## Meetings
 Nov. 2:  
 * Present: Sam, Emma, Alex, Jeanine
