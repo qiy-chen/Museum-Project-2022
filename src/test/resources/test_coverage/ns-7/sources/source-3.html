@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PersonRepository</title>
+  <title>Coverage Report > MuseumRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.repository</a>
 </div>
 
-<h1>Coverage Summary for Class: PersonRepository (ca.mcgill.ecse321.MuseumBackend.repository)</h1>
+<h1>Coverage Summary for Class: MuseumRepository (ca.mcgill.ecse321.MuseumBackend.repository)</h1>
 
 <table class="coverageStats">
 
@@ -29,13 +29,13 @@ Current scope:     <a href="../../index.html">all classes</a>
   <th class="name">Class</th>
 </tr>
   <tr>
-    <td class="name">PersonRepository$MockitoMock$J4uwq8CU</td>
+    <td class="name">MuseumRepository$MockitoMock$daKy3fgq</td>
   </tr>
   <tr>
-    <td class="name">PersonRepository$MockitoMock$J4uwq8CU$auxiliary$7dOVkBtu</td>
+    <td class="name">MuseumRepository$MockitoMock$daKy3fgq$auxiliary$iS9aTpaq</td>
   </tr>
   <tr>
-    <td class="name">PersonRepository$MockitoMock$J4uwq8CU$auxiliary$bJ7hX4TV</td>
+    <td class="name">MuseumRepository$MockitoMock$daKy3fgq$auxiliary$xrtQgnAU</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -49,12 +49,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.repository;
 &nbsp;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 &nbsp;import org.springframework.data.repository.CrudRepository;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Person;
 &nbsp;
-&nbsp;public interface PersonRepository extends CrudRepository&lt;Person, String&gt;{
+&nbsp;public interface MuseumRepository extends CrudRepository&lt;Museum, Integer&gt;{
 &nbsp;
-&nbsp;	Person findPersonByEmail(String aEmail);
+&nbsp;	Museum findMuseumByMuseumId(int aMuseumId);
 &nbsp;	
 &nbsp;}
 </code>
@@ -80,7 +80,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-19 15:34</div>
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
 </div>
 </body>
 </html>

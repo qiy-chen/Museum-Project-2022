@@ -56,10 +56,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">ShiftService$$EnhancerBySpringCGLIB$$6a5bc293</td>
+    <td class="name">ShiftService$$EnhancerBySpringCGLIB$$a55e5cbe</td>
   </tr>
   <tr>
-    <td class="name">ShiftService$$EnhancerBySpringCGLIB$$6a5bc293$$FastClassBySpringCGLIB$$c4e2d430</td>
+    <td class="name">ShiftService$$EnhancerBySpringCGLIB$$a55e5cbe$$FastClassBySpringCGLIB$$20394904</td>
   </tr>
   <tr>
     <td class="name">ShiftService$$FastClassBySpringCGLIB$$5cc63ca</td>
@@ -92,27 +92,24 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.service;
 &nbsp;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Employee;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.EmployeeRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.ShiftRepository;
 &nbsp;import org.springframework.beans.factory.annotation.Autowired;
 &nbsp;import org.springframework.http.HttpStatus;
 &nbsp;import org.springframework.stereotype.Service;
 &nbsp;import org.springframework.transaction.annotation.Transactional;
 &nbsp;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Shift;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.ShiftRepository;
-&nbsp;
-&nbsp;import java.sql.Date;
-&nbsp;import java.sql.Timestamp;
-&nbsp;import java.time.Instant;
 &nbsp;import java.time.LocalDateTime;
-&nbsp;import java.time.ZoneId;
 &nbsp;import java.time.format.DateTimeFormatter;
-&nbsp;import java.util.List;
+&nbsp;
 &nbsp;
 &nbsp;@Service
 <b class="fc">&nbsp;public class ShiftService {</b>
+&nbsp;
+&nbsp;
 &nbsp;
 &nbsp;	@Autowired
 &nbsp;	ShiftRepository shiftRepo;
@@ -139,41 +136,42 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;		}
 <b class="fc">&nbsp;	}</b>
 &nbsp;
+&nbsp;	/**
+&nbsp;	 * @author Samuel Faubert
+&nbsp;	 * Takes an identifying integer to find its corresponding shift in the shift repository
+&nbsp;	 * @param workDayId An integer equal to the unique value corresponding to a shift
+&nbsp;	 * @return shift A Shift object from the shift repository that corresponds to the id
+&nbsp;	 */
 &nbsp;	@Transactional
-&nbsp;	public Shift getShiftById(int workDayid) {
-&nbsp;		/**
-&nbsp;		 * Takes an identifying integer to find its corresponding shift in the shift repository
-&nbsp;		 * @param workDayId An integer equal to the unique value corresponding to a shift
-&nbsp;		 * @return shift A Shift object from the shift repository that corresponds to the id
-&nbsp;		 */
-<b class="fc">&nbsp;		Shift shift = shiftRepo.findShiftByWorkDayId(workDayid);</b>
+&nbsp;	public Shift getShiftById(int workDayId) {
+<b class="fc">&nbsp;		Shift shift = shiftRepo.findShiftByWorkDayId(workDayId);</b>
 <b class="fc">&nbsp;		if (shift == null) {</b>
 <b class="fc">&nbsp;			throw new MuseumBackendException(HttpStatus.NOT_FOUND, &quot;Shift not found.&quot;);</b>
 &nbsp;		}
 <b class="fc">&nbsp;		return shift;</b>
 &nbsp;	}
-&nbsp;	
+&nbsp;	/**
+&nbsp;	 * @author Samuel Faubert
+&nbsp;	 * Takes a Shift object to be saved to the shift repository
+&nbsp;	 * @param shift A Shift object to be persisted
+&nbsp;	 * @return shift The same Shift object after it has been persisted
+&nbsp;	 */
 &nbsp;	@Transactional
 &nbsp;	public Shift createShift(Shift shift) {
-&nbsp;		/**
-&nbsp;		 * Takes a Shift object to be saved to the shift repository
-&nbsp;		 * @param shift A Shift object to be persisted
-&nbsp;		 * @return shift The same Shift object after it has been persisted
-&nbsp;		 */
 <b class="fc">&nbsp;		shiftArgumentErrorTest(shift);</b>
 <b class="fc">&nbsp;		shift = shiftRepo.save(shift);</b>
 <b class="fc">&nbsp;		return shift;</b>
 &nbsp;	}
-&nbsp;
+&nbsp;	/**
+&nbsp;	 * @author Samuel Faubert
+&nbsp;	 * Takes an identifying integer and 2 Date objects to find its corresponding shift in the shift repository to change the start and end times of the shift
+&nbsp;	 *  @param workDayId An integer equal to the unique value corresponding to a shift
+&nbsp;	 *	@param startTimeValue A string object equal to the new starting time to be set for the shift
+&nbsp;	 * 	@param endTimeValue A string equal to the new ending time to be set for the shift
+&nbsp;	 * 	@return shift The Shift object corresponding to the workDayId with its start and end times now updated
+&nbsp;	 */
 &nbsp;	@Transactional
 &nbsp;	public Shift changeShiftDate(int workDayId, String startTimeValue, String endTimeValue) {
-&nbsp;		/**
-&nbsp;		 * Takes an identifying integer and 2 Date objects to find its corresponding shift in the shift repository to change the start and end times of the shift
-&nbsp;		 *  @param workDayId An integer equal to the unique value corresponding to a shift
-&nbsp;		 *	@param startTime A Date object equal to the new starting time to be set for the shift
-&nbsp;		 * 	@param endTime A Date object equal to the new ending time to be set for the shift
-&nbsp;		 * 	@return shift The Shift object corresponding to the workDayId with its start and end times now updated
-&nbsp;		 */
 <b class="fc">&nbsp;		Shift shift = getShiftById(workDayId);</b>
 <b class="fc">&nbsp;		shiftArgumentErrorTest(shift);</b>
 <b class="fc">&nbsp;		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd H:mm&quot;);</b>
@@ -185,15 +183,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;
 &nbsp;
-&nbsp;
+&nbsp;	/**
+&nbsp;	 * @author Samuel Faubert
+&nbsp;	 * Takes 2 identifying integers to find the corresponding shift in the shift repository to add the corresponding employee to the shift
+&nbsp;	 * @param workDayId An integer equal to the unique value corresponding to a shift
+&nbsp;	 * @param employeeId An integer equal to the unique value corresponding to an employee
+&nbsp;	 * @return shift The Shift object corresponding to the workDayId with the requested employee added
+&nbsp;	 */
 &nbsp;	@Transactional
 &nbsp;	public Shift addEmployeeToShift(int workDayId, int employeeId) {
-&nbsp;		/**
-&nbsp;		 * Takes 2 identifying integers to find the corresponding shift in the shift repository to add the corresponding employee to the shift
-&nbsp;		 * @param workDayId An integer equal to the unique value corresponding to a shift
-&nbsp;		 * @param employeeId An integer equal to the unique value corresponding to an employee
-&nbsp;		 * @return shift The Shift object corresponding to the workDayId with the requested employee added
-&nbsp;		 */
 <b class="fc">&nbsp;		Shift shift = getShiftById(workDayId);</b>
 <b class="fc">&nbsp;		shiftArgumentErrorTest(shift);</b>
 <b class="fc">&nbsp;		Employee employee = employeeRepository.findEmployeeByPersonRoleId(employeeId);</b>
@@ -201,26 +199,28 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;		return shift;</b>
 &nbsp;	}
 &nbsp;
+&nbsp;	/**
+&nbsp;	 * @author Samuel Faubert
+&nbsp;	 * Takes 2 identifying integers to find the corresponding shift in the shift repository to remove the corresponding employee from the shift
+&nbsp;	 * @param workDayId An integer equal to the unique value corresponding to a shift
+&nbsp;	 * @param employeeId An integer equal to the unique value corresponding to an employee
+&nbsp;	 * @return shift The Shift object corresponding to the workDayId with the requested employee removed
+&nbsp;	 */
 &nbsp;	@Transactional
 &nbsp;	public Shift removeEmployeeFromShift(int workDayId, int employeeId) {
-&nbsp;		/**
-&nbsp;		 * Takes 2 identifying integers to find the corresponding shift in the shift repository to remove the corresponding employee from the shift
-&nbsp;		 * @param workDayId An integer equal to the unique value corresponding to a shift
-&nbsp;		 * @param employeeId An integer equal to the unique value corresponding to an employee
-&nbsp;		 * @return shift The Shift object corresponding to the workDayId with the requested employee removed
-&nbsp;		 */
 <b class="fc">&nbsp;		Shift shift = getShiftById(workDayId);</b>
 <b class="fc">&nbsp;		shiftArgumentErrorTest(shift);</b>
 <b class="fc">&nbsp;		Employee employee = employeeRepository.findEmployeeByPersonRoleId(employeeId);</b>
 <b class="fc">&nbsp;		shift.removeEmployee(employee);</b>
 <b class="fc">&nbsp;		return shift;</b>
 &nbsp;	}
+&nbsp;	/**
+&nbsp;	 * @author Samuel Faubert
+&nbsp;	 * Takes an identifying integer to find the corresponding shift in the shift repository to delete it from the repository
+&nbsp;	 * @param workDayId An integer equal to the unique value corresponding to a shift
+&nbsp;	 */
 &nbsp;	@Transactional
 &nbsp;	public void deleteShift(int workDayId) {
-&nbsp;		/**
-&nbsp;		 * Takes an identifying integer to find the corresponding shift in the shift repository to delete it from the repository
-&nbsp;		 * @param workDayId An integer equal to the unique value corresponding to a shift
-&nbsp;		 */
 <b class="fc">&nbsp;		Shift shift = getShiftById(workDayId);</b>
 <b class="fc">&nbsp;		shiftArgumentErrorTest(shift);</b>
 <b class="fc">&nbsp;		shiftRepo.delete(shift);</b>
@@ -253,7 +253,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-19 15:34</div>
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
 </div>
 </body>
 </html>

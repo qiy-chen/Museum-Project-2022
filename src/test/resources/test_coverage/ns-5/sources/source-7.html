@@ -40,43 +40,43 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">Museum</td>
 <td class="coverageStat">
   <span class="percent">
-    28.2%
+    29.6%
   </span>
   <span class="absValue">
-    (20/71)
+    (21/71)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    30.8%
+    33.3%
   </span>
   <span class="absValue">
-    (96/312)
+    (104/312)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">Museum$HibernateProxy$4hDC8yX1</td>
+    <td class="name">Museum$HibernateProxy$ACu0gjPm</td>
   </tr>
   <tr>
-    <td class="name">Museum$HibernateProxy$gpQAG2Ln</td>
+    <td class="name">Museum$HibernateProxy$JLEyxUsd</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    28.2%
+    29.6%
   </span>
   <span class="absValue">
-    (20/71)
+    (21/71)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    30.8%
+    33.3%
   </span>
   <span class="absValue">
-    (96/312)
+    (104/312)
   </span>
 </td>
 </tr>
@@ -91,11 +91,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 &nbsp;
 &nbsp;package ca.mcgill.ecse321.MuseumBackend.model;
-&nbsp;import java.time.LocalDateTime;
-&nbsp;import java.util.*;
+&nbsp;
 &nbsp;import javax.persistence.*;
 &nbsp;import java.sql.Date;
 &nbsp;import java.time.LocalDateTime;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
 &nbsp;
 &nbsp;// line 2 &quot;../../../../../Museum.ump&quot;
 &nbsp;// line 106 &quot;../../../../../Museum.ump&quot;
@@ -360,20 +362,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;  public boolean addRoom(Room aRoom)
 &nbsp;  {
-<b class="nc">&nbsp;    boolean wasAdded = false;</b>
-<b class="nc">&nbsp;    if (rooms.contains(aRoom)) { return false; }</b>
-<b class="nc">&nbsp;    Museum existingMuseum = aRoom.getMuseum();</b>
-<b class="nc">&nbsp;    boolean isNewMuseum = existingMuseum != null &amp;&amp; !this.equals(existingMuseum);</b>
-<b class="nc">&nbsp;    if (isNewMuseum)</b>
+<b class="fc">&nbsp;    boolean wasAdded = false;</b>
+<b class="fc">&nbsp;    if (rooms.contains(aRoom)) { return false; }</b>
+<b class="fc">&nbsp;    Museum existingMuseum = aRoom.getMuseum();</b>
+<b class="fc">&nbsp;    boolean isNewMuseum = existingMuseum != null &amp;&amp; !this.equals(existingMuseum);</b>
+<b class="fc">&nbsp;    if (isNewMuseum)</b>
 &nbsp;    {
 <b class="nc">&nbsp;      aRoom.setMuseum(this);</b>
 &nbsp;    }
 &nbsp;    else
 &nbsp;    {
-<b class="nc">&nbsp;      rooms.add(aRoom);</b>
+<b class="fc">&nbsp;      rooms.add(aRoom);</b>
 &nbsp;    }
-<b class="nc">&nbsp;    wasAdded = true;</b>
-<b class="nc">&nbsp;    return wasAdded;</b>
+<b class="fc">&nbsp;    wasAdded = true;</b>
+<b class="fc">&nbsp;    return wasAdded;</b>
 &nbsp;  }
 &nbsp;
 &nbsp;  public boolean removeRoom(Room aRoom)
@@ -856,7 +858,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-19 15:34</div>
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
 </div>
 </body>
 </html>

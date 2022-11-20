@@ -58,7 +58,7 @@ public class ShiftRestController {
      * @param workDayId An identifying integer equal to the value corresponding to a shift
      * @return A ResponseEntity with a body of a list of Integers with the ids of the shift's employees
      */
-    @GetMapping(value = "shift/employees/{workDayId}")
+    @GetMapping(value = "/shift/employees/{workDayId}")
     public ResponseEntity<Integer[]> getAllShiftEmployeeIds(@PathVariable int workDayId) throws IllegalArgumentException {
         return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)).getEmployees().toArray(new Integer[0]),HttpStatus.OK);
     }

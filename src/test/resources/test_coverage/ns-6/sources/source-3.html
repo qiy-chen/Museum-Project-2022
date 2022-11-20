@@ -40,73 +40,73 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">CustomerService</td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    100%
   </span>
   <span class="absValue">
-    (6/8)
+    (8/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.5%
+    94.1%
   </span>
   <span class="absValue">
-    (26/34)
+    (32/34)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">CustomerService$$EnhancerBySpringCGLIB$$c3ace9d5</td>
+    <td class="name">CustomerService$$EnhancerBySpringCGLIB$$feaf8400</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$$EnhancerBySpringCGLIB$$c3ace9d5$$FastClassBySpringCGLIB$$f0d4b9b0</td>
+    <td class="name">CustomerService$$EnhancerBySpringCGLIB$$feaf8400$$FastClassBySpringCGLIB$$7d858bb9</td>
   </tr>
   <tr>
     <td class="name">CustomerService$$FastClassBySpringCGLIB$$ffa9a0</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ$auxiliary$9qktmnKu</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9$auxiliary$1UeWhP05</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ$auxiliary$CCpTeS2p</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9$auxiliary$4yqdhRrv</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ$auxiliary$d1eh5oeE</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9$auxiliary$61OVYCWH</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ$auxiliary$DIME7h7v</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9$auxiliary$ERyZTrfR</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ$auxiliary$EuKSp6mK</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9$auxiliary$kmFbM57D</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ$auxiliary$QlhWRdCb</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9$auxiliary$kVddszWg</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ$auxiliary$S2JFZfLY</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9$auxiliary$tk63f69S</td>
   </tr>
   <tr>
-    <td class="name">CustomerService$MockitoMock$XKKTeTeJ$auxiliary$XWBW2G9M</td>
+    <td class="name">CustomerService$MockitoMock$RO1wNGn9$auxiliary$Y9my11f3</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    100%
   </span>
   <span class="absValue">
-    (6/8)
+    (8/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.5%
+    94.1%
   </span>
   <span class="absValue">
-    (26/34)
+    (32/34)
   </span>
 </td>
 </tr>
@@ -135,7 +135,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
-&nbsp;
+&nbsp;/**
+&nbsp; * @Author Jeanine Looman
+&nbsp; */
 &nbsp;@Service
 <b class="fc">&nbsp;public class CustomerService {</b>
 &nbsp;
@@ -191,19 +193,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;	// find all tickets for one customer
 &nbsp;	@Transactional
 &nbsp;	public List&lt;Ticket&gt; getTicketsForCustomer(int id) {
-<b class="nc">&nbsp;		Customer customer = customerRepo.findCustomerByPersonRoleId(id);</b>
-<b class="nc">&nbsp;		if (customer == null)</b>
+<b class="fc">&nbsp;		Customer customer = customerRepo.findCustomerByPersonRoleId(id);</b>
+<b class="fc">&nbsp;		if (customer == null)</b>
 <b class="nc">&nbsp;			throw new MuseumBackendException(HttpStatus.NOT_FOUND, &quot;Customer not Found&quot;);</b>
-<b class="nc">&nbsp;		return customer.getTickets();</b>
+<b class="fc">&nbsp;		return customer.getTickets();</b>
 &nbsp;	}
 &nbsp;
 &nbsp;	// find all loans for one customer
 &nbsp;	@Transactional
 &nbsp;	public List&lt;Loan&gt; getLoansForCustomer(int id) {
-<b class="nc">&nbsp;		Customer customer = customerRepo.findCustomerByPersonRoleId(id);</b>
-<b class="nc">&nbsp;		if (customer == null)</b>
+<b class="fc">&nbsp;		Customer customer = customerRepo.findCustomerByPersonRoleId(id);</b>
+<b class="fc">&nbsp;		if (customer == null)</b>
 <b class="nc">&nbsp;			throw new MuseumBackendException(HttpStatus.NOT_FOUND, &quot;Customer not Found&quot;);</b>
-<b class="nc">&nbsp;		return customer.getLoans();</b>
+<b class="fc">&nbsp;		return customer.getLoans();</b>
 &nbsp;	}
 &nbsp;
 &nbsp;	// convert ArrayList to List
@@ -238,7 +240,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-19 15:34</div>
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
 </div>
 </body>
 </html>

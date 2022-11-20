@@ -59,10 +59,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95.2%
+    95%
   </span>
   <span class="absValue">
-    (20/21)
+    (19/20)
   </span>
 </td>
 </tr>
@@ -76,9 +76,6 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.controller;
 &nbsp;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.Exception.MuseumBackendException;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeRequestDto;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.EmployeeResponseDto;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.ShiftRequestDto;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.ShiftResponseDto;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Shift;
@@ -90,7 +87,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import org.springframework.http.ResponseEntity;
 &nbsp;import org.springframework.http.converter.HttpMessageNotReadableException;
 &nbsp;import org.springframework.web.bind.annotation.*;
-&nbsp;import java.util.List;
+&nbsp;
 &nbsp;import java.util.Map;
 &nbsp;
 &nbsp;@CrossOrigin(origins = &quot;*&quot;)
@@ -99,19 +96,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @Autowired
 &nbsp;    private ShiftService service;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * @author Samuel Faubert
+&nbsp;     * Takes an identifying integer corresponding to a shift from the shift repository from the request to find the corresponding
+&nbsp;     * shift, and returns a shift response transfer object with the details of the requested Shift object in the body of a ResponseEntity
+&nbsp;     * @param workDayId An identifying integer equal to the value corresponding to a shift
+&nbsp;     * @return A ResponseEntity with a body of a shift response transfer object with the details of the requested Shift object
+&nbsp;     */
 &nbsp;    @GetMapping(value = &quot;/shift/{workDayId}&quot;)
 &nbsp;    public ResponseEntity&lt;ShiftResponseDto&gt; getShiftById(@PathVariable int workDayId) throws IllegalArgumentException, HttpMessageNotReadableException {
-&nbsp;        /**
-&nbsp;         * Takes an identifying integer corresponding to a shift from the shift repository from the request to find the corresponding
-&nbsp;         * shift, and returns a shift response transfer object with the details of the requested Shift object in the body of the ResponseEntity
-&nbsp;         * @param workDayId An identifying integer equal to the value corresponding to a shift
-&nbsp;         * @return A ResponseEntity with a body of a shift response transfer object with the details of the requested Shift object
-&nbsp;         */
 <b class="fc">&nbsp;        final HttpHeaders httpHeaders = new HttpHeaders();</b>
 <b class="fc">&nbsp;        httpHeaders.setContentType(MediaType.APPLICATION_JSON);</b>
 <b class="fc">&nbsp;        return new ResponseEntity&lt;&gt;(convertToResponseDto(service.getShiftById(workDayId)), httpHeaders, HttpStatus.OK);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * @author Samuel Faubert
+&nbsp;     * Takes 2 identifying integers corresponding to a shift and employee from the shift repository and employee repository respectively
+&nbsp;     * from the request to add that employee to the shift, and returns a shift response transfer object with the details of the Shift object
+&nbsp;     * with the newly added employee in the body of a ResponseEntity
+&nbsp;     * @param workDayId An identifying integer equal to the value corresponding to a shift
+&nbsp;     * @param employeeId An identifying integer equal to the value corresponding to an employee
+&nbsp;     * @return A ResponseEntity with a body of a shift response transfer object with the details of the requested Shift object
+&nbsp;     */
 &nbsp;    @PostMapping(value = &quot;/shift/employees/{workDayId}&quot;)
 &nbsp;    public ResponseEntity&lt;ShiftResponseDto&gt; addEmployeeToShift(@PathVariable int workDayId, @RequestBody int employeeId) throws IllegalArgumentException {
 <b class="fc">&nbsp;        final HttpHeaders httpHeaders = new HttpHeaders();</b>
@@ -119,18 +126,31 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return new ResponseEntity&lt;&gt;(convertToResponseDto(service.addEmployeeToShift(workDayId,employeeId)), httpHeaders, HttpStatus.OK);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * @author Samuel Faubert
+&nbsp;     * Takes an identfying integer corresponding to a shift from the shift repository from the request, and
+&nbsp;     * returns a list of Integers corresponding to all the id of the employees assigned to the shift in the body of
+&nbsp;     * a ResponseEntity
+&nbsp;     * @param workDayId An identifying integer equal to the value corresponding to a shift
+&nbsp;     * @return A ResponseEntity with a body of a list of Integers with the ids of the shift&#39;s employees
+&nbsp;     */
 &nbsp;    @GetMapping(value = &quot;shift/employees/{workDayId}&quot;)
 &nbsp;    public ResponseEntity&lt;Integer[]&gt; getAllShiftEmployeeIds(@PathVariable int workDayId) throws IllegalArgumentException {
 <b class="fc">&nbsp;        return new ResponseEntity&lt;&gt;(convertToResponseDto(service.getShiftById(workDayId)).getEmployees().toArray(new Integer[0]),HttpStatus.OK);</b>
 &nbsp;    }
 &nbsp;
-&nbsp;
+&nbsp;    /**
+&nbsp;     * @author Samuel Faubert
+&nbsp;     * Takes an identifying integer corresponding to a shift from the shift repository and a map holding strings representing dates, and returns
+&nbsp;     * a shift response tranfer object with the details of the Shift object with the new start and end dates
+&nbsp;     * @param workDayId An identifying integer equal to the value corresponding to a shift
+&nbsp;     * @param dateMap A map of string to string holding the new start and end dates of the shift
+&nbsp;     */
 &nbsp;    @PutMapping(value = &quot;/shift/{workDayId}/&quot;)
 &nbsp;    public void changeShiftDate(@PathVariable int workDayId, @RequestBody Map&lt;String, String&gt; dateMap) throws IllegalArgumentException {
 <b class="fc">&nbsp;        service.changeShiftDate(workDayId, dateMap.get(&quot;startTimeValue&quot;),dateMap.get(&quot;endTimeValue&quot;));</b>
 &nbsp;
 <b class="fc">&nbsp;    }</b>
-&nbsp;
 &nbsp;
 &nbsp;    @PutMapping(value = &quot;/shift/{workDayId}&quot;)
 &nbsp;    public void deleteShift(@PathVariable int workDayId) throws IllegalArgumentException {
@@ -142,30 +162,30 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        service.removeEmployeeFromShift(workDayId,employeeId);</b>
 <b class="fc">&nbsp;    }</b>
 &nbsp;
-&nbsp;
+&nbsp;    /**
+&nbsp;     * @author Samuel Faubert
+&nbsp;     * Takes a shift request transfer object with the details corresponding to a Shift object to be created,
+&nbsp;     * and returns a shift response transfer object with the details of the created shift in the body of a ResponseEntity
+&nbsp;     * @param shiftRequestDto a shift request transfer object with the details corresponding to a Shift object to be created
+&nbsp;     * @return A ResponseEntity with a body of a shift response transfer object with the details of the created Shift object
+&nbsp;     */
 &nbsp;    @PostMapping(value = &quot;/shift&quot;)
 &nbsp;    public ResponseEntity&lt;ShiftResponseDto&gt; createShift(@RequestBody ShiftRequestDto shiftRequestDto) throws IllegalArgumentException {
-&nbsp;        /**
-&nbsp;         * Takes a shift request transfer object with the details corresponding to a Shift object to be created,
-&nbsp;         * and returns a shift response transfer object with the details of the created shift in the body of a ResponseEntity
-&nbsp;         * @param shiftRequestDto a shift request transfer object with the details corresponding to a Shift object to be created
-&nbsp;         * @return A ResponseEntity with a body of a shift response transfer object with the details of the created Shift object
-&nbsp;         */
 <b class="fc">&nbsp;        final HttpHeaders httpHeaders = new HttpHeaders();</b>
 <b class="fc">&nbsp;        httpHeaders.setContentType(MediaType.APPLICATION_JSON);</b>
 <b class="fc">&nbsp;        return new ResponseEntity&lt;&gt;(convertToResponseDto(service.createShift(shiftRequestDto.toModel())), httpHeaders,HttpStatus.CREATED);</b>
 &nbsp;    }
+&nbsp;    /**
+&nbsp;     * @author Samuel Faubert
+&nbsp;     * Takes a Shift object to create a new shift response transfer object with corresponding details
+&nbsp;     * @param s A Shift object to be modeled for the shift response transfer object
+&nbsp;     * @return A shift response transfer object with the details corresponding to the inputted Shift object
+&nbsp;     */
 &nbsp;    private ShiftResponseDto convertToResponseDto(Shift s) {
-&nbsp;        /**
-&nbsp;         * Takes a Shift object to create a new shift response transfer object with corresponding details
-&nbsp;         * @param s A Shift object to be modeled for the shift response transfer object
-&nbsp;         * @return A shift response transfer object with the details corresponding to the inputted Shift object
-&nbsp;         */
 <b class="fc">&nbsp;        if(s==null) {</b>
 <b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;There is no such Shift!&quot;);</b>
 &nbsp;        }
-<b class="fc">&nbsp;        ShiftResponseDto shiftResponseDto = new ShiftResponseDto(s.getStartTime(), s.getEndTime(), s.getWorkDayId(), s.getMuseum(), s.getEmployees());</b>
-<b class="fc">&nbsp;        return shiftResponseDto;</b>
+<b class="fc">&nbsp;        return new ShiftResponseDto(s.getStartTime(), s.getEndTime(), s.getWorkDayId(), s.getMuseum(), s.getEmployees());</b>
 &nbsp;    }
 &nbsp;
 &nbsp;}
@@ -192,7 +212,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-19 15:34</div>
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
 </div>
 </body>
 </html>
