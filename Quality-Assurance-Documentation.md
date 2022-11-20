@@ -22,22 +22,3 @@ Overall all our tests ran and passed successfully as seen below:
 
 ![Screen Shot 2022-11-19 at 8 21 54 PM](https://user-images.githubusercontent.com/98911345/202878374-97dda3d9-2da0-40a5-8de6-757405123921.png)
 
-# Report
-
-### Unit Tests
-
-#### Ticket
-Coverage: 98,2% on TicketService.java
-
-Branches: 19/20 branches on TicketService.java
-
-### Integration Tests
-
-#### Ticket
-Coverage: 99,1% on TicketService.java
-
-100% on TicketController.java
-
-Branches: 19/20 branches on TicketService.java
-
-2/2 branches on TicketController.java
