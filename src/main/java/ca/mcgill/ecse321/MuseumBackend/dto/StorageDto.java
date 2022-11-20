@@ -5,21 +5,31 @@ public class StorageDto {
   
   private int roomNumber;
   private int roomId;
+  private int museumId;
 
   public StorageDto() {}
   
   public StorageDto(Storage s) {
    this.roomNumber = s.getRoomNumber();
    this.roomId = s.getRoomId();
-
+   this.museumId = s.getMuseum().getMuseumId();
  }
+  
+  public StorageDto(int roomNumber, int museumId) {
+    this.roomNumber = roomNumber;
+    this.museumId = museumId;
+  }
  
- public int getNumber() {
+ public int getRoomNumber() {
    return roomNumber;
 }
  
- public int getId() {
+ public int getRoomId() {
    return roomId;
 }
+ 
+ public int getMuseumId() {
+   return museumId;
+  }
  
 }
