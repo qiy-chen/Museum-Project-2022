@@ -40,40 +40,46 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">RoomService</td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    83.3%
   </span>
   <span class="absValue">
-    (1/6)
+    (5/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    3.2%
+    73%
   </span>
   <span class="absValue">
-    (1/31)
+    (27/37)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">RoomService$$EnhancerBySpringCGLIB$$6cb1ce5e</td>
+    <td class="name">RoomService$$EnhancerBySpringCGLIB$$a7b46889</td>
+  </tr>
+  <tr>
+    <td class="name">RoomService$$EnhancerBySpringCGLIB$$a7b46889$$FastClassBySpringCGLIB$$2db7c1e1</td>
+  </tr>
+  <tr>
+    <td class="name">RoomService$$FastClassBySpringCGLIB$$54b9be83</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    83.3%
   </span>
   <span class="absValue">
-    (1/6)
+    (5/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    3.2%
+    73%
   </span>
   <span class="absValue">
-    (1/31)
+    (27/37)
   </span>
 </td>
 </tr>
@@ -92,19 +98,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import org.springframework.stereotype.Service;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.Exception.DisplayException;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Display;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Room;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Storage;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.ArtworkRepository;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
 &nbsp;import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 &nbsp;
 &nbsp;@Service
 <b class="fc">&nbsp;public class RoomService {</b>
-&nbsp;  
-&nbsp;  @Autowired
-&nbsp;  ArtworkRepository artworkRepository;
-&nbsp;  
+&nbsp;
 &nbsp;  @Autowired
 &nbsp;  StorageRepository storageRepository;
 &nbsp;  
@@ -114,73 +117,86 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;  @Autowired
 &nbsp;  RoomRepository roomRepository;
 &nbsp;  
+&nbsp;  @Autowired
+&nbsp;  MuseumRepository museumRepository;
+&nbsp;  
 &nbsp;  @Transactional
-&nbsp;  public Display createDisplayRoom(int aRoomNumber, int aMaxArtworks) {
+&nbsp;  public Display createDisplayRoom(int aRoomNumber, int aMaxArtworks, int museumId) {
 &nbsp;    
-<b class="nc">&nbsp;    Display display = new Display();</b>
+<b class="fc">&nbsp;    Museum mus = museumRepository.findMuseumByMuseumId(museumId);</b>
 &nbsp;    
-<b class="nc">&nbsp;    display.setRoomNumber(aRoomNumber);</b>
-<b class="nc">&nbsp;    display.setMaxArtworks(aMaxArtworks);</b>
+<b class="fc">&nbsp;    if (aRoomNumber &lt; 1) {throw new DisplayException(HttpStatus.BAD_REQUEST, &quot;Room number must be valid.&quot;);}</b>
+<b class="fc">&nbsp;    if (aMaxArtworks &lt; 1) {throw new DisplayException(HttpStatus.BAD_REQUEST, &quot;Room must have a maximum number of artworks.&quot;);}</b>
 &nbsp;    
-<b class="nc">&nbsp;    displayRepository.save(display);</b>
-<b class="nc">&nbsp;    roomRepository.save(display);</b>
-<b class="nc">&nbsp;    return display;</b>
+<b class="fc">&nbsp;    Display display = new Display();</b>
+&nbsp;    
+<b class="fc">&nbsp;    display.setRoomNumber(aRoomNumber);</b>
+<b class="fc">&nbsp;    display.setMaxArtworks(aMaxArtworks);</b>
+<b class="fc">&nbsp;    display.setMuseum(mus);</b>
+&nbsp;    
+<b class="fc">&nbsp;    display = displayRepository.save(display);</b>
+<b class="fc">&nbsp;    mus.addRoom(display);</b>
+&nbsp;    
+<b class="fc">&nbsp;    museumRepository.save(mus);</b>
+&nbsp;    
+<b class="fc">&nbsp;    return display;</b>
 &nbsp;  }
 &nbsp;  
 &nbsp;  @Transactional
-&nbsp;  public Display updateDisplayRoom(int aRoomId, int aRoomNumber, int aMaxArtworks) {
-&nbsp;    
-<b class="nc">&nbsp;    Display display = displayRepository.findDisplayByRoomId(aRoomId);</b>
-&nbsp;    
-<b class="nc">&nbsp;    display.setRoomNumber(aRoomNumber);</b>
-<b class="nc">&nbsp;    display.setMaxArtworks(aMaxArtworks);</b>
-&nbsp;   
-<b class="nc">&nbsp;    displayRepository.save(display);</b>
-<b class="nc">&nbsp;    roomRepository.save(display);</b>
-<b class="nc">&nbsp;    return display;</b>
-&nbsp;  }
-&nbsp;  
-&nbsp;
-&nbsp;  //@SuppressWarnings(&quot;unused&quot;)
-&nbsp;  @Transactional
-&nbsp;  public void deleteDisplayRoom(int aRoomId) {
-<b class="nc">&nbsp;    Display display = displayRepository.findDisplayByRoomId(aRoomId);</b>
+&nbsp;  public void deleteDisplayRoom(int roomId) {
+<b class="nc">&nbsp;    Display display = displayRepository.findDisplayByRoomId(roomId);</b>
 &nbsp;    
 <b class="nc">&nbsp;    if (display == null) {</b>
 <b class="nc">&nbsp;      throw new DisplayException(HttpStatus.NOT_FOUND, &quot;Display not found.&quot;);</b>
 &nbsp;    }
 &nbsp;    
-<b class="nc">&nbsp;    if (display.numberOfArtworks() &gt; 0) {</b>
+<b class="nc">&nbsp;    if (display.numberOfArtworks() &gt;= 1) {</b>
 <b class="nc">&nbsp;      throw new DisplayException(HttpStatus.BAD_REQUEST, &quot;Display room is not empty&quot;);</b>
-&nbsp;      
 &nbsp;    }
 &nbsp;    
-<b class="nc">&nbsp;    displayRepository.delete(display);</b>
+<b class="nc">&nbsp;    Museum m = display.getMuseum();</b>
+<b class="nc">&nbsp;    m.removeRoom(display);</b>
+&nbsp;    
+<b class="nc">&nbsp;    display.delete();</b>
 <b class="nc">&nbsp;    roomRepository.delete(display);</b>
 <b class="nc">&nbsp;  }</b>
 &nbsp;  
 &nbsp;  @Transactional
-&nbsp;  public Room getRoom(int aRoomId) {
-<b class="nc">&nbsp;    Room room = roomRepository.findRoomByRoomId(aRoomId);</b>
+&nbsp;  public Storage getStorageById(int aRoomId) {
+<b class="fc">&nbsp;    Storage room = storageRepository.findStorageByRoomId(aRoomId);</b>
 &nbsp;    
-<b class="nc">&nbsp;    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, &quot;Room not found.&quot;);}</b>
+<b class="fc">&nbsp;    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, &quot;Storage room not found.&quot;);}</b>
 &nbsp;    
-<b class="nc">&nbsp;    return room; </b>
+<b class="fc">&nbsp;    return room; </b>
 &nbsp;  }
 &nbsp;  
 &nbsp;  @Transactional
-&nbsp;  public Storage createStorageRoom(int aRoomNumber) {
+&nbsp;  public Display getDisplayById(int aRoomId) {
+<b class="fc">&nbsp;    Display room = displayRepository.findDisplayByRoomId(aRoomId);</b>
 &nbsp;    
-<b class="nc">&nbsp;    if (storageRepository.count() &gt;= 1 ) {throw new DisplayException(HttpStatus.BAD_REQUEST, &quot;Already one existing storage room.&quot;);}</b>
+<b class="fc">&nbsp;    if (room ==null ) {throw new DisplayException(HttpStatus.NOT_FOUND, &quot;Display room not found.&quot;);}</b>
 &nbsp;    
-<b class="nc">&nbsp;    Storage storage = new Storage();</b>
+<b class="fc">&nbsp;    return room; </b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  @Transactional
+&nbsp;  public Storage createStorageRoom(int aRoomNumber, int museumId) {
 &nbsp;    
-<b class="nc">&nbsp;    storage.setRoomNumber(aRoomNumber);</b>
-<b class="nc">&nbsp;    storage.setRoomId(storage.hashCode());</b>
+<b class="fc">&nbsp;    if (storageRepository.count() &gt;= 1 ) {throw new DisplayException(HttpStatus.BAD_REQUEST, &quot;Already one existing storage room.&quot;);}</b>
 &nbsp;    
-<b class="nc">&nbsp;    storageRepository.save(storage);</b>
-<b class="nc">&nbsp;    roomRepository.save(storage);</b>
-<b class="nc">&nbsp;    return storage;</b>
+<b class="fc">&nbsp;    Museum mus = museumRepository.findMuseumByMuseumId(museumId);</b>
+&nbsp;    
+<b class="fc">&nbsp;    Storage storage = new Storage();</b>
+&nbsp;    
+<b class="fc">&nbsp;    storage.setRoomNumber(aRoomNumber);</b>
+<b class="fc">&nbsp;    storage.setMuseum(mus);</b>
+&nbsp;    
+<b class="fc">&nbsp;    storage = storageRepository.save(storage);</b>
+<b class="fc">&nbsp;    mus.addRoom(storage);</b>
+&nbsp;    
+<b class="fc">&nbsp;    museumRepository.save(mus);</b>
+&nbsp;    
+<b class="fc">&nbsp;    return storage;</b>
 &nbsp;  }
 &nbsp;
 &nbsp;}
@@ -207,7 +223,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-19 15:34</div>
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
 </div>
 </body>
 </html>

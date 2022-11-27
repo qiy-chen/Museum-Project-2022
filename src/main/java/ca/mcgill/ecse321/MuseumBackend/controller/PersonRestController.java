@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Objects;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -30,8 +31,8 @@ public class PersonRestController {
     public void changePersonNameAndPassword(@PathVariable String email, @RequestBody Map<String, String> inputMap) throws IllegalArgumentException {
         String name = inputMap.get("name");
         String password = inputMap.get("password");
-        if(service.getPersonByEmail(email).getName() != name)service.changePersonName(email,name);
-        if(service.getPersonByEmail(email).getPassword() != password)service.changePersonPassword(email,password);
+        if(!Objects.equals(service.getPersonByEmail(email).getName(), name))service.changePersonName(email,name);
+        if(!Objects.equals(service.getPersonByEmail(email).getPassword(), password))service.changePersonPassword(email,password);
     }
 
     @PutMapping(value = "/person/{email}")

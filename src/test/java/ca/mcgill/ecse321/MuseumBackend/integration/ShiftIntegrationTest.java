@@ -161,7 +161,7 @@ public class ShiftIntegrationTest {
         try {
             client.getForEntity("/shift/"+workDayId,ShiftResponseDto.class);
             fail("Shift was found");
-        } catch(RestClientException | IllegalArgumentException e) {
+        } catch(RestClientException | IllegalArgumentException ignored) {
 
         }
     }

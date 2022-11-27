@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DisplayRepository</title>
+  <title>Coverage Report > CustomerRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.repository</a>
 </div>
 
-<h1>Coverage Summary for Class: DisplayRepository (ca.mcgill.ecse321.MuseumBackend.repository)</h1>
+<h1>Coverage Summary for Class: CustomerRepository (ca.mcgill.ecse321.MuseumBackend.repository)</h1>
 
 <table class="coverageStats">
 
@@ -29,13 +29,13 @@ Current scope:     <a href="../../index.html">all classes</a>
   <th class="name">Class</th>
 </tr>
   <tr>
-    <td class="name">DisplayRepository$MockitoMock$tJbf089I</td>
+    <td class="name">CustomerRepository$MockitoMock$vl1jlqJX</td>
   </tr>
   <tr>
-    <td class="name">DisplayRepository$MockitoMock$tJbf089I$auxiliary$jgYXRurS</td>
+    <td class="name">CustomerRepository$MockitoMock$vl1jlqJX$auxiliary$BPfJOGoI</td>
   </tr>
   <tr>
-    <td class="name">DisplayRepository$MockitoMock$tJbf089I$auxiliary$JjXcpdv5</td>
+    <td class="name">CustomerRepository$MockitoMock$vl1jlqJX$auxiliary$LtXDdwOH</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -49,12 +49,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.repository;
 &nbsp;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 &nbsp;import org.springframework.data.repository.CrudRepository;
-&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Display;
 &nbsp;
-&nbsp;public interface DisplayRepository extends CrudRepository&lt;Display, Integer&gt;{
+&nbsp;public interface CustomerRepository extends CrudRepository&lt;Customer, Integer&gt;{
 &nbsp;
-&nbsp;	Display findDisplayByRoomId(int aDisplayId);
+&nbsp;	Customer findCustomerByPersonRoleId(int aCustomerId);
 &nbsp;	
 &nbsp;}
 </code>
@@ -80,7 +80,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-19 15:34</div>
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
 </div>
 </body>
 </html>

@@ -56,10 +56,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">Shift$HibernateProxy$yrvhdK2P</td>
+    <td class="name">Shift$HibernateProxy$f4i9PEFm</td>
   </tr>
   <tr>
-    <td class="name">Shift$HibernateProxy$ZvBJuNyh</td>
+    <td class="name">Shift$HibernateProxy$nAnMMiDD</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -91,10 +91,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 &nbsp;
 &nbsp;package ca.mcgill.ecse321.MuseumBackend.model;
-&nbsp;import java.sql.Date;
-&nbsp;import java.time.LocalDateTime;
-&nbsp;import java.util.*;
+&nbsp;
 &nbsp;import javax.persistence.*;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
 &nbsp;
 &nbsp;// line 34 &quot;../../../../../Museum.ump&quot;
 &nbsp;// line 127 &quot;../../../../../Museum.ump&quot;
@@ -110,6 +112,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;  private LocalDateTime startTime;
 &nbsp;  private LocalDateTime endTime;
 &nbsp;  @Id
+&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)
 &nbsp;  private int workDayId;
 &nbsp;
 &nbsp;  //Shift Associations
@@ -380,7 +383,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-11-19 15:34</div>
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
 </div>
 </body>
 </html>
