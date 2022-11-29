@@ -1,8 +1,8 @@
 {
   "name": "museum-frontend",
   "version": "1.0.0",
-  "description": "A Vue.js frontent for Museum Management App",
-  "author": "alextsah <alexander.tsahageas@mail. mcgill.ca>",
+  "description": "A Vue.js frontend for Museum System",
+  "author": "qiy-chen <qi.chen6@mail.mcgill.ca>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

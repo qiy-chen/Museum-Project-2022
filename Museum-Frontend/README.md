@@ -1,6 +1,6 @@
 # museum-frontend
 
-> A Vue.js frontent for Museum Management App
+> A Vue.js frontend for Museum System
 
 ## Build Setup
 
