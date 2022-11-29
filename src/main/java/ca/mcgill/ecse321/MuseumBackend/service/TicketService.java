@@ -38,6 +38,18 @@ public class TicketService {
     }
     return ticketsdto;
   }
+  
+  @Transactional
+  public List<Ticket> getAllUnpurchasedTickets() {
+    List<Ticket> tickets = toList(ticketRepository.findAll());
+    List<Ticket> ticketsdto = new ArrayList<Ticket>();
+    for (Ticket ticket:tickets) {
+      if (ticket.getCustomer()==null) {
+        ticketsdto.add(ticket);
+      }
+    }
+    return ticketsdto;
+  }
 
   @Transactional
   public Ticket getTicketByTicketId(int id) {
@@ -71,6 +83,7 @@ public class TicketService {
     //Replace old ticket with new values
     oldTicket.setPrice(ticket.getPrice());
     oldTicket.setTicketDate(ticket.getTicketDate());
+    oldTicket.setCustomer(ticket.getCustomer());
     return ticketRepository.save(oldTicket);
 
   }
