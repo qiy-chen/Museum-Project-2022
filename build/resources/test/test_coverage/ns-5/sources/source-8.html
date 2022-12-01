@@ -1,0 +1,387 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Person</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Person (ca.mcgill.ecse321.MuseumBackend.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Person</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.1%
+  </span>
+  <span class="absValue">
+    (19/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.1%
+  </span>
+  <span class="absValue">
+    (69/106)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Person$HibernateProxy$eknfs4yP</td>
+  </tr>
+  <tr>
+    <td class="name">Person$HibernateProxy$x91WPcXj</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    73.1%
+  </span>
+  <span class="absValue">
+    (19/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.1%
+  </span>
+  <span class="absValue">
+    (69/106)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*PLEASE DO NOT EDIT THIS CODE*/
+&nbsp;/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+&nbsp;
+&nbsp;package ca.mcgill.ecse321.MuseumBackend.model;
+&nbsp;
+&nbsp;import javax.persistence.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;// line 11 &quot;../../../../../Museum.ump&quot;
+&nbsp;// line 115 &quot;../../../../../Museum.ump&quot;
+&nbsp;@Entity
+&nbsp;public class Person
+&nbsp;{
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // MEMBER VARIABLES
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;  //Person Attributes
+&nbsp;  @Id
+&nbsp;  private String email;
+&nbsp;  private String password;
+&nbsp;  private String name;
+&nbsp;
+&nbsp;  //Person Associations
+&nbsp;  @ManyToOne
+&nbsp;  private Museum museum;
+&nbsp;  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+&nbsp;  private List&lt;PersonRole&gt; personRoles;
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // CONSTRUCTOR
+&nbsp;  //------------------------
+&nbsp;  public Person(String aEmail, String aPassword, String aName, Museum aMuseum)
+<b class="fc">&nbsp;  {</b>
+<b class="fc">&nbsp;    email = aEmail;</b>
+<b class="fc">&nbsp;    password = aPassword;</b>
+<b class="fc">&nbsp;    name = aName;</b>
+<b class="fc">&nbsp;    boolean didAddMuseum = setMuseum(aMuseum);</b>
+<b class="fc">&nbsp;    if (!didAddMuseum)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      throw new RuntimeException(&quot;Unable to create person due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html&quot;);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    personRoles = new ArrayList&lt;PersonRole&gt;();</b>
+<b class="fc">&nbsp;  }</b>
+&nbsp;
+<b class="fc">&nbsp;  public Person() {</b>
+<b class="fc">&nbsp;    personRoles = new ArrayList&lt;PersonRole&gt;();</b>
+<b class="fc">&nbsp;  }</b>
+&nbsp;  
+&nbsp;
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // INTERFACE
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;
+&nbsp;public boolean setEmail(String aEmail)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    email = aEmail;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean setPassword(String aPassword)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    password = aPassword;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean setName(String aName)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    name = aName;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getEmail()
+&nbsp;  {
+<b class="fc">&nbsp;    return email;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getPassword()
+&nbsp;  {
+<b class="fc">&nbsp;    return password;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getName()
+&nbsp;  {
+<b class="fc">&nbsp;    return name;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_GetOne */
+&nbsp;  public Museum getMuseum()
+&nbsp;  {
+<b class="fc">&nbsp;    return museum;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_GetMany */
+&nbsp;  
+&nbsp;  public PersonRole getPersonRole(int index)
+&nbsp;  {
+<b class="fc">&nbsp;    PersonRole aPersonRole = personRoles.get(index);</b>
+<b class="fc">&nbsp;    return aPersonRole;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  public List&lt;PersonRole&gt; getPersonRoles()
+&nbsp;  {
+<b class="fc">&nbsp;    List&lt;PersonRole&gt; newPersonRoles = Collections.unmodifiableList(personRoles);</b>
+<b class="fc">&nbsp;    return newPersonRoles;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  // check if the person has each different role
+&nbsp;  public boolean isAdmin() {
+<b class="fc">&nbsp;	  return personRoles.stream().anyMatch(role -&gt; role.getClass().equals(Admin.class));</b>
+&nbsp;  }
+&nbsp;  public boolean isCustomer() {
+<b class="fc">&nbsp;	  return personRoles.stream().anyMatch(role -&gt; role.getClass().equals(Customer.class));</b>
+&nbsp;  }
+&nbsp;  public boolean isEmployee() {
+<b class="fc">&nbsp;	  return personRoles.stream().anyMatch(role -&gt; role.getClass().equals(Employee.class));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public int numberOfPersonRoles()
+&nbsp;  {
+<b class="nc">&nbsp;    int number = personRoles.size();</b>
+<b class="nc">&nbsp;    return number;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean hasPersonRoles()
+&nbsp;  {
+<b class="nc">&nbsp;    boolean has = personRoles.size() &gt; 0;</b>
+<b class="nc">&nbsp;    return has;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public int indexOfPersonRole(PersonRole aPersonRole)
+&nbsp;  {
+<b class="nc">&nbsp;    int index = personRoles.indexOf(aPersonRole);</b>
+<b class="nc">&nbsp;    return index;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_SetOneToMany */
+&nbsp;  public boolean setMuseum(Museum aMuseum)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    if (aMuseum == null)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      return wasSet;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    Museum existingMuseum = museum;</b>
+<b class="fc">&nbsp;    museum = aMuseum;</b>
+<b class="fc">&nbsp;    if (existingMuseum != null &amp;&amp; !existingMuseum.equals(aMuseum))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      existingMuseum.removePerson(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    museum.addPerson(this);</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_MinimumNumberOfMethod */
+&nbsp;  public static int minimumNumberOfPersonRoles()
+&nbsp;  {
+<b class="nc">&nbsp;    return 0;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_AddManyToOne */
+&nbsp;
+&nbsp;
+&nbsp;  public boolean addPersonRole(PersonRole aPersonRole)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasAdded = false;</b>
+<b class="fc">&nbsp;    if (personRoles.contains(aPersonRole)) { return false; }</b>
+<b class="fc">&nbsp;    Person existingPerson = aPersonRole.getPerson();</b>
+<b class="fc">&nbsp;    boolean isNewPerson = existingPerson != null &amp;&amp; !this.equals(existingPerson);</b>
+<b class="fc">&nbsp;    if (isNewPerson)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      aPersonRole.setPerson(this);</b>
+&nbsp;    }
+&nbsp;    else
+&nbsp;    {
+<b class="fc">&nbsp;      personRoles.add(aPersonRole);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    wasAdded = true;</b>
+<b class="fc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @PreRemove
+&nbsp;  private void removePersonFromPersonRoles() {
+<b class="fc">&nbsp;    List&lt;PersonRole&gt; personRoleList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;    for(PersonRole e : personRoles) {</b>
+<b class="fc">&nbsp;      personRoleList.add(e);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    for(PersonRole e : personRoleList) {</b>
+<b class="fc">&nbsp;      if(e.getPerson() == this)removePersonRole(e);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  public boolean removePersonRole(PersonRole aPersonRole)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasRemoved = false;</b>
+&nbsp;    //Unable to remove aPersonRole, as it must always have a person
+<b class="fc">&nbsp;    if (!this.equals(aPersonRole.getPerson()))</b>
+&nbsp;    {
+<b class="fc">&nbsp;      personRoles.remove(aPersonRole);</b>
+<b class="fc">&nbsp;      wasRemoved = true;</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return wasRemoved;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_AddIndexControlFunctions */
+&nbsp;  public boolean addPersonRoleAt(PersonRole aPersonRole, int index)
+&nbsp;  {
+<b class="nc">&nbsp;    boolean wasAdded = false;</b>
+<b class="nc">&nbsp;    if(addPersonRole(aPersonRole))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      if(index &lt; 0 ) { index = 0; }</b>
+<b class="nc">&nbsp;      if(index &gt; numberOfPersonRoles()) { index = numberOfPersonRoles() - 1; }</b>
+<b class="nc">&nbsp;      personRoles.remove(aPersonRole);</b>
+<b class="nc">&nbsp;      personRoles.add(index, aPersonRole);</b>
+<b class="nc">&nbsp;      wasAdded = true;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean addOrMovePersonRoleAt(PersonRole aPersonRole, int index)
+&nbsp;  {
+<b class="nc">&nbsp;    boolean wasAdded = false;</b>
+<b class="nc">&nbsp;    if(personRoles.contains(aPersonRole))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      if(index &lt; 0 ) { index = 0; }</b>
+<b class="nc">&nbsp;      if(index &gt; numberOfPersonRoles()) { index = numberOfPersonRoles() - 1; }</b>
+<b class="nc">&nbsp;      personRoles.remove(aPersonRole);</b>
+<b class="nc">&nbsp;      personRoles.add(index, aPersonRole);</b>
+<b class="nc">&nbsp;      wasAdded = true;</b>
+&nbsp;    }
+&nbsp;    else
+&nbsp;    {
+<b class="nc">&nbsp;      wasAdded = addPersonRoleAt(aPersonRole, index);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void delete()
+&nbsp;  {
+<b class="fc">&nbsp;    Museum placeholderMuseum = museum;</b>
+<b class="fc">&nbsp;    this.museum = null;</b>
+<b class="fc">&nbsp;    if(placeholderMuseum != null)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      placeholderMuseum.removePerson(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    while (personRoles.size() &gt; 0)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      PersonRole aPersonRole = personRoles.get(personRoles.size() - 1);</b>
+<b class="nc">&nbsp;      aPersonRole.delete();</b>
+<b class="nc">&nbsp;      personRoles.remove(aPersonRole);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;  }</b>
+&nbsp;
+&nbsp;
+&nbsp;  public String toString()
+&nbsp;  {
+<b class="nc">&nbsp;    return super.toString() + &quot;[&quot;+</b>
+<b class="nc">&nbsp;            &quot;email&quot; + &quot;:&quot; + getEmail()+ &quot;,&quot; +</b>
+<b class="nc">&nbsp;            &quot;password&quot; + &quot;:&quot; + getPassword()+ &quot;,&quot; +</b>
+<b class="nc">&nbsp;            &quot;name&quot; + &quot;:&quot; + getName()+ &quot;]&quot; + System.getProperties().getProperty(&quot;line.separator&quot;) +</b>
+<b class="nc">&nbsp;            &quot;  &quot; + &quot;museum = &quot;+(getMuseum()!=null?Integer.toHexString(System.identityHashCode(getMuseum())):&quot;null&quot;);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
+</div>
+</body>
+</html>

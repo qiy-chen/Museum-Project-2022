@@ -1,0 +1,297 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Employee</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Employee (ca.mcgill.ecse321.MuseumBackend.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Employee</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (8/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    46.4%
+  </span>
+  <span class="absValue">
+    (32/69)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Employee$HibernateProxy$cFiMhZ7Q</td>
+  </tr>
+  <tr>
+    <td class="name">Employee$HibernateProxy$yPnbCx80</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (8/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    46.4%
+  </span>
+  <span class="absValue">
+    (32/69)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*PLEASE DO NOT EDIT THIS CODE*/
+&nbsp;/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+&nbsp;
+&nbsp;package ca.mcgill.ecse321.MuseumBackend.model;
+&nbsp;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.FetchType;
+&nbsp;import javax.persistence.ManyToMany;
+&nbsp;import javax.persistence.PreRemove;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;// line 64 &quot;../../../../../Museum.ump&quot;
+&nbsp;// line 144 &quot;../../../../../Museum.ump&quot;
+&nbsp;@Entity
+&nbsp;public class Employee extends PersonRole
+&nbsp;{
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // MEMBER VARIABLES
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;  //Employee Associations
+&nbsp;  @ManyToMany(fetch = FetchType.EAGER)
+&nbsp;  private List&lt;Shift&gt; shifts;
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // CONSTRUCTOR
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;  public Employee(int aPersonRoleId, Person person)
+&nbsp;  {
+<b class="fc">&nbsp;    super(aPersonRoleId, person);</b>
+<b class="fc">&nbsp;    shifts = new ArrayList&lt;Shift&gt;();</b>
+<b class="fc">&nbsp;  }</b>
+&nbsp;  
+&nbsp;  public Employee() {
+<b class="fc">&nbsp;    super();</b>
+<b class="fc">&nbsp;    shifts = new ArrayList&lt;Shift&gt;();</b>
+<b class="fc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // INTERFACE
+&nbsp;  //------------------------
+&nbsp;  /* Code from template association_GetMany */
+&nbsp;  
+&nbsp;  public Shift getShift(int index)
+&nbsp;  {
+<b class="nc">&nbsp;    Shift aShift = shifts.get(index);</b>
+<b class="nc">&nbsp;    return aShift;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  public List&lt;Shift&gt; getShifts()
+&nbsp;  {
+<b class="fc">&nbsp;    List&lt;Shift&gt; newShifts = Collections.unmodifiableList(shifts);</b>
+<b class="fc">&nbsp;    return newShifts;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public int numberOfShifts()
+&nbsp;  {
+<b class="nc">&nbsp;    int number = shifts.size();</b>
+<b class="nc">&nbsp;    return number;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean hasShifts()
+&nbsp;  {
+<b class="nc">&nbsp;    boolean has = shifts.size() &gt; 0;</b>
+<b class="nc">&nbsp;    return has;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public int indexOfShift(Shift aShift)
+&nbsp;  {
+<b class="fc">&nbsp;    int index = shifts.indexOf(aShift);</b>
+<b class="fc">&nbsp;    return index;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_MinimumNumberOfMethod */
+&nbsp;  public static int minimumNumberOfShifts()
+&nbsp;  {
+<b class="nc">&nbsp;    return 0;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_AddManyToManyMethod */
+&nbsp;  public boolean addShift(Shift aShift)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasAdded = false;</b>
+<b class="fc">&nbsp;    if (shifts.contains(aShift)) { return false; }</b>
+<b class="fc">&nbsp;    shifts.add(aShift);</b>
+<b class="fc">&nbsp;    if (aShift.indexOfEmployee(this) != -1)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      wasAdded = true;</b>
+&nbsp;    }
+&nbsp;    else
+&nbsp;    {
+<b class="nc">&nbsp;      wasAdded = aShift.addEmployee(this);</b>
+<b class="nc">&nbsp;      if (!wasAdded)</b>
+&nbsp;      {
+<b class="nc">&nbsp;        shifts.remove(aShift);</b>
+&nbsp;      }
+&nbsp;    }
+<b class="fc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_RemoveMany */
+&nbsp;  @PreRemove
+&nbsp;  private void removeEmployeeFromShifts() {
+<b class="fc">&nbsp;    List&lt;Shift&gt; shiftList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;    for(Shift s: shifts) {</b>
+<b class="nc">&nbsp;      shiftList.add(s);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="fc">&nbsp;    for(Shift s : shiftList) {</b>
+<b class="nc">&nbsp;      if(s.getEmployees().equals(this))removeShift(s);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="fc">&nbsp;  }</b>
+&nbsp;  public boolean removeShift(Shift aShift)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasRemoved = false;</b>
+<b class="fc">&nbsp;    if (!shifts.contains(aShift))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      return wasRemoved;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    int oldIndex = shifts.indexOf(aShift);</b>
+<b class="fc">&nbsp;    shifts.remove(oldIndex);</b>
+<b class="fc">&nbsp;    if (aShift.indexOfEmployee(this) == -1)</b>
+&nbsp;    {
+<b class="fc">&nbsp;      wasRemoved = true;</b>
+&nbsp;    }
+&nbsp;    else
+&nbsp;    {
+<b class="nc">&nbsp;      wasRemoved = aShift.removeEmployee(this);</b>
+<b class="nc">&nbsp;      if (!wasRemoved)</b>
+&nbsp;      {
+<b class="nc">&nbsp;        shifts.add(oldIndex,aShift);</b>
+&nbsp;      }
+&nbsp;    }
+<b class="fc">&nbsp;    return wasRemoved;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_AddIndexControlFunctions */
+&nbsp;  public boolean addShiftAt(Shift aShift, int index)
+&nbsp;  {  
+<b class="nc">&nbsp;    boolean wasAdded = false;</b>
+<b class="nc">&nbsp;    if(addShift(aShift))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      if(index &lt; 0 ) { index = 0; }</b>
+<b class="nc">&nbsp;      if(index &gt; numberOfShifts()) { index = numberOfShifts() - 1; }</b>
+<b class="nc">&nbsp;      shifts.remove(aShift);</b>
+<b class="nc">&nbsp;      shifts.add(index, aShift);</b>
+<b class="nc">&nbsp;      wasAdded = true;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean addOrMoveShiftAt(Shift aShift, int index)
+&nbsp;  {
+<b class="nc">&nbsp;    boolean wasAdded = false;</b>
+<b class="nc">&nbsp;    if(shifts.contains(aShift))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      if(index &lt; 0 ) { index = 0; }</b>
+<b class="nc">&nbsp;      if(index &gt; numberOfShifts()) { index = numberOfShifts() - 1; }</b>
+<b class="nc">&nbsp;      shifts.remove(aShift);</b>
+<b class="nc">&nbsp;      shifts.add(index, aShift);</b>
+<b class="nc">&nbsp;      wasAdded = true;</b>
+&nbsp;    } 
+&nbsp;    else 
+&nbsp;    {
+<b class="nc">&nbsp;      wasAdded = addShiftAt(aShift, index);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void delete()
+&nbsp;  {
+<b class="fc">&nbsp;    ArrayList&lt;Shift&gt; copyOfShifts = new ArrayList&lt;Shift&gt;(shifts);</b>
+<b class="fc">&nbsp;    shifts.clear();</b>
+<b class="fc">&nbsp;    for(Shift aShift : copyOfShifts)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      aShift.removeEmployee(this);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="fc">&nbsp;    super.delete();</b>
+<b class="fc">&nbsp;  }</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
+</div>
+</body>
+</html>

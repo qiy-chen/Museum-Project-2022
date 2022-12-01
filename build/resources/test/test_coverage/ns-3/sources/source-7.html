@@ -1,0 +1,213 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RoomController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: RoomController (ca.mcgill.ecse321.MuseumBackend.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RoomController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.9%
+  </span>
+  <span class="absValue">
+    (15/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package ca.mcgill.ecse321.MuseumBackend.controller;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.CrossOrigin;
+&nbsp;import org.springframework.web.bind.annotation.DeleteMapping;
+&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;import org.springframework.web.bind.annotation.PostMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.DisplayDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.dto.StorageDto;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Display;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.model.Storage;
+&nbsp;import ca.mcgill.ecse321.MuseumBackend.service.RoomService;
+&nbsp;
+&nbsp;@CrossOrigin(origins = &quot;*&quot;)
+&nbsp;@RestController
+<b class="fc">&nbsp;public class RoomController {</b>
+&nbsp;
+&nbsp;  @Autowired
+&nbsp;  private RoomService service;
+&nbsp;
+&nbsp;  /**
+&nbsp;  *
+&nbsp;  * @param name
+&nbsp;  * @param roomNumber
+&nbsp;  * @throws IllegalArgumentException
+&nbsp;  */
+&nbsp;  @PostMapping(value = {&quot;/display/&quot;, &quot;/display&quot;})
+&nbsp;  public ResponseEntity&lt;DisplayDto&gt; createDisplay(
+&nbsp;      @RequestBody DisplayDto request
+&nbsp;    )   throws IllegalArgumentException {
+&nbsp;
+<b class="fc">&nbsp;    Display d = service.createDisplayRoom(request.getRoomNumber(), request.getMaxArtworks(), request.getMuseumId());</b>
+<b class="fc">&nbsp;    return new ResponseEntity&lt;DisplayDto&gt;(convertToDto(d), HttpStatus.CREATED);</b>
+&nbsp;}
+&nbsp;  
+&nbsp;  /**
+&nbsp;  *
+&nbsp;  * @param name
+&nbsp;  * @param roomNumber
+&nbsp;  * @throws IllegalArgumentException
+&nbsp;  */
+&nbsp;  @PostMapping(value = {&quot;/storage/&quot;, &quot;/storage&quot;})
+&nbsp;  public ResponseEntity&lt;StorageDto&gt; createStorage(
+&nbsp;      @RequestBody StorageDto request
+&nbsp;    )   throws IllegalArgumentException {
+&nbsp;
+<b class="fc">&nbsp;    Storage s = service.createStorageRoom(request.getRoomNumber(), request.getMuseumId());</b>
+<b class="fc">&nbsp;    return new ResponseEntity&lt;StorageDto&gt;(convertToDto(s), HttpStatus.CREATED);</b>
+&nbsp;}
+&nbsp;  
+&nbsp;  /**
+&nbsp;  *
+&nbsp;  * @param id
+&nbsp;  * @return
+&nbsp;  */
+&nbsp;  @GetMapping(value = {&quot;/display/{id}&quot;, &quot;/display/{id}/&quot;})  
+&nbsp;  public ResponseEntity&lt;DisplayDto&gt; getDisplayById(@PathVariable int id) 
+&nbsp;      throws IllegalArgumentException {
+&nbsp;    
+<b class="fc">&nbsp;     Display d = service.getDisplayById(id);</b>
+<b class="fc">&nbsp;     return new ResponseEntity&lt;DisplayDto&gt;(convertToDto(d), HttpStatus.OK);</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;  *
+&nbsp;  * @param id
+&nbsp;  * @return
+&nbsp;  */
+&nbsp;  @GetMapping(value = {&quot;/storage/{id}&quot;, &quot;/storage/{id}/&quot;})  
+&nbsp;  public ResponseEntity&lt;StorageDto&gt; getStorageById(@PathVariable int id) 
+&nbsp;      throws IllegalArgumentException {
+&nbsp;    
+<b class="fc">&nbsp;     Storage s = service.getStorageById(id);</b>
+<b class="fc">&nbsp;     return new ResponseEntity&lt;StorageDto&gt;(convertToDto(s), HttpStatus.OK);</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  @DeleteMapping(value = {&quot;/display/delete/{id}&quot;, &quot;/display/delete/{id}/&quot;})  
+&nbsp;  public ResponseEntity&lt;DisplayDto&gt; deleteDisplay(@PathVariable int id) 
+&nbsp;      throws IllegalArgumentException {
+&nbsp;    
+<b class="nc">&nbsp;     service.deleteDisplayRoom(id);</b>
+<b class="nc">&nbsp;     return new ResponseEntity&lt;DisplayDto&gt;(HttpStatus.OK);</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  
+&nbsp;  //helper, convert from display to display dto
+&nbsp;private DisplayDto convertToDto(Display d) {
+&nbsp;    
+<b class="fc">&nbsp;    if (d == null) {</b>
+<b class="nc">&nbsp;      throw new IllegalArgumentException(&quot;There is no such Display Room!&quot;);</b>
+&nbsp;  }
+<b class="fc">&nbsp;    DisplayDto displayDto = new DisplayDto(d);</b>
+<b class="fc">&nbsp;    return displayDto;</b>
+&nbsp;}
+&nbsp;
+&nbsp;//helper, convert from storage to storage dto
+&nbsp;private StorageDto convertToDto(Storage s) {
+&nbsp;  
+<b class="fc">&nbsp;  if (s == null) {</b>
+<b class="nc">&nbsp;    throw new IllegalArgumentException(&quot;There is no such Storage Room!&quot;);</b>
+&nbsp;}
+<b class="fc">&nbsp;  StorageDto storageDto = new StorageDto(s);</b>
+<b class="fc">&nbsp;  return storageDto;</b>
+&nbsp;}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
+</div>
+</body>
+</html>
