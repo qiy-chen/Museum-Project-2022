@@ -11,4 +11,4 @@
 * [RESTful Service Documentation](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/RESTful-Documentation-Links)
 * [Quality Assurance Documentation](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Quality-Assurance-Documentation)
 # [Sprint 3 🏃](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Sprint-3)
-* [Architecture Diagram](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Architecture-Diagram)
+* [Architecture Model](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Architecture-Diagram)
