@@ -1,0 +1,355 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Room</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ca.mcgill.ecse321.MuseumBackend.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Room (ca.mcgill.ecse321.MuseumBackend.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Room</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.4%
+  </span>
+  <span class="absValue">
+    (11/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44.8%
+  </span>
+  <span class="absValue">
+    (39/87)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Room$HibernateProxy$boJgkOcZ</td>
+  </tr>
+  <tr>
+    <td class="name">Room$HibernateProxy$Tg9P1PZ8</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    52.4%
+  </span>
+  <span class="absValue">
+    (11/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44.8%
+  </span>
+  <span class="absValue">
+    (39/87)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*PLEASE DO NOT EDIT THIS CODE*/
+&nbsp;/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+&nbsp;
+&nbsp;package ca.mcgill.ecse321.MuseumBackend.model;
+&nbsp;import java.util.*;
+&nbsp;import javax.persistence.*;
+&nbsp;import org.hibernate.annotations.Cascade;
+&nbsp;
+&nbsp;// line 69 &quot;../../../../../Museum.ump&quot;
+&nbsp;// line 149 &quot;../../../../../Museum.ump&quot;
+&nbsp;@Entity
+&nbsp;@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+&nbsp;public abstract class Room
+&nbsp;{
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // MEMBER VARIABLES
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;  //Room Attributes
+&nbsp;  private int roomNumber;
+&nbsp;  @Id
+&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)
+&nbsp;  private int roomId;
+&nbsp;
+&nbsp;  //Room Associations
+&nbsp;  @ManyToOne
+&nbsp;  @Cascade({org.hibernate.annotations.CascadeType.REMOVE})
+&nbsp;  private Museum museum;
+&nbsp;  
+&nbsp;  @OneToMany(fetch = FetchType.EAGER)
+&nbsp;  private List&lt;Artwork&gt; artworks;
+&nbsp;
+&nbsp;  //------------------------
+&nbsp;  // CONSTRUCTOR
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;  public Room(int aRoomNumber, int aRoomId, Museum aMuseum)
+<b class="nc">&nbsp;  {</b>
+<b class="nc">&nbsp;    roomNumber = aRoomNumber;</b>
+<b class="nc">&nbsp;    roomId = aRoomId;</b>
+<b class="nc">&nbsp;    boolean didAddMuseum = setMuseum(aMuseum);</b>
+<b class="nc">&nbsp;    if (!didAddMuseum)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      throw new RuntimeException(&quot;Unable to create room due to museum. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html&quot;);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    artworks = new ArrayList&lt;Artwork&gt;();</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="fc">&nbsp;  public Room() {</b>
+&nbsp;
+<b class="fc">&nbsp;    artworks = new ArrayList&lt;Artwork&gt;();</b>
+&nbsp;    
+<b class="fc">&nbsp;  }</b>
+&nbsp;  
+&nbsp;  //------------------------
+&nbsp;  // INTERFACE
+&nbsp;  //------------------------
+&nbsp;
+&nbsp;  public boolean setRoomNumber(int aRoomNumber)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    roomNumber = aRoomNumber;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  public abstract boolean isFull();
+&nbsp;
+&nbsp;  public boolean setRoomId(int aRoomId)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    roomId = aRoomId;</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public int getRoomNumber()
+&nbsp;  {
+<b class="fc">&nbsp;    return roomNumber;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;  public int getRoomId()
+&nbsp;  {
+<b class="fc">&nbsp;    return roomId;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_GetOne */
+&nbsp;  public Museum getMuseum()
+&nbsp;  {
+<b class="fc">&nbsp;    return museum;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_GetMany */
+&nbsp;  
+&nbsp;  public Artwork getArtwork(int index)
+&nbsp;  {
+<b class="fc">&nbsp;    Artwork aArtwork = artworks.get(index);</b>
+<b class="fc">&nbsp;    return aArtwork;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public List&lt;Artwork&gt; getArtworks()
+&nbsp;  {
+<b class="nc">&nbsp;    List&lt;Artwork&gt; newArtworks = Collections.unmodifiableList(artworks);</b>
+<b class="nc">&nbsp;    return newArtworks;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public int numberOfArtworks()
+&nbsp;  {
+<b class="fc">&nbsp;    int number = artworks.size();</b>
+<b class="fc">&nbsp;    return number;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean hasArtworks()
+&nbsp;  {
+<b class="nc">&nbsp;    boolean has = artworks.size() &gt; 0;</b>
+<b class="nc">&nbsp;    return has;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public int indexOfArtwork(Artwork aArtwork)
+&nbsp;  {
+<b class="nc">&nbsp;    int index = artworks.indexOf(aArtwork);</b>
+<b class="nc">&nbsp;    return index;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_SetOneToMany */
+&nbsp;  public boolean setMuseum(Museum aMuseum)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasSet = false;</b>
+<b class="fc">&nbsp;    if (aMuseum == null)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      return wasSet;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    Museum existingMuseum = museum;</b>
+<b class="fc">&nbsp;    museum = aMuseum;</b>
+<b class="fc">&nbsp;    if (existingMuseum != null &amp;&amp; !existingMuseum.equals(aMuseum))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      existingMuseum.removeRoom(this);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    museum.addRoom(this);</b>
+<b class="fc">&nbsp;    wasSet = true;</b>
+<b class="fc">&nbsp;    return wasSet;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_MinimumNumberOfMethod */
+&nbsp;  public static int minimumNumberOfArtworks()
+&nbsp;  {
+<b class="nc">&nbsp;    return 0;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_AddManyToOne */
+&nbsp;  public Artwork addArtwork(boolean aIsLoanable, double aValue, int aArtworkId, String aArtworkName, Museum aMuseum)
+&nbsp;  {
+<b class="nc">&nbsp;    return new Artwork(aIsLoanable, aValue, aArtworkId, aArtworkName, aMuseum, this);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean addArtwork(Artwork aArtwork)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasAdded = false;</b>
+<b class="fc">&nbsp;    if (artworks.contains(aArtwork)) { return false; }</b>
+<b class="fc">&nbsp;    Room existingRoom = aArtwork.getRoom();</b>
+<b class="fc">&nbsp;    boolean isNewRoom = existingRoom != null &amp;&amp; !this.equals(existingRoom);</b>
+<b class="fc">&nbsp;    if (isNewRoom)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      aArtwork.setRoom(this);</b>
+&nbsp;    }
+&nbsp;    else
+&nbsp;    {
+<b class="fc">&nbsp;      artworks.add(aArtwork);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    wasAdded = true;</b>
+<b class="fc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean removeArtwork(Artwork aArtwork)
+&nbsp;  {
+<b class="fc">&nbsp;    boolean wasRemoved = false;</b>
+&nbsp;    //Unable to remove aArtwork, as it must always have a room
+<b class="fc">&nbsp;    if (!this.equals(aArtwork.getRoom()))</b>
+&nbsp;    {
+<b class="fc">&nbsp;      artworks.remove(aArtwork);</b>
+<b class="fc">&nbsp;      wasRemoved = true;</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return wasRemoved;</b>
+&nbsp;  }
+&nbsp;  /* Code from template association_AddIndexControlFunctions */
+&nbsp;  public boolean addArtworkAt(Artwork aArtwork, int index)
+&nbsp;  {  
+<b class="nc">&nbsp;    boolean wasAdded = false;</b>
+<b class="nc">&nbsp;    if(addArtwork(aArtwork))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      if(index &lt; 0 ) { index = 0; }</b>
+<b class="nc">&nbsp;      if(index &gt; numberOfArtworks()) { index = numberOfArtworks() - 1; }</b>
+<b class="nc">&nbsp;      artworks.remove(aArtwork);</b>
+<b class="nc">&nbsp;      artworks.add(index, aArtwork);</b>
+<b class="nc">&nbsp;      wasAdded = true;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public boolean addOrMoveArtworkAt(Artwork aArtwork, int index)
+&nbsp;  {
+<b class="nc">&nbsp;    boolean wasAdded = false;</b>
+<b class="nc">&nbsp;    if(artworks.contains(aArtwork))</b>
+&nbsp;    {
+<b class="nc">&nbsp;      if(index &lt; 0 ) { index = 0; }</b>
+<b class="nc">&nbsp;      if(index &gt; numberOfArtworks()) { index = numberOfArtworks() - 1; }</b>
+<b class="nc">&nbsp;      artworks.remove(aArtwork);</b>
+<b class="nc">&nbsp;      artworks.add(index, aArtwork);</b>
+<b class="nc">&nbsp;      wasAdded = true;</b>
+&nbsp;    } 
+&nbsp;    else 
+&nbsp;    {
+<b class="nc">&nbsp;      wasAdded = addArtworkAt(aArtwork, index);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    return wasAdded;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void delete()
+&nbsp;  {
+<b class="nc">&nbsp;    Museum placeholderMuseum = museum;</b>
+<b class="nc">&nbsp;    this.museum = null;</b>
+<b class="nc">&nbsp;    if(placeholderMuseum != null)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      placeholderMuseum.removeRoom(this);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    for(int i=artworks.size(); i &gt; 0; i--)</b>
+&nbsp;    {
+<b class="nc">&nbsp;      Artwork aArtwork = artworks.get(i - 1);</b>
+<b class="nc">&nbsp;      aArtwork.delete();</b>
+&nbsp;    }
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+&nbsp;
+&nbsp;  public String toString()
+&nbsp;  {
+<b class="nc">&nbsp;    return super.toString() + &quot;[&quot;+</b>
+<b class="nc">&nbsp;            &quot;roomNumber&quot; + &quot;:&quot; + getRoomNumber()+ &quot;,&quot; +</b>
+<b class="nc">&nbsp;            &quot;roomId&quot; + &quot;:&quot; + getRoomId()+ &quot;]&quot; + System.getProperties().getProperty(&quot;line.separator&quot;) +</b>
+<b class="nc">&nbsp;            &quot;  &quot; + &quot;museum = &quot;+(getMuseum()!=null?Integer.toHexString(System.identityHashCode(getMuseum())):&quot;null&quot;);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-19 19:41</div>
+</div>
+</body>
+</html>
