@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.MuseumBackend.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.MuseumBackend.dto.DisplayDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.StorageDto;
+import ca.mcgill.ecse321.MuseumBackend.dto.TicketResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.service.RoomService;
 
 @CrossOrigin(origins = "*")
@@ -85,6 +89,26 @@ public class RoomController {
     
      service.deleteDisplayRoom(id);
      return new ResponseEntity<DisplayDto>(HttpStatus.OK);
+  }
+  
+  @GetMapping(value = {"/storage"})
+  public ResponseEntity<List<StorageDto>> getAllStorage() {
+    List<Storage> listStorages = service.getAllStorage();
+    List<StorageDto> listResponseStorages = new ArrayList<StorageDto>();
+    for (Storage storage:listStorages) {
+      listResponseStorages.add(convertToDto(storage));
+    }
+    return new ResponseEntity<List<StorageDto>>(listResponseStorages, HttpStatus.OK);
+  }
+  
+  @GetMapping(value = {"/display"})
+  public ResponseEntity<List<DisplayDto>> getAllDisplay() {
+    List<Display> listDisplay = service.getAllDisplay();
+    List<DisplayDto> listResponseDisplays = new ArrayList<DisplayDto>();
+    for (Display storage:listDisplay) {
+      listResponseDisplays.add(convertToDto(storage));
+    }
+    return new ResponseEntity<List<DisplayDto>>(listResponseDisplays, HttpStatus.OK);
   }
   
   
