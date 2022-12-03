@@ -8,7 +8,6 @@
         <meta name="author" content="" />
         <title>Register - SB Admin</title>
         <link href="../styles.css" rel="stylesheet" />
-        
     </head>
     <body class="bg-primary">
         <div id="layoutAuthentication">

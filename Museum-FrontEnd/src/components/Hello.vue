@@ -95,7 +95,8 @@
                         </div>
                         <div class="col">
                             <div class="team-member">
-                              <b-button @click="$router.push({name: 'register'})">Sign up</b-button>                            </div>
+                              <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'register'})">Sign up</a>                           
+                             </div>
                         </div>
                     </div>
                 </div>
