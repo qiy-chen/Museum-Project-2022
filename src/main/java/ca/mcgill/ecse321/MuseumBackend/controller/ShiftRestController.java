@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
@@ -32,6 +33,20 @@ public class ShiftRestController {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(convertToResponseDto(service.getShiftById(workDayId)), httpHeaders, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/shift")
+    public ResponseEntity<ShiftResponseDto[]> getShifts() throws IllegalArgumentException {
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        List<Shift> shifts = service.getShifts();
+        ShiftResponseDto[] shiftResponses = new ShiftResponseDto[shifts.size()];
+        int i = 0;
+        for(Shift shift:shifts) {
+            shiftResponses[i] = convertToResponseDto(shift);
+            i++;
+        }
+        return new ResponseEntity<>(shiftResponses,httpHeaders,HttpStatus.OK);
     }
 
     /**

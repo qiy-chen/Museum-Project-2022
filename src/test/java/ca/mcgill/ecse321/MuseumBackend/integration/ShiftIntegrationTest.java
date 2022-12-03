@@ -192,7 +192,28 @@ public class ShiftIntegrationTest {
         for(Integer e : employeeIds) {
             assertTrue(responseEmployeeIds.contains(e));
         }
+    }
+    @Test
+    public void testCreateShiftsAndGetShifts() {
+        int[] workDayIds = new int[3];
+        workDayIds[0] = testCreateShift();
+        this.startTime = LocalDateTime.parse("2022-11-19 8:00",this.formatter);
+        this.endTime = LocalDateTime.parse("2022-11-19 17:00",this.formatter);
+        workDayIds[1] = testCreateShift();
+        this.startTime = LocalDateTime.parse("2022-11-20 8:00",this.formatter);
+        this.endTime = LocalDateTime.parse("2022-11-20 17:00",this.formatter);
+        workDayIds[2] = testCreateShift();
+        testGetShifts(workDayIds);
 
+
+    }
+    private void testGetShifts(int[] workDayIds) {
+        ResponseEntity<ShiftResponseDto[]> shiftsResponse = client.getForEntity("/shift",ShiftResponseDto[].class);
+        int i =0;
+        for(int workDayId : workDayIds) {
+            assertEquals(workDayId,shiftsResponse.getBody()[i].getWorkDayId());
+            i++;
+        }
     }
 
 

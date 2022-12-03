@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -42,6 +44,15 @@ public class ShiftService {
 		if(error.length() > 0) {
 			throw new IllegalArgumentException(error);
 		}
+	}
+	@Transactional
+	public List<Shift> getShifts() {
+		List<Shift> shifts = new ArrayList<>();
+		Iterable<Shift> shiftsIterable = shiftRepo.findAll();
+		for(Shift shift: shiftsIterable) {
+			shifts.add(shift);
+		}
+		return shifts;
 	}
 
 	/**

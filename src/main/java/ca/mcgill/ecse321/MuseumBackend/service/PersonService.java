@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PersonService {
 
@@ -22,7 +25,15 @@ public class PersonService {
 		}
 		return person;
 	}
-	
+	@Transactional
+	public List<Person> getPeople() {
+		List<Person> people = new ArrayList<>();
+		Iterable<Person> peopleIterable = personRepo.findAll();
+		for(Person person : peopleIterable) {
+			people.add(person);
+		}
+		return people;
+	}
 	@Transactional
 	public Person createPerson(Person person) {
 		person = personRepo.save(person);
