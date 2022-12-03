@@ -10,15 +10,14 @@ var AXIOS = axios.create({
 })
 
 
-function ShiftRequestDto(startTime,endTime,workDayId,museum) {
+function ShiftRequestDto(startTime,endTime,museum) {
   this.startTime = startTime
   this.endTime = endTime
-  this.workDayId = workDayId
   this.museum = museum
 }
 
 export default {
-  name: "shifts",
+  name: 'shifts',
   data() {
     return {
       shifts: [],
@@ -42,12 +41,12 @@ export default {
       })
   },
   methods: {
-    createShift: function (newShift) {
-      AXIOS.post('/shift', newShift)
+    createShift: function (startTime,endTime,museum) {
+      AXIOS.post('/shift', new ShiftRequestDto(startTime,endTime,museum))
         .then(response => {
           this.shifts.push(response.data)
           this.errorShift = ''
-          this.newShift = {}
+          this.newShift = response.data
 
         })
         .catch(e => {
