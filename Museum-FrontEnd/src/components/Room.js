@@ -25,9 +25,13 @@ export default {
 	  storages: [],
 	  storageNb: '',
 	  displayNb: '',
-	  maxArtwork: '',
+	  maxArt: '',
+	  RoomId: '',
+	  MuseumId: '',
       errorDisplay: '',
       errorStorage: '',
+      storageResponse: '',
+      displayResponse: '',
       response: []
     }
   },
@@ -64,8 +68,7 @@ export default {
 })
         .then(response => {
         // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
-          this.storageResponse = response.data
+          this.storages.push(response.data)
           this.errorStorage = ''
           this.storageNB = ''
           this.RoomId = ''
@@ -89,8 +92,7 @@ export default {
 })
         .then(response => {
         // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
-          this.displayResponse = response.data
+          this.displays.push(response.data)
           this.errorDisplay = ''
           this.displayNB = ''
           this.MaxArt = ''
@@ -104,14 +106,13 @@ export default {
         })
     },
 	
-	getStorage: function (storageId) {
-      AXIOS.get('/storage/'.concat(storageId), {}, {})
+	getStorage: function (RoomId) {
+      AXIOS.get('/storage/'.concat(RoomId), {}, {})
         .then(response => {
         // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
           this.storageResponse = response.data
           this.errorStorage = ''
-          this.storageId = ''
+          this.RoomId = ''
         })
         .catch(e => {
           var errorMsg = e.response.data.message
@@ -120,14 +121,14 @@ export default {
         })
     },
     
-    	getDisplay: function (displayId) {
-      AXIOS.get('/display/'.concat(displayId), {}, {})
+    	getDisplay: function (RoomId) {
+      AXIOS.get('/display/'.concat(RoomId), {}, {})
         .then(response => {
         // JSON responses are automatically parsed.
           //this.ticket.push(response.data)
           this.displayResponse = response.data
           this.errorDisplay = ''
-          this.displayId = ''
+          this.RoomId = ''
         })
         .catch(e => {
           var errorMsg = e.response.data.message
@@ -136,14 +137,13 @@ export default {
         })
     },
     
-      deleteDisplay: function (displayId) {
-      AXIOS.delete('/display/'.concat(displayId), {}, {})
+      deleteDisplay: function (RoomId) {
+      AXIOS.delete('/display/'.concat(RoomId), {}, {})
         .then(response => {
-        // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
-          this.displayResponse = response.data
+       		getAllDisplay()
+       		this.displayResponse = response.data
           this.errorDisplay = ''
-          this.displayId = ''
+          this.RoomId = ''
         })
         .catch(e => {
           var errorMsg = e.response.data.message
@@ -156,7 +156,7 @@ export default {
       AXIOS.delete('/storage/'.concat(storageId), {}, {})
         .then(response => {
         // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
+          getAllStorage()
           this.storageResponse = response.data
           this.errorStorage = ''
           this.storageId = ''

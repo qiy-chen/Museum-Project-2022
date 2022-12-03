@@ -32,11 +32,14 @@ export default {
     return {
       allTickets: [],
       unpurchasedTickets: [],
+      customerTickets: [],
       newTicketDate: '',
       newTicketPrice:'',
       ticketId: '',
       errorTicket: '',
+      nb: '',
       selectedPersonRoleId: '',
+      selectedTicket:'',
       response: []
     }
   },
@@ -61,15 +64,24 @@ export default {
     .catch(e => {
       this.errorTicket += e
     })
+        //Load all customer's 'tickets
+    AXIOS.get('/customers/'.concat(selectedPersonRoleId))
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.customerTickets = response.data
+    })
+    .catch(e => {
+      this.errorTicket += e
+    })
   },
   methods: {
 	
 	getTicket: function (ticketId) {
-      AXIOS.get('/tickets/'.concat(ticketId), {}, {})
+      AXIOS.get('/tickets/'.concat(ticketId))
         .then(response => {
         // JSON responses are automatically parsed.
           //this.ticket.push(response.data)
-          this.ticketResponse = response.data
+          this.selectedTicket = response.data
           this.errorTicket = ''
           this.ticketId = ''
         })
@@ -125,18 +137,20 @@ export default {
         })
     },
 	
-    createTicket: function (date, price, nb) {
+    createTicket: function (newTicketDate, newTicketPrice, nb) {
 	for (let i = 0; i<nb; i++){
 		      AXIOS.post('/tickets', {}, {
         params: {
-          ticketDate = date,
-          price = price
+          ticketDate = newTicketDate,
+          price = newTicketPrice
         }}).then(response => {
         // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
+          this.allTickets.push(response.data)
+          this.unpurchasedTickets.push(response.data)
           this.errorTicket = ''
           this.newTicketDate = ''
           this.newTicketPrice = ''
+          this.nb = 0
         })
         .catch(e => {
           var errorMsg = e.response.data.message
@@ -154,7 +168,11 @@ export default {
         }})
         .then(response => {
         // JSON responses are automatically parsed.
-          //this.allTickets.getgood = sd
+        //Update values
+         getAllTickets()
+         getAllUnpurchasedTickets()
+         getCustomerTickets()
+			this.response = response.data
           this.errorTicket = ''
           this.newTicketDate = ''
           this.newTicketPrice = ''
@@ -171,7 +189,11 @@ export default {
       AXIOS.delete('/tickets/'.concat(ticketId), {}, {})
         .then(response => {
         // JSON responses are automatically parsed.
-          //this.allTickets.push(response.data)
+          //Update values
+          getAllTickets()
+         getAllUnpurchasedTickets()
+         getCustomerTickets()
+         this.response = response.data
           this.errorTicket = ''
           ticketId = ''
         })
@@ -181,19 +203,43 @@ export default {
           this.errorTicket = errorMsg
         })
     },
-
-	  cancelTicket: function (customerId,ticketId) {
-      AXIOS.delete('/customers/'.concat(customerId), {}, {
+    
+        purchaseTickets: function (selectedPersonRoleId,ticketId) {
+      AXIOS.post('/customers/'.concat(selectedPersonRoleId), {}, {
 	      params: {
           id = ticketId,
         }
 })
         .then(response => {
         // JSON responses are automatically parsed.
-          //this.allTickets.push(response.data)
+          if (!this.customerTickets.includes(response.data)) this.customerTickets.push(response.data)
           this.errorTicket = ''
           this.ticketId = ''
-          this.customerId = ''
+          this.selectedPersonRoleId = ''
+        })
+        .catch(e => {
+          var errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorTicket = errorMsg
+        })
+    },
+
+	  cancelTicket: function (selectedPersonRoleId,ticketId) {
+      AXIOS.delete('/customers/'.concat(selectedPersonRoleId), {}, {
+	      params: {
+          id = ticketId,
+        }
+})
+        .then(response => {
+        // JSON responses are automatically parsed.
+        //Update values
+         getAllTickets()
+         getAllUnpurchasedTickets()
+         getCustomerTickets()
+         this.response = response.data
+          this.errorTicket = ''
+          this.ticketId = ''
+          this.selectedPersonRoleId = ''
         })
         .catch(e => {
           var errorMsg = e.response.data.message
