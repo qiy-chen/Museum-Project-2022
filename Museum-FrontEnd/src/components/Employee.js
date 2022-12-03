@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     createEmployee: function(email,shiftIDs) {
-      AXIOS.post('/employee',EmployeeRequestDto(email,shiftIDs))
+      AXIOS.post('/employee',new EmployeeRequestDto(email,shiftIDs))
         .then(response => {
           this.employees.push(response.data)
           this.errorEmployee = ''

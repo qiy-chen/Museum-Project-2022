@@ -47,7 +47,7 @@ public class PersonIntegrationTest {
     private String testCreatePerson() {
         Museum museum = new Museum(12);
         museum = museumRepository.save(museum);
-        ResponseEntity<PersonResponseDto> response = client.postForEntity("/person", new PersonRequestDto(email,password,name,museum),PersonResponseDto.class);
+        ResponseEntity<PersonResponseDto> response = client.postForEntity("/person", new PersonRequestDto(email,password,name,museum.getMuseumId()),PersonResponseDto.class);
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
         assertNotNull(response.getBody(), "Response has body");

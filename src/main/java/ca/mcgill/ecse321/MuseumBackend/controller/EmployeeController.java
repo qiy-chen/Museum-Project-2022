@@ -59,7 +59,7 @@ public class EmployeeController {
 		List<Shift> shifts = employeeService.getShiftsForEmployee(id);
 		ArrayList<ShiftResponseDto> shiftDtos = new ArrayList<>();
 		for (Shift s : shifts)
-			shiftDtos.add(new ShiftResponseDto(s));
+			shiftDtos.add(new ShiftResponseDto(s.getStartTime(),s.getEndTime(),s.getWorkDayId(),s.getMuseum().getMuseumId(), s.getEmployees()));
 		return new ResponseEntity<List<ShiftResponseDto>>(toList(shiftDtos), HttpStatus.OK);
 	}
 	

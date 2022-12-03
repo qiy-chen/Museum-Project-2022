@@ -124,7 +124,7 @@ public class ShiftRestController {
         if(s==null) {
             throw new IllegalArgumentException("There is no such Shift!");
         }
-        return new ShiftResponseDto(s.getStartTime(), s.getEndTime(), s.getWorkDayId(), s.getMuseum(), s.getEmployees());
+        return new ShiftResponseDto(s.getStartTime(), s.getEndTime(), s.getWorkDayId(), s.getMuseum().getMuseumId(), s.getEmployees());
     }
 
 }

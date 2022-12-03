@@ -218,13 +218,3 @@ class EmployeeDto {
 	}
 }
 
-class ShiftDto {
-	public int workDayId;
-
-	public ShiftDto() {
-	}
-
-	public ShiftDto(int workDayId) {
-		this.workDayId = workDayId;
-	}
-}

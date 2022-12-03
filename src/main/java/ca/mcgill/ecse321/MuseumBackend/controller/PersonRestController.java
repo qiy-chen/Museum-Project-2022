@@ -63,6 +63,6 @@ public class PersonRestController {
 
     private PersonResponseDto convertToResponseDto(Person p) {
         if(p==null)throw new IllegalArgumentException("There is no such Person!");
-        return new PersonResponseDto(p.getEmail(),p.getPassword(),p.getName(),p.getMuseum(),p.getPersonRoles());
+        return new PersonResponseDto(p.getEmail(),p.getPassword(),p.getName(),p.getMuseum().getMuseumId(),p.getPersonRoles());
     }
 }

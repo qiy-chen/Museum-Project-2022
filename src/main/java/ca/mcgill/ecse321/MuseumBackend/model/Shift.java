@@ -36,11 +36,10 @@ public class Shift
   // CONSTRUCTOR
   //------------------------
 
-  public Shift(LocalDateTime aStartTime, LocalDateTime aEndTime, int aWorkDayId, Museum aMuseum)
+  public Shift(LocalDateTime aStartTime, LocalDateTime aEndTime, Museum aMuseum)
   {
     startTime = aStartTime;
     endTime = aEndTime;
-    workDayId = aWorkDayId;
     employees = new ArrayList<Employee>();
     boolean didAddMuseum = setMuseum(aMuseum);
     if (!didAddMuseum)

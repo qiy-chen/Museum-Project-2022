@@ -338,9 +338,9 @@ public class Museum
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Shift addShift(LocalDateTime aStartTime, LocalDateTime aEndTime, int aWorkDayId)
+  public Shift addShift(LocalDateTime aStartTime, LocalDateTime aEndTime)
   {
-    return new Shift(aStartTime, aEndTime, aWorkDayId, this);
+    return new Shift(aStartTime, aEndTime,this);
   }
 
   public boolean addShift(Shift aShift)
