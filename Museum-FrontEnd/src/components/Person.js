@@ -9,10 +9,10 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function PersonRequestDto(email,password,name,museum) {
+function PersonRequestDto(email,password,firstName,lastName,museum) {
   this.email = email
   this.password = password
-  this.name = name
+  this.name = firstName.concat(" ").concat(lastName)
   this.museum = museum
 }
 
@@ -40,8 +40,8 @@ export default {
       })
   },
   methods: {
-    createPerson: function (newPerson) {
-      AXIOS.post('/person', newPerson)
+    createPerson: function (email,password,firstName,lastName,museum) {
+      AXIOS.post('/person', new PersonRequestDto(email,password,firstName,lastName,museum))
         .then(response => {
           this.people.push(response.data)
           this.errorPerson = ''
