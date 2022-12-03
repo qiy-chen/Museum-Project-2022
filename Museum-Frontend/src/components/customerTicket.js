@@ -68,7 +68,7 @@ export default {
         .then(response => {
         // JSON responses are automatically parsed.
           //this.ticket.push(response.data)
-          this.allUnpurchasedTickets = response.data
+          this.unpurchasedTickets = response.data
           this.errorTicket = ''
         })
         .catch(e => {
@@ -93,7 +93,7 @@ export default {
         })
     },
     
-    getCustomerTickets: function (customerId,ticketId) {
+    purchaseTickets: function (customerId,ticketId) {
       AXIOS.post('/customers/'.concat(customerId), {}, {
 	      params: {
           id = ticketId,

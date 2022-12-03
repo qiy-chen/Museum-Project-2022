@@ -99,7 +99,7 @@ export default {
         .then(response => {
         // JSON responses are automatically parsed.
           //this.ticket.push(response.data)
-          this.allUnpurchasedTickets = response.data
+          this.unpurchasedTickets = response.data
           this.errorTicket = ''
         })
         .catch(e => {
