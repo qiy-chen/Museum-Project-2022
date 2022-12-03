@@ -13,10 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShiftRequestDto {
-    @Autowired
-    private EmployeeService employeeService;
-    @Autowired
-    private MuseumService museumService;
     private String startTime;
     private String endTime;
 
@@ -32,14 +28,9 @@ public class ShiftRequestDto {
 
     }
 
-    public Shift toModel() {
+    public Shift toModel(Museum museum) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
-        Shift shift = new Shift(LocalDateTime.parse(startTime,formatter), LocalDateTime.parse(endTime,formatter), museumService.getMuseumById(museumId));
-        for(Integer e : employeeIds) {
-            Employee employee = employeeService.getEmployeeById(e);
-            shift.addEmployee(employee);
-        }
-        return shift;
+        return new Shift(LocalDateTime.parse(startTime,formatter), LocalDateTime.parse(endTime,formatter),museum);
 
     }
 

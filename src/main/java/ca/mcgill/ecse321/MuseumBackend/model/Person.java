@@ -56,7 +56,10 @@ public class Person
   // INTERFACE
   //------------------------
 
-
+@PreRemove
+private void deletePerson() {
+    this.delete();
+}
 public boolean setEmail(String aEmail)
   {
     boolean wasSet = false;
@@ -187,16 +190,6 @@ public boolean setEmail(String aEmail)
     return wasAdded;
   }
 
-  @PreRemove
-  private void removePersonFromPersonRoles() {
-    List<PersonRole> personRoleList = new ArrayList<>();
-    for(PersonRole e : personRoles) {
-      personRoleList.add(e);
-    }
-    for(PersonRole e : personRoleList) {
-      if(e.getPerson() == this)removePersonRole(e);
-    }
-  }
 
   public boolean removePersonRole(PersonRole aPersonRole)
   {

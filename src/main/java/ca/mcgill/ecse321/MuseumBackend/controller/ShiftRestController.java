@@ -3,6 +3,8 @@ package ca.mcgill.ecse321.MuseumBackend.controller;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftRequestDto;
 import ca.mcgill.ecse321.MuseumBackend.dto.ShiftResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
+import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
+import ca.mcgill.ecse321.MuseumBackend.service.MuseumService;
 import ca.mcgill.ecse321.MuseumBackend.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,10 @@ import java.util.Map;
 public class ShiftRestController {
     @Autowired
     private ShiftService service;
+    @Autowired
+    private MuseumService museumService;
+    @Autowired
+    private EmployeeService employeeService;
 
     /**
      * @author Samuel Faubert
@@ -112,7 +118,11 @@ public class ShiftRestController {
     public ResponseEntity<ShiftResponseDto> createShift(@RequestBody ShiftRequestDto shiftRequestDto) throws IllegalArgumentException {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<>(convertToResponseDto(service.createShift(shiftRequestDto.toModel())), httpHeaders,HttpStatus.CREATED);
+        Shift shift = shiftRequestDto.toModel(museumService.getMuseumById(shiftRequestDto.getMuseumId()));
+        for(int employeeId: shiftRequestDto.getEmployeeIds()) {
+            shift.addEmployee(employeeService.getEmployeeById(employeeId));
+        }
+        return new ResponseEntity<>(convertToResponseDto(service.createShift(shift)), httpHeaders,HttpStatus.CREATED);
     }
     /**
      * @author Samuel Faubert

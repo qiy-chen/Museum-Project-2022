@@ -12,14 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonRequestDto {
-    @Autowired
-    private EmployeeService employeeService;
-    @Autowired
-    private CustomerService customerService;
-    @Autowired
-    private AdminService adminService;
-    @Autowired
-    private MuseumService museumService;
 
     private String email;
     private String password;
@@ -37,22 +29,9 @@ public class PersonRequestDto {
         this.museumId = museumId;
     }
 
-    public Person toModel() {
-        Person person = new Person(email,password,name,museumService.getMuseumById(museumId));
-        for(Integer e: personRoleIds) {
-            try{
-                Employee employee = employeeService.getEmployeeById(e);
-                person.addPersonRole(employee);
-            } catch (MuseumBackendException exception) {}
-            try {
-                Customer customer = customerService.getCustomerById(e);
-                person.addPersonRole(customer);
-            } catch (MuseumBackendException exception) {}
-            try {
-                Admin admin = adminService.getAdminById(e);
-                person.addPersonRole(admin);
-            } catch (MuseumBackendException exception) {}
-        }
+    public Person toModel(Museum museum) {
+        Person person = new Person(email,password,name,museum);
+
         return person;
     }
 
