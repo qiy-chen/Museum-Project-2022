@@ -5,10 +5,13 @@ import ca.mcgill.ecse321.MuseumBackend.dto.PersonResponseDto;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -21,6 +24,20 @@ public class PersonRestController {
     @GetMapping(value = "/person/{email}")
     public ResponseEntity<PersonResponseDto> getPersonByEmail(@PathVariable String email) throws IllegalArgumentException {
         return new ResponseEntity<>(convertToResponseDto(service.getPersonByEmail(email)), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/person")
+    public ResponseEntity<PersonResponseDto[]> getPeople() throws IllegalArgumentException {
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        List<Person> people = service.getPeople();
+        PersonResponseDto[] personResponses = new PersonResponseDto[people.size()];
+        int i =0;
+        for(Person person:people) {
+            personResponses[i] = convertToResponseDto(person);
+            i++;
+        }
+        return new ResponseEntity<>(personResponses,httpHeaders,HttpStatus.OK);
     }
 
     @PostMapping(value = "/person")

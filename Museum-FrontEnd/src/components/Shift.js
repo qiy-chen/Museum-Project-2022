@@ -9,13 +9,6 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function ShiftResponseDto(startTime,endTime,workDayId,museum,employees) {
-  this.startTime = startTime
-  this.endTime = endTime
-  this.workDayId = workDayId
-  this.museum = museum
-  this.employees = employees
-}
 
 function ShiftRequestDto(startTime,endTime,workDayId,museum) {
   this.startTime = startTime
@@ -30,13 +23,12 @@ export default {
     return {
       shifts: [],
       requestedShiftIndex: 0,
-      newShift: '',
+      newShift: {},
       errorShift: '',
-      startTime: '',
-      endTime: '',
+      dateMap: {},
       workDayId: 0,
-      museum: 0,
       employeeId: 0,
+      employeeIds: [],
       response: []
     }
   },
@@ -50,20 +42,12 @@ export default {
       })
   },
   methods: {
-    createShift: function (startTime,endTime,workDayId,museum) {
-      AXIOS.post('/shift', {
-        startTime: startTime,
-        endTime: endTime,
-        workDayId: workDayId,
-        museum: museum
-      })
+    createShift: function (newShift) {
+      AXIOS.post('/shift', newShift)
         .then(response => {
           this.shifts.push(response.data)
           this.errorShift = ''
-          this.newShift = ''
-          this.startTime = ''
-          this.endTime = ''
-          this.workDayId = 0
+          this.newShift = {}
 
         })
         .catch(e => {
@@ -78,7 +62,7 @@ export default {
           if (!this.shifts.includes(response.data)) {
             this.shifts.push(response.data)
             this.errorShift = ''
-            this.newShift = ''
+            this.newShift = {}
           }
           this.requestedShiftIndex = this.shifts.indexOf(response.data)
           this.workDayId = 0
@@ -91,39 +75,69 @@ export default {
     },
     deleteShift: function (workDayId) {
       AXIOS.put('/shift/'.concat(workDayId))
-      AXIOS.get('/shift')
-        .then(response => {
-          this.shifts = response.data
-          this.workDayId = 0
-        })
         .catch(e => {
           let errorMsg = e.response.data.message
           console.log(errorMsg)
           this.errorShift = errorMsg
-          })
+        })
+      this.created()
+      this.workdDayId = 0
+      this.errorShift = ''
     },
     addEmployeeToShift: function (workDayId,employeeId) {
-      AXIOS.get('/shift/'.concat(workDayId))
-        .then(response => {
-          this.requestedShiftIndex = this.shifts.indexOf(response.data)
-        })
-        .catch(e => {
-          let errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorShift = errorMsg
-        })
+      this.methods.getShiftById(workDayId)
       AXIOS.post('shift/employees/'.concat(workDayId),employeeId)
         .then(response => {
           this.shifts[this.requestedShiftIndex] = response.data
           this.employeeId = 0
           this.requestedShiftIndex = 0
+          this.errorShift = ''
         })
         .catch(e => {
           let errorMsg = e.response.data.message
           console.log(errorMsg)
           this.errorShift = errorMsg
         })
+    },
+    removeEmployeeFromShift: function(workDayId,employeeId) {
+      AXIOS.put('/shift/employees/'.concat(workDayId),employeeId)
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorShift = errorMsg
+        })
+      this.created()
+      this.workDayId = 0
+      this.employeeId = 0
+      this.errorShift = ''
+
+    },
+    getAllShiftEmployees: function(workDayId) {
+      AXIOS.get('/shift/employees/'.concat(workDayId))
+        .then(response => {
+          this.employeeIds = response.data
+          this.workDayId = 0
+          this.errorShift = ''
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorShift = errorMsg
+        })
+    },
+    changeShiftDate: function(workDayId,dateMap) {
+      AXIOS.put('/shift/'.concat(workDayId),dateMap)
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorShift = errorMsg
+        })
+      this.created()
+      this.workDayId = 0
+      this.dateMap = {}
+      this.errorShift = ''
     }
+
 
 
 
