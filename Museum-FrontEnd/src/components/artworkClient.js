@@ -18,86 +18,37 @@ var AXIOS = axios.create({
 })
 
 export default {
-  name: 'ArtManage',
+  name: 'ArtClient',
   data() {
     return {
 
       artworksOnDisplay: [],
-	  artworksInRoom: [],
-	  artworksInStorage: [],
-	  artworks: [],
-      artworkId: '',
+      artworksInRoom: [],
+      artworkId: 0,
       errorArtwork: '',
       artworkResponse: '',
-      roomId: '',
+      roomId: 0,
     }
   },
 
   created() {
-    AXIOS.get('/artwork')
+    AXIOS.get('/display/artworks')
     .then(response => {
       console.log(response)
       this.artworksOnDisplay = response.data
+      this.errorArtwork = ''
     })
     .catch(e => {
       var errorMsg = e.response.data.message
       console.log(errorMsg)
       this.errorArtwork = errorMsg
-	})
+    })
     
   },
 
   methods: {
 
-	createArtwork: function (name, roomId, museumId) {
-        AXIOS.post('/artwork/', {}, {
-        params: {
-		  name = name,
-		  
-        }})
-          .then(response => {
-            console.log(response)
-            this.artworks = response.data
-            this.errorArtwork = ''
-          })
-          .catch(e => {
-            var errorMsg = e.response.data.message
-            console.log(errorMsg)
-            this.errorArtwork = errorMsg
-          })
-	  },
-
-	getAllArtwork: function () {
-        AXIOS.get('/artwork/', {}, {})
-          .then(response => {
-            console.log(response)
-            this.artworks = response.data
-            this.errorArtwork = ''
-          })
-          .catch(e => {
-            var errorMsg = e.response.data.message
-            console.log(errorMsg)
-            this.errorArtwork = errorMsg
-          })
-	  },
-	  
-	  getArtworkById: function (artworkId) {
-        AXIOS.get('/artwork/'.concat(artworkId), {}, {})
-          .then(response => {
-            console.log(response)
-            this.artworkResponse = response.data
-            this.errorArtwork = ''
-            this.artworkId = ''
-          })
-          .catch(e => {
-            var errorMsg = e.response.data.message
-            console.log(errorMsg)
-            this.errorArtwork = errorMsg
-          })
-      },
-	
-
-  	getArtworkOnDisplay: function () {
+    getArtworkOnDisplay: function () {
         AXIOS.get('/display/artworks', {}, {})
           .then(response => {
             console.log(response)
@@ -109,14 +60,15 @@ export default {
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
-	  },
-	  
-	getArtworkInStorage: function () {
-        AXIOS.get('/storage/artworks', {}, {})
+      },
+
+  getArtworkById: function (artworkId) {
+        AXIOS.get('/artwork/'.concat(artworkId), {}, {})
           .then(response => {
             console.log(response)
-            this.artworksInStorage = response.data
+            this.artworkResponse = response.data
             this.errorArtwork = ''
+            this.artworkId = 0
           })
           .catch(e => {
             var errorMsg = e.response.data.message
@@ -131,7 +83,7 @@ export default {
             console.log(response)
             this.artworksInRoom = response.data
             this.errorArtwork = ''
-            this.roomId = ''
+            this.roomId = 0
           })
           .catch(e => {
             var errorMsg = e.response.data.message
@@ -140,8 +92,11 @@ export default {
           })
       },
 
-
       
     }
 
 }
+
+
+
+
