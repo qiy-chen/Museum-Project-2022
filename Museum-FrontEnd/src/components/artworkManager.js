@@ -86,6 +86,21 @@ export default {
             this.errorArtwork = errorMsg
           })
     },
+
+    moveArtwork: function (artworkId, roomId) {
+        AXIOS.put('/artwork/room/'.concat(artworkId),  new artworkRequestDto('', roomId, 0, 0, false), {})
+          .then(response => {
+            console.log(response)
+            this.created()
+            this.errorArtwork = ''
+            this.artworkId = 0 
+          })
+          .catch(e => {
+            var errorMsg = e.response.data.message
+            console.log(errorMsg)
+            this.errorArtwork = errorMsg
+          })
+    },
     
     deleteArtwork: function (artworkId) {
         AXIOS.delete('/artwork/'.concat(artworkId), {}, {})
@@ -175,8 +190,6 @@ export default {
           })
       },
 
-
-      
     }
 
 }
