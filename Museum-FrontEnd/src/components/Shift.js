@@ -29,8 +29,14 @@ export default {
   data() {
     return {
       shifts: [],
+      requestedShiftIndex: 0,
       newShift: '',
       errorShift: '',
+      startTime: '',
+      endTime: '',
+      workDayId: 0,
+      museum: 0,
+      employeeId: 0,
       response: []
     }
   },
@@ -44,17 +50,21 @@ export default {
       })
   },
   methods: {
-    createShift: function (ShiftRequestDto) {
+    createShift: function (startTime,endTime,workDayId,museum) {
       AXIOS.post('/shift', {
-        startTime: ShiftRequestDto.startTime,
-        endTime: ShiftRequestDto.endTime,
-        workDayId: ShiftRequestDto.workDayId,
-        museum: ShiftRequestDto.museum
+        startTime: startTime,
+        endTime: endTime,
+        workDayId: workDayId,
+        museum: museum
       })
         .then(response => {
           this.shifts.push(response.data)
           this.errorShift = ''
           this.newShift = ''
+          this.startTime = ''
+          this.endTime = ''
+          this.workDayId = 0
+
         })
         .catch(e => {
           let errorMsg = e.response.data.message
@@ -63,22 +73,57 @@ export default {
         })
     },
     getShiftById: function (workDayId) {
-      AXIOS.get('/shift/'.concat(workDayId),{})
+      AXIOS.get('/shift/'.concat(workDayId))
         .then(response => {
-          if(!this.shifts.includes(response.data)) {
+          if (!this.shifts.includes(response.data)) {
             this.shifts.push(response.data)
             this.errorShift = ''
             this.newShift = ''
           }
+          this.requestedShiftIndex = this.shifts.indexOf(response.data)
+          this.workDayId = 0
         })
         .catch(e => {
           let errorMsg = e.response.data.message
           console.log(errorMsg)
           this.errorShift = errorMsg
         })
-      return response.data
     },
-
+    deleteShift: function (workDayId) {
+      AXIOS.put('/shift/'.concat(workDayId))
+      AXIOS.get('/shift')
+        .then(response => {
+          this.shifts = response.data
+          this.workDayId = 0
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorShift = errorMsg
+          })
+    },
+    addEmployeeToShift: function (workDayId,employeeId) {
+      AXIOS.get('/shift/'.concat(workDayId))
+        .then(response => {
+          this.requestedShiftIndex = this.shifts.indexOf(response.data)
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorShift = errorMsg
+        })
+      AXIOS.post('shift/employees/'.concat(workDayId),employeeId)
+        .then(response => {
+          this.shifts[this.requestedShiftIndex] = response.data
+          this.employeeId = 0
+          this.requestedShiftIndex = 0
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorShift = errorMsg
+        })
+    }
 
 
 
