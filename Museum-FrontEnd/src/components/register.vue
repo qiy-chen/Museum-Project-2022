@@ -41,19 +41,19 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" v-model="password" placeholder="Create a password" />
+                                                        <input class="form-control" id="inputPassword" type="text" v-model="password" placeholder="Create a password" />
                                                         <label for="inputPassword">Password</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password" v-model="password" placeholder="Confirm password" />
+                                                        <input class="form-control" id="inputPasswordConfirm" type="text" v-model="password" placeholder="Confirm password" />
                                                         <label for="inputPasswordConfirm">Confirm Password</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" role="button" data-bs-toggle="createPerson(email,password,firstName,lastName)" href="login.html">Create Account</a></div>
+                                                <div class="d-grid"><b-button  @click="createPerson(email,password,firstName,lastName,1)">Create Account</b-button></div>
                                             </div>
                                         </form>
                                     </div>
@@ -81,13 +81,11 @@
                 </footer>
             </div>
         </div>
-      </body>  
+      </body>
   </div>
 </template>
-<script>
-  src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
-  crossorigin="anonymous"
-
+<script
+  src="./Person.js">
 </script>
 <style scoped>
 @charset "UTF-8";
@@ -133,8 +131,8 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 255, 200, 0; 
-  --bs-secondary-rgb: 108, 117, 125; 
+  --bs-primary-rgb: 255, 200, 0;
+  --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 253, 126, 20;
