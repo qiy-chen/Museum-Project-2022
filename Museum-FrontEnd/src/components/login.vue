@@ -1,93 +1,84 @@
 <template>
-  <div class="register">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Register - SB Admin</title>
-        <link href="../styles.css" rel="stylesheet" />
-    </head>
-    <body class="bg-primary">
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" type="text" v-model="firstName" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">First name</label>
-                                                    </div>
+    <div class="login">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <meta name="description" content="" />
+            <meta name="author" content="" />
+            <title>Login - SB Admin</title>
+            <link href="../styles.css" rel="stylesheet" />
+        </head>
+        <body class="bg-primary">
+            <div id="layoutAuthentication">
+                <div id="layoutAuthentication_content">
+                    <main>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-5">
+                                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                    <label for="inputEmail">Email address</label>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" type="text" v-model="lastName" placeholder="Enter your last name" />
-                                                        <label for="inputLastName">Last name</label>
-                                                    </div>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                                    <label for="inputPassword">Password</label>
                                                 </div>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" v-model="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="text" v-model="password" placeholder="Create a password" />
-                                                        <label for="inputPassword">Password</label>
-                                                    </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                                    <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="text" v-model="password" placeholder="Confirm password" />
-                                                        <label for="inputPasswordConfirm">Confirm Password</label>
-                                                    </div>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                    <a class="small" href="password.html">Forgot Password?</a>
+                                                    &nbsp;
+                                                    <a class="btn btn-primary" href="index.html">Login as Customer</a>
+                                                    &nbsp;
+                                                    <a class="btn btn-primary" href="index.html">Login as Employee</a>
+                                                    &nbsp;
+                                                    <a class="btn btn-primary" href="index.html">Login as Admin</a>
+                                                    &nbsp;
                                                 </div>
-                                            </div>
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><b-button @click="createPerson(email,password,firstName,lastName,1); $router.push({name: 'login'})" >Create Account</b-button></div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer text-center py-3">
+                                            <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </main>
-            </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Museum Website 2022</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                    </main>
+                </div>
+                <div id="layoutAuthentication_footer">
+                    <footer class="py-4 bg-light mt-auto">
+                        <div class="container-fluid px-4">
+                            <div class="d-flex align-items-center justify-content-between small">
+                                <div class="text-muted">Copyright &copy; Museum Website 2022</div>
+                                <div>
+                                    <a href="#">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#">Terms &amp; Conditions</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </footer>
+                    </footer>
+                </div>
             </div>
-        </div>
-      </body>
-  </div>
+        </body>
+    </div>
 </template>
-<script
-  src="./Person.js">
+<script>
+    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
+    crossorigin="anonymous"
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+    crossorigin="anonymous"
+    src="js/scripts.js"
 </script>
-<style scoped>
+<style>
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Agency v7.0.11 (https://startbootstrap.com/theme/agency)
@@ -131,8 +122,8 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 255, 200, 0;
-  --bs-secondary-rgb: 108, 117, 125;
+  --bs-primary-rgb: 255, 200, 0; 
+  --bs-secondary-rgb: 108, 117, 125; 
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 253, 126, 20;
@@ -11771,7 +11762,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/homePage/header/museumWallBackground.jpg");
+  background-image: url("*/assets/homePage/header/museumWallBackground.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -12081,7 +12072,7 @@ header.masthead .masthead-heading {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../assets/homePage/img/map-image.png");
+  background-image: url("*/src/assets/homePage/img/map-image.png");
   background-repeat: no-repeat;
   background-position: center;
 }

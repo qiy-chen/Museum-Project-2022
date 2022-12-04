@@ -30,7 +30,7 @@
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw">Menu</i></a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="src/components/login.html">Log in</a></li>
                                 <li><a class="dropdown-item" href="src/components/register.html">Register</a></li>
@@ -90,7 +90,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="team-member">
-                                <a class="btn btn-dark btn-xl text-uppercase" href="src/components/login.html">Log in</a>
+                                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'login'})">Log in</a>
                             </div>
                         </div>
                         <div class="col">
