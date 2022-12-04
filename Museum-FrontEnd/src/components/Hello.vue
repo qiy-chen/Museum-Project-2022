@@ -29,14 +29,12 @@
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw">Menu</i></a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="src/components/login.html">Log in</a></li>
-                                <li><a class="dropdown-item" href="src/components/register.html">Register</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="src/components/adminDash.html">Dashboard</a></li>
-                                <li><a class="dropdown-item" href="#!">Log out</a></li>
-                            </ul>
+                            <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
+                                <b-dropdown-item href="src/components/login.html">Log in</b-dropdown-item>
+                                <b-dropdown-item href="src/components/register.html">Register</b-dropdown-item>
+                                <b-dropdown-item href="src/components/adminDash.html">Dashboard</b-dropdown-item>
+                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                            </b-dropdown>
                         </li>
                     </ul>
                 </div>
