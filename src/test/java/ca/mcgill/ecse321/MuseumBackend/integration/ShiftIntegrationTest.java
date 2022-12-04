@@ -32,8 +32,8 @@ public class ShiftIntegrationTest {
     private double sixHoursInMillisecond = Double.parseDouble("2.16e+7");
     private long workHours = (long) sixHoursInMillisecond;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
-    private LocalDateTime startTime = LocalDateTime.parse("2022-11-18 8:00",formatter);
-    private LocalDateTime endTime = LocalDateTime.parse("2022-11-18 17:00",formatter);
+    private String startTime = "2022-11-18 8:00";
+    private String endTime = "2022-11-18 17:00";
 
 
     @Autowired
@@ -70,7 +70,7 @@ public class ShiftIntegrationTest {
         Museum museum = new Museum();
         museum = museumRepository.save(museum);
         this.museumId = museum.getMuseumId();
-        ResponseEntity<ShiftResponseDto> response = client.postForEntity("/shift", new ShiftRequestDto(this.startTime,this.endTime,this.workDayId,museum), ShiftResponseDto.class);
+        ResponseEntity<ShiftResponseDto> response = client.postForEntity("/shift", new ShiftRequestDto(this.startTime,this.endTime,museumId), ShiftResponseDto.class);
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
         assertNotNull(response.getBody(), "Response has body");
@@ -98,7 +98,7 @@ public class ShiftIntegrationTest {
     public void testCreateAndGetShiftAndAddEmployeeToShift() {
         int workDayId = testCreateShift();
         testGetShift(workDayId);
-        PersonRequestDto personRequestDto = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",museumRepository.findMuseumByMuseumId(this.museumId));
+        PersonRequestDto personRequestDto = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",this.museumId);
         EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
         employeeRequestDto.setEmail("sfaubert9@gmail.com");
         testAddEmployeeToShift(workDayId,personRequestDto,employeeRequestDto);
@@ -132,7 +132,7 @@ public class ShiftIntegrationTest {
     public void testCreateAndGetShiftAndRemoveEmployeeFromShift() {
         int workDayId = testCreateShift();
         testGetShift(workDayId);
-        PersonRequestDto personRequestDto = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",museumRepository.findMuseumByMuseumId(this.museumId));
+        PersonRequestDto personRequestDto = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",this.museumId);
         EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
         employeeRequestDto.setEmail("sfaubert9@gmail.com");
         int employeeId = testAddEmployeeToShift(workDayId,personRequestDto,employeeRequestDto);
@@ -171,15 +171,15 @@ public class ShiftIntegrationTest {
        List<Integer> employeeIds = new ArrayList<>();
         int workDayId = testCreateShift();
         testGetShift(workDayId);
-        PersonRequestDto personRequestDto0 = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",museumRepository.findMuseumByMuseumId(this.museumId));
+        PersonRequestDto personRequestDto0 = new PersonRequestDto("sfaubert9@gmail.com","yoyo","Sam",this.museumId);
         EmployeeRequestDto employeeRequestDto0 = new EmployeeRequestDto();
         employeeRequestDto0.setEmail("sfaubert9@gmail.com");
         employeeIds.add(testAddEmployeeToShift(workDayId,personRequestDto0,employeeRequestDto0));
-        PersonRequestDto personRequestDto1 = new PersonRequestDto("alex@gmail.com","yoyoA","Alex",museumRepository.findMuseumByMuseumId(this.museumId));
+        PersonRequestDto personRequestDto1 = new PersonRequestDto("alex@gmail.com","yoyoA","Alex",this.museumId);
         EmployeeRequestDto employeeRequestDto1 = new EmployeeRequestDto();
         employeeRequestDto1.setEmail("alex@gmail.com");
         employeeIds.add(testAddEmployeeToShift(workDayId,personRequestDto1,employeeRequestDto1));
-        PersonRequestDto personRequestDto2 = new PersonRequestDto("emma@gmail.com","yoyoE","Emma",museumRepository.findMuseumByMuseumId(this.museumId));
+        PersonRequestDto personRequestDto2 = new PersonRequestDto("emma@gmail.com","yoyoE","Emma",this.museumId);
         EmployeeRequestDto employeeRequestDto2 = new EmployeeRequestDto();
         employeeRequestDto2.setEmail("emma@gmail.com");
         employeeIds.add(testAddEmployeeToShift(workDayId,personRequestDto2,employeeRequestDto2));
@@ -197,11 +197,11 @@ public class ShiftIntegrationTest {
     public void testCreateShiftsAndGetShifts() {
         int[] workDayIds = new int[3];
         workDayIds[0] = testCreateShift();
-        this.startTime = LocalDateTime.parse("2022-11-19 8:00",this.formatter);
-        this.endTime = LocalDateTime.parse("2022-11-19 17:00",this.formatter);
+        this.startTime = "2022-11-19 8:00";
+        this.endTime = "2022-11-19 17:00";
         workDayIds[1] = testCreateShift();
-        this.startTime = LocalDateTime.parse("2022-11-20 8:00",this.formatter);
-        this.endTime = LocalDateTime.parse("2022-11-20 17:00",this.formatter);
+        this.startTime = "2022-11-20 8:00";
+        this.endTime = "2022-11-20 17:00";
         workDayIds[2] = testCreateShift();
         testGetShifts(workDayIds);
 

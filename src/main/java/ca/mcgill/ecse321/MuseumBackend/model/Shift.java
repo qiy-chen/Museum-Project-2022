@@ -36,11 +36,10 @@ public class Shift
   // CONSTRUCTOR
   //------------------------
 
-  public Shift(LocalDateTime aStartTime, LocalDateTime aEndTime, int aWorkDayId, Museum aMuseum)
+  public Shift(LocalDateTime aStartTime, LocalDateTime aEndTime, Museum aMuseum)
   {
     startTime = aStartTime;
     endTime = aEndTime;
-    workDayId = aWorkDayId;
     employees = new ArrayList<Employee>();
     boolean didAddMuseum = setMuseum(aMuseum);
     if (!didAddMuseum)
@@ -159,14 +158,8 @@ public class Shift
   }
   /* Code from template association_RemoveMany */
   @PreRemove
-  private void removeShiftFromEmployees() {
-    List<Employee> employeeList = new ArrayList<>();
-    for(Employee e: employees) {
-      employeeList.add(e);
-    }
-    for(Employee e : employeeList) {
-      if(e.getShifts().contains(this))removeEmployee(e);
-    }
+  private void removeShiftFromEmployeesAndMuseum() {
+    this.delete();
   }
 
   public boolean removeEmployee(Employee aEmployee)

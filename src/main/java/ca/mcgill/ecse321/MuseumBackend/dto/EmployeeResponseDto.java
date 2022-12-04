@@ -21,7 +21,7 @@ public class EmployeeResponseDto {
 		this.person = new PersonDto(employee.getPerson());
 		this.email = this.person.getEmail();
 		for (Shift shift : employee.getShifts()) {
-			this.shifts.add(new ShiftResponseDto(shift.getStartTime(),shift.getEndTime(),shift.getWorkDayId(),shift.getMuseum(),shift.getEmployees()));
+			this.shifts.add(new ShiftResponseDto(shift.getStartTime(),shift.getEndTime(),shift.getWorkDayId(),shift.getMuseum().getMuseumId(),shift.getEmployees()));
 		}
 	}
 

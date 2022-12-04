@@ -45,7 +45,7 @@ export default {
         .then(response => {
           this.people.push(response.data)
           this.errorPerson = ''
-          this.newPerson = {}
+          this.newPerson = response.data
         })
         .catch(e => {
           let errorMsg = e.response.data.message
@@ -58,6 +58,7 @@ export default {
       AXIOS.get('/person/'.concat(email))
         .then(response => {
           if (!this.people.includes(response.data)) {
+            this.people.push(response.data)
             this.newPerson = {}
           }
           this.requestedPersonIndex = this.people.indexOf(response.data)

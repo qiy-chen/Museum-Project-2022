@@ -11,16 +11,16 @@ public class PersonResponseDto {
     private String email;
     private String password;
     private String name;
-    private Museum museum;
+    private int museumId;
     private List<Integer> personRoleIds = new ArrayList<>();
 
     public PersonResponseDto() {
     }
-    public PersonResponseDto(String email, String password, String name, Museum museum, List<PersonRole> personRoles) {
+    public PersonResponseDto(String email, String password, String name, int museumId, List<PersonRole> personRoles) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.museum = museum;
+        this.museumId = museumId;
         for (PersonRole e: personRoles) {
             personRoleIds.add(e.getPersonRoleId());
         }
@@ -50,12 +50,12 @@ public class PersonResponseDto {
         this.name = name;
     }
 
-    public Museum getMuseum() {
-        return museum;
+    public int getMuseumId() {
+        return museumId;
     }
 
-    public void setMuseum(Museum museum) {
-        this.museum = museum;
+    public void setMuseumId(int museum) {
+        this.museumId = museumId;
     }
 
     public List<Integer> getPersonRoleIds() {

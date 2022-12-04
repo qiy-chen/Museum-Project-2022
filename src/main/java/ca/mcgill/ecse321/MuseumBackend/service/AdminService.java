@@ -12,6 +12,10 @@ import ca.mcgill.ecse321.MuseumBackend.model.Admin;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
 import ca.mcgill.ecse321.MuseumBackend.repository.AdminRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author Jeanine Looman
  */
@@ -31,6 +35,15 @@ public class AdminService {
 			throw new MuseumBackendException(HttpStatus.NOT_FOUND, "Admin not found.");
 		}
 		return admin;
+	}
+	@Transactional
+	public List<Admin> getAdmins() {
+		List<Admin> admins = new ArrayList<>();
+		Iterable<Admin> adminsIterable = adminRepo.findAll();
+		for(Admin admin:adminsIterable) {
+			admins.add(admin);
+		}
+		return admins;
 	}
 	
 	// create Admin given the email of the person to give that role
