@@ -44,7 +44,7 @@
             </body>
             <header class="masthead">
                 <div class="container">
-                    <div class="masthead-subheading">Welcome Customer</div>
+                    <div class="masthead-subheading">Welcome Admin</div>
                 </div>
             </header>
             <section class="page-section" id="youremployees">
@@ -65,31 +65,31 @@
                             <tbody>
                                 <!-- placeholder values to be removed when script is ready-->
                                 <tr class="active-row">
-                                    <td>#260972321</td><a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'buy_tickets'})">Fire Employee</a>  
+                                    <td>#260972321</td> 
                                     <td>Alex Tsahageas</td>
-                                    <td>alexa@mcgill.ca</td>
+                                    <td>alexa@mcgill.ca</td><button type="button">Fire Employee</button>
                                 </tr>
                                 <tr>
                                     <td>#260972321</td>
-                                    <td>Alex Tsahageas</td>
-                                    <td>alexa@mcgill.ca</td>
+                                    <td>Nick Tsahageas</td>
+                                    <td>alexa@mcgill.ca</td><button type="button">Fire Employee</button>
                                 </tr>
                                 <tr>
                                     <td>#260972321</td>
-                                    <td>Alex Tsahageas</td>
-                                    <td>alexa@mcgill.ca</td>
+                                    <td>Andy Tsahageas</td>
+                                    <td>alexa@mcgill.ca</td><button type="button">Fire Employee</button>
                                 </tr>
                                 <tr>
                                     <td>#260972321</td>
-                                    <td>Alex Tsahageas</td>
-                                    <td>alexa@mcgill.ca</td>
+                                    <td>Sandy Tsahageas</td>
+                                    <td>alexa@mcgill.ca</td><button type="button">Fire Employee</button>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div> 
             </section>
-            <section class="page-section" id="yourloans">
+            <section class="page-section" id="yourartworks">
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Your Artworks </h2>
