@@ -42,7 +42,6 @@
         <header class="masthead">
             <div class="container">
                 <div class="masthead-subheading text-uppercase">Welcome to your Employee Dashboard</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Schedule</a>
             </div>
         </header>
         <!-- Services-->
