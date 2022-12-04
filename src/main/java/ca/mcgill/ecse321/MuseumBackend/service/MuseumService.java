@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MuseumService {
 
 	@Autowired
+  static
 	MuseumRepository museumRepo;
 	
 	@Transactional
@@ -24,8 +25,8 @@ public class MuseumService {
 	}
 	
 	@Transactional
-	public Museum createmuseum(Museum museum) {
-		museum = museumRepo.save(museum);
-		return museum;
-	}
+    public Museum createmuseum(Museum museum) {
+        museum = museumRepo.save(museum);
+        return museum;
+    }
 }
