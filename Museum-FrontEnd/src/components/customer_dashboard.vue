@@ -152,7 +152,7 @@
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">View the Gallery:</h2>
-                        <button click="$router.push({name: 'gallery'})">Gallery</button>
+                        <button @click="$router.push({name: 'gallery'})">Gallery</button>
                     </div>
                 </div>
             </section>
