@@ -13,5 +13,4 @@ public class MuseumBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MuseumBackendApplication.class, args);
 	}
-
 }
