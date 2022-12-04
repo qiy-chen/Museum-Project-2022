@@ -7,20 +7,19 @@
         <meta name="author" content="" />
         <title>Museum Website</title>
         <!-- Flaticon-->
-        <link rel="icon" type="image/x-icon" href="src/assets/homePage/museumLogo.png" />
+        <link rel="icon" type="image/x-icon" href="../assets/homePage/museumLogo.png" />
         <!-- Font Awesome icons (free version)-->
        
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="src/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="src/assets/homePage/MWLogoWide.png" alt="..." /></a>
+                <a class="navbar-brand" href="#page-top"><img src="../assets/homePage/MWLogoWide.png" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
@@ -56,7 +55,7 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">Create a free account to access these online serivices.</h3>
+                    <h3 class="section-subheading text-muted">Create a free account to access these online services.</h3>
                 </div>
                 <div class="row text-center">
                     <div class="col-md-4">
@@ -85,17 +84,17 @@
                     </div>
                 </div>
                 <div class="container">
-                    <span class="fa-stack fa-4x">
-                    </span>
                     <div class="row">
+                        <h4 class="my-3">   </h4>
+                        <h4 class="my-3">   </h4>
                         <div class="col">
                             <div class="team-member">
-                                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'login'})">Log in</a>
+                                <a class="btn btn-secondary btn-xl text-uppercase" @click="$router.push({name: 'login'})">Log in</a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="team-member">
-                              <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'register'})">Sign up</a>                           
+                              <a class="btn btn-secondary btn-xl text-uppercase" @click="$router.push({name: 'register'})">Sign up</a>                           
                              </div>
                         </div>
                     </div>
@@ -112,50 +111,44 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="src/assets/homePage/img/team/1.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/1.jpg" alt="..." />
                             <h4>Marwan Kanaan</h4>
                             <p class="text-muted">Lead Designer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Marwan Kanaan GitHub"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="src/assets/homePage/img/team/2.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/2.jpg" alt="..." />
                             <h4>Marwan Kanaan</h4>
                             <p class="text-muted">Software Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Marwan Kanaan GitHub"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="src/assets/homePage/img/team/3.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/3.jpg" alt="..." />
                             <h4>Marwan Kanaan</h4>
                             <p class="text-muted">Scrum Manager</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Marwan Kanaan GitHub"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="src/assets/homePage/img/team/1.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/1.jpg" alt="..." />
                             <h4>Marwan Kanaan</h4>
                             <p class="text-muted">Documenter</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Marwan Kanaan GitHub"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="src/assets/homePage/img/team/2.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/2.jpg" alt="..." />
                             <h4>Marwan Kanaan</h4>
                             <p class="text-muted">Head of Testing</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Marwan Kanaan GitHub"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="src/assets/homePage/img/team/3.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/3.jpg" alt="..." />
                             <h4>Marwan Kanaan</h4>
                             <p class="text-muted">Software Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Marwan Kanaan GitHub"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -170,12 +163,6 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4 text-lg-start">Copyright &copy; Museum Website 2022</div>
                     <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Email"><i class="fab fa-facebook-f"></i></a>
-                    </div>
-                    <div class="col-lg-4 text-lg-end">
-                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
-                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
                     </div>
                 </div>
             </div>
@@ -186,13 +173,55 @@
 
 <script>
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"  
-  src="src/scripts.js"
   src="https://cdn.startbootstrap.com/sb-forms-latest.js"
   src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
+  src="../scripts.js"
   crossorigin="anonymous"
+
+  // Navbar shrink function
+    var navbarShrink = function () {
+        const navbarCollapsible = document.body.querySelector('#mainNav');
+        if (!navbarCollapsible) {
+            return;
+        }
+        if (window.scrollY === 0) {
+            navbarCollapsible.classList.remove('navbar-shrink')
+        } else {
+            navbarCollapsible.classList.add('navbar-shrink')
+        }
+
+    };
+
+    // Shrink the navbar 
+    navbarShrink();
+
+    // Shrink the navbar when page is scrolled
+    document.addEventListener('scroll', navbarShrink);
+
+    // Activate Bootstrap scrollspy on the main nav element
+    const mainNav = document.body.querySelector('#mainNav');
+    if (mainNav) {
+        new bootstrap.ScrollSpy(document.body, {
+            target: '#mainNav',
+            offset: 74,
+        });
+    };
+
+    // Collapse responsive navbar when toggler is visible
+    const navbarToggler = document.body.querySelector('.navbar-toggler');
+    const responsiveNavItems = [].slice.call(
+        document.querySelectorAll('#navbarResponsive .nav-link')
+    );
+    responsiveNavItems.map(function (responsiveNavItem) {
+        responsiveNavItem.addEventListener('click', () => {
+            if (window.getComputedStyle(navbarToggler).display !== 'none') {
+                navbarToggler.click();
+            }
+        });
+    });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style>
+    @import '../assets/styles.css';
 </style>
