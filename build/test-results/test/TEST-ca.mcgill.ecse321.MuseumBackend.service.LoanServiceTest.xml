@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2022-12-04T21:23:37" hostname="samuel-gp66leopard10ug" time="0.038">
+  <properties/>
+  <testcase name="testReturnArtworkandEndLoanInvalidStatus()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.02"/>
+  <testcase name="testApproveLoanInvalidIsLonable()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.001"/>
+  <testcase name="testGetAllLoans()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.001"/>
+  <testcase name="testApproveLoanInvalid()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.001"/>
+  <testcase name="testDeleteLoanInvalid()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.001"/>
+  <testcase name="testGetArtById()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.002"/>
+  <testcase name="testApproveLoanInvalidStatus()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.002"/>
+  <testcase name="testApproveLoan()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.002"/>
+  <testcase name="testCreateLoan()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.002"/>
+  <testcase name="testDeleteLoan()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.002"/>
+  <testcase name="testReturnArtworkandEndLoan()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.002"/>
+  <testcase name="testDenyLoan()" classname="ca.mcgill.ecse321.MuseumBackend.service.LoanServiceTest" time="0.001"/>
+  <system-out><![CDATA[ca.mcgill.ecse321.MuseumBackend.model.Artwork@6b5986b8[isLoanable:false,value:0.0,artworkId:0,artworkName:null]
+  museum = null
+  room = nullTHIS IS WRONG
+nullHEY GUYS ITS ME AGAI
+ca.mcgill.ecse321.MuseumBackend.model.Artwork@d6c9fd[isLoanable:false,value:0.0,artworkId:0,artworkName:null]
+  museum = null
+  room = nullTHIS IS WRONG
+ca.mcgill.ecse321.MuseumBackend.model.Artwork@219e0fad[isLoanable:true,value:0.0,artworkId:0,artworkName:null]
+  museum = null
+  room = nullTHIS IS WRONG
+ca.mcgill.ecse321.MuseumBackend.model.Loan@73d8545b[rentalFee:0.0,numOfDays:12,loanId:0]
+  startDate=null
+  endDate=null
+  status=Requested
+  museum = null
+  customer = 751b79a3
+  artwork = 3dd6f932HEY GUYS ITS ME AGAI
+reach here
+Requested
+Alex is a stupid bitch
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

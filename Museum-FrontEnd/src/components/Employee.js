@@ -8,10 +8,14 @@ var AXIOS = axios.create({
   baseURL: backendUrl,
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
-function EmployeeRequestDto(email,shiftIDs) {
-  this.email = email
-  this.shiftIDs = shiftIDs
+
+class EmployeeRequestDto {
+  constructor(email, shiftIDs) {
+    this.email = email
+    this.shiftIDs = shiftIDs
+  }
 }
+
 
 export default {
   name: 'employees',
@@ -29,7 +33,7 @@ export default {
     }
   },
   created: function() {
-    AXIOS.get('/employees')
+    AXIOS.get('/employee')
       .then(response => {
         this.employees = response.data
       })

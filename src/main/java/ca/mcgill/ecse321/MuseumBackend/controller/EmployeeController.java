@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * @Author Jeanine Looman
  */
+@CrossOrigin(origins = "*")
 @RestController
 public class EmployeeController {
 
@@ -44,7 +45,7 @@ public class EmployeeController {
 	}
 	
 	// get all employees
-	@GetMapping("/employees")
+	@GetMapping("/employee")
 	public ResponseEntity<List<EmployeeResponseDto>> getAllEmployees() {
 		List<Employee> employees = employeeService.getAllEmployees();
 		ArrayList<EmployeeResponseDto> employeeDtos = new ArrayList<>();

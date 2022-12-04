@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" tests="16" skipped="0" failures="0" errors="0" timestamp="2022-12-04T21:23:38" hostname="samuel-gp66leopard10ug" time="0.07">
+  <properties/>
+  <testcase name="testReplaceTicket2()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.042"/>
+  <testcase name="getAllTicketsFromCustomer()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.002"/>
+  <testcase name="testReplaceInvalidTicket2()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.001"/>
+  <testcase name="testDeleteNonExistentTicket()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.002"/>
+  <testcase name="testGetTicketByInvalidId()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.001"/>
+  <testcase name="testCreateTicket()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.002"/>
+  <testcase name="testReplaceTicket()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.001"/>
+  <testcase name="testCreateInvalidTicket()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.0"/>
+  <testcase name="testCancelTicket()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.005"/>
+  <testcase name="testGetTicketById()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.001"/>
+  <testcase name="testCreateInvalidTicket2()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.002"/>
+  <testcase name="testCancelTicketTooLate()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.003"/>
+  <testcase name="testDeleteTicket()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.001"/>
+  <testcase name="testCancelTicketWrongCustomer()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.001"/>
+  <testcase name="testReplaceInvalidTicket()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.001"/>
+  <testcase name="testGetAllTickets()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestTicketService" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

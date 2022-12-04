@@ -24,6 +24,7 @@ export default {
       requestedCustomerIndex: 0,
       newCustomer: {},
       errorCustomer: '',
+      email: '',
       ticketsForCustomer: [],
       loansForCustomer: [],
       id: 0,
@@ -31,7 +32,7 @@ export default {
     }
   },
   created: function() {
-    AXIOS.get('/customers')
+    AXIOS.get('/customer')
       .then(response => {
         this.customers = response.data
       })
@@ -41,7 +42,7 @@ export default {
   },
   methods: {
     createCustomer: function(email,loanIDs) {
-      AXIOS.post('/customer')
+      AXIOS.post('/customer', new CustomerRequestDto(email,loanIDs))
         .then(response => {
           this.customers.push(response.data)
           this.errorCustomer = ''

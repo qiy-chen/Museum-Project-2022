@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * @Author Jeanine Looman
  */
+@CrossOrigin(origins = "*")
 @RestController
 public class AdminController {
 

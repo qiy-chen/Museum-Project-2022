@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ca.mcgill.ecse321.MuseumBackend.service.ArtworkServiceTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-12-04T21:23:37" hostname="samuel-gp66leopard10ug" time="0.161">
+  <properties/>
+  <testcase name="testMoveArtwork()" classname="ca.mcgill.ecse321.MuseumBackend.service.ArtworkServiceTests" time="0.153"/>
+  <testcase name="testCreateArtwork()" classname="ca.mcgill.ecse321.MuseumBackend.service.ArtworkServiceTests" time="0.003"/>
+  <testcase name="testGetArtById()" classname="ca.mcgill.ecse321.MuseumBackend.service.ArtworkServiceTests" time="0.002"/>
+  <testcase name="testUpdateFields()" classname="ca.mcgill.ecse321.MuseumBackend.service.ArtworkServiceTests" time="0.001"/>
+  <testcase name="testDeleteArtwork()" classname="ca.mcgill.ecse321.MuseumBackend.service.ArtworkServiceTests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
