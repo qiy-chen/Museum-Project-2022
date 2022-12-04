@@ -173,5 +173,5 @@
     src="https://cdn.startbootstrap.com/sb-forms-latest.js"
 </script>
 <style>
-    @import '*/Museum-FrontEnd/scr/styles.css'
+    @import '*/Museum-FrontEnd/scr/styles.css';
 </style>

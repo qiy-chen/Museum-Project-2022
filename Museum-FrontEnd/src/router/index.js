@@ -17,32 +17,32 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/Hello',
+      path: '/Hello/register',
       name: 'register',
       component: Register
     },
     {
-      path: '/Hello',
+      path: '/Hello/login',
       name: 'login',
       component: Login
     },
     {
-      path: '/login',
-      name: 'customer_dashboard',
-      component: CustomerDashboard
-    },
-    {
-      path: '/login',
+      path: '/login/employeeDashboard',
       name: 'employeeDashboard',
       component: EmployeeDashboard
     },
     {
-      path: '/customer_dashboard',
+      path: '/login/customer_dashboard',
+      name: 'customer_dashboard',
+      component: CustomerDashboard
+    },
+    {
+      path: '/customer_dashboard/buy_tickets',
       name: 'buy_tickets',
       component: BuyTickets
     },
     {
-      path: '/customer_dashboard',
+      path: '/customer_dashboard/request_loan',
       name: 'request_loan',
       component: RequestLoan
     }
