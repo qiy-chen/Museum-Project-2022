@@ -9,8 +9,10 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function AdminRequestDto(email) {
-  this.email = email
+class AdminRequestDto {
+  constructor(email) {
+    this.email = email
+  }
 }
 
 export default {

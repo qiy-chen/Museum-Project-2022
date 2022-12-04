@@ -10,10 +10,12 @@ var AXIOS = axios.create({
 })
 
 
-function ShiftRequestDto(startTime,endTime,museum) {
-  this.startTime = startTime
-  this.endTime = endTime
-  this.museum = museum
+class ShiftRequestDto {
+  constructor(startTime, endTime, museum) {
+    this.startTime = startTime
+    this.endTime = endTime
+    this.museum = museum
+  }
 }
 
 export default {

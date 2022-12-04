@@ -9,9 +9,11 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function CustomerRequestDto(email,loanIDs) {
-  this.email = email
-  this.loanIDs = loanIDs
+class CustomerRequestDto {
+  constructor(email, loanIDs) {
+    this.email = email
+    this.loanIDs = loanIDs
+  }
 }
 
 export default {

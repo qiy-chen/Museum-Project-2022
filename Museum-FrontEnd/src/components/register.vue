@@ -53,7 +53,7 @@
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><b-button  @click="createPerson(email,password,firstName,lastName,1)">Create Account</b-button></div>
+                                                <div class="d-grid"><button type="button" class="btn btn-primary" @click="createPerson(email,password,firstName,lastName,69)">Create Account</button></div>
                                             </div>
                                         </form>
                                     </div>
@@ -84,8 +84,7 @@
       </body>
   </div>
 </template>
-<script
-  src="./Person.js">
+<script src="./Person.js">
 </script>
 <style scoped>
 @charset "UTF-8";

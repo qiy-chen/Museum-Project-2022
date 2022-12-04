@@ -9,11 +9,14 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function PersonRequestDto(email,password,firstName,lastName,museum) {
-  this.email = email
-  this.password = password
-  this.name = firstName.concat(" ").concat(lastName)
-  this.museum = museum
+class PersonRequestDto {
+  constructor(email, password, firstName, lastName, museum) {
+    this.email = email
+    this.password = password
+    this.name = firstName.concat(" ").concat(lastName)
+    this.museum = museum
+  }
+
 }
 
 export default {
@@ -25,6 +28,9 @@ export default {
       newPerson: {},
       errorPerson: '',
       email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
       inputMap: {},
       personRoleIds: [],
       response: []
@@ -109,4 +115,6 @@ export default {
     }
   }
 }
+
+
 
