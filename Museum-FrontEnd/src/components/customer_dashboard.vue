@@ -148,6 +148,14 @@
                 </div>
                 <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Request new loan</a>  
             </section>
+            <section>
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">View the Gallery:</h2>
+                        <button click="$router.push({name: 'gallery'})">Gallery</button>
+                    </div>
+                </div>
+            </section>
             <footer class="footer py-4">
                 <div class="container">
                     <div class="row align-items-center">
