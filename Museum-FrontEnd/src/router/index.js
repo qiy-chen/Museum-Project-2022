@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import Register from '@/components/register'
 import Login from '@/components/login'
 import CustomerDashboard from '@/components/customer_dashboard'
+import EmployeeDashboard from '@/components/employeeDashboard'
 import BuyTickets from '@/components/buy_tickets'
 import RequestLoan from '@/components/request_loan'
 Vue.use(Router)
@@ -29,6 +30,11 @@ export default new Router({
       path: '/login',
       name: 'customer_dashboard',
       component: CustomerDashboard
+    },
+    {
+      path: '/login',
+      name: 'employeeDashboard',
+      component: EmployeeDashboard
     },
     {
       path: '/customer_dashboard',
