@@ -30,9 +30,10 @@
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item dropdown">
                             <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
-                                <b-dropdown-item href="src/components/login.html">Log in</b-dropdown-item>
-                                <b-dropdown-item href="src/components/register.html">Register</b-dropdown-item>
-                                <b-dropdown-item href="src/components/adminDash.html">Dashboard</b-dropdown-item>
+                                <b-dropdown-item href="./login.vue">Log in</b-dropdown-item>
+                                <b-dropdown-item href="./register.vue">Register</b-dropdown-item>
+                                <b-dropdown-divider></b-dropdown-divider>
+                                <b-dropdown-item href="./adminDash.vue">Dashboard</b-dropdown-item>
                                 <b-dropdown-item href="#!">Log out</b-dropdown-item>
                             </b-dropdown>
                         </li>
