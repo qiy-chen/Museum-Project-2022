@@ -39,7 +39,7 @@
                                                     &nbsp;
                                                     <a class="btn btn-primary" @click="$router.push({name: 'employeeDashboard'})"> Login as Employee</a>
                                                     &nbsp;
-                                                    <a class="btn btn-primary" href="index.html">Login as Admin</a>
+                                                    <a class="btn btn-primary" @click="$router.push({name: 'admin_dashboard'})">Login as Admin</a>
                                                     &nbsp;
                                                 </div>
                                             </form>

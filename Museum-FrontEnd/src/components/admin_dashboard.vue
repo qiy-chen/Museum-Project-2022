@@ -1,5 +1,5 @@
 <template>
-    <div class="customer_dashboard">
+    <div class="admin_dashboard">
         <head>
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -26,8 +26,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="#yourtickets">Your Tickets</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#yourloans">Your Loans</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#youremployees">Your Employees</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#yourartworks">Your Artworks</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -47,106 +47,56 @@
                     <div class="masthead-subheading">Welcome Customer</div>
                 </div>
             </header>
-            <section class="page-section" id="yourtickets">
+            <section class="page-section" id="youremployees">
                 <div class="container">
                     <div class="text-center">
-                        <h2 class="section-heading text-uppercase">Your Tickets</h2>
-                        <h3 class="section-subheading text-muted">These are all your upcoming tickets</h3>
+                        <h2 class="section-heading text-uppercase">Your Employees</h2>
+                        <h3 class="section-subheading text-muted">These are all your currently registered employees</h3>
                     </div>
                     <div class="container">
                         <table class="styled-table">
                             <thead>
                                 <tr>
-                                    <th>TicketId</th>
-                                    <th>Date</th>
-                                    <th>Price</th>
+                                    <th>EmployeeId</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- placeholder values to be removed when script is ready-->
                                 <tr class="active-row">
+                                    <td>#260972321</td><a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'buy_tickets'})">Fire Employee</a>  
+                                    <td>Alex Tsahageas</td>
+                                    <td>alexa@mcgill.ca</td>
+                                </tr>
+                                <tr>
                                     <td>#260972321</td>
-                                    <td>01/01/2023</td>
-                                    <td>9.99</td>
+                                    <td>Alex Tsahageas</td>
+                                    <td>alexa@mcgill.ca</td>
                                 </tr>
                                 <tr>
-                                    <td>#260958121</td>
-                                    <td>25/12/2022</td>
-                                    <td>9.99</td>
+                                    <td>#260972321</td>
+                                    <td>Alex Tsahageas</td>
+                                    <td>alexa@mcgill.ca</td>
                                 </tr>
                                 <tr>
-                                    <td>#260958121</td>
-                                    <td>20/12/2022</td>
-                                    <td>9.99</td>
-                                </tr>
-                                <tr>
-                                    <td>#260958121</td>
-                                    <td>20/12/2022</td>
-                                    <td>9.99</td>
+                                    <td>#260972321</td>
+                                    <td>Alex Tsahageas</td>
+                                    <td>alexa@mcgill.ca</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div> 
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'buy_tickets'})">Buy Tickets</a>  
             </section>
             <section class="page-section" id="yourloans">
                 <div class="container">
                     <div class="text-center">
-                        <h2 class="section-heading text-uppercase">Your Loans</h2>
-                        <h3 class="section-subheading text-muted">These are all your active loans</h3>
+                        <h2 class="section-heading text-uppercase">Your Artworks </h2>
+                        <h3 class="section-subheading text-muted">Go manage your Artworks</h3>
                     </div>
                 </div>
-                <div class="container">
-                    <table class="styled-table">
-                        <thead>
-                            <tr>
-                                <th>LoanId</th>
-                                <th>Status</th>
-                                <th>numOfDays</th>
-                                <th>startDate</th>
-                                <th>endDate</th>
-                                <th>rentalFee</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- placeholder values to be removed when script is ready-->
-                            <tr class="active-row">
-                                <td>#260972321</td>
-                                <td>Requested</td>
-                                <td>2</td>
-                                <td>25/12/2022</td>
-                                <td>27/12/2022</td>
-                                <td>9.99</td>
-                            </tr>
-                            <tr>
-                                <td>#260972325</td>
-                                <td>Approved</td>
-                                <td>10</td>
-                                <td>15/12/2022</td>
-                                <td>25/12/2022</td>
-                                <td>9.99</td>
-                            </tr>
-                            <tr>
-                                <td>#123456789</td>
-                                <td>Returned</td>
-                                <td>5</td>
-                                <td>5/9/2022</td>
-                                <td>10/9/2022</td>
-                                <td>9.99</td>
-                            </tr>
-                            <tr>
-                                <td>#674937423</td>
-                                <td>Returned</td>
-                                <td>17</td>
-                                <td>5/4/2022</td>
-                                <td>23/4/2022</td>
-                                <td>9.99</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Request new loan</a>  
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'artwork_dashboard'})">Manage your Artworks</a>  
             </section>
             <footer class="footer py-4">
                 <div class="container">
