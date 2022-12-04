@@ -35,7 +35,7 @@
                                                 <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <a class="small" href="password.html">Forgot Password?</a>
                                                     &nbsp;
-                                                    <a class="btn btn-primary" href="index.html">Login as Customer</a>
+                                                    <a class="btn btn-primary" @click="$router.push({name: 'customer_dashboard'})">Login as Customer</a>
                                                     &nbsp;
                                                     <a class="btn btn-primary" href="index.html">Login as Employee</a>
                                                     &nbsp;
