@@ -89,14 +89,17 @@
                     </div>
                 </div> 
             </section>
+            <div class="text-center">
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: ''})">Schedule Assistant</a>
+            </div>
             <section class="page-section" id="yourartworks">
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Your Artworks </h2>
                         <h3 class="section-subheading text-muted">Go manage your Artworks</h3>
+                        <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'artwork_dashboard'})">Manage your Artworks</a>
                     </div>
                 </div>
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'artwork_dashboard'})">Manage your Artworks</a>  
             </section>
             <footer class="footer py-4">
                 <div class="container">
