@@ -90,7 +90,7 @@
                 </div> 
             </section>
             <div class="text-center">
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: ''})">Schedule Assistant</a>
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'schedule'})">Schedule Assistant</a>
             </div>
             <section class="page-section" id="yourartworks">
                 <div class="container">

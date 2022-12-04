@@ -10,6 +10,7 @@ import RequestLoan from '@/components/request_loan'
 import AdminDashboard from '@/components/admin_dashboard'
 import ArtworkDashboard from '@/components/ArtworkDashboard'
 import Gallery from '@/components/gallery'
+import Schedule from '@/components/schedule'
 Vue.use(Router)
 
 export default new Router({
@@ -63,6 +64,11 @@ export default new Router({
       path: '/customer_dashboard/gallery',
       name: 'gallery',
       component: Gallery
+    },
+    {
+      path: '/admin_dashboard/schedule',
+      name: 'schedule',
+      component: Schedule
     }
   ]
 })

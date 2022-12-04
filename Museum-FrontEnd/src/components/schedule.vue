@@ -1,21 +1,21 @@
 <template>
     <div class="schedule">
-   <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Schedule Dashboard</title>
-        <!-- Flaticon-->
-        <link rel="icon" type="image/x-icon" href="src/assets/homePage/museumLogo.png" />
-        <!-- Font Awesome icons (free version)-->
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="src/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <meta name="description" content="" />
+            <meta name="author" content="" />
+            <title>Schedule Dashboard</title>
+            <!-- Flaticon-->
+            <link rel="icon" type="image/x-icon" href="src/assets/homePage/museumLogo.png" />
+            <!-- Font Awesome icons (free version)-->
+            <!-- Google fonts-->
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+            <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+            <!-- Core theme CSS (includes Bootstrap)-->
+            <link href="src/styles.css" rel="stylesheet" />
+        </head>
+        <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
@@ -41,6 +41,7 @@
         <header class="masthead">
             <div class="container">
                 <div class="masthead-subheading">Welcome to your Schedule Page</div>
+            </div>
         </header>
         <section>
             <div class="text-center">
@@ -101,11 +102,12 @@
                         <option value="6">Employee#6</option>
                         <option value="7">Employee#7</option>
                     </select>
-                    <div>&nbsp;</div>
+                    <div>&nbsp</div>
                     <div>
                         <a class="btn btn-dark btn-xl text-uppercase" href="#!">Add Shift!</a>
                     </div>
                 </div>
+            </div>
         </section>
         <section class="page-section" id="removeshift">
             <div class="container">
@@ -131,11 +133,12 @@
                         <option value="6">Employee#6</option>
                         <option value="7">Employee#7</option>
                     </select>
-                    <div>&nbsp;</div>
+                    <div>&nbsp</div>
                     <div>
                         <a class="btn btn-dark btn-xl text-uppercase" href="#!">Remove their Shift!</a>
                     </div>
                 </div>
+            </div>
         </section>
         <footer class="footer py-4">
             <div class="container">
@@ -151,7 +154,7 @@
                     </div>
                 </div>
             </div>
-        </footer> 
+        </footer>
     </div>
 </template>
 
