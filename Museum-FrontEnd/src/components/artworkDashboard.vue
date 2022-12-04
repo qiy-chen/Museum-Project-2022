@@ -9,7 +9,7 @@
             <!-- Flaticon-->
             <link rel="icon" type="image/x-icon" href="src/assets/homePage/museumLogo.png" />
             <!-- Font Awesome icons (free version)-->
-            <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+          
             <!-- Google fonts-->
             <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
             <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
@@ -132,6 +132,8 @@
 </template>
 
 <script>
+    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
+    crossorigin="anonymous"
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     src="src/scripts.js"
     src="https://cdn.startbootstrap.com/sb-forms-latest.js"
