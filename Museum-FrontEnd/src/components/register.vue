@@ -53,7 +53,7 @@
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><b-button  @click="createPerson(email,password,firstName,lastName,1)">Create Account</b-button></div>
+                                                <div class="d-grid"><b-button @click="createPerson(email,password,firstName,lastName,1); $router.push({name: 'login'})" >Create Account</b-button></div>
                                             </div>
                                         </form>
                                     </div>
