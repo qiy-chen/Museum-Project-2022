@@ -54,6 +54,14 @@
                 </div>
             </div>
         </section>
+        <section class="page-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Artwork Dashboard Here:</h2>
+                    <button @click="$router.push({name: 'artworkDashboard'})">Artwork Dashboard</button>
+                </div>
+            </div>
+        </section>
         
         <!-- Footer-->
         <footer class="footer py-4">
