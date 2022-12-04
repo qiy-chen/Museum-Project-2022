@@ -45,6 +45,9 @@ export default new Router({
       path: '/customer_dashboard',
       name: 'request_loan',
       component: RequestLoan
+    },
+    {
+      path: '/employeeDashboard/art'
     }
   ]
 })
