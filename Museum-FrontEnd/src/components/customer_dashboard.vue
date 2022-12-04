@@ -151,8 +151,8 @@
             <section>
                 <div class="container">
                     <div class="text-center">
-                        <h2 class="section-heading text-uppercase">View the Gallery:</h2>
-                        <button @click="$router.push({name: 'gallery'})">Gallery</button>
+                        <h2 class="section-heading text-uppercase">View Gallery</h2>
+                        <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'gallery'})">Gallery</a>  
                     </div>
                 </div>
             </section>

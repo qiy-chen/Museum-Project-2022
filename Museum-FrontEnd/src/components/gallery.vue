@@ -61,17 +61,17 @@
                         <div class="col-md-4">
                             <h4 class="my-3">Name</h4>
                             <p class="text-muted">Price</p>
-                            <button>Loan</button>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
                         </div>
                         <div class="col-md-4">
                             <h4 class="my-3">Name</h4>
                             <p class="text-muted">Price</p>
-                            <button>Loan</button>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
                         </div>
                         <div class="col-md-4">
                             <h4 class="my-3">Name</h4>
                             <p class="text-muted">Price</p>
-                            <button>Loan</button>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
                         </div>
                     </div>
                 </div>
@@ -84,17 +84,17 @@
                         <div class="col-md-4">
                             <h4 class="my-3">Name</h4>
                             <p class="text-muted">Price</p>
-                            <button>Loan</button>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
                         </div>
                         <div class="col-md-4">
                             <h4 class="my-3">Name</h4>
                             <p class="text-muted">Price</p>
-                            <button>Loan</button>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
                         </div>
                         <div class="col-md-4">
                             <h4 class="my-3">Name</h4>
                             <p class="text-muted">Price</p>
-                            <button>Loan</button>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
                         </div>
                     </div>
                 </div>
