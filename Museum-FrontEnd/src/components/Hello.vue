@@ -90,7 +90,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="team-member">
-                                <a class="btn btn-dark btn-xl text-uppercase" href="src/components/login.html">Log in</a>
+                                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'login'})">Log in</a>
                             </div>
                         </div>
                         <div class="col">
