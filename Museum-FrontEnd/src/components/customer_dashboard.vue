@@ -146,6 +146,7 @@
                         </tbody>
                     </table>
                 </div>
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Request new loan</a>  
             </section>
             <footer class="footer py-4">
                 <div class="container">

@@ -5,6 +5,7 @@ import Register from '@/components/register'
 import Login from '@/components/login'
 import CustomerDashboard from '@/components/customer_dashboard'
 import BuyTickets from '@/components/buy_tickets'
+import RequestLoan from '@/components/request_loan'
 Vue.use(Router)
 
 export default new Router({
@@ -33,6 +34,11 @@ export default new Router({
       path: '/customer_dashboard',
       name: 'buy_tickets',
       component: BuyTickets
+    },
+    {
+      path: '/customer_dashboard',
+      name: 'request_loan',
+      component: RequestLoan
     }
   ]
 })
