@@ -23,17 +23,15 @@
                         <i class="fas fa-bars ms-1"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="#youremployees">Your Employees</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#yourartworks">Your Artworks</a></li>
+                        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                            <li class="nav-item"><a class="nav-link" href="#youremployees">Employees</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#yourartworks">Artworks</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#yourrooms">Rooms</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#scheduleView">Schedule</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Go to Art Gallery</a></li>
-                                    <li><a class="dropdown-item" href="file:///Users/alextsah/Documents/GitHub/project-group-15/Museum-Frontend/purchase_ticket.html">Buy Tickets</a></li>
-                                    <li><a class="dropdown-item" href="request_loan.html">Loan Artwork</a></li>
-                                    <li><a class="dropdown-item" href="index.html">Log out</a></li>
-                                </ul>
+                            <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
+                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                            </b-dropdown>
                             </li>
                         </ul>
                     </div>

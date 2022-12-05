@@ -26,7 +26,8 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item dropdown">
                             <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
-                                <b-dropdown-item href="#">Artwork</b-dropdown-item>
+                                <b-dropdown-item href="#">Gallery</b-dropdown-item>
+                                <b-dropdown-item href="#">Dashboard</b-dropdown-item>
                                 <b-dropdown-item href="#!">Log out</b-dropdown-item>
                             </b-dropdown>
                         </li>

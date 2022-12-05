@@ -28,11 +28,11 @@
                         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#!">Go to Art Gallery</a></li>
-                                    <li><a class="dropdown-item" href="customer_dashboard.html">Return to your dashboard</a></li>
-                                    <li><a class="dropdown-item" href="index.html">Log out</a></li>
-                                </ul>
+                                <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
+                                <b-dropdown-item href="#">Gallery</b-dropdown-item>
+                                <b-dropdown-item href="#">Dashboard</b-dropdown-item>
+                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                            </b-dropdown>
                             </li>
                         </ul>
                     </div>
