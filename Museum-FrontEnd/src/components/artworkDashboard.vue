@@ -64,6 +64,7 @@
                 </div>
 
             <div class="text_center">
+                        &nbsp;
                         <table class="center">
                             <tr>
                                 <th>Artwork Name</th>
