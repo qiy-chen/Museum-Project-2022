@@ -33,8 +33,8 @@ export default {
   methods: {
     loginToRightRole: function(email,password) {
       this.getPersonByEmail(email)
-      this.checkPersonIsAdmin(email,password)
-      this.checkPersonIsEmployee(email,password)
+      if(this.checkPersonIsAdmin(email,password))return
+      if(this.checkPersonIsEmployee(email,password))return
       this.checkPersonIsCustomer(email,password)
     },
     getPersonByEmail: function (email) {
@@ -49,7 +49,6 @@ export default {
           this.email = ''
           this.password = ''
           this.errorPerson = ''
-          console.log(response.data)
         })
         .catch(e => {
           this.foundPerson = []
@@ -57,12 +56,14 @@ export default {
         })
     },
     checkPersonIsCustomer: function(email, password) {
+      let result = false
       setTimeout(() => {if(this.foundPerson.password === password) {
       this.foundPerson.personRoleIds.forEach(element => {
         AXIOS.get('/customer/'.concat(element))
           .then(response => {
             this.errorPerson = ''
             Router.push({name: 'customer_dashboard'})
+            result = true
           })
           .catch(e => {
             console.log(e.response.message)
@@ -71,15 +72,17 @@ export default {
     } else {
         this.errorPerson = 'Wrong Password!'
       }},500)
-      console.log(this.errorPerson)
-      },
+      return result
+    },
     checkPersonIsEmployee: function(email, password) {
+      let result = false
       setTimeout(() => {if(this.foundPerson.password === password) {
         this.foundPerson.personRoleIds.forEach(element => {
           AXIOS.get('/employee/'.concat(element))
             .then(response => {
               this.errorPerson = ''
               Router.push({name: 'employeeDashboard'})
+              result = true
             })
             .catch(e => {
             })
@@ -87,14 +90,17 @@ export default {
       } else {
         this.errorPerson = 'Wrong Password!'
       }},500)
+      return result
     },
     checkPersonIsAdmin: function(email, password) {
+      let result = false
       setTimeout(() => {if(this.foundPerson.password === password) {
         this.foundPerson.personRoleIds.forEach(element => {
           AXIOS.get('/admin/'.concat(element))
             .then(response => {
               this.errorPerson = ''
               Router.push({name: 'admin_dashboard'})
+              result = true
             })
             .catch(e => {
             })
@@ -102,6 +108,7 @@ export default {
       }else {
         this.errorPerson = 'Wrong Password!'
       }},500)
+      return result
     }
   }
 
