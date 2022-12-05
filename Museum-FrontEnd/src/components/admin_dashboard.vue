@@ -30,7 +30,7 @@
                             <li class="nav-item"><a class="nav-link" href="#scheduleView">Schedule</a></li>
                             <li class="nav-item dropdown">
                             <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
-                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'Hello'})">Log out</b-dropdown-item>
                             </b-dropdown>
                             </li>
                         </ul>
@@ -75,9 +75,12 @@
                     </table>
                 </div>
             </section>
-            <div class="text-center">
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'schedule'})">Schedule Assistant</a>
-            </div>
+            <section class="page-section" id="scheduleView">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Your Scheduler</h2>
+                    <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'schedule'})">Schedule Assistant</a>
+                </div>
+            </section>
             <section class="page-section" id="yourartworks">
                 <div class="container">
                     <div class="text-center">
