@@ -85,12 +85,14 @@
                         <h4 class="my-3">   </h4>
                         <div class="col">
                             <div class="team-member">
-                                <a class="btn btn-secondary btn-xl text-uppercase" @click="$router.push({name: 'login'})">Log in</a>
+                                <a class="btn btn-primary btn-xl text-uppercase" @click="$router.push({name: 'login'})">Log in</a>
                             </div>
                         </div>
+
+                        
                         <div class="col">
                             <div class="team-member">
-                              <a class="btn btn-secondary btn-xl text-uppercase" @click="$router.push({name: 'register'})">Sign up</a>                           
+                              <a class="btn btn-primary btn-xl text-uppercase" @click="$router.push({name: 'register'})">Sign up</a>                           
                              </div>
                         </div>
                     </div>

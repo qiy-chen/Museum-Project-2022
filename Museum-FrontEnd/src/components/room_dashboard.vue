@@ -59,13 +59,15 @@
                         </div>
                         <div class="text_center">
                         <table class="styled-table">
-                            <tr>
-                                <th>Room Number</th>
-                                <div>&nbsp;</div> 
-                                <th>Max Artworks</th>
-                                <div>&nbsp;</div> 
-                                <th>Room Id</th>
-                            </tr>
+                            
+                                <tr>
+                                    <th>Room Number</th>
+                                    <div>&nbsp;</div> 
+                                    <th>Max Artworks</th>
+                                    <div>&nbsp;</div> 
+                                    <th>Room Id</th>
+                                </tr>
+                            
                             <tr v-for="display in displays">
                                 <td>{{ display.roomNumber}}</td>
                                 <div>&nbsp;</div>
@@ -90,10 +92,12 @@
                             <a class="btn btn-dark btn-xl text-uppercase" @click="createStorageRoom(roomNumber,69)" >Create Storage Room</a>
                         </div>
                         <table class="center">
+                            <thead>
                             <tr>
                                 <th>Room Number</th>
                                 <th>Room Id</th>
                             </tr>
+                            </thead>
                             <tr v-for="storage in storages">
                                 <td>{{ storage.roomNumber}}</td>
                                 <div>&nbsp;</div>
