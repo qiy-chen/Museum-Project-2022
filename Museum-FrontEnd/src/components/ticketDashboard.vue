@@ -60,7 +60,8 @@
 						<h2 class="section-heading text-uppercase">Add Ticket</h2>
 						<h3 class="section-subheading text-muted">Enter ticket
 							information down below.</h3>
-						<label for="fname">Date:</label><br> <input type="date"
+						<label for="fname">Date:</label><br>
+            <input type="date"
 							v-model="ticketDate" id="fname" name="fname" value="2022-12-05"
 							min="2022-01-01" max="2025-12-31"><br>
 						<div>&nbsp;</div>

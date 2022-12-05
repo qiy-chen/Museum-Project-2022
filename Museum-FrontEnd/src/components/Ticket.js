@@ -33,8 +33,8 @@ export default {
       allTickets: [],
       unpurchasedTickets: [],
       customerTickets: [],
-      newTicketDate: '',
-      newTicketPrice:'',
+      ticketDate: '',
+      price:'',
       ticketId: '',
       errorTicket: '',
       nb: '',
@@ -46,7 +46,7 @@ export default {
   created: function () {
     // Initializing tickets from backend
     //Load all tickets
-    errorTicket=''
+    this.errorTicket=''
     AXIOS.get('/tickets')
     .then(response => {
       // JSON responses are automatically parsed.
@@ -137,13 +137,10 @@ export default {
         })
     },
 	
-    createTicket: function (newTicketDate, newTicketPrice, nb) {
+    createTicket: function (ticketDate, price, nb) {
 	for (let i = 0; i<nb; i++){
-		      AXIOS.post('/tickets', {}, {
-        params: {
-          ticketDate: newTicketDate,
-          price: newTicketPrice
-        }}).then(response => {
+		      AXIOS.post('/tickets',new TicketRequestDto(ticketDate,price))
+                  .then(response => {
         // JSON responses are automatically parsed.
           this.allTickets.push(response.data)
           this.unpurchasedTickets.push(response.data)
