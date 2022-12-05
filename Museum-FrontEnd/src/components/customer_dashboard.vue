@@ -85,10 +85,10 @@
                             <tr>
                                 <th>LoanId</th>
                                 <th>Status</th>
-                                <th>numOfDays</th>
-                                <th>startDate</th>
-                                <th>endDate</th>
-                                <th>rentalFee</th>
+                                <th>Nb Days</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Rental Fee</th>
                             </tr>
                         </thead>
                         <tbody>
