@@ -14,8 +14,8 @@ var backendConfigurer = function(){
 function IdRequestDto(id){
 	this.id = id
 }
-function TicketRequestDto(date, price){
-	this.date = date
+function TicketRequestDto(ticketDate, price){
+	this.ticketDate = ticketDate
 	this.price = price
 }
 
@@ -157,18 +157,12 @@ export default {
 	}
    },
 
-    updateTicket: function (newTicketDate,newTicketPrice,ticketId) {
-      AXIOS.put('/tickets/'.concat(ticketId), {}, {
-        params: {
-          ticketDate: newTicketDate,
-          price: newTicketPrice
-        }})
+    updateTicket: function (ticketDate,price,ticketId) {
+      AXIOS.put('/tickets/'.concat(ticketId), new TicketRequestDto(ticketDate,price))
         .then(response => {
         // JSON responses are automatically parsed.
         //Update values
-         getAllTickets()
-         getAllUnpurchasedTickets()
-         getCustomerTickets()
+         window.location.reload();
 			this.response = response.data
           this.errorTicket = ''
           this.newTicketDate = ''
@@ -187,9 +181,7 @@ export default {
         .then(response => {
         // JSON responses are automatically parsed.
           //Update values
-          getAllTickets()
-         getAllUnpurchasedTickets()
-         getCustomerTickets()
+         window.location.reload();
          this.response = response.data
           this.errorTicket = ''
           ticketId = ''
