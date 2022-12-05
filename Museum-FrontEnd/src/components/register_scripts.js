@@ -1,5 +1,6 @@
 import * as people from "./Person"
 import * as customers from "./Customer";
+import Router from "@/router/index.js"
 import axios from 'axios'
 var config = require('../../config')
 
@@ -47,6 +48,7 @@ export default {
       let loanIDs = []
       setTimeout(() =>customers.default.methods.createCustomer(email,loanIDs),5000)
       this.errorPerson = ''
+      Router.push({name: 'login'})
     },
     getPersonByEmail: function (email) {
       if(!email)return

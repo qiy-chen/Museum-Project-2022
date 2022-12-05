@@ -63,27 +63,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- placeholder values to be removed when script is ready-->
-                                <tr class="active-row">
-                                    <td>#260972321</td>
-                                    <td>01/01/2023</td>
-                                    <td>9.99</td>
-                                </tr>
-                                <tr>
-                                    <td>#260958121</td>
-                                    <td>25/12/2022</td>
-                                    <td>9.99</td>
-                                </tr>
-                                <tr>
-                                    <td>#260958121</td>
-                                    <td>20/12/2022</td>
-                                    <td>9.99</td>
-                                </tr>
-                                <tr>
-                                    <td>#260958121</td>
-                                    <td>20/12/2022</td>
-                                    <td>9.99</td>
-                                </tr>
+                               <li v-for="ticket in theirTickets">
+                                 {{ticket.ticketId}} {{ticket.ticketDate.toString()}} {{ticket.price}}
+                               </li>
                             </tbody>
                         </table>
                     </div>

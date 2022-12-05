@@ -72,6 +72,7 @@ export default {
         AXIOS.get('/customer/'.concat(element))
           .then(response => {
             this.errorPerson = ''
+            localStorage.setItem('id',element.toString())
             Router.push({name: 'customer_dashboard'})
             result = true
           })
@@ -91,6 +92,7 @@ export default {
           AXIOS.get('/employee/'.concat(element))
             .then(response => {
               this.errorPerson = ''
+              localStorage.setItem('id',element.toString())
               Router.push({name: 'employeeDashboard'})
               result = true
             })
@@ -109,6 +111,7 @@ export default {
           AXIOS.get('/admin/'.concat(element))
             .then(response => {
               this.errorPerson = ''
+              localStorage.setItem('id',element.toString())
               Router.push({name: 'admin_dashboard'})
               result = true
             })
