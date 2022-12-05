@@ -113,8 +113,10 @@
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Update Artwork</h2>
                         <h3 class="section-subheading text-muted">Enter artwork information down below.</h3>
-                        <label for="fname">Artwork ID:</label><br>
-                            <input type="number" v-model="artworkId" id="fname" name="fname"><br>
+                        <label for="fname2">ArtworkId:</label>
+                            <select v-model="roomId">
+                            <option v-for="artwork in artworks" > {{artwork.artworkId}}</option>
+                            </select>
                         <div>&nbsp;</div> 
                         <label for="fname">Name:</label><br>
                             <input type="text" v-model="artworkName" id="fname" name="fname"><br>
