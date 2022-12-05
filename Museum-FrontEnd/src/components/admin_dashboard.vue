@@ -30,7 +30,7 @@
                             <li class="nav-item"><a class="nav-link" href="#scheduleView">Schedule</a></li>
                             <li class="nav-item dropdown">
                             <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
-                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'Hello'})">Log out</b-dropdown-item>
                             </b-dropdown>
                             </li>
                         </ul>
@@ -48,70 +48,41 @@
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Your Employees</h2>
                         <h3 class="section-subheading text-muted">These are all your currently registered employees</h3>
+                    <h2 class="section-heading text-uppercase">Register a new employee</h2>
+                        <h3 class="section-subheading text-muted">Enter employee information down below.</h3>
+                        <label for="inputFirstName">Enter first name:</label>
+                        <input class="form-control" id="inputFirstName" type="text" v-model="firstName" placeholder="Enter first name" />
+                        <div>&nbsp;</div>
+                        <label for="inputLastName">Enter last name:</label>
+                        <input class="form-control" id="inputLastName" type="text" v-model="lastName" placeholder="Enter last name" />
+                        <div>&nbsp;</div> 
+                        <label for="inputEmail">Enter email:</label>
+                        <input class="form-control" id="inputEmail" type="text" v-model="email" placeholder="Enter email" />
+                        <div>&nbsp;</div>   
+                        <label for="inputPassword">Enter password:</label>
+                        <input class="form-control" id="inputPassword" type="text" v-model="password" placeholder="Enter password" />
+                        <div>&nbsp;</div>        
+                        <div>
+                            <div class="d-grid"><button type="button" class="btn btn-primary" @click="createNewPersonAndMakeEmployee(email,password,firstName,lastName,69)">Create Employee</button></div>                        </div> 
                     </div>
-                        <div class="card-body">
-                        <vuejs-simple-dataTable :options="employeeTableOptions">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <tr>
-                                    <td>Jonas Alexander</td>
-                                    <td>Developer</td>
-                                    <td>San Francisco</td>
-                                    <td>30</td>
-                                    <td>2010/07/14</td>
-                                    <td>$86,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Shad Decker</td>
-                                    <td>Regional Director</td>
-                                    <td>Edinburgh</td>
-                                    <td>51</td>
-                                    <td>2008/11/13</td>
-                                    <td>$183,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Michael Bruce</td>
-                                    <td>Javascript Developer</td>
-                                    <td>Singapore</td>
-                                    <td>29</td>
-                                    <td>2011/06/27</td>
-                                    <td>$183,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Donna Snider</td>
-                                    <td>Customer Support</td>
-                                    <td>New York</td>
-                                    <td>27</td>
-                                    <td>2011/01/25</td>
-                                    <td>$112,000</td>
-                                </tr>
-                            </tbody>
-                        </vuejs-simple-dataTable>
-                        </div>
-                </div> 
+                    <table class="center">
+                            <tr>
+                                <th>Existing Employee Emails</th>
+                                <div>&nbsp;</div>
+                            </tr>
+                            <tr v-for="employee in employees">
+                                <td>{{ employee.email }}</td>
+                                <div>&nbsp;</div>
+                            </tr>
+                    </table>
+                </div>
             </section>
-            <div class="text-center">
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'schedule'})">Schedule Assistant</a>
-            </div>
+            <section class="page-section" id="scheduleView">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Your Scheduler</h2>
+                    <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'schedule'})">Schedule Assistant</a>
+                </div>
+            </section>
             <section class="page-section" id="yourartworks">
                 <div class="container">
                     <div class="text-center">
@@ -130,26 +101,6 @@
                     </div>
                 </div>
             </section>
-
-            <!-- schedule viewer -->
-            <section class="page-section" id="scheduleView">
-                <div class="container">
-                    <div class="text-center">
-                        <h2 class="section-heading text-uppercase">Your Schedule</h2>
-                    <full-calendar class="test-fc" :events="fcEvents" 
-                    first-day='1' locale="fr"
-                    @changeMonth="changeMonth"
-                    @eventClick="eventClick"
-                    @dayClick="dayClick"
-                    @moreClick="moreClick">
-                        <template slot="fc-event-card" scope="p">
-                            <p><i class="fa">sadfsd</i> {{ p.event.title }} test</p>
-                        </template>
-                    </full-calendar>
-                    </div>
-                </div>
-            </section>
-
             <footer class="footer py-4">
                 <div class="container">
                     <div class="row align-items-center">
@@ -165,91 +116,9 @@
     </div>
 </template>
 
-<script>
-    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
-    crossorigin="anonymous"
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="../assets/scripts.js"
-    src="https://cdn.startbootstrap.com/sb-forms-latest.js"
-
-    // full calendar from: https://github.com/Wanderxx/vue-fullcalendar
-
-    let demoEvents = [
-        {
-            title    : 'Sunny 725-727',
-            start    : '2022-12-25',
-            end      : '2022-12-27',
-            cssClass : 'family'
-        },
-        {
-            title : 'Lunfel 726-727',
-            start : '2017-02-26',
-            end : '2017-02-27',
-            cssClass : ['home', 'work']
-        },
-        {
-            title : 'Lunfel 2/27-2/28',
-            start : '2017-02-27',
-            end : '2017-02-28'
-        },
-        {
-            title : 'Lunfel 2/27-2/28',
-            start : '2017-02-27',
-            end : '2017-02-28'
-        },
-        {
-            title : 'Lunfel 2/27-2/28',
-            start : '2017-02-27',
-            end : '2017-02-28'
-        },
-        {
-            title : 'Lunfel 2/26-3/05',
-            start : '2017-02-26',
-            end : '2017-03-05'
-        },
-        {
-            title : 'Lunfel 1/27-1/28',
-            start : '2017-01-27',
-            end : '2017-01-28'
-        },
-        {
-            title : 'Lunfel 1/27-2/2',
-            start : '2017-01-27',
-            end : '2017-02-02'
-        },
-        {
-            title : 'Lunfel 3/27-3/28',
-            start : '2017-03-27',
-            end : '2017-03-28'
-        },
-    ];
-    export default {
-        data () {
-            return {
-                name:'Sunny!',
-                fcEvents : demoEvents
-            }
-        },
-        methods : {
-            'changeMonth' (start, end, current) {
-            console.log('changeMonth', start.format(), end.format(), current.format())
-            },
-            'eventClick' (event, jsEvent, pos) {
-            console.log('eventClick', event, jsEvent, pos)
-            },
-            'dayClick' (day, jsEvent) {
-            console.log('dayClick', day, jsEvent)
-            },
-            'moreClick' (day, events, jsEvent) {
-            console.log('moreCLick', day, events, jsEvent)
-            }
-        },
-        components : {
-            'full-calendar': require('vue-fullcalendar')	
-        }
-    }
+<script src="./admin_scripts.js">
 </script>
 
 <style>
-    @import '*/Museum-FrontEnd/scr/assets/styles.css';
+     @import '../assets/styles.css';
 </style>

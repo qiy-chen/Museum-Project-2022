@@ -28,12 +28,13 @@
                         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                             <li class="nav-item"><a class="nav-link" href="#yourtickets">Your Tickets</a></li>
                             <li class="nav-item"><a class="nav-link" href="#yourloans">Your Loans</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
                             <li class="nav-item dropdown">
                                 <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
-                                <b-dropdown-item href="./login.vue">Gallery</b-dropdown-item>
-                                <b-dropdown-item href="./register.vue">Tickets</b-dropdown-item>
-                                <b-dropdown-item href="./adminDash.vue">Loans</b-dropdown-item>
-                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'gallery'})">Gallery</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'buy_tickets'})">Tickets</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'request_loan'})">Loans</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'Hello'})">Log out</b-dropdown-item>
                             </b-dropdown>
                             </li>
                         </ul>
@@ -147,7 +148,7 @@
                 </div>
                 <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Request new loan</a>  
             </section>
-            <section>
+            <section id="gallery">
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">View Gallery</h2>

@@ -59,6 +59,7 @@ export default {
       AXIOS.get('/employee/'.concat(id))
         .then(response => {
           if(!this.employees.includes(response.data)) {
+            console.log(employees)
             this.employees.push(response.data)
             this.newEmployee = {}
           }

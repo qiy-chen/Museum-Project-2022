@@ -24,6 +24,7 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                             <li class="nav-item"><a class="nav-link" href="#services">Add Artwork</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#update">Update Artwork</a></li>
                             <li class="nav-item"><a class="nav-link" href="#moveartwork">Move Artwork</a></li>
                             <li class="nav-item dropdown">
                                 <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
@@ -49,52 +50,61 @@
                         <h2 class="section-heading text-uppercase">Add Artwork</h2>
                         <h3 class="section-subheading text-muted">Enter artwork information down below.</h3>
                         <label for="fname">Name:</label><br>
-                            <input type="text" id="fname" name="fname"><br>
+                            <input type="text" v-model="artworkName" id="fname" name="fname"><br>
                         <div>&nbsp;</div>   
-                        <label for="fname">Price:</label><br>
-                            <input type="text" id="fname" name="fname"><br>
+                        <label for="fname">Room Id:</label><br>
+                            <input type="number" v-model="roomId" id="fname" name="fname"><br>
+                        <div>&nbsp;</div>    
+                        <div>
+                            <button class ="btn btn-primary" @click="createArtwork(artworkName, roomId, 69)">ADD</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="page-section" id="update">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Update Artwork</h2>
+                        <h3 class="section-subheading text-muted">Enter artwork information down below.</h3>
+                        <label for="fname">Artwork ID:</label><br>
+                            <input type="number" v-model="artworkId" id="fname" name="fname"><br>
+                        <div>&nbsp;</div> 
+                        <label for="fname">Name:</label><br>
+                            <input type="text" v-model="artworkName" id="fname" name="fname"><br>
+                        <div>&nbsp;</div>   
+                        <label for="fname">Value:</label><br>
+                            <input type="number" v-model="value" id="fname" name="fname"><br>
                         <div>&nbsp;</div>    
                         <label for="numbers">Loanable?</label>
-                        <select name="numbers" id="numbers">
+                        <select name="numbers" v-model="isLoanable" id="numbers">
                             <option value="1">Yes</option>
                             <option value="2">No</option>
                         </select>
                         <div>&nbsp;</div> 
                         <div>
-                            <button>Add</button>
+                            <button class ="btn btn-primary" @click="updateArtwork(artworkId, artworkName, value, isLoanable)" >UPDATE</button>
                         </div>
                     </div>
                 </div>
             </section>
+
+
+
             <section class="page-section" id="moveartwork">
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Move Artwork</h2>
                         <h3 class="section-subheading text-muted">Find by artwork id and select room to move to.</h3>
-                        <label for="numbers">Artwork id:</label>
-                        <select name="numbers" id="numbers">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                        </select>
-                        &nbsp; &nbsp; &nbsp; 
-                        <label for="numbers">Room:</label>
-                        <select name="numbers" id="numbers">
-                            <option value="1">Storage</option>
-                            <option value="2">BigDisplay1</option>
-                            <option value="3">BigDisplay2</option>
-                            <option value="4">BigDisplay3</option>
-                            <option value="5">LittleDisplay1</option>
-                            <option value="6">LittleDisplay2</option>
-                            <option value="7">LittleDisplay3</option>
-                        </select>  
+                        <label for="fname">Artwork ID:</label><br>
+                            <input type="number" v-model="artworkId" id="fname" name="fname"><br>
+                    
+                        <div>&nbsp;</div> 
+                        <label for="fname">Room ID:</label><br>
+                            <input type="number" v-model="roomId" id="fname" name="fname"><br>
                         <div>&nbsp; </div>
                         <div>
-                            <button>Move</button>
+                            <button class ="btn btn-primary" @click="moveArtwork(artworkId, roomId)" >MOVE</button>
                         </div>
                     </div>
                 </div>
@@ -126,10 +136,7 @@
     </div>
 </template>
 
-<script>
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="src/scripts.js"
-    src="https://cdn.startbootstrap.com/sb-forms-latest.js"
+<script src="./artworkManager.js">
 </script>
 
 <style>

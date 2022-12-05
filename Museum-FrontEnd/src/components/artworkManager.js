@@ -1,14 +1,13 @@
 import axios from 'axios'
 var config = require('../../config')
 
-var backendConfigurer = function(){
-  switch(process.env.NODE_ENV){
-      case 'development':
-          return 'http://' + config.dev.backendHost + ':' + config.dev.backendPort;
-      case 'production':
-          return 'https://' + config.build.backendHost + ':' + config.build.backendPort ;
-  }
-};
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
 
 function artworkRequestDto(artworkName, roomId, museumId, value, isLoanable){
   this.artworkName = artworkName
@@ -16,17 +15,11 @@ function artworkRequestDto(artworkName, roomId, museumId, value, isLoanable){
   this.museumId = museumId
   this.value = value
   this.isLoanable = isLoanable
+  this.artworkId
 }
 
-var backendUrl = backendConfigurer();
-
-var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
-})
-
 export default {
-  name: 'ArtManage',
+  name: 'artworkManager',
   data() {
     return {
 
@@ -34,10 +27,10 @@ export default {
 	  artworksInRoom: [],
 	  artworksInStorage: [],
 	  artworks: [],
-    artworkId: 0,
+    artworkId: '',
     errorArtwork: '',
     artworkResponse: '',
-    roomId: 0,
+    roomId: '',
     }
   },
 
@@ -62,8 +55,9 @@ export default {
           .then(response => {
             console.log(response)
             this.artworks.push(reponse.data)
+            this.artworkId = response.data.artworkId
             this.errorArtwork = ''
-            this.roomId =0
+            this.roomId =''
           })
           .catch(e => {
             var errorMsg = e.response.data.message
@@ -78,7 +72,7 @@ export default {
             console.log(response)
             this.created()
             this.errorArtwork = ''
-            this.artworkId = 0 
+            this.artworkId = ''
           })
           .catch(e => {
             var errorMsg = e.response.data.message
@@ -93,7 +87,7 @@ export default {
             console.log(response)
             this.created()
             this.errorArtwork = ''
-            this.artworkId = 0 
+            this.artworkId = ''
           })
           .catch(e => {
             var errorMsg = e.response.data.message
@@ -108,7 +102,7 @@ export default {
             console.log(response)
             this.created()
             this.errorArtwork = ''
-            this.artworkId = 0 
+            this.artworkId = ''
           })
           .catch(e => {
             var errorMsg = e.response.data.message
@@ -137,7 +131,7 @@ export default {
             console.log(response)
             this.artworkResponse = response.data
             this.errorArtwork = ''
-            this.artworkId = 0
+            this.artworkId = ''
           })
           .catch(e => {
             var errorMsg = e.response.data.message
@@ -181,7 +175,7 @@ export default {
             console.log(response)
             this.artworksInRoom = response.data
             this.errorArtwork = ''
-            this.roomId = 0
+            this.roomId = ''
           })
           .catch(e => {
             var errorMsg = e.response.data.message

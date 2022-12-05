@@ -24,11 +24,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Schedule</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#scheulde">Schedule</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#artwork">Artwork</a></li>
                         <li class="nav-item dropdown">
                             <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
-                                <b-dropdown-item href="#">Artwork</b-dropdown-item>
-                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'Hello'})">Log out</b-dropdown-item>
                             </b-dropdown>
                         </li>
                     </ul>
@@ -42,7 +42,7 @@
             </div>
         </header>
         <!-- Services-->
-        <section class="page-section" id="services">
+        <section class="page-section" id="scheulde">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Schedule</h2>
@@ -60,11 +60,19 @@
                 </div>
             </div>
         </section>
-        <section class="page-section" id="services">
+        <section class="page-section" id="artwork">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Artwork Dashboard Here:</h2>
-                    <button @click="$router.push({name: 'artworkDashboard'})">Artwork Dashboard</button>
+                    <h2 class="section-heading text-uppercase">Artwork Dashboard</h2>
+                    <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'artworkDashboard'})">Artwork Dashboard</a>
+                </div>
+            </div>
+        </section>
+        <section class="page-section" id="room">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Room Dashboard</h2>
+                    <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'room_dashboard'})">Room Dashboard</a>
                 </div>
             </div>
         </section>
