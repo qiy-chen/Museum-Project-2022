@@ -104,6 +104,8 @@
     src="src/scripts.js"
     src="https://cdn.startbootstrap.com/sb-forms-latest.js"
 
+    // full calendar from: https://github.com/Wanderxx/vue-fullcalendar
+
     let demoEvents = [
         {
             title    : 'Sunny 725-727',
@@ -181,5 +183,5 @@
 </script>
 
 <style>
-    @import '*/Museum-FrontEnd/scr/styles.css';
+    @import '*/Museum-FrontEnd/scr/assets/styles.css';
 </style>
