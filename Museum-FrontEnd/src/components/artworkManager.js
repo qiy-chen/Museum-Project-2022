@@ -155,10 +155,12 @@ export default {
     deleteArtwork: function (artworkId) {
         AXIOS.delete('/artwork/'.concat(artworkId), {}, {})
           .then(response => {
+            window.location.reload();
             this.created()
             this.errorArtwork = ''
             this.artworkId = ''
           })
+          
           .catch(e => {
             let errorMsg = e.response.data.message
             console.log(errorMsg)
