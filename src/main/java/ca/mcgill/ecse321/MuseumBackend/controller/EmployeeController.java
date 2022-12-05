@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * @Author Jeanine Looman
  */
+@CrossOrigin(origins = "*")
 @RestController
 public class EmployeeController {
 
@@ -44,7 +45,7 @@ public class EmployeeController {
 	}
 	
 	// get all employees
-	@GetMapping("/employees")
+	@GetMapping("/employee")
 	public ResponseEntity<List<EmployeeResponseDto>> getAllEmployees() {
 		List<Employee> employees = employeeService.getAllEmployees();
 		ArrayList<EmployeeResponseDto> employeeDtos = new ArrayList<>();
@@ -59,7 +60,7 @@ public class EmployeeController {
 		List<Shift> shifts = employeeService.getShiftsForEmployee(id);
 		ArrayList<ShiftResponseDto> shiftDtos = new ArrayList<>();
 		for (Shift s : shifts)
-			shiftDtos.add(new ShiftResponseDto(s));
+			shiftDtos.add(new ShiftResponseDto(s.getStartTime(),s.getEndTime(),s.getWorkDayId(),s.getMuseum().getMuseumId(), s.getEmployees()));
 		return new ResponseEntity<List<ShiftResponseDto>>(toList(shiftDtos), HttpStatus.OK);
 	}
 	

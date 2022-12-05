@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.MuseumBackend.dto;
 
 
 public class LoanRequestDto {
-  private int loanId;
   private int LoanStatusAsNumber;
   private int numOfDays;
   private String startDate;
@@ -34,13 +33,6 @@ public class LoanRequestDto {
     this.dateAsString = dateAsString;
   }
 */
-  public int getLoanId() {
-    return loanId;
-  }
-
-  public void setLoanId(int loanId) {
-    this.loanId = loanId;
-  }
 
   public int getLoanStatusAsNumber() {
     return LoanStatusAsNumber;

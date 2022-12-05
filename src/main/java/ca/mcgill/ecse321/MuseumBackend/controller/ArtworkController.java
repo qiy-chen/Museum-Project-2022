@@ -158,6 +158,5 @@ public ResponseEntity<ArtworkResponseDto> getArtworkById(@PathVariable("id") int
     return artworkDto;
 }
   
-  //missing delete
   
 }

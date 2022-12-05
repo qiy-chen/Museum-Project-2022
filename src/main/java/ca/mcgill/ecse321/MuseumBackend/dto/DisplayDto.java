@@ -8,6 +8,7 @@ public class DisplayDto {
   private int roomId;
   private int maxArtworks;
   private int museumId;
+  private int numberOfArtworks;
 
   public DisplayDto () {}
   
@@ -16,6 +17,7 @@ public class DisplayDto {
    this.roomId = d.getRoomId();
    this.maxArtworks = d.getMaxArtworks();
    this.museumId = d.getMuseum().getMuseumId();
+   this.numberOfArtworks = d.numberOfArtworks();
  }
   
   public DisplayDto(int roomNumber, int maxArtworks, int museumId) {
@@ -39,5 +41,9 @@ public class DisplayDto {
  public int getMuseumId() {
    return museumId;
  }
+
+ public int getNumOfArtworks() {
+  return numberOfArtworks;
+}
  
 }

@@ -15,6 +15,9 @@ import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class RoomService {
 
@@ -43,6 +46,7 @@ public class RoomService {
     display.setRoomNumber(aRoomNumber);
     display.setMaxArtworks(aMaxArtworks);
     display.setMuseum(mus);
+    int size = display.numberOfArtworks();
     
     display = displayRepository.save(display);
     mus.addRoom(display);
@@ -120,5 +124,24 @@ public class RoomService {
     List<Display> displays = (List<Display>) (displayRepository.findAll());
     return displays;
   }
+
+  @Transactional
+  public List<Display> getAllDisplays() {
+    return toList(displayRepository.findAll()); 
+  }
+
+  @Transactional
+  public List<Storage> getAllStorages() {
+    return toList(storageRepository.findAll()); 
+  }
+
+  //helper method 
+  private <T> List<T> toList(Iterable<T> iterable){
+    List<T> resultList = new ArrayList<T>();
+    for (T t : iterable) {
+        resultList.add(t);
+    }
+    return resultList;
+}
 
 }

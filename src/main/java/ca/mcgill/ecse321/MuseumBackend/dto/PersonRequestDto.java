@@ -5,51 +5,33 @@ import ca.mcgill.ecse321.MuseumBackend.model.*;
 import ca.mcgill.ecse321.MuseumBackend.service.AdminService;
 import ca.mcgill.ecse321.MuseumBackend.service.CustomerService;
 import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
+import ca.mcgill.ecse321.MuseumBackend.service.MuseumService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonRequestDto {
-    @Autowired
-    private EmployeeService employeeService;
-    @Autowired
-    private CustomerService customerService;
-    @Autowired
-    private AdminService adminService;
 
     private String email;
     private String password;
     private String name;
-    private Museum museum;
+    private int museumId;
     private List<Integer> personRoleIds = new ArrayList<>();
 
     public PersonRequestDto() {
 
     }
-    public PersonRequestDto(String email, String password, String name, Museum museum) {
+    public PersonRequestDto(String email, String password, String name, int museumId) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.museum = museum;
+        this.museumId = museumId;
     }
 
-    public Person toModel() {
+    public Person toModel(Museum museum) {
         Person person = new Person(email,password,name,museum);
-        for(Integer e: personRoleIds) {
-            try{
-                Employee employee = employeeService.getEmployeeById(e);
-                person.addPersonRole(employee);
-            } catch (MuseumBackendException exception) {}
-            try {
-                Customer customer = customerService.getCustomerById(e);
-                person.addPersonRole(customer);
-            } catch (MuseumBackendException exception) {}
-            try {
-                Admin admin = adminService.getAdminById(e);
-                person.addPersonRole(admin);
-            } catch (MuseumBackendException exception) {}
-        }
+
         return person;
     }
 
@@ -79,12 +61,12 @@ public class PersonRequestDto {
         this.name = name;
     }
 
-    public Museum getMuseum() {
-        return museum;
+    public int getMuseumId() {
+        return museumId;
     }
 
-    public void setMuseum(Museum museum) {
-        this.museum = museum;
+    public void setMuseum(int museumId) {
+        this.museumId = museumId;
     }
 
     public List<Integer> getPersonRoleIds() {

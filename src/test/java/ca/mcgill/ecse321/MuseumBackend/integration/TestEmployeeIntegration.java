@@ -125,7 +125,7 @@ public class TestEmployeeIntegration {
 		int gandalfID = testCreateEmployee("gandalf@grey.com");
 
 		// call method: get the employee by their id
-		ResponseEntity<EmployeeDto[]> response = client.getForEntity("/employees", EmployeeDto[].class);
+		ResponseEntity<EmployeeDto[]> response = client.getForEntity("/employee", EmployeeDto[].class);
 
 		// check response
 		assertNotNull(response);
@@ -218,13 +218,3 @@ class EmployeeDto {
 	}
 }
 
-class ShiftDto {
-	public int workDayId;
-
-	public ShiftDto() {
-	}
-
-	public ShiftDto(int workDayId) {
-		this.workDayId = workDayId;
-	}
-}

@@ -14,32 +14,20 @@ public class ShiftResponseDto {
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 
-	private Museum museum;
+	private int museumId;
 	private List<Integer> employeeIds = new ArrayList<>();
 	
 	public ShiftResponseDto() {
 
 	}
 
-	public ShiftResponseDto(LocalDateTime startTime, LocalDateTime endTime, int workDayId, Museum museum, List<Employee> employees) {
+	public ShiftResponseDto(LocalDateTime startTime, LocalDateTime endTime, int workDayId, int museumId, List<Employee> employees) {
 		
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.workDayId = workDayId;
-		this.museum = museum;
+		this.museumId = museumId;
 			for (Employee e : employees) {
-				Integer employeeId = e.getPersonRoleId();
-				this.employeeIds.add(employeeId);
-			}
-		}
-
-	public ShiftResponseDto(Shift shift) {
-		
-		this.startTime = shift.getStartTime();
-		this.endTime = shift.getEndTime();
-		this.workDayId = shift.getWorkDayId();
-		this.museum = shift.getMuseum();
-			for (Employee e : shift.getEmployees()) {
 				Integer employeeId = e.getPersonRoleId();
 				this.employeeIds.add(employeeId);
 			}
@@ -70,12 +58,12 @@ public class ShiftResponseDto {
 		this.endTime = endTime;
 	}
 
-	public Museum getMuseum() {
-		return museum;
+	public int getMuseumId() {
+		return museumId;
 	}
 
-	public void setMuseum(Museum museum) {
-		this.museum = museum;
+	public void setMuseumId(int museumId) {
+		this.museumId = museumId;
 	}
 	public List<Integer> getEmployees() {
 		return employeeIds;

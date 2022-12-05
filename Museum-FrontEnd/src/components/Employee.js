@@ -8,10 +8,14 @@ var AXIOS = axios.create({
   baseURL: backendUrl,
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
-function EmployeeRequestDto(email,shiftIDs) {
-  this.email = email
-  this.shiftIDs = shiftIDs
+
+class EmployeeRequestDto {
+  constructor(email, shiftIDs) {
+    this.email = email
+    this.shiftIDs = shiftIDs
+  }
 }
+
 
 export default {
   name: 'employees',
@@ -22,12 +26,14 @@ export default {
       newEmployee: {},
       errorEmployee: '',
       email: '',
+      id: 0,
+      employeeShifts: [],
       shiftIDs: [],
       response: [],
     }
   },
   created: function() {
-    AXIOS.get('/employees')
+    AXIOS.get('/employee')
       .then(response => {
         this.employees = response.data
       })
@@ -37,11 +43,11 @@ export default {
   },
   methods: {
     createEmployee: function(email,shiftIDs) {
-      AXIOS.post('/employee',EmployeeRequestDto(email,shiftIDs))
+      AXIOS.post('/employee',new EmployeeRequestDto(email,shiftIDs))
         .then(response => {
           this.employees.push(response.data)
           this.errorEmployee = ''
-          this.newEmployee = {}
+          this.newEmployee = response.data
         })
         .catch(e => {
           let errorMsg = e.response.data.message
@@ -49,6 +55,47 @@ export default {
           this.errorEmployee = errorMsg
         })
     },
+    getEmployeeByID: function(id) {
+      AXIOS.get('/employee/'.concat(id))
+        .then(response => {
+          if(!this.employees.includes(response.data)) {
+            console.log(employees)
+            this.employees.push(response.data)
+            this.newEmployee = {}
+          }
+          this.requestedShiftIndex = this.employees.indexOf(response.data)
+          this.id = 0
+          this.errorEmployee = ''
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorEmployee = errorMsg
+        })
+    },
+    fireEmployee: function(id) {
+      AXIOS.delete('/employee/'.concat(id))
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorEmployee = errorMsg
+        })
+        this.created()
+        this.id = 0
+        this.errorEmployee = ''
+    },
+    getShiftsForEmployee: function(id) {
+      AXIOS.get('/employee/shifts/'.concat(id))
+        .then(response => {
+          this.employeeShifts = response.data
+          this.id = 0
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorEmployee = errorMsg
+        })
+    }
 
 
   }

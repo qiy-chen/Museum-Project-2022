@@ -1,3 +1,80 @@
+<template>
+    <div class="login">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <meta name="description" content="" />
+            <meta name="author" content="" />
+            <title>Login - SB Admin</title>
+            <link href="../styles.css" rel="stylesheet" />
+        </head>
+        <body class="bg-primary">
+            <div id="layoutAuthentication">
+                <div id="layoutAuthentication_content">
+                    <main>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-5">
+                                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="inputEmail" type="text" v-model="email" placeholder="name@example.com" />
+                                                    <label for="inputEmail">Email address</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="inputPassword" type="password" v-model="password" placeholder="Password"/>
+                                                    <label for="inputPassword">Password</label>
+                                                </div>
+                                                <div>
+                                                  <span v-if="errorPerson" style="color:red">{{errorPerson}}</span>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                                    <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                    <a class="small" href="password.html">Forgot Password?</a>
+                                                    <a class="btn btn-primary" @click="loginToRightRole(email,password)">Login</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer text-center py-3">
+                                          <a href="#" @click="$router.push({name: 'register'})" >Need an account? Sign up!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+                <div id="layoutAuthentication_footer">
+                    <footer class="py-4 bg-light mt-auto">
+                        <div class="container-fluid px-4">
+                            <div class="d-flex align-items-center justify-content-between small">
+                                <div class="text-muted">Copyright &copy; Museum Website 2022</div>
+                                <div>
+                                    <a href="#">Privacy Policy</a>
+                                    &middot;
+                                    <a href="#">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </body>
+    </div>
+</template>
+<script src="./login_scripts.js"></script>
+    //src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+    //crossorigin="anonymous"
+    //src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    //crossorigin="anonymous"
+    //src="js/scripts.js"
+<style>
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Agency v7.0.11 (https://startbootstrap.com/theme/agency)
@@ -41,8 +118,8 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 255, 200, 0; 
-  --bs-secondary-rgb: 108, 117, 125; 
+  --bs-primary-rgb: 255, 200, 0;
+  --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 253, 126, 20;
@@ -11681,7 +11758,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("assets/homePage/header/museumWallBackground.jpg");
+  background-image: url("*/assets/homePage/header/museumWallBackground.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -11991,7 +12068,7 @@ header.masthead .masthead-heading {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
+  background-image: url("*/../assets/homePage/img/map-image.png");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -12048,3 +12125,4 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+</style>

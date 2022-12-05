@@ -4,73 +4,61 @@ import ca.mcgill.ecse321.MuseumBackend.model.Employee;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Shift;
 import ca.mcgill.ecse321.MuseumBackend.service.EmployeeService;
+import ca.mcgill.ecse321.MuseumBackend.service.MuseumService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShiftRequestDto {
-    @Autowired
-    private EmployeeService employeeService;
-    private int workDayId;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private String startTime;
+    private String endTime;
 
-    private Museum museum;
+    private int museumId;
     private List<Integer> employeeIds = new ArrayList<>();
 
-    public ShiftRequestDto(LocalDateTime startTime, LocalDateTime endTime, int workDayId, Museum museum) {
+    public ShiftRequestDto(String startTime, String endTime, int museumId) {
         this.startTime = startTime;
         this.endTime = endTime;
-        this.workDayId = workDayId;
-        this.museum = museum;
+        this.museumId = museumId;
     }
     public ShiftRequestDto() {
 
     }
 
-    public Shift toModel() {
-        Shift shift = new Shift(startTime, endTime, workDayId, museum);
-        for(Integer e : employeeIds) {
-            Employee employee = employeeService.getEmployeeById(e);
-            shift.addEmployee(employee);
-        }
-        return shift;
+    public Shift toModel(Museum museum) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
+        return new Shift(LocalDateTime.parse(startTime,formatter), LocalDateTime.parse(endTime,formatter),museum);
 
     }
 
-    public Museum getMuseum() {
-        return museum;
+    public int getMuseumId() {
+        return museumId;
     }
 
-    public LocalDateTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public int getWorkDayId() {
-        return workDayId;
-    }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public void setMuseum(Museum museum) {
-        this.museum = museum;
+    public void setMuseumId(int museumId) {
+        this.museumId = museumId;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    public void setWorkdayId(int workdayId) {
-        this.workDayId = workdayId;
-    }
 
     public void setEmployeeIds(List<Integer> employeeIds) {
         this.employeeIds = employeeIds;

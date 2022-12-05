@@ -17,6 +17,23 @@ var AXIOS = axios.create({
   //headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
+class DisplayDto {
+    constructor(roomNumber,maxArtworks,museumId) {
+        this.roomNumber = roomNumber;
+        this.maxArtworks = maxArtworks;
+        this.museumId = museumId;
+        this.roomId;
+        this.numberOfArtworks;
+    }
+  }
+  class StorageDto {
+    constructor(roomNumber,museumId) {
+        this.roomNumber = roomNumber;
+        this.museumId = museumId;
+        this.roomId;
+    }
+  }
+
 export default {
   name: 'manageroom',
   data () {
@@ -25,14 +42,16 @@ export default {
 	  storages: [],
 	  storageNb: '',
 	  displayNb: '',
+    newDisplay: {},
+    newStorage:{},
 	  maxArt: '',
 	  RoomId: '',
 	  MuseumId: '',
-      errorDisplay: '',
-      errorStorage: '',
-      storageResponse: '',
-      displayResponse: '',
-      response: []
+    errorDisplay: '',
+    errorStorage: '',
+    storageResponse: '',
+    displayResponse: '',
+    response: []
     }
   },
   created: function () {
@@ -57,145 +76,33 @@ export default {
     })
   },
   methods: {
-	
-		createStorage: function (storageNB,RoomId, MuseumId) {
-      AXIOS.post('/storage/', {}, {
-		  params: {
-          roomNumber = storageNB,
-          roomId = RoomId,
-          museumId = MuseumId
-        }
-})
-        .then(response => {
-        // JSON responses are automatically parsed.
-          this.storages.push(response.data)
-          this.errorStorage = ''
-          this.storageNB = ''
-          this.RoomId = ''
-          this.MuseumId = ''
-        })
-        .catch(e => {
-          var errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorStorage = errorMsg
-        })
-    },
-    
-   createDisplay: function (displayNB,RoomId, MaxArt, MuseumId) {
-      AXIOS.post('/display/', {}, {
-		  params: {
-          roomNumber = displayNB,
-          roomId = RoomId,
-          maxArtworks = MaxArt,
-          museumId = MuseumId
-        }
-})
-        .then(response => {
-        // JSON responses are automatically parsed.
-          this.displays.push(response.data)
-          this.errorDisplay = ''
-          this.displayNB = ''
-          this.MaxArt = ''
-          this.RoomId = ''
-          this.MuseumId = ''
-        })
-        .catch(e => {
-          var errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorDisplay = errorMsg
-        })
-    },
-	
-	getStorage: function (RoomId) {
-      AXIOS.get('/storage/'.concat(RoomId), {}, {})
-        .then(response => {
-        // JSON responses are automatically parsed.
-          this.storageResponse = response.data
-          this.errorStorage = ''
-          this.RoomId = ''
-        })
-        .catch(e => {
-          var errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorStorage = errorMsg
-        })
-    },
-    
-    	getDisplay: function (RoomId) {
-      AXIOS.get('/display/'.concat(RoomId), {}, {})
-        .then(response => {
-        // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
-          this.displayResponse = response.data
-          this.errorDisplay = ''
-          this.RoomId = ''
-        })
-        .catch(e => {
-          var errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorDisplay = errorMsg
-        })
-    },
-    
-      deleteDisplay: function (RoomId) {
-      AXIOS.delete('/display/'.concat(RoomId), {}, {})
-        .then(response => {
-       		getAllDisplay()
-       		this.displayResponse = response.data
-          this.errorDisplay = ''
-          this.RoomId = ''
-        })
-        .catch(e => {
-          var errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorDisplay = errorMsg
-        })
-    },
-    
-          deleteStorage: function (storageId) {
-      AXIOS.delete('/storage/'.concat(storageId), {}, {})
-        .then(response => {
-        // JSON responses are automatically parsed.
-          getAllStorage()
-          this.storageResponse = response.data
-          this.errorStorage = ''
-          this.storageId = ''
-        })
-        .catch(e => {
-          var errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorStorage = errorMsg
-        })
-    },
-    
-    getAllStorage:  function () {
-      AXIOS.get('/storage', {}, {})
-        .then(response => {
-        // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
-          this.storages = response.data
-          this.errorStorage = ''
-        })
-        .catch(e => {
-          var errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorStorage = errorMsg
-        })
-    },
-        getAllDisplay:  function () {
-      AXIOS.get('/display', {}, {})
-        .then(response => {
-        // JSON responses are automatically parsed.
-          //this.ticket.push(response.data)
-          this.displays = response.data
-          this.errorDisplay = ''
-        })
-        .catch(e => {
-          var errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorDisplay = errorMsg
-        })
-    },
-    
+	createDisplayRoom: function (roomNumber,maxArtworks,museumId) {
+        AXIOS.post('/display', new DisplayDto(roomNumber,maxArtworks,museumId))
+          .then(response => {
+            this.displays.push(response.data)
+            this.RoomId = response.data.roomId;
+            this.numberOfArtworks = response.data.numberOfArtworks;
+            console.log(this.displays)
+            this.errorDisplay = ''
+          })
+          .catch(e => {
+            let errorMsg = e.response.data.message
+            console.log(errorMsg)
+            this.errorDisplay = errorMsg
+          })
+      },
+      createStorageRoom: function (roomNumber,museumId) {
+        AXIOS.post('/storage', new StorageDto(roomNumber,museumId))
+          .then(response => {
+            this.storages.push(response.data)
+            this.RoomId = response.data.roomId;
+            this.errorStorage = ''
+          })
+          .catch(e => {
+            let errorMsg = e.response.data.message
+            console.log(errorMsg)
+            this.errorStorage = errorMsg
+          })
+      }
   }
 }
