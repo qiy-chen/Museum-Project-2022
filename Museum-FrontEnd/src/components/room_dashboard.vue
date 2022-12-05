@@ -66,6 +66,8 @@
                                 <th>Max Artworks</th>
                                 <div>&nbsp;</div> 
                                 <th>Room Id</th>
+                                <div>&nbsp;</div> 
+                                <th>Number of Artworks</th>
                             </tr>
                             <tr v-for="display in displays">
                                 <td>{{ display.roomNumber}}</td>
@@ -73,6 +75,8 @@
                                 <td>{{ display.maxArtworks }}</td>
                                 <div>&nbsp;</div>
                                 <td>{{ display.roomId }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ display.numberOfArtworks }}</td>
                             </tr>
                         </table>
                         </div>
@@ -93,9 +97,12 @@
                         <table class="center">
                             <tr>
                                 <th>Room Number</th>
+                                <th>Room Id</th>
                             </tr>
                             <tr v-for="storage in storages">
                                 <td>{{ storage.roomNumber}}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ storage.roomId }}</td>
                             </tr>
                         </table>
                     </div>
