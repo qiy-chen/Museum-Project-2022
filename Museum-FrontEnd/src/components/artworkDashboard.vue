@@ -78,8 +78,6 @@
                                 <div>&nbsp;</div>
                                 <th>Artwork Room Id</th>
                             </tr>
-
-
                             <tr v-for="artwork in artworks">
                                 <td>{{ artwork.artworkName}}</td>
                                 <div>&nbsp;</div>
