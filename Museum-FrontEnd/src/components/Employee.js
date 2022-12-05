@@ -15,8 +15,6 @@ class EmployeeRequestDto {
     this.shiftIDs = shiftIDs
   }
 }
-
-
 export default {
   name: 'employees',
   data() {
@@ -95,8 +93,21 @@ export default {
           console.log(errorMsg)
           this.errorEmployee = errorMsg
         })
-    }
+    },
 
+    getAllEmployees: function () {
+      AXIOS.get('/employee/', {}, {})
+        .then(response => {
+          console.log(response)
+          this.employees = response.data
+          this.errorEmployee = ''
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorEmployee = errorMsg
+        })
 
+  }
   }
 }

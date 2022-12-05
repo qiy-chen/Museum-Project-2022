@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Employee from './Employee'
 var config = require('../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
@@ -22,6 +23,7 @@ export default {
   name: 'shifts',
   data() {
     return {
+      employees: [],
       shifts: [],
       requestedShiftIndex: 0,
       newShift: {},
@@ -43,8 +45,21 @@ export default {
       })
   },
   methods: {
+    getAllEmployee: function () {
+      AXIOS.get('/employee', {}, {})
+        .then(response => {
+          console.log(response.data)
+          this.employees = response.data
+          this.errorEmployee = ''
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorEmployee = errorMsg
+        })
+      },
     createShift: function (startTime,endTime,museum) {
-      AXIOS.post('/shift', new ShiftRequestDto(startTime,endTime,museum))
+      AXIOS.post('/shift', new ShiftRequestDto(startTime, endTime, museum))
         .then(response => {
           this.shifts.push(response.data)
           this.errorShift = ''
@@ -137,10 +152,39 @@ export default {
       this.workDayId = 0
       this.dateMap = {}
       this.errorShift = ''
+    },
+    getAllShift: function () {
+      AXIOS.get('/shift', {}, {})
+        .then(response => {
+          console.log(response)
+          this.shifts = response.data
+          this.errorShift = ''
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorShift = errorMsg
+        })
+    },
+    setShift: function(startDate,endDate,employeeId) {
+      workDayId = this.createShift(startDate,endDate,1)
+      this.addEmployeeToShift(workDayId, employeeId)
+    },
+
+    'changeMonth' (start, end, current) {
+    console.log('changeMonth', start.format(), end.format(), current.format())
+    },
+    'eventClick' (event, jsEvent, pos) {
+    console.log('eventClick', event, jsEvent, pos)
+    },
+    'dayClick' (day, jsEvent) {
+    console.log('dayClick', day, jsEvent)
+    },
+    'moreClick' (day, events, jsEvent) {
+    console.log('moreCLick', day, events, jsEvent)
     }
-
-
-
-
+  },
+  components : {
+      'full-calendar': require('vue-fullcalendar')
   }
 }
