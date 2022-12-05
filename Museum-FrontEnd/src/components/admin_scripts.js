@@ -4,6 +4,7 @@ export default {
   name: 'admin_scripts',
   data() {
     return {
+      employees: [],
       email: '',
       password: '',
       firstName: '',
@@ -36,9 +37,10 @@ export default {
       let shiftIDs = []
       setTimeout(() =>employees.default.methods.createEmployee(email,shiftIDs),5000)
       this.errorPerson = ''
+      this.employees = employees.default.employees
+      console.log(employees)
     },
     getPersonByEmail: function (email) {
-
       AXIOS.get('/person/'.concat(email))
         .then(response => {
           this.foundPerson = response.data

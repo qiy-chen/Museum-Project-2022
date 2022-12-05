@@ -67,15 +67,12 @@
                     </div>
                     <table class="center">
                             <tr>
-                                <th>Employee Name</th>
                                 <th>Employee email</th>
                             </tr>
                             <tr v-for="employee in employees">
-                                <td>{{ employee.name}}</td>
-                                <div>&nbsp;</div>
                                 <td>{{ employee.email }}</td>
                             </tr>
-                        </table>
+                    </table>
                 </div>
             </section>
             <div class="text-center">
