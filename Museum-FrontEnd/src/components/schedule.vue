@@ -12,8 +12,6 @@
             <!-- Google fonts-->
             <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
             <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-            <!-- Core theme CSS (includes Bootstrap)-->
-            <link href="src/styles.css" rel="stylesheet" />
         </head>
         <body id="page-top">
         <!-- Navigation-->
@@ -27,11 +25,10 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Go to Art Gallery</a></li>
-                                <li><a class="dropdown-item" href="index.html">Log out</a></li>
-                            </ul>
+                            <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
+                                <b-dropdown-item href="#">Artwork</b-dropdown-item>
+                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                            </b-dropdown>
                         </li>
                     </ul>
                 </div>
@@ -123,8 +120,6 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4 text-lg-start">Copyright &copy; Museum Website 2022</div>
                     <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Email"><i class="fab fa-facebook-f"></i></a>
                     </div>
                     <div class="col-lg-4 text-lg-end">
                         <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
