@@ -33,15 +33,15 @@ export default {
 	  storages: [],
 	  storageNb: '',
 	  displayNb: '',
-      newDisplay: {},
+    newDisplay: {},
 	  maxArt: '',
 	  RoomId: '',
 	  MuseumId: '',
-      errorDisplay: '',
-      errorStorage: '',
-      storageResponse: '',
-      displayResponse: '',
-      response: []
+    errorDisplay: '',
+    errorStorage: '',
+    storageResponse: '',
+    displayResponse: '',
+    response: []
     }
   },
   created: function () {
@@ -69,6 +69,7 @@ export default {
 	createDisplayRoom: function (roomNumber,maxArtworks,museumId) {
         AXIOS.post('/display', new DisplayDto(roomNumber,maxArtworks,museumId))
           .then(response => {
+            console.log(response.data)
             this.displays.push(response.data)
             this.errorDisplay = ''
             this.newDisplay = response.data

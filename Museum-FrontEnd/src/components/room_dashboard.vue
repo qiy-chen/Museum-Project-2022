@@ -50,12 +50,12 @@
                         <h2 class="section-heading text-uppercase">Create a Display Room</h2>
                         <h3 class="section-subheading text-muted">Enter room information down below.</h3>
                         <label for="fname">Room number:</label><br>
-                            <input type="text" id="fname" name="fname" v-model="roomNumber"><br>
-                            <label for="fname">Max artworks:</label><br>
-                            <input type="text" id="fname" name="fname" v-model="maxArtworks"><br>
+                        <input class="form-control" id="inputroomNumber" type="text" v-model="roomNumber" placeholder="Room number" />
+                        <label for="fname">Max artworks:</label><br>
+                        <input class="form-control" id="inputmaxArtworks" type="text" v-model="maxArtworks" placeholder="maxArtworks" />
                         <div>&nbsp;</div>   
                         <div>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="createDisplay(roomNumber,maxArtworks,1)">Create Display Room</a>
+                            <div class="d-grid"><b-button @click="createDisplayRoom(roomNumber,maxArtworks,69)" >Create Display Room</b-button></div>
                         </div>
                     </div>
                 </div>
@@ -94,8 +94,8 @@
     </div>
 </template>
 
-<script>
-   src="./Room.js"
+<script
+   src="./Room.js">
 </script>
 
 <style>
