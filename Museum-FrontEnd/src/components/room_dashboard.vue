@@ -29,8 +29,7 @@
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
                                 <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
                                 <b-dropdown-item href="#">Employee Dashboard</b-dropdown-item>
-                                <b-dropdown-item href="#">Admin Dashboard</b-dropdown-item>
-                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'Hello'})">Log out</b-dropdown-item>
                             </b-dropdown>
                             </li>
                         </ul>
@@ -104,9 +103,6 @@
                     </div>
                 </div>
             </section>
-            <div class="text-center">
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'admin_dashboard'})">Return to your dashboard</a>
-            </div>
             <!-- Footer-->
             <footer class="footer py-4">
                 <div class="container">
