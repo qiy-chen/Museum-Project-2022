@@ -50,8 +50,10 @@
                         <label for="fname">Name:</label><br>
                             <input type="text" v-model="artworkName" id="fname" name="fname"><br>
                         <div>&nbsp;</div>   
-                        <label for="fname">Room Id:</label><br>
-                            <input type="number" v-model="roomId" id="fname" name="fname"><br>
+                        <label for="fname2">RoomId:</label>
+                            <select v-model="roomId">
+                            <option v-for="display in displays" > {{display.roomId}}</option>
+                            </select>
                         <div>&nbsp;</div>    
                         <div>
                             <button class ="btn btn-primary" @click="createArtwork(artworkName, roomId, 69)">ADD</button>
@@ -59,7 +61,32 @@
                     </div>
                 </div>
             </section>
-
+            <div class="text_center">
+                        <table class="center">
+                            <tr>
+                                <th>Artwork Name</th>
+                                <div>&nbsp;</div> 
+                                <th>Artwork Id</th>
+                                <div>&nbsp;</div> 
+                                <th>Artwork Value</th>
+                                <div>&nbsp;</div> 
+                                <th>Artwork Loanable</th>
+                                <div>&nbsp;</div> 
+                                <th>Artwork Room Id</th>
+                            </tr>
+                            <tr v-for="artwork in artworks">
+                                <td>{{ artwork.artworkName}}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ artwork.artworkId }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ artwork.value }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ artwork.isLoanable }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ artwork.roomId }}</td>
+                            </tr>
+                        </table>
+                        </div>
             <section class="page-section" id="update">
                 <div class="container">
                     <div class="text-center">

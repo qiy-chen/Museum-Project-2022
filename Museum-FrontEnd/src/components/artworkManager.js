@@ -18,6 +18,23 @@ function artworkRequestDto(artworkName, roomId, museumId, value, isLoanable){
   this.artworkId
 }
 
+class DisplayDto {
+  constructor(roomNumber,maxArtworks,museumId) {
+      this.roomNumber = roomNumber;
+      this.maxArtworks = maxArtworks;
+      this.museumId = museumId;
+      this.roomId;
+      this.numberOfArtworks;
+  }
+}
+class StorageDto {
+  constructor(roomNumber,museumId) {
+      this.roomNumber = roomNumber;
+      this.museumId = museumId;
+      this.roomId;
+  }
+}
+
 export default {
   name: 'artworkManager',
   data() {
@@ -30,7 +47,21 @@ export default {
     artworkId: '',
     errorArtwork: '',
     artworkResponse: '',
-    roomId: '',
+    roomId: '', //for artworks
+    displays: [],
+	  storages: [],
+	  storageNb: '',
+	  displayNb: '',
+    newDisplay: {},
+    newStorage:{},
+	  maxArt: '',
+	  RoomId: '', //for rooms
+	  MuseumId: '',
+    errorDisplay: '',
+    errorStorage: '',
+    storageResponse: '',
+    displayResponse: '',
+    response: []
     }
   },
 
@@ -45,7 +76,23 @@ export default {
       console.log(errorMsg)
       this.errorArtwork = errorMsg
 	})
-    
+    AXIOS.get('/display')
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.displays = response.data
+    })
+    .catch(e => {
+      this.errorDisplay = e
+    })
+        //Load all storage
+    AXIOS.get('/storage')
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.storages = response.data
+    })
+    .catch(e => {
+      this.errorStorage = e
+    })
   },
 
   methods: {
@@ -55,6 +102,7 @@ export default {
           .then(response => {
             console.log(response)
             this.artworks.push(reponse.data)
+            console.log(artworks)
             this.artworkId = response.data.artworkId
             this.errorArtwork = ''
             this.roomId =''
@@ -67,7 +115,7 @@ export default {
     },
     
     updateArtwork: function (artworkId, artworkName, value, isLoanable) {
-        AXIOS.put('/artwork/'.concat(artworkId),  new artworkRequestDto(artworkName, 0, 0, value, isLoanable), {})
+        AXIOS.put('/artwork/'.concat(artworkId),  new artworkRequestDto("artworkName", 14, 69, value, false), {})
           .then(response => {
             console.log(response)
             this.created()
@@ -183,6 +231,34 @@ export default {
             this.errorArtwork = errorMsg
           })
       },
+      createDisplayRoom: function (roomNumber,maxArtworks,museumId) {
+        AXIOS.post('/display', new DisplayDto(roomNumber,maxArtworks,museumId))
+          .then(response => {
+            this.displays.push(response.data)
+            this.RoomId = response.data.roomId;
+            this.numberOfArtworks = response.data.numberOfArtworks;
+            console.log(this.displays)
+            this.errorDisplay = ''
+          })
+          .catch(e => {
+            let errorMsg = e.response.data.message
+            console.log(errorMsg)
+            this.errorDisplay = errorMsg
+          })
+      },
+      createStorageRoom: function (roomNumber,museumId) {
+        AXIOS.post('/storage', new StorageDto(roomNumber,museumId))
+          .then(response => {
+            this.storages.push(response.data)
+            this.RoomId = response.data.roomId;
+            this.errorStorage = ''
+          })
+          .catch(e => {
+            let errorMsg = e.response.data.message
+            console.log(errorMsg)
+            this.errorStorage = errorMsg
+          })
+      }
 
     }
 
