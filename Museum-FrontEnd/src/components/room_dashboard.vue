@@ -84,8 +84,16 @@
                         <input class="form-control" id="inputroomNumber" type="text" v-model="roomNumber" placeholder="Room number" />
                         <div>&nbsp;</div>   
                         <div>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="">Create Storage Room</a>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="createStorageRoom(roomNumber,69)" >Create Storage Room</a>
                         </div>
+                        <table class="center">
+                            <tr>
+                                <th>Room Number</th>
+                            </tr>
+                            <tr v-for="storage in storages">
+                                <td>{{ storage.roomNumber}}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </section>

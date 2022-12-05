@@ -115,6 +115,11 @@ public class RoomService {
     return toList(displayRepository.findAll()); 
   }
 
+  @Transactional
+  public List<Storage> getAllStorages() {
+    return toList(storageRepository.findAll()); 
+  }
+
   //helper method 
   private <T> List<T> toList(Iterable<T> iterable){
     List<T> resultList = new ArrayList<T>();

@@ -91,14 +91,22 @@ public class RoomController {
   }
 
   @GetMapping(value = "/display")
-public ResponseEntity<List<DisplayDto>> getAllArtwork() {
+public ResponseEntity<List<DisplayDto>> getAllDisplays() {
   List<DisplayDto> displayDto = new ArrayList<>();
   for (Display d : service.getAllDisplays()) {
     displayDto.add(convertToDto(d));
   }
   return new ResponseEntity<List<DisplayDto>>(displayDto, HttpStatus.OK);
 }
-  
+
+@GetMapping(value = "/storage")
+public ResponseEntity<List<StorageDto>> getAllStorages() {
+  List<StorageDto> storageDto = new ArrayList<>();
+  for (Storage d : service.getAllStorages()) {
+    storageDto.add(convertToDto(d));
+  }
+  return new ResponseEntity<List<StorageDto>>(storageDto, HttpStatus.OK);
+}
   
   //helper, convert from display to display dto
 private DisplayDto convertToDto(Display d) {
