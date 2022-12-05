@@ -41,7 +41,7 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Welcome Our Museum Website!</div>
+                <div class="masthead-subheading">Welcome To Our Museum Website!</div>
                 <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
                 <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
             </div>
@@ -85,12 +85,14 @@
                         <h4 class="my-3">   </h4>
                         <div class="col">
                             <div class="team-member">
-                                <a class="btn btn-secondary btn-xl text-uppercase" @click="$router.push({name: 'login'})">Log in</a>
+                                <a class="btn btn-primary btn-xl text-uppercase" @click="$router.push({name: 'login'})">Log in</a>
                             </div>
                         </div>
+
+                        
                         <div class="col">
                             <div class="team-member">
-                              <a class="btn btn-secondary btn-xl text-uppercase" @click="$router.push({name: 'register'})">Sign up</a>                           
+                              <a class="btn btn-primary btn-xl text-uppercase" @click="$router.push({name: 'register'})">Sign up</a>                           
                              </div>
                         </div>
                     </div>

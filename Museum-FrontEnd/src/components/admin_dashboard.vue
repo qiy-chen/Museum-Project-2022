@@ -69,9 +69,17 @@
                             <tr>
                                 <th>Existing Employee Emails</th>
                                 <div>&nbsp;</div>
+                                <th>Existing Employee Names</th>
+                                <div>&nbsp;</div>
+                                <th>Existing Employee Ids</th>
+                                <div>&nbsp;</div>
                             </tr>
-                            <tr v-for="employee in employees">
-                                <td>{{ employee.email }}</td>
+                            <tr v-for="person in people">
+                                <td>{{ person.email }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ person.name }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ person.personRoleIds }}</td>
                                 <div>&nbsp;</div>
                             </tr>
                     </table>

@@ -23,6 +23,7 @@ export default {
     }
   },
   created: function() {
+    console.log(localStorage)
     AXIOS.get('/customer/'.concat(localStorage.getItem('id')))
       .then(response => {
         this.customer = response.data
