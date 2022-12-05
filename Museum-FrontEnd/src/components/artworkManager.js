@@ -123,10 +123,11 @@ export default {
             this.errorArtwork = errorMsg
           })
     },
-    
+
     updateArtwork: function (artworkId, artworkName, value, isLoanable) {
-        AXIOS.put('/artwork/'.concat(artworkId),  new artworkRequestDto(artworkName, 0, 0, value, true), {})
+        AXIOS.put('/artwork/'.concat(artworkId+'/'),  new artworkRequestDto(artworkName, 0, 0, value, true), {})
           .then(response => {
+            window.location.reload();
             this.created()
             this.errorArtwork = ''
             this.artworkId = ''
@@ -141,6 +142,7 @@ export default {
     moveArtwork: function (artworkId, roomId, museumId) {
         AXIOS.put('/artwork/room/'.concat(artworkId),  new artworkRequestDto('Help', roomId, museumId, 0.0, false), {})
           .then(response => {
+            window.location.reload();
             this.created()
             this.errorArtwork = ''
             this.artworkId = ''
@@ -151,7 +153,7 @@ export default {
             this.errorArtwork = errorMsg
           })
     },
-    
+
     deleteArtwork: function (artworkId) {
         AXIOS.delete('/artwork/'.concat(artworkId), {}, {})
           .then(response => {
@@ -160,7 +162,7 @@ export default {
             this.errorArtwork = ''
             this.artworkId = ''
           })
-          
+
           .catch(e => {
             let errorMsg = e.response.data.message
             console.log(errorMsg)
@@ -181,7 +183,7 @@ export default {
             this.errorArtwork = errorMsg
           })
 	  },
-	  
+
 	  getArtworkById: function (artworkId) {
         AXIOS.get('/artwork/'.concat(artworkId), {}, {})
           .then(response => {
@@ -196,7 +198,7 @@ export default {
             this.errorArtwork = errorMsg
           })
       },
-	
+
 
   	getArtworkOnDisplay: function () {
         AXIOS.get('/display/artworks', {}, {})
@@ -211,7 +213,7 @@ export default {
             this.errorArtwork = errorMsg
           })
 	  },
-	  
+
 	getArtworkInStorage: function () {
         AXIOS.get('/storage/artworks', {}, {})
           .then(response => {
@@ -240,8 +242,8 @@ export default {
             this.errorArtwork = errorMsg
           })
       },
-      
-      
+
+
 
     }
 
