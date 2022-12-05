@@ -1,11 +1,11 @@
 <template>
-    <div class="artworkDashboard">
+    <div class="room_dashboard">
         <head>
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
             <meta name="description" content="" />
             <meta name="author" content="" />
-            <title>Artwork DashBoard</title>
+            <title>Room DashBoard</title>
             <!-- Flaticon-->
             <link rel="icon" type="image/x-icon" href="../assets/homePage/museumLogo.png" />
             <!-- Google fonts-->
@@ -23,9 +23,10 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="#services">Add Artwork</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#moveartwork">Move Artwork</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#display">Create Display</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#storage">Create Storage</a></li>
                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
                                 <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
                                 <b-dropdown-item href="#">Employee Dashboard</b-dropdown-item>
                                 <b-dropdown-item href="#">Admin Dashboard</b-dropdown-item>
@@ -39,73 +40,66 @@
             <!-- Masthead-->
             <header class="masthead">
                 <div class="container">
-                    <div class="masthead-subheading text-uppercase">Welcome to your Artwork Dashboard</div>
+                    <div class="masthead-subheading text-uppercase">Welcome to your Room Dashboard</div>
                 </div>
             </header>
             <!-- Services-->
-            <section class="page-section" id="services">
+            <section class="page-section" id="display">
                 <div class="container">
                     <div class="text-center">
-                        <h2 class="section-heading text-uppercase">Add Artwork</h2>
-                        <h3 class="section-subheading text-muted">Enter artwork information down below.</h3>
-                        <label for="fname">Name:</label><br>
-                            <input type="text" id="fname" name="fname"><br>
+                        <h2 class="section-heading text-uppercase">Create a Display Room</h2>
+                        <h3 class="section-subheading text-muted">Enter room information down below.</h3>
+                        <label for="fname">Room number:</label><br>
+                        <input class="form-control" id="inputroomNumber" type="text" v-model="roomNumber" placeholder="Room number" />
+                        <label for="fname">Max artworks:</label><br>
+                        <input class="form-control" id="inputmaxArtworks" type="text" v-model="maxArtworks" placeholder="maxArtworks" />
                         <div>&nbsp;</div>   
-                        <label for="fname">Price:</label><br>
-                            <input type="text" id="fname" name="fname"><br>
-                        <div>&nbsp;</div>    
-                        <label for="numbers">Loanable?</label>
-                        <select name="numbers" id="numbers">
-                            <option value="1">Yes</option>
-                            <option value="2">No</option>
-                        </select>
-                        <div>&nbsp;</div> 
                         <div>
-                            <button>Add</button>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="createDisplayRoom(roomNumber,maxArtworks,69)" >Create Display Room</a>
+                            <div>&nbsp;</div>  
+                        </div>
+                        <div class="text_center">
+                        <table class="center">
+                            <tr>
+                                <th>Room Number</th>
+                                <div>&nbsp;</div> 
+                                <th>Max Artworks</th>
+                            </tr>
+                            <tr v-for="display in displays">
+                                <td>{{ display.roomNumber}}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ display.maxArtworks }}</td>
+                            </tr>
+                        </table>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="page-section" id="moveartwork">
+            <section class="page-section" id="storage">
                 <div class="container">
                     <div class="text-center">
-                        <h2 class="section-heading text-uppercase">Move Artwork</h2>
-                        <h3 class="section-subheading text-muted">Find by artwork id and select room to move to.</h3>
-                        <label for="numbers">Artwork id:</label>
-                        <select name="numbers" id="numbers">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                        </select>
-                        &nbsp; &nbsp; &nbsp; 
-                        <label for="numbers">Room:</label>
-                        <select name="numbers" id="numbers">
-                            <option value="1">Storage</option>
-                            <option value="2">BigDisplay1</option>
-                            <option value="3">BigDisplay2</option>
-                            <option value="4">BigDisplay3</option>
-                            <option value="5">LittleDisplay1</option>
-                            <option value="6">LittleDisplay2</option>
-                            <option value="7">LittleDisplay3</option>
-                        </select>  
-                        <div>&nbsp; </div>
+                        <h2 class="section-heading text-uppercase">Create a Storage Room</h2>
+                        <h3 class="section-subheading text-muted">Enter room information down below.</h3>
+                        <label for="fname">Room number:</label><br>
+                        <input class="form-control" id="inputroomNumber" type="text" v-model="roomNumber" placeholder="Room number" />
+                        <div>&nbsp;</div>   
                         <div>
-                            <button>Move</button>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="createStorageRoom(roomNumber,69)" >Create Storage Room</a>
                         </div>
+                        <table class="center">
+                            <tr>
+                                <th>Room Number</th>
+                            </tr>
+                            <tr v-for="storage in storages">
+                                <td>{{ storage.roomNumber}}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </section>
-            <section class="page-section" id="moveartwork">
-                <div class="container">
-                    <div class="text-center">
-                    
-                    </div>
-                </div>
-            </section>
+            <div class="text-center">
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'admin_dashboard'})">Return to your dashboard</a>
+            </div>
             <!-- Footer-->
             <footer class="footer py-4">
                 <div class="container">
@@ -126,10 +120,8 @@
     </div>
 </template>
 
-<script>
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="src/scripts.js"
-    src="https://cdn.startbootstrap.com/sb-forms-latest.js"
+<script
+   src="./Room.js">
 </script>
 
 <style>

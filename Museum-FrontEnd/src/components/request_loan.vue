@@ -7,7 +7,7 @@
             <meta name="author" content="" />
             <title>Request Loan Dashboard</title>
             <!-- Flaticon-->
-            <link rel="icon" type="image/x-icon" href="src/assets/homePage/museumLogo.png" />
+            <link rel="icon" type="image/x-icon" href="../assets/homePage/museumLogo.png" />
             <!-- Font Awesome icons (free version)-->
             <!-- Google fonts-->
             <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
@@ -19,7 +19,7 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
                 <div class="container">
-                    <a class="navbar-brand" href="#page-top"><img src="src/assets/homePage/MWLogoWide.png" alt="..." /></a>
+                    <a class="navbar-brand" href="#page-top"><img src="../assets/homePage/MWLogoWide.png" alt="..." /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         Menu
                         <i class="fas fa-bars ms-1"></i>
@@ -28,11 +28,11 @@
                         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#!">Go to Art Gallery</a></li>
-                                    <li><a class="dropdown-item" href="customer_dashboard.html">Return to your dashboard</a></li>
-                                    <li><a class="dropdown-item" href="index.html">Log out</a></li>
-                                </ul>
+                                <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
+                                <b-dropdown-item href="#">Gallery</b-dropdown-item>
+                                <b-dropdown-item href="#">Dashboard</b-dropdown-item>
+                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                            </b-dropdown>
                             </li>
                         </ul>
                     </div>
