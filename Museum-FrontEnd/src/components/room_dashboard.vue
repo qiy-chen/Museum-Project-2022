@@ -55,7 +55,22 @@
                         <input class="form-control" id="inputmaxArtworks" type="text" v-model="maxArtworks" placeholder="maxArtworks" />
                         <div>&nbsp;</div>   
                         <div>
-                            <div class="d-grid"><b-button @click="createDisplayRoom(roomNumber,maxArtworks,69)" >Create Display Room</b-button></div>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="createDisplayRoom(roomNumber,maxArtworks,69)" >Create Display Room</a>
+                            <div>&nbsp;</div>  
+                        </div>
+                        <div class="text_center">
+                        <table class="center">
+                            <tr>
+                                <th>Room Number</th>
+                                <div>&nbsp;</div> 
+                                <th>Max Artworks</th>
+                            </tr>
+                            <tr v-for="display in displays">
+                                <td>{{ display.roomNumber}}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ display.maxArtworks }}</td>
+                            </tr>
+                        </table>
                         </div>
                     </div>
                 </div>
@@ -66,7 +81,7 @@
                         <h2 class="section-heading text-uppercase">Create a Storage Room</h2>
                         <h3 class="section-subheading text-muted">Enter room information down below.</h3>
                         <label for="fname">Room number:</label><br>
-                            <input type="text" id="fname" name="fname"><br>
+                        <input class="form-control" id="inputroomNumber" type="text" v-model="roomNumber" placeholder="Room number" />
                         <div>&nbsp;</div>   
                         <div>
                             <a class="btn btn-dark btn-xl text-uppercase" @click="">Create Storage Room</a>
@@ -74,6 +89,9 @@
                     </div>
                 </div>
             </section>
+            <div class="text-center">
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'admin_dashboard'})">Return to your dashboard</a>
+            </div>
             <!-- Footer-->
             <footer class="footer py-4">
                 <div class="container">

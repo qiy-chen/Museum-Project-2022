@@ -13,6 +13,9 @@ import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.StorageRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class RoomService {
 
@@ -106,5 +109,19 @@ public class RoomService {
     
     return storage;
   }
+
+  @Transactional
+  public List<Display> getAllDisplays() {
+    return toList(displayRepository.findAll()); 
+  }
+
+  //helper method 
+  private <T> List<T> toList(Iterable<T> iterable){
+    List<T> resultList = new ArrayList<T>();
+    for (T t : iterable) {
+        resultList.add(t);
+    }
+    return resultList;
+}
 
 }

@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.MuseumBackend.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,6 +89,15 @@ public class RoomController {
      service.deleteDisplayRoom(id);
      return new ResponseEntity<DisplayDto>(HttpStatus.OK);
   }
+
+  @GetMapping(value = "/display")
+public ResponseEntity<List<DisplayDto>> getAllArtwork() {
+  List<DisplayDto> displayDto = new ArrayList<>();
+  for (Display d : service.getAllDisplays()) {
+    displayDto.add(convertToDto(d));
+  }
+  return new ResponseEntity<List<DisplayDto>>(displayDto, HttpStatus.OK);
+}
   
   
   //helper, convert from display to display dto
