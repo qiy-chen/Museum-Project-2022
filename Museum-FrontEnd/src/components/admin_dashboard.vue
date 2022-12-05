@@ -101,6 +101,15 @@
                     </div>
                 </div>
             </section>
+            <section class="page-section" id="yourrooms">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Your Rooms </h2>
+                        <h3 class="section-subheading text-muted">Go manage your Rooms</h3>
+                        <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'room_dashboard'})">Manage your Rooms</a>
+                    </div>
+                </div>
+            </section>
             <footer class="footer py-4">
                 <div class="container">
                     <div class="row align-items-center">

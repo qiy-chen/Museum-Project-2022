@@ -11,6 +11,7 @@ import AdminDashboard from '@/components/admin_dashboard'
 import ArtworkDashboard from '@/components/ArtworkDashboard'
 import Gallery from '@/components/gallery'
 import Schedule from '@/components/schedule'
+import Room from '@/components/room_dashboard'
 Vue.use(Router)
 
 export default new Router({
@@ -69,6 +70,11 @@ export default new Router({
       path: '/admin_dashboard/schedule',
       name: 'schedule',
       component: Schedule
+    },
+    {
+      path: 'login/admin_dashboard/room_dashboard',
+      name: 'room_dashboard',
+      component: Room
     }
   ]
 })
