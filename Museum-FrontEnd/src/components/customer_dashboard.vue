@@ -63,32 +63,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- placeholder values to be removed when script is ready-->
-                                <tr class="active-row">
-                                    <td>#260972321</td>
-                                    <td>01/01/2023</td>
-                                    <td>9.99</td>
-                                </tr>
-                                <tr>
-                                    <td>#260958121</td>
-                                    <td>25/12/2022</td>
-                                    <td>9.99</td>
-                                </tr>
-                                <tr>
-                                    <td>#260958121</td>
-                                    <td>20/12/2022</td>
-                                    <td>9.99</td>
-                                </tr>
-                                <tr>
-                                    <td>#260958121</td>
-                                    <td>20/12/2022</td>
-                                    <td>9.99</td>
-                                </tr>
+                               <li v-for="ticket in theirTickets">
+                                 {{ticket.ticketId}} {{ticket.ticketDate.toString()}} {{ticket.price}}
+                               </li>
                             </tbody>
                         </table>
                     </div>
-                </div> 
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'buy_tickets'})">Buy Tickets</a>  
+                </div>
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'buy_tickets'})">Buy Tickets</a>
             </section>
             <section class="page-section" id="yourloans">
                 <div class="container">
@@ -146,13 +128,13 @@
                         </tbody>
                     </table>
                 </div>
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Request new loan</a>  
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Request new loan</a>
             </section>
             <section id="gallery">
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">View Gallery</h2>
-                        <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'gallery'})">Gallery</a>  
+                        <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'gallery'})">Gallery</a>
                     </div>
                 </div>
             </section>
@@ -173,13 +155,7 @@
             </footer>
     </div>
 </template>
-<script>
-    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
-    crossorigin="anonymous"
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="src/scripts.js"
-    src="https://cdn.startbootstrap.com/sb-forms-latest.js"
+<script src="./customer_dashboard_scripts.js">
 </script>
 <style>
-    @import '*/Museum-FrontEnd/scr/styles.css';
 </style>
