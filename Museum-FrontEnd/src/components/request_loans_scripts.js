@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     requestLoan: function(startDate,endDate,artworkName) {
-      
+
     }
   }
 }
