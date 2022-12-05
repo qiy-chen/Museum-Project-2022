@@ -12,6 +12,8 @@ import ArtworkDashboard from '@/components/artworkDashboard'
 import Gallery from '@/components/gallery'
 import Schedule from '@/components/schedule'
 import Room from '@/components/room_dashboard'
+import Ticket from '@/components/ticketDashboard'
+
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +62,11 @@ export default new Router({
       path: '/employeeDashboard/artworkDashboard',
       name: 'artworkDashboard',
       component: ArtworkDashboard
+    },
+    {
+      path: '/admin_dashboard/ticketDashboard',
+      name: 'ticketDashboard',
+      component: Ticket
     },
     {
       path: '/customer_dashboard/gallery',

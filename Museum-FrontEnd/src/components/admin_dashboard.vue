@@ -28,6 +28,7 @@
                             <li class="nav-item"><a class="nav-link" href="#yourartworks">Artworks</a></li>
                             <li class="nav-item"><a class="nav-link" href="#yourrooms">Rooms</a></li>
                             <li class="nav-item"><a class="nav-link" href="#scheduleView">Schedule</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#scheduleView">Tickets</a></li>
                             <li class="nav-item dropdown">
                             <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
                                 <b-dropdown-item @click="$router.push({name: 'Hello'})">Log out</b-dropdown-item>
@@ -106,6 +107,15 @@
                         <h2 class="section-heading text-uppercase">Your Rooms </h2>
                         <h3 class="section-subheading text-muted">Go manage your Rooms</h3>
                         <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'room_dashboard'})">Manage your Rooms</a>
+                    </div>
+                </div>
+            </section>
+                        <section class="page-section" id="yourtickets">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Your Tickets </h2>
+                        <h3 class="section-subheading text-muted">Go manage your Tickets</h3>
+                        <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'ticketDashboard'})">Manage your Tickets</a>
                     </div>
                 </div>
             </section>
