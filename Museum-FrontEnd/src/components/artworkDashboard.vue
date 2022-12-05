@@ -28,9 +28,7 @@
                             <li class="nav-item"><a class="nav-link" href="#moveartwork">Move Artwork</a></li>
                             <li class="nav-item dropdown">
                                 <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
-                                <b-dropdown-item href="#">Employee Dashboard</b-dropdown-item>
-                                <b-dropdown-item href="#">Admin Dashboard</b-dropdown-item>
-                                <b-dropdown-item href="#!">Log out</b-dropdown-item>
+                                <b-dropdown-item @click="$router.push({name: 'Hello'})">Log out</b-dropdown-item>
                             </b-dropdown>
                             </li>
                         </ul>
