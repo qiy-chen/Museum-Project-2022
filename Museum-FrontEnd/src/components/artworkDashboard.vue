@@ -26,7 +26,6 @@
                             <li class="nav-item"><a class="nav-link" href="#services">Add Artwork</a></li>
                             <li class="nav-item"><a class="nav-link" href="#moveartwork">Move Artwork</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
                                 <b-dropdown id="navbarDropdown" text="Account" class="m-md-2">
                                 <b-dropdown-item href="#">Employee Dashboard</b-dropdown-item>
                                 <b-dropdown-item href="#">Admin Dashboard</b-dropdown-item>
