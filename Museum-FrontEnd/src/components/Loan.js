@@ -85,7 +85,7 @@ export default {
     createLoan: function (LoanStatusAsNumber, startDate, endDate,numOfDays, rentalFee, artworkId, customerId, museumId ) {
 		 AXIOS.post('/loans', {}, {
         params: {
-          LoanStatusAsNumber = LoanStatusAsNumber,
+          LoanStatusAsNumber: LoanStatusAsNumber,
     startDate: startDate,
     endDate: endDate,
     numOfDays: numOfDays,

@@ -141,8 +141,8 @@ export default {
 	for (let i = 0; i<nb; i++){
 		      AXIOS.post('/tickets', {}, {
         params: {
-          ticketDate = newTicketDate,
-          price = newTicketPrice
+          ticketDate: newTicketDate,
+          price: newTicketPrice
         }}).then(response => {
         // JSON responses are automatically parsed.
           this.allTickets.push(response.data)
@@ -163,8 +163,8 @@ export default {
     updateTicket: function (newTicketDate,newTicketPrice,ticketId) {
       AXIOS.put('/tickets/'.concat(ticketId), {}, {
         params: {
-          ticketDate = newTicketDate,
-          price = newTicketPrice
+          ticketDate: newTicketDate,
+          price: newTicketPrice
         }})
         .then(response => {
         // JSON responses are automatically parsed.
@@ -207,7 +207,7 @@ export default {
         purchaseTickets: function (selectedPersonRoleId,ticketId) {
       AXIOS.post('/customers/'.concat(selectedPersonRoleId), {}, {
 	      params: {
-          id = ticketId,
+          id: ticketId,
         }
 })
         .then(response => {
@@ -227,7 +227,7 @@ export default {
 	  cancelTicket: function (selectedPersonRoleId,ticketId) {
       AXIOS.delete('/customers/'.concat(selectedPersonRoleId), {}, {
 	      params: {
-          id = ticketId,
+          id: ticketId,
         }
 })
         .then(response => {
