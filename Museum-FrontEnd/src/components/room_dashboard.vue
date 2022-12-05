@@ -95,7 +95,7 @@
 </template>
 
 <script>
-   src="/Users/alextsah/Documents/GitHub/project-group-15/Museum-FrontEnd/src/components/Room.js"
+   src="./Room.js"
 </script>
 
 <style>
