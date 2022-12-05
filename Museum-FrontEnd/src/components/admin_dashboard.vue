@@ -74,16 +74,16 @@
                                 <th>Existing Employee Ids</th>
                                 <div>&nbsp;</div>
                             </tr>
-                            <tr v-for="person in people">
-                                <td>{{ person.email }}</td>
+                            <tr v-for="employee in employees">
+                                <td>{{ employee.email }}</td>
                                 <div>&nbsp;</div>
-                                <td>{{ person.name }}</td>
+                                <td>{{ employee.name }}</td>
                                 <div>&nbsp;</div>
-                                <td>{{ person.personRoleIds }}</td>
+                                <td>{{ employee.personRoleIds }}</td>
                                 <div>&nbsp;</div>
                             </tr>
                     </table>
-                </div>
+                </div>  
             </section>
             <section class="page-section" id="scheduleView">
                 <div class="text-center">
