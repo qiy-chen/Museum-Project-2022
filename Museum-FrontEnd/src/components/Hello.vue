@@ -110,43 +110,43 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/1.jpg" alt="..." />
-                            <h4>Marwan Kanaan</h4>
-                            <p class="text-muted">Lead Designer</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/2.jpg" alt="..." />
-                            <h4>Marwan Kanaan</h4>
-                            <p class="text-muted">Software Developer</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/3.jpg" alt="..." />
-                            <h4>Marwan Kanaan</h4>
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/sam.jpeg" alt="..." />
+                            <h4>Sam Faubert</h4>
                             <p class="text-muted">Scrum Manager</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/1.jpg" alt="..." />
-                            <h4>Marwan Kanaan</h4>
-                            <p class="text-muted">Documenter</p>
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/elie.jpg" alt="..." />
+                            <h4>Elie Abdo</h4>
+                            <p class="text-muted">Software Developer</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/2.jpg" alt="..." />
-                            <h4>Marwan Kanaan</h4>
-                            <p class="text-muted">Head of Testing</p>
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/emma.jpg" alt="..." />
+                            <h4>Emma Kawczynski</h4>
+                            <p class="text-muted">Software Developer</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/3.jpg" alt="..." />
-                            <h4>Marwan Kanaan</h4>
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/alex.jpg" alt="..." />
+                            <h4>Alex Tsahageas</h4>
+                            <p class="text-muted">Project Manager</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/qi.jpg" alt="..." />
+                            <h4>Qi Chen</h4>
+                            <p class="text-muted">Software Developer</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="../assets/homePage/img/team/jeanine.jpg" alt="..." />
+                            <h4>Jeanine Looman</h4>
                             <p class="text-muted">Software Developer</p>
                         </div>
                     </div>

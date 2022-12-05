@@ -102,8 +102,8 @@ public ResponseEntity<List<DisplayDto>> getAllDisplays() {
 @GetMapping(value = "/storage")
 public ResponseEntity<List<StorageDto>> getAllStorages() {
   List<StorageDto> storageDto = new ArrayList<>();
-  for (Storage d : service.getAllStorages()) {
-    storageDto.add(convertToDto(d));
+  for (Storage s : service.getAllStorages()) {
+    storageDto.add(convertToDto(s));
   }
   return new ResponseEntity<List<StorageDto>>(storageDto, HttpStatus.OK);
 }

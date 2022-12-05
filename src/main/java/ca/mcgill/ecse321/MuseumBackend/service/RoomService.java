@@ -44,6 +44,7 @@ public class RoomService {
     display.setRoomNumber(aRoomNumber);
     display.setMaxArtworks(aMaxArtworks);
     display.setMuseum(mus);
+    int size = display.numberOfArtworks();
     
     display = displayRepository.save(display);
     mus.addRoom(display);
