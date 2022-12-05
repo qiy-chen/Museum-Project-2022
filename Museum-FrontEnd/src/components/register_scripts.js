@@ -38,17 +38,13 @@ export default {
       this.errorPerson = ''
     },
     getPersonByEmail: function (email) {
-
       AXIOS.get('/person/'.concat(email))
         .then(response => {
-          this.foundPerson = response.data
-          this.email = ''
-          this.password = ''
-          this.errorPerson = ''
+          if(response.data) {
+            this.errorPerson = 'Email already exists!'
+          }
         })
         .catch(e => {
-          this.foundPerson = []
-          this.errorPerson = 'Wrong Email!'
         })
     },
   }
