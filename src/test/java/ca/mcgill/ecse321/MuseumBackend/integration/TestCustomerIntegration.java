@@ -128,7 +128,7 @@ public class TestCustomerIntegration {
 		int gandalfID = testCreateCustomer("gandalf@grey.com");
 
 		// call method: get the customer by their id
-		ResponseEntity<CustomerDto[]> response = client.getForEntity("/customers", CustomerDto[].class);
+		ResponseEntity<CustomerDto[]> response = client.getForEntity("/customer", CustomerDto[].class);
 
 		// check response
 		assertNotNull(response);

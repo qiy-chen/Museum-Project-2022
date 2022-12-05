@@ -25,15 +25,14 @@ export default {
     return {
       people: [],
       requestedPersonIndex: 0,
-      newPerson: {},
+      newPerson: [],
       errorPerson: '',
       email: '',
       password: '',
       firstName: '',
       lastName: '',
       inputMap: {},
-      personRoleIds: [],
-      response: []
+      personRoleIds: []
     }
   },
   created: function() {
@@ -50,25 +49,6 @@ export default {
       AXIOS.post('/person', new PersonRequestDto(email,password,firstName,lastName,museum))
         .then(response => {
           this.people.push(response.data)
-          this.errorPerson = ''
-          this.newPerson = response.data
-        })
-        .catch(e => {
-          let errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorPerson = errorMsg
-        })
-    },
-
-    getPersonByEmail: function (email) {
-      AXIOS.get('/person/'.concat(email))
-        .then(response => {
-          if (!this.people.includes(response.data)) {
-            this.people.push(response.data)
-            this.newPerson = {}
-          }
-          this.requestedPersonIndex = this.people.indexOf(response.data)
-          this.email = ''
           this.errorPerson = ''
         })
         .catch(e => {

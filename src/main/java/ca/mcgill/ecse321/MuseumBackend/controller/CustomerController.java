@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * @Author Jeanine Looman
  */
+@CrossOrigin(origins = "*")
 @RestController
 public class CustomerController {
 
@@ -46,7 +47,7 @@ public class CustomerController {
 	}
 
 	// get all customers
-	@GetMapping("/customers")
+	@GetMapping("/customer")
 	public ResponseEntity<List<CustomerResponseDto>> getAllCustomers() {
 		List<Customer> customers = customerService.getAllCustomers();
 		ArrayList<CustomerResponseDto> customerDtos = new ArrayList<>();

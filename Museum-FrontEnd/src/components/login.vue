@@ -21,11 +21,11 @@
                                         <div class="card-body">
                                             <form>
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                    <input class="form-control" id="inputEmail" type="text" v-model="email" placeholder="name@example.com" />
                                                     <label for="inputEmail">Email address</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                                    <input class="form-control" id="inputPassword" type="text" v-model="password" placeholder="Password" />
                                                     <label for="inputPassword">Password</label>
                                                 </div>
                                                 <div class="form-check mb-3">
@@ -35,12 +35,7 @@
                                                 <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <a class="small" href="password.html">Forgot Password?</a>
                                                     &nbsp;
-                                                    <a class="btn btn-primary" @click="$router.push({name: 'customer_dashboard'})">Login as Customer</a>
-                                                    &nbsp;
-                                                    <a class="btn btn-primary" @click="$router.push({name: 'employeeDashboard'})"> Login as Employee</a>
-                                                    &nbsp;
-                                                    <a class="btn btn-primary" @click="$router.push({name: 'admin_dashboard'})">Login as Admin</a>
-                                                    &nbsp;
+                                                    <a class="btn btn-primary" @click="loginToRightRole(email,password)">Login</a>
                                                 </div>
                                             </form>
                                         </div>
@@ -71,13 +66,12 @@
         </body>
     </div>
 </template>
-<script>
-    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
-    crossorigin="anonymous"
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-    crossorigin="anonymous"
-    src="js/scripts.js"
-</script>
+<script src="./login_scripts.js"></script>
+    //src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+    //crossorigin="anonymous"
+    //src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    //crossorigin="anonymous"
+    //src="js/scripts.js"
 <style>
 @charset "UTF-8";
 /*!
@@ -122,8 +116,8 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 255, 200, 0; 
-  --bs-secondary-rgb: 108, 117, 125; 
+  --bs-primary-rgb: 255, 200, 0;
+  --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 253, 126, 20;
