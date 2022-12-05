@@ -58,7 +58,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a>Have an account? Go to login</a></div>
+                                        <a href="#" @click="$router.push({name: 'login'})" >Have an account? Go to login</a>
                                     </div>
                                 </div>
                             </div>
