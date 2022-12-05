@@ -50,12 +50,12 @@
                         <h2 class="section-heading text-uppercase">Create a Display Room</h2>
                         <h3 class="section-subheading text-muted">Enter room information down below.</h3>
                         <label for="fname">Room number:</label><br>
-                            <input type="text" id="fname" name="fname"><br>
+                            <input type="text" id="fname" name="fname" v-model="roomNumber"><br>
                             <label for="fname">Max artworks:</label><br>
-                            <input type="text" id="fname" name="fname"><br>
+                            <input type="text" id="fname" name="fname" v-model="maxArtworks"><br>
                         <div>&nbsp;</div>   
                         <div>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="">Create Display Room</a>
+                            <a class="btn btn-dark btn-xl text-uppercase" @click="createDisplay(roomNumber,maxArtworks,1)">Create Display Room</a>
                         </div>
                     </div>
                 </div>
@@ -95,9 +95,7 @@
 </template>
 
 <script>
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="src/scripts.js"
-    src="https://cdn.startbootstrap.com/sb-forms-latest.js"
+   src="/Users/alextsah/Documents/GitHub/project-group-15/Museum-FrontEnd/src/components/Room.js"
 </script>
 
 <style>
