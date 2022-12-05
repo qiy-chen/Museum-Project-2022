@@ -5,6 +5,7 @@ export default {
   data() {
     return {
       employees: [],
+      people: [],
       email: '',
       password: '',
       firstName: '',
@@ -38,6 +39,7 @@ export default {
       setTimeout(() =>employees.default.methods.createEmployee(email,shiftIDs),5000)
       this.errorPerson = ''
       this.employees = employees.default.employees
+      this.people = people.default.people
       console.log(employees)
     },
     getPersonByEmail: function (email) {
