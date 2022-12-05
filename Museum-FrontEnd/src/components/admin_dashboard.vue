@@ -168,6 +168,7 @@
             </footer>
     </div>
 </template>
+
 <script>
     src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
     crossorigin="anonymous"
@@ -176,11 +177,11 @@
     src="https://cdn.startbootstrap.com/sb-forms-latest.js"
 
     
-    var demoEvents = [
+    let demoEvents = [
         {
             title    : 'Sunny 725-727',
-            start    : '2017-02-25',
-            end      : '2017-02-27',
+            start    : '2022-12-25',
+            end      : '2022-12-27',
             cssClass : 'family'
         },
         {
