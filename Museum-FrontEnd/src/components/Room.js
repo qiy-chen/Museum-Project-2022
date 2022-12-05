@@ -22,6 +22,7 @@ class DisplayDto {
         this.roomNumber = roomNumber;
         this.maxArtworks = maxArtworks;
         this.museumId = museumId;
+        this.roomId;
     }
   }
   class StorageDto {
@@ -77,9 +78,9 @@ export default {
         AXIOS.post('/display', new DisplayDto(roomNumber,maxArtworks,museumId))
           .then(response => {
             this.displays.push(response.data)
+            this.RoomId = response.data.roomId;
             console.log(this.displays)
             this.errorDisplay = ''
-            this.newDisplay = response.data
           })
           .catch(e => {
             let errorMsg = e.response.data.message
@@ -90,10 +91,8 @@ export default {
       createStorageRoom: function (roomNumber,museumId) {
         AXIOS.post('/storage', new StorageDto(roomNumber,museumId))
           .then(response => {
-            console.log(response.data)
             this.storages.push(response.data)
             this.errorStorage = ''
-            this.newStorage = response.data
           })
           .catch(e => {
             let errorMsg = e.response.data.message
