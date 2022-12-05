@@ -6,6 +6,7 @@ import java.util.List;
 
 import ca.mcgill.ecse321.MuseumBackend.model.Customer;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 
 public class CustomerResponseDto {
 
@@ -13,6 +14,7 @@ public class CustomerResponseDto {
 	private PersonDto person;
 	private List<LoanResponseDto> loans;
 	private String email;
+	private List<TicketResponseDto> tickets;
 	
 	public CustomerResponseDto() {}
 	public CustomerResponseDto(Customer customer) {
@@ -21,6 +23,9 @@ public class CustomerResponseDto {
 		this.email = this.person.getEmail();
 		for (Loan loan : customer.getLoans()) {
 			this.loans.add(new LoanResponseDto(loan));
+		}
+		for(Ticket ticket : customer.getTickets()) {
+			this.tickets.add(new TicketResponseDto(ticket));
 		}
 	}
 

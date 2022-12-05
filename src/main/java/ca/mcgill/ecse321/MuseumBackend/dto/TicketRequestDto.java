@@ -35,9 +35,10 @@ public class TicketRequestDto {
 
   
   public Ticket toModel() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
     Ticket ticket = new Ticket();
     ticket.setPrice(price);
+    this.ticketDate += " 0:00";
     ticket.setTicketDate(LocalDateTime.parse(ticketDate,formatter));
     return ticket;
   }

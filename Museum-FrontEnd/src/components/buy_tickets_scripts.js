@@ -23,18 +23,27 @@ export default {
     return {
       tickets: [],
       ticketDate: '',
-      price: 0,
       errorTickets: ''
     }
   },
+  created: function () {
+    AXIOS.post('/tickets',new TicketRequestDto('2022-12-05',9.99))
+      .then(response => {
+        this.tickets.push(response.data)
+      })
+      .catch(e => {
+        console.log(e.response.message)
+      })
+  },
+
   methods: {
-    purchaseTicket: function(ticketDate,price) {
-      AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new TicketRequestDto(ticketDate,price))
+    purchaseTicket: function(ticketDate) {
+      AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new TicketRequestDto(ticketDate,9.99))
         .then(response => {
           Router.push({name: 'customer_dashboard'})
         })
         .catch(e => {
-
+          this.errorTickets = e.response.message
         })
     }
   }
