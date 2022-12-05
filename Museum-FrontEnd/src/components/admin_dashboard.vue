@@ -65,6 +65,17 @@
                         <div>
                             <div class="d-grid"><button type="button" class="btn btn-primary" @click="createNewPersonAndMakeEmployee(email,password,firstName,lastName,69)">Create Employee</button></div>                        </div> 
                     </div>
+                    <table class="center">
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Employee email</th>
+                            </tr>
+                            <tr v-for="employee in employees">
+                                <td>{{ employee.name}}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ employee.email }}</td>
+                            </tr>
+                        </table>
                 </div>
             </section>
             <div class="text-center">
