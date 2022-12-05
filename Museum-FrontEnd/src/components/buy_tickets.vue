@@ -52,7 +52,7 @@
                 </div>
                 <form>
                     <label for="start">Date:</label>
-                    <input type="date" id="start" name="trip-start"
+                    <input type="date" v-model="ticketDate" id="start" name="trip-start"
                         value="2022-12-05"
                         min="2022-01-01" max="2025-12-31">
                     <label for="numbers">Number of People:</label>
@@ -73,7 +73,7 @@
                 <div>
                     <td>Price per ticket: $9.99 + tax</td>
                 </div>
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'customer_dashboard'})">Purchase!</a>
+                <a class="btn btn-dark btn-xl text-uppercase" @click="purchaseTicket(ticketDate)">Purchase!</a>
             </div>
         </section>
         <footer class="footer py-4">
@@ -93,12 +93,7 @@
         </footer>
     </div>
 </template>
-<script>
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="src/scripts.js"
-    src="https://cdn.startbootstrap.com/sb-forms-latest.js"
-    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
-    crossorigin="anonymous"
+<script src="./buy_tickets_scripts.js">
 </script>
 <style>
 

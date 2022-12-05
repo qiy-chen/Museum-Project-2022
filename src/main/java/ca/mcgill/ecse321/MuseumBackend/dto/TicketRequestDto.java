@@ -3,24 +3,25 @@ package ca.mcgill.ecse321.MuseumBackend.dto;
 import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TicketRequestDto {
 
-  private LocalDateTime ticketDate;
+  private String ticketDate;
 
   private double price;
 
   
   public TicketRequestDto() {}
-  public TicketRequestDto(LocalDateTime ticketDate, double price) {
+  public TicketRequestDto(String ticketDate, double price) {
     this.ticketDate = ticketDate;
     this.price = price;
   }
   
-  public void setTicketDate(LocalDateTime newDate) {
+  public void setTicketDate(String newDate) {
     ticketDate = newDate;
   }
-  public LocalDateTime getTicketDate() {
+  public String getTicketDate() {
     return ticketDate;
   }
   
@@ -34,9 +35,11 @@ public class TicketRequestDto {
 
   
   public Ticket toModel() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
     Ticket ticket = new Ticket();
     ticket.setPrice(price);
-    ticket.setTicketDate(ticketDate);
+    this.ticketDate += " 0:00";
+    ticket.setTicketDate(LocalDateTime.parse(ticketDate,formatter));
     return ticket;
   }
   

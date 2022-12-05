@@ -52,6 +52,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                          <div>
+                                            <span v-if="errorPerson" style="color:red">{{errorPerson}}</span>
+                                            </div>
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><button type="button" class="btn btn-primary" @click="createNewPersonAndMakeCustomer(email,password,firstName,lastName,69)">Create Account</button></div>
                                             </div>
