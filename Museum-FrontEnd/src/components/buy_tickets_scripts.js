@@ -10,35 +10,40 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-class TicketRequestDto {
-  constructor(ticketDate,price) {
-    this.ticketDate = ticketDate
-    this.price = price
-  }
+//Dtos
+function IdRequestDto(id){
+	this.id = id
+}
+function TicketRequestDto(ticketDate, price){
+	this.ticketDate = ticketDate
+	this.price = price
 }
 
 export default {
   name: 'buy_tickets_scripts',
   data() {
     return {
-      tickets: [],
+      unpurchasedTickets: [],
+      selectedTicket: '',
       ticketDate: '',
       errorTickets: ''
     }
   },
   created: function () {
-    AXIOS.post('/tickets',new TicketRequestDto('2022-12-05',9.99))
-      .then(response => {
-        this.tickets.push(response.data)
-      })
-      .catch(e => {
-        console.log(e.response.message)
-      })
+    //Load all unpurchased tickets
+    AXIOS.get('/tickets/buy')
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.unpurchasedTickets = response.data
+    })
+    .catch(e => {
+      this.errorTicket += e
+    })
   },
 
   methods: {
-    purchaseTicket: function(ticketDate) {
-      AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new TicketRequestDto(ticketDate,9.99))
+    purchaseTicket: function(ticketId) {
+      AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new IdRequestDto(ticketId))
         .then(response => {
           Router.push({name: 'customer_dashboard'})
         })
