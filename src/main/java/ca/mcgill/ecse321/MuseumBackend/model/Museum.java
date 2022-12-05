@@ -554,7 +554,7 @@ public class Museum
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Customer aCustomer, Artwork aArtwork)
+  public Loan addLoan(double aRentalFee, LocalDateTime aStartDate, LocalDateTime aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Customer aCustomer, Artwork aArtwork)
   {
     return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, this, aCustomer, aArtwork);
   }

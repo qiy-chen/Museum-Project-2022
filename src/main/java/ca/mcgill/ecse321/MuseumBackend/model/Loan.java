@@ -5,6 +5,8 @@ package ca.mcgill.ecse321.MuseumBackend.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 // line 42 "../../../../../Museum.ump"
 @Entity
@@ -23,8 +25,8 @@ public class Loan
 
   //Loan Attributes
   private double rentalFee;
-  private Date startDate;
-  private Date endDate;
+  private LocalDateTime startDate;
+  private LocalDateTime endDate;
   private int numOfDays;
   private LoanStatus status;
   @Id
@@ -43,7 +45,7 @@ public class Loan
   // CONSTRUCTOR
   //------------------------
 
-  public Loan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, LoanStatus aStatus, int aLoanId, Museum aMuseum, Customer aCustomer, Artwork aArtwork)
+  public Loan(double aRentalFee, LocalDateTime aStartDate, LocalDateTime aEndDate, int aNumOfDays, LoanStatus aStatus, int aLoanId, Museum aMuseum, Customer aCustomer, Artwork aArtwork)
   {
     rentalFee = aRentalFee;
     startDate = aStartDate;
@@ -87,7 +89,7 @@ public boolean setRentalFee(double aRentalFee)
     return wasSet;
   }
 
-  public boolean setStartDate(Date aStartDate)
+  public boolean setStartDate(LocalDateTime aStartDate)
   {
     boolean wasSet = false;
     startDate = aStartDate;
@@ -95,7 +97,7 @@ public boolean setRentalFee(double aRentalFee)
     return wasSet;
   }
 
-  public boolean setEndDate(Date aEndDate)
+  public boolean setEndDate(LocalDateTime aEndDate)
   {
     boolean wasSet = false;
     endDate = aEndDate;
@@ -132,12 +134,12 @@ public boolean setRentalFee(double aRentalFee)
     return rentalFee;
   }
 
-  public Date getStartDate()
+  public LocalDateTime getStartDate()
   {
     return startDate;
   }
 
-  public Date getEndDate()
+  public LocalDateTime getEndDate()
   {
     return endDate;
   }

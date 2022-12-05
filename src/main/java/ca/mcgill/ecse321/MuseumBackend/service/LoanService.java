@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +48,16 @@ public class LoanService {
     Artwork artwork = artworkRepository.findArtworkByArtworkId(loanRequest.getArtworkId());
     Customer customer = customerRepository.findCustomerByPersonRoleId(loanRequest.getCustomerId());
     Loan loan = new Loan();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
     loan.setRentalFee(loanRequest.getRentalFee());
     loan.setNumOfDays(loanRequest.getNumOfDays());
     String date = loanRequest.getStartDate();
-    Date startDate = Date.valueOf(date);  
+    date += " 8:00";
+    LocalDateTime startDate = LocalDateTime.parse(date);
     loan.setStartDate(startDate);
     String date2 = loanRequest.getEndDate();
-    Date endDate = Date.valueOf(date2);
+    date2 += " 8:00";
+    LocalDateTime endDate = LocalDateTime.parse(loanRequest.getEndDate());
     loan.setEndDate(endDate);
     loan.setArtwork(artwork);
     loan.setCustomer(customer);
