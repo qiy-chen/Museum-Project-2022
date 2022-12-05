@@ -79,6 +79,7 @@
 				</div>
 			</section>
 			<div class="text_center">
+				<h2 class="section-heading text-uppercase">All Tickets</h2>
 				<table class="center">
 					<tr>
 						<th>Ticket Id</th>
@@ -89,6 +90,27 @@
 						<div>&nbsp;</div>
 					</tr>
 					<tr v-for="ticket in allTickets">
+						<td>{{ ticket.ticketId}}</td>
+						<div>&nbsp;</div>
+						<td>{{ ticket.ticketDate.toString() }}</td>
+						<div>&nbsp;</div>
+						<td>{{ ticket.price }}</td>
+						<div>&nbsp;</div>
+					</tr>
+				</table>
+			</div>
+			<div class="text_center">
+				<h2 class="section-heading text-uppercase">Unpurchased Tickets</h2>
+				<table class="center">
+					<tr>
+						<th>Ticket Id</th>
+						<div>&nbsp;</div>
+						<th>Ticket Date</th>
+						<div>&nbsp;</div>
+						<th>Ticket Price</th>
+						<div>&nbsp;</div>
+					</tr>
+					<tr v-for="ticket in unpurchasedTickets">
 						<td>{{ ticket.ticketId}}</td>
 						<div>&nbsp;</div>
 						<td>{{ ticket.ticketDate.toString() }}</td>
@@ -194,6 +216,7 @@
 </template>
 
 <script src="./Ticket.js">
+	
 </script>
 
 <style>
