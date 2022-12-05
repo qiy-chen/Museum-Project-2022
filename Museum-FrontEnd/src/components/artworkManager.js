@@ -47,7 +47,9 @@ export default {
     artworkId: '',
     errorArtwork: '',
     artworkResponse: '',
-    roomId: '', //for artworks
+    roomId: '', //for artworks,
+    value: '',
+    isLoanable: '',
     displays: [],
 	  storages: [],
 	  storageNb: '',
@@ -68,7 +70,6 @@ export default {
   created() {
     AXIOS.get('/artwork')
     .then(response => {
-      console.log(response)
       this.artworks = response.data
     })
     .catch(e => {
@@ -98,9 +99,8 @@ export default {
   methods: {
 
 	createArtwork: function (artworkName, roomId, museumId) {
-        AXIOS.post('/artwork/',  new artworkRequestDto(artworkName, roomId, museumId, 0.0, false), {})
+        AXIOS.post('/artwork/',  new artworkRequestDto(artworkName, roomId, museumId, 12, false), {})
           .then(response => {
-            console.log(response)
             this.artworks.push(reponse.data)
             console.log(artworks)
             this.artworkId = response.data.artworkId
@@ -115,9 +115,9 @@ export default {
     },
     
     updateArtwork: function (artworkId, artworkName, value, isLoanable) {
-        AXIOS.put('/artwork/'.concat(artworkId),  new artworkRequestDto("artworkName", 14, 69, value, false), {})
+        AXIOS.put('/artwork/'.concat(artworkId),  new artworkRequestDto(artworkName, 0, 0, value, true), {})
           .then(response => {
-            console.log(response)
+            console.log(response.data)
             this.created()
             this.errorArtwork = ''
             this.artworkId = ''
@@ -129,8 +129,8 @@ export default {
           })
     },
 
-    moveArtwork: function (artworkId, roomId) {
-        AXIOS.put('/artwork/room/'.concat(artworkId),  new artworkRequestDto('', roomId, 0, 0, false), {})
+    moveArtwork: function (artworkId, roomId, museumId) {
+        AXIOS.put('/artwork/room/'.concat(artworkId),  new artworkRequestDto('Help', roomId, museumId, 0.0, false), {})
           .then(response => {
             console.log(response)
             this.created()
@@ -147,7 +147,6 @@ export default {
     deleteArtwork: function (artworkId) {
         AXIOS.delete('/artwork/'.concat(artworkId), {}, {})
           .then(response => {
-            console.log(response)
             this.created()
             this.errorArtwork = ''
             this.artworkId = ''

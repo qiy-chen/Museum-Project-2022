@@ -54,6 +54,9 @@
                             <select v-model="roomId">
                             <option v-for="display in displays" > {{display.roomId}}</option>
                             </select>
+                        <div>&nbsp;</div> 
+                        <label for="fname2">Artwork value:</label><br>
+                            <input type="number" v-model="value" id="fname3" name="fname3"><br>
                         <div>&nbsp;</div>    
                         <div>
                             <button class ="btn btn-primary" @click="createArtwork(artworkName, roomId, 69)">ADD</button>
@@ -86,7 +89,23 @@
                                 <td>{{ artwork.roomId }}</td>
                             </tr>
                         </table>
+            </div>
+            <section class="page-section" id="services">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Delete Artwork</h2>
+                        <h3 class="section-subheading text-muted">Select which artwork to delete.</h3>  
+                        <label for="fname2">artworkId:</label>
+                            <select v-model="artworkId">
+                            <option v-for="artwork in artworks" > {{artwork.artworkId}}</option>
+                            </select>
+                        <div>&nbsp;</div>      
+                        <div>
+                            <button class ="btn btn-primary" @click="deleteArtwork(artworkId)">DELETE</button>                            
                         </div>
+                    </div>
+                </div>
+            </section>
             <section class="page-section" id="update">
                 <div class="container">
                     <div class="text-center">
@@ -103,18 +122,16 @@
                         <div>&nbsp;</div>    
                         <label for="numbers">Loanable?</label>
                         <select name="numbers" v-model="isLoanable" id="numbers">
-                            <option value="1">Yes</option>
-                            <option value="2">No</option>
+                            <option value="1">true</option>
+                            <option value="2">false</option>
                         </select>
                         <div>&nbsp;</div> 
                         <div>
-                            <button class ="btn btn-primary" @click="updateArtwork(artworkId, artworkName, value, isLoanable)" >UPDATE</button>
+                            <button class ="btn btn-primary" @click="updateArtwork(artworkId, artworkName, value, true)" >UPDATE</button>
                         </div>
                     </div>
                 </div>
             </section>
-
-
 
             <section class="page-section" id="moveartwork">
                 <div class="container">
@@ -129,7 +146,7 @@
                             <input type="number" v-model="roomId" id="fname" name="fname"><br>
                         <div>&nbsp; </div>
                         <div>
-                            <button class ="btn btn-primary" @click="moveArtwork(artworkId, roomId)" >MOVE</button>
+                            <button class ="btn btn-primary" @click="moveArtwork(artworkId, roomId, 69)" >MOVE</button>
                         </div>
                     </div>
                 </div>
