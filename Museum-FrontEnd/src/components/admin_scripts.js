@@ -36,7 +36,7 @@ export default {
 
       people.default.methods.createPerson(email,password,firstName,lastName,museum)
       let shiftIDs = []
-      setTimeout(() =>employees.default.methods.createEmployee(email,shiftIDs),5000)
+      setTimeout(() => employees.default.methods.createEmployee(email,shiftIDs),5000)
       this.errorPerson = ''
       this.employees = people.default.employees
       this.people = people.default.people
