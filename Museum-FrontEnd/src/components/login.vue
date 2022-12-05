@@ -35,12 +35,7 @@
                                                 <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <a class="small" href="password.html">Forgot Password?</a>
                                                     &nbsp;
-                                                    <a class="btn btn-primary" @click="checkPersonIsCustomer(email,password)">Login as Customer</a>
-                                                    &nbsp;
-                                                    <a class="btn btn-primary" @click="checkPersonIsEmployee(email,password)"> Login as Employee</a>
-                                                    &nbsp;
-                                                    <a class="btn btn-primary" @click="checkPersonIsAdmin(email,password)">Login as Admin</a>
-                                                    &nbsp;
+                                                    <a class="btn btn-primary" @click="loginToRightRole(email,password)">Login</a>
                                                 </div>
                                             </form>
                                         </div>

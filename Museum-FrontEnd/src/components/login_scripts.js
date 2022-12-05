@@ -31,6 +31,11 @@ export default {
     admin.default.created()
   },
   methods: {
+    loginToRightRole: function(email,password) {
+      this.checkPersonIsAdmin(email,password)
+      this.checkPersonIsEmployee(email,password)
+      this.checkPersonIsCustomer(email,password)
+    },
     getPersonByEmail: function (email) {
       AXIOS.get('/person/'.concat(email))
         .then(response => {
