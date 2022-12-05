@@ -1,6 +1,4 @@
 import axios from 'axios'
-import login_scripts from "./login_scripts";
-import inject from 'vue'
 var config = require('../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
@@ -24,18 +22,19 @@ export default {
     }
   },
   created: function() {
-    AXIOS.get('/customer/'.concat(localStorage.getItem('userEmail')))
+    AXIOS.get('/customer/'.concat(localStorage.getItem('id')))
       .then(response => {
         this.customer = response.data
-        console.log(localStorage.getItem('userEmail'))
+        console.log(this.customer)
       })
       .catch(e => {
         this.errorCustomer = e
       })
     setTimeout(() => {
-      AXIOS.get('/customer/tickets/'.concat(this.customer.id))
+      AXIOS.get('/customer/tickets/'.concat(localStorage.getItem('id')))
         .then(response => {
           this.theirTickets = response.data
+          console.log(this.theirTickets)
         })
         .catch(e => {
           this.errorCustomer = e

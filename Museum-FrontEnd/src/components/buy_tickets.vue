@@ -73,7 +73,7 @@
                 <div>
                     <td>Price per ticket: $9.99 + tax</td>
                 </div>
-                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'customer_dashboard'})">Purchase!</a>
+                <a class="btn btn-dark btn-xl text-uppercase" @click="">Purchase!</a>
             </div>
         </section>
         <footer class="footer py-4">
@@ -97,7 +97,7 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     src="src/scripts.js"
     src="https://cdn.startbootstrap.com/sb-forms-latest.js"
-    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
+    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
     crossorigin="anonymous"
 </script>
 <style>
