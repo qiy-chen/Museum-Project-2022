@@ -24,8 +24,8 @@ public class MuseumService {
 	}
 	
 	@Transactional
-	public Museum createmuseum(Museum museum) {
-		museum = museumRepo.save(museum);
-		return museum;
-	}
+    public Museum createmuseum(Museum museum) {
+        museum = museumRepo.save(museum);
+        return museum;
+    }
 }
