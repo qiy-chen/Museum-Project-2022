@@ -55,15 +55,14 @@
                             <option v-for="display in displays" > {{display.roomId}}</option>
                             </select>
                         <div>&nbsp;</div> 
-                        <label for="fname2">Artwork value:</label><br>
-                            <input type="number" v-model="value" id="fname3" name="fname3"><br>
-                        <div>&nbsp;</div>    
+                          
                         <div>
                             <button class ="btn btn-primary" @click="createArtwork(artworkName, roomId, 69)">ADD</button>
+                            
                         </div>
                     </div>
                 </div>
-            </section>
+            
             <div class="text_center">
                         <table class="center">
                             <tr>
@@ -77,6 +76,8 @@
                                 <div>&nbsp;</div> 
                                 <th>Artwork Room Id</th>
                             </tr>
+
+                        
                             <tr v-for="artwork in artworks">
                                 <td>{{ artwork.artworkName}}</td>
                                 <div>&nbsp;</div>
@@ -90,6 +91,7 @@
                             </tr>
                         </table>
             </div>
+            </section>
             <section class="page-section" id="services">
                 <div class="container">
                     <div class="text-center">

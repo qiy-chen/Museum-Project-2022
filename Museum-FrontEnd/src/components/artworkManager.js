@@ -1,22 +1,30 @@
 import axios from 'axios'
 var config = require('../../config')
 
-var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+var backendConfigurer = function(){
+  switch(process.env.NODE_ENV){
+      case 'development':
+          return 'http://' + config.dev.backendHost + ':' + config.dev.backendPort;
+      case 'production':
+          return 'https://' + config.build.backendHost + ':' + config.build.backendPort ;
+  }
+};
+
+var backendUrl = backendConfigurer();
 
 var AXIOS = axios.create({
   baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+  //headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function artworkRequestDto(artworkName, roomId, museumId, value, isLoanable){
+class artworkRequestDto {constructor(artworkName, roomId, museumId, value, isLoanable){
   this.artworkName = artworkName
   this.roomId = roomId
   this.museumId = museumId
   this.value = value
   this.isLoanable = isLoanable
   this.artworkId
-}
+}}
 
 class DisplayDto {
   constructor(roomNumber,maxArtworks,museumId) {
@@ -40,10 +48,11 @@ export default {
   data() {
     return {
 
+    artworks: [],
+    artworkName: '',
     artworksOnDisplay: [],
 	  artworksInRoom: [],
 	  artworksInStorage: [],
-	  artworks: [],
     artworkId: '',
     errorArtwork: '',
     artworkResponse: '',
@@ -73,7 +82,7 @@ export default {
       this.artworks = response.data
     })
     .catch(e => {
-      var errorMsg = e.response.data.message
+      let errorMsg = e.response.data.message
       console.log(errorMsg)
       this.errorArtwork = errorMsg
 	})
@@ -83,7 +92,7 @@ export default {
       this.displays = response.data
     })
     .catch(e => {
-      this.errorDisplay = e
+      //this.errorDisplay = e
     })
         //Load all storage
     AXIOS.get('/storage')
@@ -92,7 +101,7 @@ export default {
       this.storages = response.data
     })
     .catch(e => {
-      this.errorStorage = e
+      //this.errorStorage = e
     })
   },
 
@@ -101,14 +110,15 @@ export default {
 	createArtwork: function (artworkName, roomId, museumId) {
         AXIOS.post('/artwork/',  new artworkRequestDto(artworkName, roomId, museumId, 12, false), {})
           .then(response => {
+            window.location.reload();
             this.artworks.push(reponse.data)
-            console.log(artworks)
+            console.log(response.data)
             this.artworkId = response.data.artworkId
             this.errorArtwork = ''
             this.roomId =''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
@@ -117,13 +127,12 @@ export default {
     updateArtwork: function (artworkId, artworkName, value, isLoanable) {
         AXIOS.put('/artwork/'.concat(artworkId),  new artworkRequestDto(artworkName, 0, 0, value, true), {})
           .then(response => {
-            console.log(response.data)
             this.created()
             this.errorArtwork = ''
             this.artworkId = ''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
@@ -132,13 +141,12 @@ export default {
     moveArtwork: function (artworkId, roomId, museumId) {
         AXIOS.put('/artwork/room/'.concat(artworkId),  new artworkRequestDto('Help', roomId, museumId, 0.0, false), {})
           .then(response => {
-            console.log(response)
             this.created()
             this.errorArtwork = ''
             this.artworkId = ''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
@@ -152,7 +160,7 @@ export default {
             this.artworkId = ''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
@@ -166,7 +174,7 @@ export default {
             this.errorArtwork = ''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
@@ -181,7 +189,7 @@ export default {
             this.artworkId = ''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
@@ -196,7 +204,7 @@ export default {
             this.errorArtwork = ''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
@@ -210,7 +218,7 @@ export default {
             this.errorArtwork = ''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
@@ -225,39 +233,13 @@ export default {
             this.roomId = ''
           })
           .catch(e => {
-            var errorMsg = e.response.data.message
+            let errorMsg = e.response.data.message
             console.log(errorMsg)
             this.errorArtwork = errorMsg
           })
       },
-      createDisplayRoom: function (roomNumber,maxArtworks,museumId) {
-        AXIOS.post('/display', new DisplayDto(roomNumber,maxArtworks,museumId))
-          .then(response => {
-            this.displays.push(response.data)
-            this.RoomId = response.data.roomId;
-            this.numberOfArtworks = response.data.numberOfArtworks;
-            console.log(this.displays)
-            this.errorDisplay = ''
-          })
-          .catch(e => {
-            let errorMsg = e.response.data.message
-            console.log(errorMsg)
-            this.errorDisplay = errorMsg
-          })
-      },
-      createStorageRoom: function (roomNumber,museumId) {
-        AXIOS.post('/storage', new StorageDto(roomNumber,museumId))
-          .then(response => {
-            this.storages.push(response.data)
-            this.RoomId = response.data.roomId;
-            this.errorStorage = ''
-          })
-          .catch(e => {
-            let errorMsg = e.response.data.message
-            console.log(errorMsg)
-            this.errorStorage = errorMsg
-          })
-      }
+      
+      
 
     }
 
