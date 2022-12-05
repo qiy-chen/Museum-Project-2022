@@ -2,6 +2,7 @@ import * as person from "./Person"
 import * as customer from "./Customer"
 import * as employee from "./Employee"
 import * as admin from "./Admin"
+import customer_dashboard_scripts from "./customer_dashboard_scripts";
 import Router from "@/router/index.js"
 import axios from 'axios'
 var config = require('../../config')
@@ -16,6 +17,9 @@ var AXIOS = axios.create({
 
 export default {
   name: 'login_scripts',
+  components: {
+    customer_dashboard_scripts
+  },
   data() {
     return {
       email: '',
@@ -33,9 +37,15 @@ export default {
   methods: {
     loginToRightRole: function(email,password) {
       this.getPersonByEmail(email)
-      if(this.checkPersonIsAdmin(email,password))return
-      if(this.checkPersonIsEmployee(email,password))return
+      localStorage.setItem('userEmail',email)
+      if(this.checkPersonIsAdmin(email,password)) {
+        return
+      }
+      if(this.checkPersonIsEmployee(email,password)) {
+        return
+      }
       this.checkPersonIsCustomer(email,password)
+
     },
     getPersonByEmail: function (email) {
       if(email === '') {
