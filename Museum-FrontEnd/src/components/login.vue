@@ -25,8 +25,11 @@
                                                     <label for="inputEmail">Email address</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" id="inputPassword" type="text" v-model="password" placeholder="Password" />
+                                                    <input class="form-control" id="inputPassword" type="password" v-model="password" placeholder="Password"/>
                                                     <label for="inputPassword">Password</label>
+                                                </div>
+                                                <div>
+                                                  <span v-if="errorPerson" style="color:red">{{errorPerson}}</span>
                                                 </div>
                                                 <div class="form-check mb-3">
                                                     <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
@@ -34,7 +37,6 @@
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <a class="small" href="password.html">Forgot Password?</a>
-                                                    &nbsp;
                                                     <a class="btn btn-primary" @click="loginToRightRole(email,password)">Login</a>
                                                 </div>
                                             </form>
