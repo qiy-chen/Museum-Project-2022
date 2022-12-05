@@ -51,26 +51,28 @@
                     <h2 class="section-heading text-uppercase">Register a new employee</h2>
                         <h3 class="section-subheading text-muted">Enter employee information down below.</h3>
                         <label for="inputFirstName">Enter first name:</label>
-                        <input class="form-control" id="inputFirstName" type="text" v-model="firstName" placeholder="Confirm email" />
+                        <input class="form-control" id="inputFirstName" type="text" v-model="firstName" placeholder="Enter first name" />
                         <div>&nbsp;</div>
                         <label for="inputLastName">Enter last name:</label>
-                        <input class="form-control" id="inputLastName" type="text" v-model="lastName" placeholder="Confirm email" />
+                        <input class="form-control" id="inputLastName" type="text" v-model="lastName" placeholder="Enter last name" />
                         <div>&nbsp;</div> 
                         <label for="inputEmail">Enter email:</label>
-                        <input class="form-control" id="inputEmail" type="text" v-model="email" placeholder="Confirm email" />
+                        <input class="form-control" id="inputEmail" type="text" v-model="email" placeholder="Enter email" />
                         <div>&nbsp;</div>   
                         <label for="inputPassword">Enter password:</label>
-                        <input class="form-control" id="inputPassword" type="text" v-model="password" placeholder="Confirm password" />
+                        <input class="form-control" id="inputPassword" type="text" v-model="password" placeholder="Enter password" />
                         <div>&nbsp;</div>        
                         <div>
                             <div class="d-grid"><button type="button" class="btn btn-primary" @click="createNewPersonAndMakeEmployee(email,password,firstName,lastName,69)">Create Employee</button></div>                        </div> 
                     </div>
                     <table class="center">
                             <tr>
-                                <th>Employee email</th>
+                                <th>Existing Employee Emails</th>
+                                <div>&nbsp;</div>
                             </tr>
                             <tr v-for="employee in employees">
                                 <td>{{ employee.email }}</td>
+                                <div>&nbsp;</div>
                             </tr>
                     </table>
                 </div>
@@ -118,5 +120,5 @@
 </script>
 
 <style>
-    @import '*/Museum-FrontEnd/scr/assets/styles.css';
+     @import '../assets/styles.css';
 </style>
