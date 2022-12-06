@@ -90,7 +90,7 @@ public class TicketController {
     Ticket newTicket = ticketService.getTicketByTicketId(ticketId2);
     newTicket.setCustomer(customer);
     newTicket = ticketService.replaceTicket(newTicket, ticketId2);
-    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.OK);
+    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.CREATED);
   }
 
   @DeleteMapping("/customers/{roleId}")

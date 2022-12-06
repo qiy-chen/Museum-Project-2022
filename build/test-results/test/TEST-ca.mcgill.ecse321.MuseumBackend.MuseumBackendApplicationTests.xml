@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-03T18:45:19" hostname="MacBook-Air-de-Qi.local" time="0.421">
+<testsuite name="ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-06T03:37:43" hostname="samuel-gp66leopard10ug" time="0.132">
   <properties/>
-  <testcase name="contextLoads()" classname="ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests" time="0.421"/>
-  <system-out><![CDATA[13:45:05.925 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-13:45:05.983 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-13:45:06.120 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-13:45:06.170 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests], using SpringBootContextLoader
-13:45:06.189 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: class path resource [ca/mcgill/ecse321/MuseumBackend/MuseumBackendApplicationTests-context.xml] does not exist
-13:45:06.190 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: class path resource [ca/mcgill/ecse321/MuseumBackend/MuseumBackendApplicationTestsContext.groovy] does not exist
-13:45:06.190 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-13:45:06.193 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: MuseumBackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-13:45:06.349 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]
-13:45:06.620 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/qi/Documents/GitHub/project-group-15F22/build/classes/java/main/ca/mcgill/ecse321/MuseumBackend/MuseumBackendApplication.class]
-13:45:06.622 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplication for test class ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests
-13:45:06.992 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: using defaults.
-13:45:06.994 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-13:45:07.068 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3178219a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2d85fb64, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@56476c16, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@497b560e, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@39ffda4a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3ba348ca, org.springframework.test.context.transaction.TransactionalTestExecutionListener@56e9a474, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@45b15381, org.springframework.test.context.event.EventPublishingTestExecutionListener@2dbfcf7, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@239f017e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@38cedb7d, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@772caabe, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2acdcce8, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@7102ac3e, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@3f598450]
-13:45:07.082 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@72b43104 testClass = MuseumBackendApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@e111c7c testClass = MuseumBackendApplicationTests, locations = '{}', classes = '{class ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@7c447c76, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@7c29adc8, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@15f8701f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7aa9e414, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6ec65b5e, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5b057c8c], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+  <testcase name="contextLoads()" classname="ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests" time="0.132"/>
+  <system-out><![CDATA[22:37:38.385 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+22:37:38.401 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+22:37:38.448 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+22:37:38.460 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests], using SpringBootContextLoader
+22:37:38.465 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: class path resource [ca/mcgill/ecse321/MuseumBackend/MuseumBackendApplicationTests-context.xml] does not exist
+22:37:38.465 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: class path resource [ca/mcgill/ecse321/MuseumBackend/MuseumBackendApplicationTestsContext.groovy] does not exist
+22:37:38.465 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+22:37:38.466 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: MuseumBackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:37:38.508 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]
+22:37:38.586 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/home/coldstuff1/Desktop/School/ECSE 321/Museum/project-group-15/build/classes/java/main/ca/mcgill/ecse321/MuseumBackend/MuseumBackendApplication.class]
+22:37:38.587 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplication for test class ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests
+22:37:38.695 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplicationTests]: using defaults.
+22:37:38.695 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+22:37:38.713 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7061622, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@32d418a9, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@52ea0269, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@746c411c, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@43ecfeb5, org.springframework.test.context.support.DirtiesContextTestExecutionListener@51efb731, org.springframework.test.context.transaction.TransactionalTestExecutionListener@53940e2f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@45e6d1e0, org.springframework.test.context.event.EventPublishingTestExecutionListener@61db86bf, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4da1f38a, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3e377967, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@4dadd690, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@707e4fe4, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@3281dfc2, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@377874b4]
+22:37:38.717 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@76ff68c5 testClass = MuseumBackendApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6418e39e testClass = MuseumBackendApplicationTests, locations = '{}', classes = '{class ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@48840594, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@216e0771, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@472a11ae, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@323f3c96, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6944e53e, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@51a06cbe], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -26,142 +26,142 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.7.5)
 
-2022-12-03 13:45:08.025  INFO 23514 --- [    Test worker] c.m.e.M.MuseumBackendApplicationTests    : Starting MuseumBackendApplicationTests using Java 17.0.1 on MacBook-Air-de-Qi.local with PID 23514 (started by qi in /Users/qi/Documents/GitHub/project-group-15F22)
-2022-12-03 13:45:08.029  INFO 23514 --- [    Test worker] c.m.e.M.MuseumBackendApplicationTests    : No active profile set, falling back to 1 default profile: "default"
-2022-12-03 13:45:10.055  INFO 23514 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-03 13:45:10.216  INFO 23514 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 138 ms. Found 12 JPA repository interfaces.
-2022-12-03 13:45:11.520  INFO 23514 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-03 13:45:11.693  INFO 23514 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.12.Final
-2022-12-03 13:45:12.168  INFO 23514 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2022-12-03 13:45:12.503  INFO 23514 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-03 13:45:13.065  INFO 23514 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-03 13:45:13.207  INFO 23514 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
-2022-12-03 13:45:15.791  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.791  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "admin" does not exist, skipping
-2022-12-03 13:45:15.797  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.798  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "artwork" does not exist, skipping
-2022-12-03 13:45:15.799  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.799  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "artwork_loans" does not exist, skipping
-2022-12-03 13:45:15.801  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.801  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "artwork_loans" does not exist, skipping
-2022-12-03 13:45:15.803  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.803  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer" does not exist, skipping
-2022-12-03 13:45:15.805  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.805  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer_loans" does not exist, skipping
-2022-12-03 13:45:15.831  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.832  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer_loans" does not exist, skipping
-2022-12-03 13:45:15.833  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.833  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer_tickets" does not exist, skipping
-2022-12-03 13:45:15.834  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.835  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer_tickets" does not exist, skipping
-2022-12-03 13:45:15.836  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.837  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "display" does not exist, skipping
-2022-12-03 13:45:15.838  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.838  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "employee" does not exist, skipping
-2022-12-03 13:45:15.839  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.839  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "employee_shifts" does not exist, skipping
-2022-12-03 13:45:15.840  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.840  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "employee_shifts" does not exist, skipping
-2022-12-03 13:45:15.842  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.842  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "loan" does not exist, skipping
-2022-12-03 13:45:15.843  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.844  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "loan" does not exist, skipping
-2022-12-03 13:45:15.845  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.845  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "loan" does not exist, skipping
-2022-12-03 13:45:15.847  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.847  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_artworks" does not exist, skipping
-2022-12-03 13:45:15.848  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.848  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_artworks" does not exist, skipping
-2022-12-03 13:45:15.849  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.850  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_loans" does not exist, skipping
-2022-12-03 13:45:15.851  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.851  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_loans" does not exist, skipping
-2022-12-03 13:45:15.852  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.853  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_persons" does not exist, skipping
-2022-12-03 13:45:15.854  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.854  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_persons" does not exist, skipping
-2022-12-03 13:45:15.855  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.856  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_rooms" does not exist, skipping
-2022-12-03 13:45:15.881  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.882  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_shifts" does not exist, skipping
-2022-12-03 13:45:15.883  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.883  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_shifts" does not exist, skipping
-2022-12-03 13:45:15.884  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.884  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_tickets" does not exist, skipping
-2022-12-03 13:45:15.885  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.885  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_tickets" does not exist, skipping
-2022-12-03 13:45:15.886  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.886  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "person" does not exist, skipping
-2022-12-03 13:45:15.887  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.888  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "person_person_roles" does not exist, skipping
-2022-12-03 13:45:15.889  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.889  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "room_artworks" does not exist, skipping
-2022-12-03 13:45:15.890  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.891  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "shift" does not exist, skipping
-2022-12-03 13:45:15.892  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.892  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "shift_employees" does not exist, skipping
-2022-12-03 13:45:15.893  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.894  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "shift_employees" does not exist, skipping
-2022-12-03 13:45:15.895  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.895  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "storage" does not exist, skipping
-2022-12-03 13:45:15.896  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.897  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "ticket" does not exist, skipping
-2022-12-03 13:45:15.897  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.898  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "ticket" does not exist, skipping
-2022-12-03 13:45:15.899  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.899  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "admin" does not exist, skipping
-2022-12-03 13:45:15.900  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.901  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "artwork" does not exist, skipping
-2022-12-03 13:45:15.902  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.902  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "artwork_loans" does not exist, skipping
-2022-12-03 13:45:15.904  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.904  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "customer" does not exist, skipping
-2022-12-03 13:45:15.905  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.905  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "customer_loans" does not exist, skipping
-2022-12-03 13:45:15.932  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.932  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "customer_tickets" does not exist, skipping
-2022-12-03 13:45:15.933  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.933  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "display" does not exist, skipping
-2022-12-03 13:45:15.935  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.935  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "employee" does not exist, skipping
-2022-12-03 13:45:15.936  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.936  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "employee_shifts" does not exist, skipping
-2022-12-03 13:45:15.937  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.937  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "loan" does not exist, skipping
-2022-12-03 13:45:15.938  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.939  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum" does not exist, skipping
-2022-12-03 13:45:15.939  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.940  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_artworks" does not exist, skipping
-2022-12-03 13:45:15.941  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.941  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_loans" does not exist, skipping
-2022-12-03 13:45:15.942  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.943  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_persons" does not exist, skipping
-2022-12-03 13:45:15.944  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.944  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_rooms" does not exist, skipping
-2022-12-03 13:45:15.945  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.946  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_shifts" does not exist, skipping
-2022-12-03 13:45:15.947  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.947  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_tickets" does not exist, skipping
-2022-12-03 13:45:15.948  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.948  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "person" does not exist, skipping
-2022-12-03 13:45:15.949  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.949  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "person_person_roles" does not exist, skipping
-2022-12-03 13:45:15.950  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.951  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "room_artworks" does not exist, skipping
-2022-12-03 13:45:15.952  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.952  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "shift" does not exist, skipping
-2022-12-03 13:45:15.953  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.953  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "shift_employees" does not exist, skipping
-2022-12-03 13:45:15.954  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.954  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "storage" does not exist, skipping
-2022-12-03 13:45:15.956  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.956  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "ticket" does not exist, skipping
-2022-12-03 13:45:15.981  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2022-12-03 13:45:15.982  WARN 23514 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : sequence "hibernate_sequence" does not exist, skipping
-2022-12-03 13:45:16.356  INFO 23514 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-03 13:45:16.380  INFO 23514 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-03 13:45:18.176  WARN 23514 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-12-03 13:45:19.411  INFO 23514 --- [    Test worker] c.m.e.M.MuseumBackendApplicationTests    : Started MuseumBackendApplicationTests in 12.164 seconds (JVM running for 16.503)
+2022-12-05 22:37:39.011  INFO 63818 --- [    Test worker] c.m.e.M.MuseumBackendApplicationTests    : Starting MuseumBackendApplicationTests using Java 19.0.1 on samuel-gp66leopard10ug with PID 63818 (started by coldstuff1 in /home/coldstuff1/Desktop/School/ECSE 321/Museum/project-group-15)
+2022-12-05 22:37:39.012  INFO 63818 --- [    Test worker] c.m.e.M.MuseumBackendApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2022-12-05 22:37:39.681  INFO 63818 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-05 22:37:39.733  INFO 63818 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 12 JPA repository interfaces.
+2022-12-05 22:37:40.181  INFO 63818 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-05 22:37:40.294  INFO 63818 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-05 22:37:40.401  INFO 63818 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-05 22:37:40.459  INFO 63818 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.12.Final
+2022-12-05 22:37:40.630  INFO 63818 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-12-05 22:37:40.759  INFO 63818 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2022-12-05 22:37:41.725  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.725  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "admin" does not exist, skipping
+2022-12-05 22:37:41.725  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.725  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "artwork" does not exist, skipping
+2022-12-05 22:37:41.726  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.726  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "artwork_loans" does not exist, skipping
+2022-12-05 22:37:41.726  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.726  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "artwork_loans" does not exist, skipping
+2022-12-05 22:37:41.727  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.727  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer" does not exist, skipping
+2022-12-05 22:37:41.727  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.727  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer_loans" does not exist, skipping
+2022-12-05 22:37:41.728  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.728  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer_loans" does not exist, skipping
+2022-12-05 22:37:41.728  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.728  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer_tickets" does not exist, skipping
+2022-12-05 22:37:41.729  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.729  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "customer_tickets" does not exist, skipping
+2022-12-05 22:37:41.729  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.729  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "display" does not exist, skipping
+2022-12-05 22:37:41.729  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.730  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "employee" does not exist, skipping
+2022-12-05 22:37:41.730  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.730  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "employee_shifts" does not exist, skipping
+2022-12-05 22:37:41.730  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.730  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "employee_shifts" does not exist, skipping
+2022-12-05 22:37:41.731  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.731  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "loan" does not exist, skipping
+2022-12-05 22:37:41.731  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.731  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "loan" does not exist, skipping
+2022-12-05 22:37:41.731  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.732  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "loan" does not exist, skipping
+2022-12-05 22:37:41.732  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.732  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_artworks" does not exist, skipping
+2022-12-05 22:37:41.732  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.732  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_artworks" does not exist, skipping
+2022-12-05 22:37:41.733  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.733  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_loans" does not exist, skipping
+2022-12-05 22:37:41.733  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.733  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_loans" does not exist, skipping
+2022-12-05 22:37:41.733  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.733  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_persons" does not exist, skipping
+2022-12-05 22:37:41.734  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.734  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_persons" does not exist, skipping
+2022-12-05 22:37:41.734  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.734  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_rooms" does not exist, skipping
+2022-12-05 22:37:41.735  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.735  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_shifts" does not exist, skipping
+2022-12-05 22:37:41.735  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.735  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_shifts" does not exist, skipping
+2022-12-05 22:37:41.735  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.735  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_tickets" does not exist, skipping
+2022-12-05 22:37:41.736  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.736  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "museum_tickets" does not exist, skipping
+2022-12-05 22:37:41.736  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.736  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "person" does not exist, skipping
+2022-12-05 22:37:41.737  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.737  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "person_person_roles" does not exist, skipping
+2022-12-05 22:37:41.737  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.737  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "room_artworks" does not exist, skipping
+2022-12-05 22:37:41.738  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.738  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "shift" does not exist, skipping
+2022-12-05 22:37:41.738  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.738  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "shift_employees" does not exist, skipping
+2022-12-05 22:37:41.738  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.739  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "shift_employees" does not exist, skipping
+2022-12-05 22:37:41.739  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.739  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "storage" does not exist, skipping
+2022-12-05 22:37:41.739  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.739  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "ticket" does not exist, skipping
+2022-12-05 22:37:41.740  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.740  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "ticket" does not exist, skipping
+2022-12-05 22:37:41.740  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.740  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "admin" does not exist, skipping
+2022-12-05 22:37:41.740  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.741  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "artwork" does not exist, skipping
+2022-12-05 22:37:41.741  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.741  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "artwork_loans" does not exist, skipping
+2022-12-05 22:37:41.741  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.741  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "customer" does not exist, skipping
+2022-12-05 22:37:41.742  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.742  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "customer_loans" does not exist, skipping
+2022-12-05 22:37:41.742  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.742  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "customer_tickets" does not exist, skipping
+2022-12-05 22:37:41.742  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.742  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "display" does not exist, skipping
+2022-12-05 22:37:41.743  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.743  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "employee" does not exist, skipping
+2022-12-05 22:37:41.743  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.743  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "employee_shifts" does not exist, skipping
+2022-12-05 22:37:41.743  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.743  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "loan" does not exist, skipping
+2022-12-05 22:37:41.744  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.744  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum" does not exist, skipping
+2022-12-05 22:37:41.744  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.744  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_artworks" does not exist, skipping
+2022-12-05 22:37:41.745  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.745  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_loans" does not exist, skipping
+2022-12-05 22:37:41.745  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.745  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_persons" does not exist, skipping
+2022-12-05 22:37:41.745  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.745  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_rooms" does not exist, skipping
+2022-12-05 22:37:41.746  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.746  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_shifts" does not exist, skipping
+2022-12-05 22:37:41.746  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.746  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "museum_tickets" does not exist, skipping
+2022-12-05 22:37:41.746  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.746  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "person" does not exist, skipping
+2022-12-05 22:37:41.747  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.747  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "person_person_roles" does not exist, skipping
+2022-12-05 22:37:41.747  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.747  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "room_artworks" does not exist, skipping
+2022-12-05 22:37:41.747  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.747  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "shift" does not exist, skipping
+2022-12-05 22:37:41.748  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.748  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "shift_employees" does not exist, skipping
+2022-12-05 22:37:41.748  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.748  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "storage" does not exist, skipping
+2022-12-05 22:37:41.748  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.749  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "ticket" does not exist, skipping
+2022-12-05 22:37:41.749  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2022-12-05 22:37:41.749  WARN 63818 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : sequence "hibernate_sequence" does not exist, skipping
+2022-12-05 22:37:41.966  INFO 63818 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-05 22:37:41.975  INFO 63818 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-05 22:37:42.634  WARN 63818 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-05 22:37:43.073  INFO 63818 --- [    Test worker] c.m.e.M.MuseumBackendApplicationTests    : Started MuseumBackendApplicationTests in 4.319 seconds (JVM running for 5.609)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -244,11 +244,13 @@ public class TicketIntegrationTests {
     //Ensure the customer is correctly added
     assertEquals(HttpStatus.CREATED, customerResponse2.getStatusCode(), "Response has correct status");
     int customerId2 = customerResponse2.getBody().getId();
-    
+    ResponseEntity<TicketResponseDto> createNewTicket1 = client.postForEntity("/tickets",new TicketRequestDto("2000-01-01",10.00), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> createNewTicket2 = client.postForEntity("/tickets",new TicketRequestDto("2000-01-01",8.00), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> createNewTicket3 = client.postForEntity("/tickets",new TicketRequestDto("2000-01-01",1.00), TicketResponseDto.class);
     //Purchase some tickets
-    ResponseEntity<TicketResponseDto> response1 = client.postForEntity("/customers/"+customerId, new TicketRequestDto("2000-01-01",10.00), TicketResponseDto.class);
-    ResponseEntity<TicketResponseDto> response2 = client.postForEntity("/customers/"+customerId, new TicketRequestDto("2000-01-01",8.00), TicketResponseDto.class);
-    ResponseEntity<TicketResponseDto> response3 = client.postForEntity("/customers/"+customerId2, new TicketRequestDto("2000-01-01",1.00), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> response1 = client.postForEntity("/customers/"+customerId, new IdRequestDto(createNewTicket1.getBody().getTicketId()), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> response2 = client.postForEntity("/customers/"+customerId, new IdRequestDto(createNewTicket2.getBody().getTicketId()), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> response3 = client.postForEntity("/customers/"+customerId2, new IdRequestDto(createNewTicket3.getBody().getTicketId()), TicketResponseDto.class);
     //Ensure the ticket is correctly purchased
     assertEquals(HttpStatus.CREATED, response1.getStatusCode(), "Response has correct status");
     assertEquals(HttpStatus.CREATED, response2.getStatusCode(), "Response has correct status");
@@ -282,10 +284,10 @@ public class TicketIntegrationTests {
     //Ensure the customer is correctly added
     assertEquals(HttpStatus.CREATED, customerResponse.getStatusCode(), "Response has correct status");
     int customerId = customerResponse.getBody().getId();
+
+    ResponseEntity<String> createNewTicketResponse = client.postForEntity("/tickets",new TicketRequestDto("2000-01-01",-9.00),String.class);
     
-    ResponseEntity<String> response1 = client.postForEntity("/customers/"+customerId, new TicketRequestDto("2000-01-01",-9.00), String.class);
-    
-    assertEquals(HttpStatus.BAD_REQUEST, response1.getStatusCode(), "Response has correct status");
+    assertEquals(HttpStatus.BAD_REQUEST, createNewTicketResponse.getStatusCode(), "Response has correct status");
     
     //Browse customer tickets
     ResponseEntity<List<TicketResponseDto>> response = client.exchange("/customers/"+customerId,HttpMethod.GET, null, new ParameterizedTypeReference<List<TicketResponseDto>>() {});
@@ -303,7 +305,7 @@ public class TicketIntegrationTests {
     
     ResponseEntity<String> response1 = client.postForEntity("/customers/"+customerId, new TicketRequestDto("2000-01-01",10.00), String.class);
     
-    assertEquals(HttpStatus.NOT_FOUND, response1.getStatusCode(), "Response has correct status");
+    assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response1.getStatusCode(), "Response has correct status");
 
   }
   @Test
@@ -324,8 +326,8 @@ public class TicketIntegrationTests {
     //Ensure the customer is correctly added
     assertEquals(HttpStatus.CREATED, customerResponse.getStatusCode(), "Response has correct status");
     int customerId = customerResponse.getBody().getId();
-    
-    ResponseEntity<String> response1 = client.postForEntity("/customers/"+customerId, new TicketRequestDto(null,10.00), String.class);
+
+    ResponseEntity<String> response1 = client.postForEntity("/tickets",new TicketRequestDto("2000-01-01",-9.00),String.class);
     
     assertEquals(HttpStatus.BAD_REQUEST, response1.getStatusCode(), "Response has correct status");
     
@@ -358,9 +360,9 @@ public class TicketIntegrationTests {
     assertEquals(HttpStatus.CREATED, customerResponse.getStatusCode(), "Response has correct status");
     int customerId = customerResponse.getBody().getId();
     String in4Days = LocalDate.now().plusDays(4).toString();
-    
+    ResponseEntity<TicketResponseDto> createTicketResponse = client.postForEntity("/tickets",new TicketRequestDto(in4Days,10.00),TicketResponseDto.class);
     //Ticket date is 4 days after now
-    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/customers/"+customerId, new TicketRequestDto(in4Days,10.00), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/customers/"+customerId,new IdRequestDto(createTicketResponse.getBody().getTicketId()) , TicketResponseDto.class);
     
     assertEquals(HttpStatus.CREATED, responsePost.getStatusCode(), "Response has correct status");
     int ticketId = responsePost.getBody().getTicketId();
@@ -402,9 +404,9 @@ public class TicketIntegrationTests {
     //Ensure the customer is correctly added
     assertEquals(HttpStatus.CREATED, customerResponse.getStatusCode(), "Response has correct status");
     int customerId = customerResponse.getBody().getId();
-    
+    ResponseEntity<TicketResponseDto> createNewTicketResponse = client.postForEntity("/tickets",new TicketRequestDto("2000-01-07",10.00),TicketResponseDto.class);
     //Ticket date is 2 days after now (too late for cancel)
-    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/customers/"+customerId, new TicketRequestDto("2000-01-07",10.00), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/customers/"+customerId, new IdRequestDto(createNewTicketResponse.getBody().getTicketId()), TicketResponseDto.class);
     
     assertEquals(HttpStatus.CREATED, responsePost.getStatusCode(), "Response has correct status");
     int ticketId = responsePost.getBody().getTicketId();
@@ -454,9 +456,9 @@ public class TicketIntegrationTests {
     //Ensure the customer is correctly added
     assertEquals(HttpStatus.CREATED, customerResponse2.getStatusCode(), "Response has correct status");
     int customerId2 = customerResponse2.getBody().getId();
-    
+    ResponseEntity<TicketResponseDto> createNewTicket = client.postForEntity("/tickets",new TicketRequestDto("2000-01-11",10.00),TicketResponseDto.class);
     //Ticket date is 4 days after now
-    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/customers/"+customerId, new TicketRequestDto("2000-01-11",10.00), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/customers/"+customerId,new IdRequestDto(createNewTicket.getBody().getTicketId()), TicketResponseDto.class);
     
     assertEquals(HttpStatus.CREATED, responsePost.getStatusCode(), "Response has correct status");
     int ticketId = responsePost.getBody().getTicketId();
