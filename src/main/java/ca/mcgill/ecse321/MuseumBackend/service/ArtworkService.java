@@ -168,15 +168,10 @@ public class ArtworkService {
     if (r == null) {throw new DisplayException(HttpStatus.NOT_FOUND, "Room not found.");}
     
     if (r.isFull()) {throw new DisplayException(HttpStatus.BAD_REQUEST, "Room is full");}
-    
-    art.getRoom().removeArtwork(art);
-    roomRepository.save(art.getRoom());
-    
+
     art.setRoom(r);
-    r.addArtwork(art);
-    
+    r = roomRepository.save(r);
     art = artworkRepository.save(art);
-    roomRepository.save(r);
     return art;
   }
   
