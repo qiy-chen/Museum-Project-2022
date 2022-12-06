@@ -69,7 +69,7 @@
                         value="2022-12-05"
                         min="2022-01-01" max="2025-12-31">
                     <label for="employeeId">Employee:</label>
-                    <select name="employeeId" id="employeeId">
+                    <select name="employeeId" v-model="employeeId" id="employeeId">
                         <option v-for="employee in employees" > {{(employee.id)}}</option>
                     </select>
                     <div>&nbsp</div>

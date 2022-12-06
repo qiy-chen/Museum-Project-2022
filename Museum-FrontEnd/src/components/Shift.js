@@ -13,10 +13,10 @@ var AXIOS = axios.create({
 
 
 class ShiftRequestDto {
-  constructor(startTime, endTime, museum) {
+  constructor(startTime, endTime, museumId) {
     this.startTime = startTime
     this.endTime = endTime
-    this.museum = museum
+    this.museumId = museumId
   }
 }
 
@@ -54,8 +54,8 @@ export default {
       })
   },
   methods: {
-    createShift: function (startTime,endTime,museum) {
-      AXIOS.post('/shift', new ShiftRequestDto(startTime, endTime, museum))
+    createShift: function (startDate,endDate) {
+      AXIOS.post('/shift', new ShiftRequestDto(startDate, endDate, 69))
         .then(response => {
           this.shifts.push(response.data)
           this.errorShift = ''
@@ -165,12 +165,12 @@ export default {
     setShift: function(startDate,endDate,employeeId) {
       let start = startDate.toString().concat(' 08:00')
       let end = endDate.toString().concat(' 17:00')
-      this.createShift(start,end,69)
+      this.createShift(start,end)
       console.log(this.shifts)
       console.log(start)
       console.log(end)
-      let workDayId = this.shifts[this.shifts.length].workDayId
-      this.addEmployeeToShift(workDayId, employeeId)
+      let workDayId = this.shifts[this.shifts.length-1].workDayId
+      setTimeout(() => {this.addEmployeeToShift(workDayId, employeeId)}, 500)
     },
 
     'changeMonth' (start, end, current) {
