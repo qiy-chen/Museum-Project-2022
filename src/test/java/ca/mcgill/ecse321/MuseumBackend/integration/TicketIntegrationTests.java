@@ -372,7 +372,7 @@ public class TicketIntegrationTests {
     mHttpHeaders.add("Content-Type", "application/json");
     HttpEntity<IdRequestDto> entity = new HttpEntity<>(new IdRequestDto(ticketId), mHttpHeaders);
     //Cancel ticket
-    ResponseEntity<TicketResponseDto> responseDelete = client.exchange("/customers/"+customerId, HttpMethod.DELETE, entity, TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> responseDelete = client.exchange("/customers/"+customerId, HttpMethod.PUT, entity, TicketResponseDto.class);
     assertNotNull(responseDelete);
     assertEquals(HttpStatus.OK, responseDelete.getStatusCode(), "Response has correct status");
     
@@ -416,7 +416,7 @@ public class TicketIntegrationTests {
     mHttpHeaders.add("Content-Type", "application/json");
     HttpEntity<IdRequestDto> entity = new HttpEntity<IdRequestDto>(new IdRequestDto(ticketId),mHttpHeaders);
     //Cancel ticket
-    ResponseEntity<String> responseDelete = client.exchange("/customers/"+customerId, HttpMethod.DELETE, entity, String.class);
+    ResponseEntity<String> responseDelete = client.exchange("/customers/"+customerId, HttpMethod.PUT, entity, String.class);
 
     assertNotNull(responseDelete);
     assertEquals(HttpStatus.FORBIDDEN, responseDelete.getStatusCode(), "Response has correct status");
@@ -468,7 +468,7 @@ public class TicketIntegrationTests {
     mHttpHeaders.add("Content-Type", "application/json");
     HttpEntity<IdRequestDto> entity = new HttpEntity<IdRequestDto>(new IdRequestDto(ticketId),mHttpHeaders);
     //Cancel ticket using wrong customer
-    ResponseEntity<String> responseDelete = client.exchange("/customers/"+customerId2, HttpMethod.DELETE, entity, String.class);
+    ResponseEntity<String> responseDelete = client.exchange("/customers/"+customerId2, HttpMethod.PUT, entity, String.class);
 
     assertNotNull(responseDelete);
     assertEquals(HttpStatus.FORBIDDEN, responseDelete.getStatusCode(), "Response has correct status");

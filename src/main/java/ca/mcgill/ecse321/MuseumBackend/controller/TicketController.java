@@ -93,7 +93,7 @@ public class TicketController {
     return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.CREATED);
   }
 
-  @DeleteMapping("/customers/{roleId}")
+  @PutMapping("/customers/{roleId}")
   public ResponseEntity<TicketResponseDto> cancelTicket(@PathVariable int roleId, @RequestBody IdRequestDto ticketId) {
     //ticketService.deleteTicket(ticketId.getId());
     ticketService.cancelTicket(ticketId.getId(),roleId);
