@@ -115,7 +115,7 @@
                         <h2 class="section-heading text-uppercase">Update Artwork</h2>
                         <h3 class="section-subheading text-muted">Enter artwork information down below.</h3>
                         <label for="fname2">ArtworkId:</label>
-                            <select v-model="roomId">
+                            <select v-model="artworkId">
                             <option v-for="artwork in artworks" > {{artwork.artworkId}}</option>
                             </select>
                         <div>&nbsp;</div> 
