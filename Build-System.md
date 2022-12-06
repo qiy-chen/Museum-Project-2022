@@ -13,7 +13,9 @@ Step 4: Run the following command
 
 `npm run dev`
 
-This should launch the Frontend in your default browser. 
+This should launch the Frontend in your default browser. The following page should start
+<img width="1552" alt="image" src="https://user-images.githubusercontent.com/98911345/205796431-78b79c2b-2cd5-4f6c-a49c-e31fb24df764.png">
+
 
 ## Important information for the Frontend
 When the frontend launches it creates a museum and an admin account for the admin to login. To log in using the admin account (and hence use all their functionalities) you must use the following credentials:
