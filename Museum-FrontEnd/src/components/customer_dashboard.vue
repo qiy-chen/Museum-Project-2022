@@ -71,6 +71,7 @@
                     </div>
                 </div>
                 <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'buy_tickets'})">Buy Tickets</a>
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'cancelTickets'})">Cancel Tickets</a>
             </section>
             <section class="page-section" id="yourloans">
                 <div class="container">

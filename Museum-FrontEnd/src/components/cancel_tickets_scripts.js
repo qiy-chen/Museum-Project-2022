@@ -23,18 +23,18 @@ export default {
   name: 'buy_tickets_scripts',
   data() {
     return {
-      unpurchasedTickets: [],
+      customerTickets: [],
       selectedTicket: '',
       ticketDate: '',
-      errorTickets: ''
+      errorTickets: []
     }
   },
   created: function () {
-    //Load all unpurchased tickets
-    AXIOS.get('/tickets/buy')
+    //Load all customer tickets
+    AXIOS.get('/customer/tickets/'.concat(localStorage.getItem('id')))
     .then(response => {
       // JSON responses are automatically parsed.
-      this.unpurchasedTickets = response.data
+      this.customerTickets = response.data
     })
     .catch(e => {
       this.errorTicket += e
@@ -42,8 +42,8 @@ export default {
   },
 
   methods: {
-    purchaseTicket: function(ticketId) {
-      AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new IdRequestDto(ticketId))
+    cancelTicket: function(ticketId) {
+      AXIOS.delete('/customers/'.concat(localStorage.getItem('id')),new IdRequestDto(ticketId))
         .then(response => {
           window.location.reload()
         })

@@ -13,6 +13,7 @@ import Gallery from '@/components/gallery'
 import Schedule from '@/components/schedule'
 import Room from '@/components/room_dashboard'
 import Ticket from '@/components/ticketDashboard'
+import cancelTicket from '@/components/cancel_tickets'
 
 Vue.use(Router)
 
@@ -67,6 +68,11 @@ export default new Router({
       path: '/admin_dashboard/ticketDashboard',
       name: 'ticketDashboard',
       component: Ticket
+    },
+        {
+      path: '/customer_dashboard/cancel_tickets',
+      name: 'cancelTickets',
+      component: cancelTicket
     },
     {
       path: '/customer_dashboard/gallery',
