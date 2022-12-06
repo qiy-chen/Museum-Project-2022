@@ -15,12 +15,12 @@ Nov 23rd
 * Topics: completed system architecture and website plan, distributed html pages
 * Action items: html team members to work on their assigned pages
 
-Nov 24th  
+Nov 29th  
 * Present: Sam, Elie, Qi
 * Topics: distributed classes for JS method writing
 * Action items: JS team members to complete assigned class  scripts
 
-Nov 3rd  
+Dec 3rd  
 * Present: everyone
 * Topics: merged html and js into vue files and distributed some tasks
 * action items
@@ -28,6 +28,6 @@ Nov 3rd
   * completion of js methods
   * incorporation of js variables for inputs and outputs with the pages
 
-Nov 4th  
+Dec 5th  
 * Present: everyone
 * Topics: prepare presentation, finish everything
