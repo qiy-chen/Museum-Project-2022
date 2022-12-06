@@ -53,17 +53,17 @@
                         <label for="fname2">RoomId:</label>
                             <select v-model="roomId">
                             <option v-for="display in displays" > {{display.roomId}}</option>
+                            <option v-for="storage in storages"> {{storage.roomId}}</option>
                             </select>
                         <div>&nbsp;</div> 
-                        <label for="fname2">Artwork value:</label><br>
-                            <input type="number" v-model="value" id="fname3" name="fname3"><br>
-                        <div>&nbsp;</div>    
+                          
                         <div>
                             <button class ="btn btn-primary" @click="createArtwork(artworkName, roomId, 69)">ADD</button>
+                            
                         </div>
                     </div>
                 </div>
-            </section>
+            
             <div class="text_center">
                         <table class="center">
                             <tr>
@@ -77,6 +77,8 @@
                                 <div>&nbsp;</div> 
                                 <th>Artwork Room Id</th>
                             </tr>
+
+                        
                             <tr v-for="artwork in artworks">
                                 <td>{{ artwork.artworkName}}</td>
                                 <div>&nbsp;</div>
@@ -90,6 +92,7 @@
                             </tr>
                         </table>
             </div>
+            </section>
             <section class="page-section" id="services">
                 <div class="container">
                     <div class="text-center">
@@ -111,8 +114,10 @@
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Update Artwork</h2>
                         <h3 class="section-subheading text-muted">Enter artwork information down below.</h3>
-                        <label for="fname">Artwork ID:</label><br>
-                            <input type="number" v-model="artworkId" id="fname" name="fname"><br>
+                        <label for="fname2">ArtworkId:</label>
+                            <select v-model="roomId">
+                            <option v-for="artwork in artworks" > {{artwork.artworkId}}</option>
+                            </select>
                         <div>&nbsp;</div> 
                         <label for="fname">Name:</label><br>
                             <input type="text" v-model="artworkName" id="fname" name="fname"><br>

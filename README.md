@@ -25,12 +25,12 @@ The Museum Management System development team is comprised of six skilled softwa
 ## Time Contributions
 | Name  | Sprint 1 | Sprint 2 | Sprint 3 | 
 | ------------- | --- | --- | --- |
-| Abdo Elie-Dimitri  | 20 | 35 |  |  
-| Chen Qi  | 20 | 30 |  |  
-| Faubert Samuel  | 24 | 45 |  |  
-| Kawczynski Emma  | 19 | 30 |  |  
-| Looman Jeanine  | 18 | 40 |  |  
-| Tsahageas Alex | 20 | 38 |  | 
+| Abdo Elie-Dimitri  | 20 | 35 | 45 |  
+| Chen Qi  | 20 | 30 | 45 |  
+| Faubert Samuel  | 24 | 45 | 45 |  
+| Kawczynski Emma  | 19 | 30 | 45 |  
+| Looman Jeanine  | 18 | 40 | 45 |  
+| Tsahageas Alex | 20 | 38 | 45 | 
 
 # Project Reports
 

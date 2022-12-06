@@ -10,42 +10,27 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-//Dtos
-function IdRequestDto(id){
-	this.id = id
-}
-function TicketRequestDto(ticketDate, price){
-	this.ticketDate = ticketDate
-	this.price = price
+class TicketRequestDto {
+  constructor(ticketDate,price) {
+    this.ticketDate = ticketDate
+    this.price = price
+  }
 }
 
 export default {
   name: 'buy_tickets_scripts',
   data() {
     return {
-      unpurchasedTickets: [],
-      selectedTicket: '',
+      tickets: [],
       ticketDate: '',
       errorTickets: ''
     }
   },
-  created: function () {
-    //Load all unpurchased tickets
-    AXIOS.get('/tickets/buy')
-    .then(response => {
-      // JSON responses are automatically parsed.
-      this.unpurchasedTickets = response.data
-    })
-    .catch(e => {
-      this.errorTicket += e
-    })
-  },
-
   methods: {
-    purchaseTicket: function(ticketId) {
-      AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new IdRequestDto(ticketId))
+    purchaseTicket: function(ticketDate) {
+      AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new TicketRequestDto(ticketDate,9.99))
         .then(response => {
-          window.location.reload()
+          Router.push({name: 'customer_dashboard'})
         })
         .catch(e => {
           this.errorTickets = e.response.message

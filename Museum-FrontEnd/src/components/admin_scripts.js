@@ -1,5 +1,24 @@
 import * as people from "./Person"
 import * as employees from "./Employee";
+import axios from 'axios'
+var config = require('../../config')
+
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
+
+class EmployeeRequestDto {
+  constructor(email, shiftIDs) {
+    this.email = email
+    this.shiftIDs = shiftIDs
+    this.name
+  }
+}
+
 export default {
   name: 'admin_scripts',
   data() {
@@ -14,8 +33,14 @@ export default {
     }
   },
   created: function() {
-    people.default.created()
-    employees.default.created()
+  
+    AXIOS.get('/employee')
+      .then(response => {
+        this.employees = response.data
+      })
+      .catch(e => {
+        this.errorEmployee = e
+      })
   },
 
   methods: {
@@ -36,11 +61,8 @@ export default {
 
       people.default.methods.createPerson(email,password,firstName,lastName,museum)
       let shiftIDs = []
-      setTimeout(() =>employees.default.methods.createEmployee(email,shiftIDs),5000)
+      setTimeout(() => employees.default.methods.createEmployee(email,shiftIDs),5000)
       this.errorPerson = ''
-      this.employees = employees.default.employees
-      this.people = people.default.people
-      console.log(employees)
     },
     getPersonByEmail: function (email) {
       AXIOS.get('/person/'.concat(email))

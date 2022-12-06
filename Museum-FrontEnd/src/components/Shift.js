@@ -1,3 +1,5 @@
+import * as people from "./Person"
+import * as employees from "./Employee";
 import axios from 'axios'
 var config = require('../../config')
 
@@ -11,10 +13,10 @@ var AXIOS = axios.create({
 
 
 class ShiftRequestDto {
-  constructor(startTime, endTime, museum) {
+  constructor(startTime, endTime, museumId) {
     this.startTime = startTime
     this.endTime = endTime
-    this.museum = museum
+    this.museumId = museumId
   }
 }
 
@@ -22,6 +24,8 @@ export default {
   name: 'shifts',
   data() {
     return {
+      employees: [],
+      people: [],
       shifts: [],
       requestedShiftIndex: 0,
       newShift: {},
@@ -41,10 +45,17 @@ export default {
       .catch(e => {
         this.errorShift = e
       })
+      AXIOS.get('/employee')
+      .then(response => {
+        this.employees = response.data
+      })
+      .catch(e => {
+        this.errorEmployee = e
+      })
   },
   methods: {
-    createShift: function (startTime,endTime,museum) {
-      AXIOS.post('/shift', new ShiftRequestDto(startTime,endTime,museum))
+    createShift: function (startDate,endDate) {
+      AXIOS.post('/shift', new ShiftRequestDto(startDate, endDate, 69))
         .then(response => {
           this.shifts.push(response.data)
           this.errorShift = ''
@@ -137,10 +148,45 @@ export default {
       this.workDayId = 0
       this.dateMap = {}
       this.errorShift = ''
+    },
+    getAllShift: function () {
+      AXIOS.get('/shift', {}, {})
+        .then(response => {
+          console.log(response)
+          this.shifts = response.data
+          this.errorShift = ''
+        })
+        .catch(e => {
+          let errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorShift = errorMsg
+        })
+    },
+    setShift: function(startDate,endDate,employeeId) {
+      let start = startDate.toString().concat(' 08:00')
+      let end = endDate.toString().concat(' 17:00')
+      this.createShift(start,end)
+      console.log(this.shifts)
+      console.log(start)
+      console.log(end)
+      let workDayId = this.shifts[this.shifts.length-1].workDayId
+      setTimeout(() => {this.addEmployeeToShift(workDayId, employeeId)}, 500)
+    },
+
+    'changeMonth' (start, end, current) {
+    console.log('changeMonth', start.format(), end.format(), current.format())
+    },
+    'eventClick' (event, jsEvent, pos) {
+    console.log('eventClick', event, jsEvent, pos)
+    },
+    'dayClick' (day, jsEvent) {
+    console.log('dayClick', day, jsEvent)
+    },
+    'moreClick' (day, events, jsEvent) {
+    console.log('moreCLick', day, events, jsEvent)
     }
-
-
-
-
+  },
+  components : {
+      'full-calendar': require('vue-fullcalendar')
   }
 }

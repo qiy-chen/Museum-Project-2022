@@ -38,8 +38,9 @@ public class TicketRequestDto {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
     Ticket ticket = new Ticket();
     ticket.setPrice(price);
-    this.ticketDate += " 8:00";
-    ticket.setTicketDate(LocalDateTime.parse(ticketDate,formatter));
+    if(this.ticketDate != null) {
+      this.ticketDate += " 8:00";
+      ticket.setTicketDate(LocalDateTime.parse(ticketDate,formatter));}
     return ticket;
   }
   

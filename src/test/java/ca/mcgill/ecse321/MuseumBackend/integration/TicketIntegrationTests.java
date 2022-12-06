@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.MuseumBackend.integration;
 
 import ca.mcgill.ecse321.MuseumBackend.dto.*;
 import ca.mcgill.ecse321.MuseumBackend.model.Person;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.repository.CustomerRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.PersonRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.TicketRepository;
@@ -16,6 +17,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -37,7 +39,7 @@ public class TicketIntegrationTests {
   private CustomerRepository customerRepo;
   @Autowired
   private PersonRepository personRepo;
-  private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
 
   @BeforeEach
   @AfterEach
@@ -62,7 +64,7 @@ public class TicketIntegrationTests {
     assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
     assertNotNull(response.getBody(), "Response has body");
     assertEquals(10.00, response.getBody().getPrice(), "Response has correct price");
-    assertEquals(LocalDateTime.parse("2000-01-01",formatter),response.getBody().getTicketDate(), "Response has correct date");
+    assertEquals(LocalDateTime.parse("2000-01-01"+" 8:00",formatter),response.getBody().getTicketDate(), "Response has correct date");
     return response.getBody().getTicketId();
   }
 
@@ -74,7 +76,7 @@ public class TicketIntegrationTests {
     assertNotNull(response.getBody(), "Response has body");
     assertEquals(id, response.getBody().getTicketId(), "Response has correct ID");
     assertEquals(10.00, response.getBody().getPrice(), "Response has correct price");
-    assertEquals(LocalDateTime.parse("2000-01-01",formatter), response.getBody().getTicketDate(), "Response has correct date");
+    assertEquals(LocalDateTime.parse("2000-01-01"+" 8:00",formatter), response.getBody().getTicketDate(), "Response has correct date");
   }
   
   @Test
@@ -99,7 +101,7 @@ public class TicketIntegrationTests {
     assertEquals(2, responseList.size(), "Response has correct number of tickets");
     assertEquals(ticketOneId, responseList.get(0).getTicketId(), "Response has correct ID for ticket 1");
     assertEquals(10.00, responseList.get(0).getPrice(), "Response has correct price for ticket 1");
-    assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0), responseList.get(0).getTicketDate(), "Response has correct date for ticket 1");
+    assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 8, 0, 0), responseList.get(0).getTicketDate(), "Response has correct date for ticket 1");
   }
 
   @Test
@@ -136,7 +138,7 @@ public class TicketIntegrationTests {
     assertNotNull(response1.getBody(), "Response has body");
     assertEquals(ticketId, response1.getBody().getTicketId(), "Response has correct ID");
     assertEquals(12.00, response1.getBody().getPrice(), "Response has correct price");
-    assertEquals(LocalDateTime.of(2022,Month.JANUARY, 1, 0, 0, 0), response1.getBody().getTicketDate(), "Response has correct date");
+    assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 8, 0, 0), response1.getBody().getTicketDate(), "Response has correct date");
 
     
   }
@@ -155,7 +157,7 @@ public class TicketIntegrationTests {
     assertEquals(HttpStatus.OK, response1.getStatusCode(), "Response has correct status");
     assertNotNull(response1.getBody(), "Response has body");
     assertEquals(12.00, response1.getBody().getPrice(), "Response has correct price");
-    assertEquals(LocalDateTime.of(2022,Month.JANUARY, 1, 0, 0, 0), response1.getBody().getTicketDate(), "Response has correct date");
+    assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 8, 0, 0), response1.getBody().getTicketDate(), "Response has correct date");
 
     
   }
@@ -259,7 +261,7 @@ public class TicketIntegrationTests {
     assertNotNull(response.getBody(), "Response has body");
     assertEquals(2, responseList.size(), "Response has correct number of tickets");
     assertEquals(10.00, responseList.get(0).getPrice(), "Response has correct price for ticket 1");
-    assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 0, 0, 0), responseList.get(0).getTicketDate(), "Response has correct date for ticket 1");
+    assertEquals(LocalDateTime.of(2000,Month.JANUARY, 1, 8, 0, 0), responseList.get(0).getTicketDate(), "Response has correct date for ticket 1");
   }
   
   @Test
@@ -355,9 +357,10 @@ public class TicketIntegrationTests {
     //Ensure the customer is correctly added
     assertEquals(HttpStatus.CREATED, customerResponse.getStatusCode(), "Response has correct status");
     int customerId = customerResponse.getBody().getId();
+    String in4Days = LocalDate.now().plusDays(4).toString();
     
     //Ticket date is 4 days after now
-    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/customers/"+customerId, new TicketRequestDto("2000-01-05",10.00), TicketResponseDto.class);
+    ResponseEntity<TicketResponseDto> responsePost = client.postForEntity("/customers/"+customerId, new TicketRequestDto(in4Days,10.00), TicketResponseDto.class);
     
     assertEquals(HttpStatus.CREATED, responsePost.getStatusCode(), "Response has correct status");
     int ticketId = responsePost.getBody().getTicketId();
@@ -365,10 +368,9 @@ public class TicketIntegrationTests {
     //Create request body
     HttpHeaders mHttpHeaders = new HttpHeaders();
     mHttpHeaders.add("Content-Type", "application/json");
-    HttpEntity<IdRequestDto> entity = new HttpEntity<IdRequestDto>(new IdRequestDto(ticketId),mHttpHeaders);
+    HttpEntity<IdRequestDto> entity = new HttpEntity<>(new IdRequestDto(ticketId), mHttpHeaders);
     //Cancel ticket
     ResponseEntity<TicketResponseDto> responseDelete = client.exchange("/customers/"+customerId, HttpMethod.DELETE, entity, TicketResponseDto.class);
-
     assertNotNull(responseDelete);
     assertEquals(HttpStatus.OK, responseDelete.getStatusCode(), "Response has correct status");
     
