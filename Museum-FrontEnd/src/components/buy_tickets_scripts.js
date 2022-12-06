@@ -37,7 +37,7 @@ export default {
       this.unpurchasedTickets = response.data
     })
     .catch(e => {
-      this.errorTicket += e
+      this.errorTickets = e.response.message
     })
   },
   methods: {
