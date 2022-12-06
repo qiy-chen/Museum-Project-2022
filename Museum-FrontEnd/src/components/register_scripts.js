@@ -23,6 +23,7 @@ export default {
     }
   },
   created: function() {
+    
     people.default.created()
     customers.default.created()
   },

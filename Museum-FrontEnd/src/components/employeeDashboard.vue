@@ -68,14 +68,6 @@
                 </div>
             </div>
         </section>
-        <section class="page-section" id="room">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Room Dashboard</h2>
-                    <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'room_dashboard'})">Room Dashboard</a>
-                </div>
-            </div>
-        </section>
         
         <!-- Footer-->
         <footer class="footer py-4">

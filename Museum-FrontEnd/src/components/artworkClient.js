@@ -34,6 +34,10 @@ export default {
   },
 
   created() {
+    setTimeout(() =>{
+      if (window.location.href.substr(-2) !== '?r') {
+    window.location = window.location.href + '?r' ;window.location.reload();
+}},500)
     AXIOS.get('/display/artworks')
     .then(response => {
       console.log(response.data)

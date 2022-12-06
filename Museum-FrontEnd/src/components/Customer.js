@@ -32,6 +32,7 @@ export default {
     }
   },
   created: function() {
+    
     AXIOS.get('/customer')
       .then(response => {
         this.customers = response.data

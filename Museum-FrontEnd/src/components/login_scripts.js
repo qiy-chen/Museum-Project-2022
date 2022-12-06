@@ -29,12 +29,14 @@ export default {
     }
   },
   created: function() {
+   
     person.default.created()
     customer.default.created()
     employee.default.created()
     admin.default.created()
   },
   methods: {
+
     loginToRightRole: function(email,password) {
       if(email === '') {
         this.foundPerson = []

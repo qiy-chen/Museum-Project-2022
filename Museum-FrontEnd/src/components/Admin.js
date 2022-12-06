@@ -29,6 +29,7 @@ export default {
     }
   },
   created: function() {
+
     AXIOS.get('/admin')
       .then(response => {
         this.admins = response.data

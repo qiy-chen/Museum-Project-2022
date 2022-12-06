@@ -31,6 +31,7 @@ export default {
     }
   },
   created: function() {
+   
     AXIOS.get('/employee')
       .then(response => {
         this.employees = response.data
@@ -84,6 +85,7 @@ export default {
         this.errorEmployee = ''
     },
     getShiftsForEmployee: function(id) {
+
       AXIOS.get('/employee/shifts/'.concat(id))
         .then(response => {
           this.employeeShifts = response.data
