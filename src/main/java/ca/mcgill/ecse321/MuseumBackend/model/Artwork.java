@@ -7,6 +7,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,7 +72,10 @@ public class Artwork
 
 	// TODO Auto-generated constructor stub
 
-
+@PreRemove
+private void deleteArtwork() {
+    this.delete();
+}
 public boolean setIsLoanable(boolean aIsLoanable)
   {
     boolean wasSet = false;
@@ -216,7 +220,7 @@ public boolean setIsLoanable(boolean aIsLoanable)
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Loan addLoan(double aRentalFee, Date aStartDate, Date aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Museum aMuseum, Customer aCustomer)
+  public Loan addLoan(double aRentalFee, LocalDateTime aStartDate, LocalDateTime aEndDate, int aNumOfDays, Loan.LoanStatus aStatus, int aLoanId, Museum aMuseum, Customer aCustomer)
   {
     return new Loan(aRentalFee, aStartDate, aEndDate, aNumOfDays, aStatus, aLoanId, aMuseum, aCustomer, this);
   }

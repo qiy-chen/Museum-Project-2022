@@ -21,6 +21,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -36,6 +39,7 @@ public class LoanIntegrationTest {
   private LoanRepository loanRepository;
   @Autowired
   private MuseumRepository museumRepository;
+  private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
   
   @BeforeEach
   @AfterEach
@@ -84,8 +88,6 @@ public class LoanIntegrationTest {
     LoanRequestDto dto = new LoanRequestDto(statusNumber,startDate,endDate, numOfDays, rentalFee, artwork.getArtworkId(), customer.getPersonRoleId(), museum.getMuseumId());
     
     ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans", dto, LoanResponseDto.class);
-    startDate = "2015-03-30";
-    endDate = "2015-04-28";
     
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -97,8 +99,8 @@ public class LoanIntegrationTest {
     assertEquals(customer.getPersonRoleId(), response.getBody().getCustomerId());
     assertEquals(museum.getMuseumId(),response.getBody().getMuseumId());
     assertNotNull(response.getBody().getStartDate());
-    assertEquals(startDate, response.getBody().getStartDate().toString());
-    assertEquals(endDate, response.getBody().getEndDate().toString());
+    assertEquals(LocalDateTime.parse(startDate+" 8:00",formatter), response.getBody().getStartDate());
+    assertEquals(LocalDateTime.parse(endDate+" 8:00",formatter), response.getBody().getEndDate());
     return response.getBody().getLoanId();
   }
   
@@ -113,8 +115,8 @@ public class LoanIntegrationTest {
     assertEquals(3, response.getBody().getNumOfDays());
     assertEquals(2.5, response.getBody().getRentalFee());
     //assertEquals(0,response.getBody().getMuseumId());
-    assertEquals("2015-03-30",response.getBody().getStartDate().toString());
-    assertEquals("2015-04-28",response.getBody().getEndDate().toString());
+    assertEquals(LocalDateTime.parse("2015-03-31"+" 8:00",formatter),response.getBody().getStartDate());
+    assertEquals(LocalDateTime.parse("2015-04-29"+" 8:00",formatter),response.getBody().getEndDate());
     assertEquals(LoanStatus.Requested,response.getBody().getStatus());
     
   } 
@@ -245,8 +247,6 @@ public class LoanIntegrationTest {
     LoanRequestDto dto = new LoanRequestDto(statusNumber,startDate,endDate, numOfDays, rentalFee, artwork.getArtworkId(), customer.getPersonRoleId(), museum.getMuseumId());
     
     ResponseEntity<LoanResponseDto> response = client.postForEntity("/loans", dto, LoanResponseDto.class);
-    startDate = "2015-03-30";
-    endDate = "2015-04-28";
     
     assertNotNull(response);
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -258,8 +258,8 @@ public class LoanIntegrationTest {
     assertEquals(customer.getPersonRoleId(), response.getBody().getCustomerId());
     assertEquals(museum.getMuseumId(),response.getBody().getMuseumId());
     assertNotNull(response.getBody().getStartDate());
-    assertEquals(startDate, response.getBody().getStartDate().toString());
-    assertEquals(endDate, response.getBody().getEndDate().toString());
+    assertEquals(LocalDateTime.parse(startDate+" 8:00",formatter), response.getBody().getStartDate());
+    assertEquals(LocalDateTime.parse(endDate+" 8:00",formatter), response.getBody().getEndDate());
     return response.getBody().getLoanId();
   }
 

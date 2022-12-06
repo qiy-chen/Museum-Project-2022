@@ -26,16 +26,6 @@ export default {
       errorTickets: ''
     }
   },
-  created: function () {
-    AXIOS.post('/tickets',new TicketRequestDto('2022-12-05',9.99))
-      .then(response => {
-        this.tickets.push(response.data)
-      })
-      .catch(e => {
-        console.log(e.response.message)
-      })
-  },
-
   methods: {
     purchaseTicket: function(ticketDate) {
       AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new TicketRequestDto(ticketDate,9.99))
