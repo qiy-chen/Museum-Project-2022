@@ -34,9 +34,9 @@
 						<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 							<li class="nav-item"><a class="nav-link" href="#services">Add
 									Ticket</a></li>
-							<li class="nav-item"><a class="nav-link" href="#update">Update
+							<li class="nav-item"><a class="nav-link" href="#delete">Delete
 									Ticket</a></li>
-							<li class="nav-item"><a class="nav-link" href="#moveartwork">Update
+							<li class="nav-item"><a class="nav-link" href="#update">Update
 									Ticket</a></li>
 							<li class="nav-item dropdown"><b-dropdown
 									id="navbarDropdown" text="Account" class="m-md-2">
@@ -77,7 +77,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="page-section" id="services">
+			<section class="page-section" id="alltickets">
 				<div class="container">
 					<div class="text_center">
 						<div>
@@ -127,7 +127,7 @@
 					</tr>
 				</table>
 			</div>
-			<section class="page-section" id="services">
+			<section class="page-section" id="delete">
 				<div class="container">
 					<div class="text-center">
 						<h2 class="section-heading text-uppercase">Delete Ticket</h2>
