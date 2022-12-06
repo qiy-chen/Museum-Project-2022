@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.MuseumBackend.service;
 
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import ca.mcgill.ecse321.MuseumBackend.Exception.DisplayException;
 import ca.mcgill.ecse321.MuseumBackend.model.Display;
 import ca.mcgill.ecse321.MuseumBackend.model.Museum;
 import ca.mcgill.ecse321.MuseumBackend.model.Storage;
+import ca.mcgill.ecse321.MuseumBackend.model.Ticket;
 import ca.mcgill.ecse321.MuseumBackend.repository.DisplayRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.MuseumRepository;
 import ca.mcgill.ecse321.MuseumBackend.repository.RoomRepository;
@@ -109,6 +111,18 @@ public class RoomService {
     museumRepository.save(mus);
     
     return storage;
+  }
+  
+  @Transactional
+  public List<Storage> getAllStorage() {
+    List<Storage> storages = (List<Storage>) (storageRepository.findAll());
+    return storages;
+  }
+  
+  @Transactional
+  public List<Display> getAllDisplay() {
+    List<Display> displays = (List<Display>) (displayRepository.findAll());
+    return displays;
   }
 
   @Transactional

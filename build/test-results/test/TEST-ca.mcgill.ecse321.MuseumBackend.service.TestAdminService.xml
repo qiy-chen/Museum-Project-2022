@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ca.mcgill.ecse321.MuseumBackend.service.TestAdminService" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-12-03T18:45:38" hostname="MacBook-Air-de-Qi.local" time="0.147">
+  <properties/>
+  <testcase name="testDeleteAdmin()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestAdminService" time="0.1"/>
+  <testcase name="testCreateAdmin()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestAdminService" time="0.007"/>
+  <testcase name="testInvalidCreateAdminForMissingPerson()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestAdminService" time="0.008"/>
+  <testcase name="testGetAdminByInvalidId()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestAdminService" time="0.006"/>
+  <testcase name="testInvalidDeleteAdmin()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestAdminService" time="0.007"/>
+  <testcase name="testInvalidCreateExistingAdmin()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestAdminService" time="0.008"/>
+  <testcase name="testGetAdminById()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestAdminService" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

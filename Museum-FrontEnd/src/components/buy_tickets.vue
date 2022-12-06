@@ -46,34 +46,44 @@
             </div>
         </header>
         <section class="page-section" id="yourtickets">
+        			<div class="text_center">
+				<h2 class="section-heading text-uppercase">Unpurchased Tickets</h2>
+				<table class="center">
+					<tr>
+						<th>Ticket Id</th>
+						<div>&nbsp;</div>
+						<th>Ticket Date</th>
+						<div>&nbsp;</div>
+						<th>Ticket Price</th>
+						<div>&nbsp;</div>
+					</tr>
+					<tr v-for="ticket in unpurchasedTickets">
+						<td>{{ ticket.ticketId}}</td>
+						<div>&nbsp;</div>
+						<td>{{ ticket.ticketDate.toString() }}</td>
+						<div>&nbsp;</div>
+						<td>{{ ticket.price }}</td>
+						<div>&nbsp;</div>
+					</tr>
+				</table>
+			</div>
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Select your Tickets</h2>
                 </div>
                 <form>
-                    <label for="start">Date:</label>
-                    <input type="date" v-model="ticketDate" id="start" name="trip-start"
-                        value="2022-12-05"
-                        min="2022-01-01" max="2025-12-31">
-                    <label for="numbers">Number of People:</label>
-                    <select name="numbers" id="numbers">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                    </select>
+                    <label for="start">Ticket Id:</label>
+						<label for="fname2"></label> <select v-model="ticketId">
+							<option v-for="ticket in unpurchasedTickets">
+								{{ticket.ticketId}}</option>
+						</select>
+						<div>&nbsp;</div>
                 <div>
                     <label for="fname">Promo Code:</label><br>
                     <input type="text" id="fname" name="fname"><br>
                 </div>
                 </form>
-                <div>
-                    <td>Price per ticket: $9.99 + tax</td>
-                </div>
-                <a class="btn btn-dark btn-xl text-uppercase" @click="purchaseTicket(ticketDate)">Purchase!</a>
+                <a class="btn btn-dark btn-xl text-uppercase" @click="purchaseTicket(ticketId)">Purchase!</a>
             </div>
         </section>
         <footer class="footer py-4">
@@ -83,7 +93,7 @@
                     <div class="col-lg-4 my-3 my-lg-0">
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="GitHub"><i class="fab fa-github"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Email"><i class="fab fa-facebook-f"></i></a>
-                    </div>
+                    </div> 
                     <div class="col-lg-4 text-lg-end">
                         <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
                         <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>

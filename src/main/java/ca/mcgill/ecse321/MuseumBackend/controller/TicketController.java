@@ -39,6 +39,16 @@ public class TicketController {
     return new ResponseEntity<List<TicketResponseDto>>(listResponseTickets, HttpStatus.OK);
   }
   
+  @GetMapping("/tickets/buy")
+  public ResponseEntity<List<TicketResponseDto>> getAllUnpurchasedTickets() {
+    List<Ticket> listTickets = ticketService.getAllUnpurchasedTickets();
+    List<TicketResponseDto> listResponseTickets = new ArrayList<TicketResponseDto>();
+    for (Ticket ticket:listTickets) {
+      listResponseTickets.add(new TicketResponseDto(ticket));
+    }
+    return new ResponseEntity<List<TicketResponseDto>>(listResponseTickets, HttpStatus.OK);
+  }
+  
   @PostMapping("/tickets")
   public ResponseEntity<TicketResponseDto> createTicket(@Valid @RequestBody TicketRequestDto newTicketDto) {
     Ticket newTicket = newTicketDto.toModel();
@@ -74,12 +84,13 @@ public class TicketController {
 
   //Purchase ticket
   @PostMapping("/customers/{roleId}")
-  public ResponseEntity<TicketResponseDto> purchaseTicket(@PathVariable int roleId, @RequestBody TicketRequestDto newTicketDto) {
-    Ticket newTicket = newTicketDto.toModel();
+  public ResponseEntity<TicketResponseDto> purchaseTicket(@PathVariable int roleId, @RequestBody IdRequestDto ticketId) {
+    int ticketId2 = ticketId.getId();
     Customer customer = customerService.getCustomerById(roleId);
+    Ticket newTicket = ticketService.getTicketByTicketId(ticketId2);
     newTicket.setCustomer(customer);
-    newTicket = ticketService.createTicket(newTicket);
-    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.CREATED);
+    newTicket = ticketService.replaceTicket(newTicket, ticketId2);
+    return new ResponseEntity<TicketResponseDto>(new TicketResponseDto(newTicket),HttpStatus.OK);
   }
 
   @DeleteMapping("/customers/{roleId}")

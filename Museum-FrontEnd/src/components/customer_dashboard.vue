@@ -71,6 +71,7 @@
                     </div>
                 </div>
                 <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'buy_tickets'})">Buy Tickets</a>
+                <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'cancelTickets'})">Cancel Tickets</a>
             </section>
             <section class="page-section" id="yourloans">
                 <div class="container">
@@ -85,46 +86,16 @@
                             <tr>
                                 <th>LoanId</th>
                                 <th>Status</th>
-                                <th>numOfDays</th>
-                                <th>startDate</th>
-                                <th>endDate</th>
-                                <th>rentalFee</th>
+                                <th>Nb Days</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Rental Fee</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- placeholder values to be removed when script is ready-->
-                            <tr class="active-row">
-                                <td>#260972321</td>
-                                <td>Requested</td>
-                                <td>2</td>
-                                <td>25/12/2022</td>
-                                <td>27/12/2022</td>
-                                <td>9.99</td>
-                            </tr>
-                            <tr>
-                                <td>#260972325</td>
-                                <td>Approved</td>
-                                <td>10</td>
-                                <td>15/12/2022</td>
-                                <td>25/12/2022</td>
-                                <td>9.99</td>
-                            </tr>
-                            <tr>
-                                <td>#123456789</td>
-                                <td>Returned</td>
-                                <td>5</td>
-                                <td>5/9/2022</td>
-                                <td>10/9/2022</td>
-                                <td>9.99</td>
-                            </tr>
-                            <tr>
-                                <td>#674937423</td>
-                                <td>Returned</td>
-                                <td>17</td>
-                                <td>5/4/2022</td>
-                                <td>23/4/2022</td>
-                                <td>9.99</td>
-                            </tr>
+                               <li v-for="loan in theirLoans">
+                                 {{loan.loanId}} {{loan.status}} {{loan.numOfDays}} {{loan.startDate.toString()}} {{loan.endDate.toString()}} {{loan.rentalFee}} 
+                               </li>
                         </tbody>
                     </table>
                 </div>

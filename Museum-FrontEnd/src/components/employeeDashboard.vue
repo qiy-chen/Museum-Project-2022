@@ -105,89 +105,12 @@
     </body>
     </div>
 </template>
-<script>
-    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
-    crossorigin="anonymous"
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="src/scripts.js"
-    src="https://cdn.startbootstrap.com/sb-forms-latest.js"
+<script src='./Employee.js'>
 
     // full calendar from: https://github.com/Wanderxx/vue-fullcalendar
 
-    let demoEvents = [
-        {
-            title    : 'Sunny 725-727',
-            start    : '2022-12-25',
-            end      : '2022-12-27',
-            cssClass : 'family'
-        },
-        {
-            title : 'Lunfel 726-727',
-            start : '2017-02-26',
-            end : '2017-02-27',
-            cssClass : ['home', 'work']
-        },
-        {
-            title : 'Lunfel 2/27-2/28',
-            start : '2017-02-27',
-            end : '2017-02-28'
-        },
-        {
-            title : 'Lunfel 2/27-2/28',
-            start : '2017-02-27',
-            end : '2017-02-28'
-        },
-        {
-            title : 'Lunfel 2/27-2/28',
-            start : '2017-02-27',
-            end : '2017-02-28'
-        },
-        {
-            title : 'Lunfel 2/26-3/05',
-            start : '2017-02-26',
-            end : '2017-03-05'
-        },
-        {
-            title : 'Lunfel 1/27-1/28',
-            start : '2017-01-27',
-            end : '2017-01-28'
-        },
-        {
-            title : 'Lunfel 1/27-2/2',
-            start : '2017-01-27',
-            end : '2017-02-02'
-        },
-        {
-            title : 'Lunfel 3/27-3/28',
-            start : '2017-03-27',
-            end : '2017-03-28'
-        },
-    ];
-    export default {
-        data () {
-            return {
-                name:'Sunny!',
-                fcEvents : demoEvents
-            }
-        },
-        methods : {
-            'changeMonth' (start, end, current) {
-            console.log('changeMonth', start.format(), end.format(), current.format())
-            },
-            'eventClick' (event, jsEvent, pos) {
-            console.log('eventClick', event, jsEvent, pos)
-            },
-            'dayClick' (day, jsEvent) {
-            console.log('dayClick', day, jsEvent)
-            },
-            'moreClick' (day, events, jsEvent) {
-            console.log('moreCLick', day, events, jsEvent)
-            }
-        },
-        components : {
-            'full-calendar': require('vue-fullcalendar')	
-        }
-    }
+    let fcEvents = 'shifts'
+    
 </script>
 
 <style>

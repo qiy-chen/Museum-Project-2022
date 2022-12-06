@@ -16,6 +16,7 @@ export default {
     return {
       email: '',
       theirTickets: [],
+      theirLoans: [],
       customer: [],
       errorCustomer: ''
 
@@ -36,6 +37,15 @@ export default {
         .then(response => {
           this.theirTickets = response.data
           console.log(this.theirTickets)
+        })
+        .catch(e => {
+          this.errorCustomer = e
+        })
+    },500)
+    setTimeout(() => {
+      AXIOS.get('/customer/loans/'.concat(this.customer.id))
+        .then(response => {
+          this.theirLoans = response.data
         })
         .catch(e => {
           this.errorCustomer = e
