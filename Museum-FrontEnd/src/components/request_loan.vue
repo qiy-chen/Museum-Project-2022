@@ -44,38 +44,65 @@
                     <div class="masthead-subheading">Request Loan</div>
                 </div>
             </header>
-            <section class="page-section" id="yourtickets">
+            <section class="page-section" id="yourloans">
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Select your loan details</h2>
                     </div>
                     <form>
-                        <label for="numbers">Artwork:</label>
-                        <select name="numbers" id="numbers">
-                            <option value="1">Mona Lisa</option>
-                            <option value="2">The Kiss</option>
-                            <option value="3">Guernica</option>
-                            <option value="4">The Starry Night</option>
-                            <option value="5">American Gothic</option>
-                            <option value="6">The Birth of Venus</option>
-                            <option value="7">The Last Supper</option>
-                        </select>
-                        <label for="start">Start Date:</label>
-                        <input type="date" id="start" name="trip-start"
-                            value="2022-12-05"
-                            min="2022-01-01" max="2025-12-31">
-                            <label for="start">End Date:</label>
-                        <input type="date" id="start" name="trip-start"
-                            value="2022-12-05"
-                            min="2022-01-01" max="2025-12-31">
+                        <label for="fname3">Artwork Id:</label> <label for="fname3"></label>
+					<select v-model="artworkId">
+						<option v-for="artwork in artworks">
+							{{artwork.artworkId}}</option>
+					</select>
+					<div>&nbsp;</div>
+                        <label for="fname">Start Date:</label><br> <input type="date"
+							v-model="ticketDate" id="fname" name="fname" value="2022-12-05"
+							min="2022-01-01" max="2025-12-31"><br>
+						<div>&nbsp;</div>
+						<label for="fname">End Date:</label><br> <input type="date"
+							v-model="ticketDate" id="fname" name="fname1" value="2022-12-05"
+							min="2022-01-01" max="2025-12-31"><br>
+						<div>&nbsp;</div>
+                            <label for="fname90">Loan Duration (day):</label><br> <input
+							type="number" v-model="numOfDays" id="fname2" name="fname2"><br>
+						<div>&nbsp;</div>
                     </form>
                     <div>
                         <td>Loan fee: $9.99 + tax</td>
                     </div>
                     <div>
-                        <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'customer_dashboard'})">Request!</a>  
+                        <a class="btn btn-dark btn-xl text-uppercase" @click="requestLoan(startDate, endDate,numOfDays, artworkId)">Request!</a>  
                     </div>
                 </div>
+                            <div class="text_center">
+                        <table class="center">
+                            <tr>
+                                <th>Artwork Name</th>
+                                <div>&nbsp;</div> 
+                                <th>Artwork Id</th>
+                                <div>&nbsp;</div> 
+                                <th>Artwork Value</th>
+                                <div>&nbsp;</div> 
+                                <th>Artwork Loanable</th>
+                                <div>&nbsp;</div> 
+                                <th>Artwork Room Id</th>
+                            </tr>
+
+                        
+                            <tr v-for="artwork in artworks">
+                                <td>{{ artwork.artworkName}}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ artwork.artworkId }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ artwork.value }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ artwork.isLoanable }}</td>
+                                <div>&nbsp;</div>
+                                <td>{{ artwork.roomId }}</td>
+                            </tr>
+                        </table>
+            </div>
             </section>
             <footer class="footer py-4">
                 <div class="container">
@@ -103,7 +130,7 @@
     src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
     crossorigin="anonymous"
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="./Loan.js"
+    src="./request_loans_scripts.js"
     src="https://cdn.startbootstrap.com/sb-forms-latest.js"
 </script>
 <style>
