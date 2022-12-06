@@ -43,7 +43,7 @@ export default {
 
   methods: {
     cancelTicket: function(ticketId) {
-      AXIOS.delete('/customers/'.concat(localStorage.getItem('id')),new IdRequestDto(ticketId))
+      AXIOS.put('/customers/'.concat(localStorage.getItem('id')),new IdRequestDto(ticketId))
         .then(response => {
           window.location.reload()
         })
