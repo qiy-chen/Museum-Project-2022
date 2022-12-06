@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-12-03T18:45:39" hostname="MacBook-Air-de-Qi.local" time="0.051">
+<testsuite name="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-12-06T03:08:28" hostname="MacBook-Air-de-Qi.local" time="0.063">
   <properties/>
-  <testcase name="testDeleteShift()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.031"/>
-  <testcase name="testFindShiftById()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.002"/>
-  <testcase name="testCreateShift()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.003"/>
-  <testcase name="testChangeShiftDate()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.003"/>
+  <testcase name="testDeleteShift()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.038"/>
+  <testcase name="testFindShiftById()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.005"/>
+  <testcase name="testCreateShift()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.004"/>
+  <testcase name="testChangeShiftDate()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.002"/>
   <testcase name="testRemoveEmployeeFromShift()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.007"/>
-  <testcase name="testAddEmployeeToShift()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.003"/>
+  <testcase name="testAddEmployeeToShift()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestShiftService" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

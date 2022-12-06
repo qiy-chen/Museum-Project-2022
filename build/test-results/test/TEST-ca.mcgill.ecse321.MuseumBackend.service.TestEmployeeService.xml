@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-12-03T18:45:39" hostname="MacBook-Air-de-Qi.local" time="0.068">
+<testsuite name="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-12-06T03:08:28" hostname="MacBook-Air-de-Qi.local" time="0.066">
   <properties/>
-  <testcase name="testInvalidFireEmployee()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.037"/>
+  <testcase name="testInvalidFireEmployee()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.034"/>
   <testcase name="testInvalidCreateEmployeeForMissingPerson()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.004"/>
-  <testcase name="testGetEmployeeById()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.003"/>
-  <testcase name="testFireEmployee()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.003"/>
-  <testcase name="testInvalidCreateExistingEmployee()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.004"/>
-  <testcase name="testCreateEmployee()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.004"/>
-  <testcase name="testGetAllEmployees()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.004"/>
-  <testcase name="testGetEmployeeByInvalidId()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.004"/>
+  <testcase name="testGetEmployeeById()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.004"/>
+  <testcase name="testFireEmployee()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.002"/>
+  <testcase name="testInvalidCreateExistingEmployee()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.003"/>
+  <testcase name="testCreateEmployee()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.006"/>
+  <testcase name="testGetAllEmployees()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.005"/>
+  <testcase name="testGetEmployeeByInvalidId()" classname="ca.mcgill.ecse321.MuseumBackend.service.TestEmployeeService" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

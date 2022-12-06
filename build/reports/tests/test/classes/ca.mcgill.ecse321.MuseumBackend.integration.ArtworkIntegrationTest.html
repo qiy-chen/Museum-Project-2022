@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">3.988s</div>
+<div class="counter">4.367s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,57 +79,57 @@
 </thead>
 <tr>
 <td class="success">testDeleteArtwork()</td>
-<td class="success">0.158s</td>
+<td class="success">0.200s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetAllArtworks()</td>
-<td class="success">0.228s</td>
+<td class="success">0.289s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetAllArtworksByRoomId()</td>
-<td class="success">0.210s</td>
+<td class="success">0.304s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetAllArtworksOnDisplay()</td>
-<td class="success">0.502s</td>
+<td class="success">0.536s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetAllArtworksOnStorage()</td>
-<td class="success">0.264s</td>
+<td class="success">0.341s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetAndCreateArtwork()</td>
-<td class="success">0.188s</td>
+<td class="success">0.164s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetNonExistingArtwork()</td>
-<td class="success">0.052s</td>
+<td class="success">0.050s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testMoveArtwork()</td>
-<td class="success">0.434s</td>
+<td class="success">0.459s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testUpdateArtwork()</td>
-<td class="success">0.297s</td>
+<td class="success">0.261s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testUpdateArtworkWithInvalidRequest()</td>
-<td class="success">0.104s</td>
+<td class="success">0.184s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testUpdateArtworkWithInvalidRequest2()</td>
-<td class="success">1.551s</td>
+<td class="success">1.579s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -137,12 +137,12 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2022-12-03 13:45:19.898  INFO 23514 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ca.mcgill.ecse321.MuseumBackend.integration.ArtworkIntegrationTest], using SpringBootContextLoader
-2022-12-03 13:45:19.900  INFO 23514 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ca.mcgill.ecse321.MuseumBackend.integration.ArtworkIntegrationTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2022-12-03 13:45:19.901  INFO 23514 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ca.mcgill.ecse321.MuseumBackend.integration.ArtworkIntegrationTest]: ArtworkIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2022-12-03 13:45:19.921  INFO 23514 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplication for test class ca.mcgill.ecse321.MuseumBackend.integration.ArtworkIntegrationTest
-2022-12-03 13:45:19.925  INFO 23514 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2022-12-03 13:45:19.926  INFO 23514 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@462d239a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7a6fcf93, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@129a09d9, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3e3d3cd0, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1123f97e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@15b4bf9e, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5722b830, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2ec5b8, org.springframework.test.context.event.EventPublishingTestExecutionListener@ec824ca, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@3eb022c2, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@7c91fe1c, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@ae4e733, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@45456cd1, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@7a5ce089, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@94e90c0]
+<pre>2022-12-05 22:08:08.161  INFO 39074 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ca.mcgill.ecse321.MuseumBackend.integration.ArtworkIntegrationTest], using SpringBootContextLoader
+2022-12-05 22:08:08.163  INFO 39074 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ca.mcgill.ecse321.MuseumBackend.integration.ArtworkIntegrationTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-12-05 22:08:08.164  INFO 39074 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ca.mcgill.ecse321.MuseumBackend.integration.ArtworkIntegrationTest]: ArtworkIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-12-05 22:08:08.191  INFO 39074 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ca.mcgill.ecse321.MuseumBackend.MuseumBackendApplication for test class ca.mcgill.ecse321.MuseumBackend.integration.ArtworkIntegrationTest
+2022-12-05 22:08:08.194  INFO 39074 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-12-05 22:08:08.195  INFO 39074 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@d03ed5d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3d452ced, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@2948e554, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@471c2da5, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@5567591e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4151251b, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2f5d1a20, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@90a7b6b, org.springframework.test.context.event.EventPublishingTestExecutionListener@664a6cfd, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@2e7be4d2, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@69b07727, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@33bb8859, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6a33757, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@770f0e25, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1dec46ac]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -152,27 +152,27 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.7.5)
 
-2022-12-03 13:45:19.995  INFO 23514 --- [    Test worker] c.m.e.M.i.ArtworkIntegrationTest         : Starting ArtworkIntegrationTest using Java 17.0.1 on MacBook-Air-de-Qi.local with PID 23514 (started by qi in /Users/qi/Documents/GitHub/project-group-15F22)
-2022-12-03 13:45:19.995  INFO 23514 --- [    Test worker] c.m.e.M.i.ArtworkIntegrationTest         : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2022-12-03 13:45:20.353  INFO 23514 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-03 13:45:20.407  INFO 23514 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 12 JPA repository interfaces.
-2022-12-03 13:45:21.062  INFO 23514 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
-2022-12-03 13:45:21.095  INFO 23514 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-03 13:45:21.096  INFO 23514 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
-2022-12-03 13:45:21.492  INFO 23514 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-03 13:45:21.492  INFO 23514 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1493 ms
-2022-12-03 13:45:21.861  INFO 23514 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-03 13:45:21.876  INFO 23514 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2022-12-03 13:45:21.941  INFO 23514 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2022-12-03 13:45:21.942  INFO 23514 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
-2022-12-03 13:45:23.056  INFO 23514 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-03 13:45:23.056  INFO 23514 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-03 13:45:23.512  WARN 23514 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-12-03 13:45:24.029  INFO 23514 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 52898 (http) with context path ''
-2022-12-03 13:45:24.035  INFO 23514 --- [    Test worker] c.m.e.M.i.ArtworkIntegrationTest         : Started ArtworkIntegrationTest in 4.105 seconds (JVM running for 21.128)
-2022-12-03 13:45:24.989  INFO 23514 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-03 13:45:24.990  INFO 23514 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-03 13:45:24.992  INFO 23514 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-12-05 22:08:08.249  INFO 39074 --- [    Test worker] c.m.e.M.i.ArtworkIntegrationTest         : Starting ArtworkIntegrationTest using Java 17.0.1 on MacBook-Air-de-Qi.local with PID 39074 (started by qi in /Users/qi/Documents/GitHub/project-group-15F22)
+2022-12-05 22:08:08.250  INFO 39074 --- [    Test worker] c.m.e.M.i.ArtworkIntegrationTest         : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2022-12-05 22:08:08.551  INFO 39074 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-05 22:08:08.584  INFO 39074 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 12 JPA repository interfaces.
+2022-12-05 22:08:09.204  INFO 39074 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2022-12-05 22:08:09.236  INFO 39074 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-05 22:08:09.237  INFO 39074 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-05 22:08:09.508  INFO 39074 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-05 22:08:09.509  INFO 39074 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1255 ms
+2022-12-05 22:08:09.765  INFO 39074 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2022-12-05 22:08:09.821  INFO 39074 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2022-12-05 22:08:09.884  INFO 39074 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-05 22:08:09.895  INFO 39074 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2022-12-05 22:08:11.214  INFO 39074 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-05 22:08:11.215  INFO 39074 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-05 22:08:11.723  WARN 39074 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-05 22:08:12.204  INFO 39074 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 57755 (http) with context path ''
+2022-12-05 22:08:12.212  INFO 39074 --- [    Test worker] c.m.e.M.i.ArtworkIntegrationTest         : Started ArtworkIntegrationTest in 4.013 seconds (JVM running for 20.01)
+2022-12-05 22:08:13.158  INFO 39074 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-05 22:08:13.158  INFO 39074 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-05 22:08:13.160  INFO 39074 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 </pre>
 </span>
 </div>
@@ -184,7 +184,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.5.1</a> at 3 déc. 2022, 13 h 45 min 40 s</p>
+<a href="http://www.gradle.org">Gradle 7.5.1</a> at 5 déc. 2022, 22 h 08 min 29 s</p>
 </div>
 </div>
 </body>
