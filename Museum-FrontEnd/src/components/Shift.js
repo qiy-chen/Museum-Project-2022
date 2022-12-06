@@ -33,6 +33,8 @@ export default {
       dateMap: {},
       workDayId: 0,
       employeeId: 0,
+      startTime: '',
+      endTime: '',
       employeeIds: [],
       response: []
     }
@@ -91,7 +93,7 @@ export default {
       this.errorShift = ''
     },
     addEmployeeToShift: function (workDayId,employeeId) {
-      AXIOS.post('shift/employees/'.concat(workDayId),employeeId)
+      AXIOS.post('/shift/employees/'.concat(workDayId),{employeeId: employeeId})
         .then(response => {
           this.newShift = response.data
           setTimeout(this.created(),5000)
@@ -154,15 +156,17 @@ export default {
           this.errorShift = errorMsg
         })
     },
-    setShift: function(startDate,endDate,employeeId) {
-      let start = startDate.toString().concat(' 08:00')
-      let end = endDate.toString().concat(' 17:00')
+    setShift: function(startTime,endTime,employeeId) {
+      let start = startTime.toString().concat(' 08:00')
+      let end = endTime.toString().concat(' 17:00')
       this.createShift(start,end)
       console.log(this.shifts)
       console.log(start)
       console.log(end)
       let workDayId = this.shifts[this.shifts.length-1].workDayId
-      setTimeout(() => {this.addEmployeeToShift(workDayId, employeeId)}, 500)
+      console.log(workDayId)
+      console.log(employeeId)
+      setTimeout(() => {this.addEmployeeToShift(workDayId, employeeId)}, 5000)
     },
 
     'changeMonth' (start, end, current) {

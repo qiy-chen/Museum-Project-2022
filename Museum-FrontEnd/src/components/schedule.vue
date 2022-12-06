@@ -61,11 +61,11 @@
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Add a Shift</h2>
                     <label for="start"> Shift Start Date:</label>
-                    <input type="date" v-model="startDate" id="start" name="shift-start"
+                    <input type="date" v-model="startTime" id="start" name="shift-start"
                         value="2022-12-05"
                         min="2022-01-01" max="2025-12-31">
                     <label for="end"> Shift End Date:</label>
-                    <input type="date"  v-model="endDate" id="end" name="shift-end"
+                    <input type="date"  v-model="endTime" id="end" name="shift-end"
                         value="2022-12-05"
                         min="2022-01-01" max="2025-12-31">
                     <label for="employeeId">Employee:</label>
@@ -74,7 +74,7 @@
                     </select>
                     <div>&nbsp</div>
                     <div>
-                        <button class ="btn btn-primary" @click="setShift(startDate,endDate, employeeId)">Add Shift</button>
+                        <button class ="btn btn-primary" @click="setShift(startTime,endTime, employeeId)">Add Shift</button>
                     </div>
                 </div>
             </div>
@@ -88,12 +88,12 @@
                         <option v-for="employee in employees" > {{(employee.id)}}</option>
                     </select>
                     <label for="shift">Shift Id:</label>
-                    <select name="shift" id="shiftId">
+                    <select name="shift" id="shiftId" v-model="workDayId">
                         <option v-for="shift in shifts" > {{shift.workDayId}}</option>
                     </select>
                     <div>&nbsp</div>
                     <div>
-                        <button class ="btn btn-primary" @click="deleteShift(shiftId)">Remove Shift</button>
+                        <button class ="btn btn-primary" @click="deleteShift(workDayId)">Remove Shift</button>
                     </div>
                 </div>
             </div>
