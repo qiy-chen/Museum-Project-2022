@@ -24,8 +24,12 @@ When the frontend launches it creates a museum and an admin account for the admi
 
 **Password: 123** 
 
+<img width="1552" alt="image" src="https://user-images.githubusercontent.com/98911345/205796573-78c5c471-20b3-4bbb-adaa-082c2382fdd8.png">
+
+
 * In the admin dashboard, to try out the functionalities of an employee, you must make an employee account. 
 * To try out the functionalities of a customer, simply make an account in the Register page. 
+* If a page is ever black, try refreshing it!
 
 ## How to run Backend
 
