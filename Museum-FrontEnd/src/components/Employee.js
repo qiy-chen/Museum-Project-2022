@@ -43,6 +43,7 @@ export default {
     createEmployee: function(email,shiftIDs) {
       AXIOS.post('/employee',new EmployeeRequestDto(email,shiftIDs))
         .then(response => {
+          window.location.reload();
           this.employees.push(response.data)
           this.errorEmployee = ''
           this.newEmployee = response.data
