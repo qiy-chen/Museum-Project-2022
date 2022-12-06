@@ -55,6 +55,7 @@ export default {
     }
   },
   created: function () {
+
     // Initializing dispplays from backend
     //Load all displays
     AXIOS.get('/display')

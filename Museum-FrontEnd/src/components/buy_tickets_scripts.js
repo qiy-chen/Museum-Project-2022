@@ -27,6 +27,8 @@ export default {
     }
   },
   methods: {
+    
+    
     purchaseTicket: function(ticketDate) {
       AXIOS.post('/customers/'.concat(localStorage.getItem('id')),new TicketRequestDto(ticketDate,9.99))
         .then(response => {

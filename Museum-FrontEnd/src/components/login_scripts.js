@@ -29,16 +29,13 @@ export default {
     }
   },
   created: function() {
+   
     person.default.created()
     customer.default.created()
     employee.default.created()
     admin.default.created()
   },
   methods: {
-
-    refresh: function (){
-      window.location.reload();
-    },
 
     loginToRightRole: function(email,password) {
       if(email === '') {

@@ -36,6 +36,7 @@ export default {
     }
   },
   created: function() {
+
     AXIOS.get('/person')
       .then(response => {
         this.people = response.data

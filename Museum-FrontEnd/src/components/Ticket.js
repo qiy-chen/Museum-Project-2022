@@ -44,6 +44,10 @@ export default {
     }
   },
   created: function () {
+    setTimeout(() =>{
+      if (window.location.href.substr(-2) !== '?r') {
+    window.location = window.location.href + '?r' ;window.location.reload();
+}},500)
     // Initializing tickets from backend
     //Load all tickets
     this.errorTicket=''
