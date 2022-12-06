@@ -37,7 +37,8 @@ export default {
       this.customerTickets = response.data
     })
     .catch(e => {
-      this.errorTicket += e
+    	this.errorTickets = []
+      this.errorTickets.push(e.response.data)
     })
   },
 
@@ -48,7 +49,8 @@ export default {
           window.location.reload()
         })
         .catch(e => {
-          this.errorTickets = e.response.message
+        this.errorTickets = []
+          this.errorTickets.push(e.response.data)
         })
     }
   }
