@@ -28,7 +28,7 @@ export default {
       people: [],
       shifts: [],
       requestedShiftIndex: 0,
-      newShift: {},
+      newShift: [],
       errorShift: '',
       dateMap: {},
       workDayId: 0,
@@ -71,12 +71,7 @@ export default {
     getShiftById: function (workDayId) {
       AXIOS.get('/shift/'.concat(workDayId))
         .then(response => {
-          if (!this.shifts.includes(response.data)) {
-            this.shifts.push(response.data)
-            this.errorShift = ''
-            this.newShift = {}
-          }
-          this.requestedShiftIndex = this.shifts.indexOf(response.data)
+          this.newShift= response.data
           this.workDayId = 0
         })
         .catch(e => {
@@ -92,18 +87,16 @@ export default {
           console.log(errorMsg)
           this.errorShift = errorMsg
         })
-      this.created()
       this.workdDayId = 0
       this.errorShift = ''
     },
     addEmployeeToShift: function (workDayId,employeeId) {
-      this.methods.getShiftById(workDayId)
       AXIOS.post('shift/employees/'.concat(workDayId),employeeId)
         .then(response => {
-          this.shifts[this.requestedShiftIndex] = response.data
-          this.employeeId = 0
-          this.requestedShiftIndex = 0
+          this.newShift = response.data
+          setTimeout(this.created(),5000)
           this.errorShift = ''
+          this.workDayId = 0
         })
         .catch(e => {
           let errorMsg = e.response.data.message
@@ -118,7 +111,7 @@ export default {
           console.log(errorMsg)
           this.errorShift = errorMsg
         })
-      this.created()
+      setTimeout(this.created(),5000)
       this.workDayId = 0
       this.employeeId = 0
       this.errorShift = ''
@@ -152,7 +145,6 @@ export default {
     getAllShift: function () {
       AXIOS.get('/shift', {}, {})
         .then(response => {
-          console.log(response)
           this.shifts = response.data
           this.errorShift = ''
         })
