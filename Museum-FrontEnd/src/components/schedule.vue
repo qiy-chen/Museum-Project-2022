@@ -60,12 +60,12 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Add a Shift</h2>
-                    <label for="shift-start"> Shift Start Date:</label>
-                    <input type="date" id="shift-start" name="shift-start"
+                    <label for="start"> Shift Start Date:</label>
+                    <input type="date" v-model="startDate" id="start" name="shift-start"
                         value="2022-12-05"
                         min="2022-01-01" max="2025-12-31">
-                    <label for="shift-end"> Shift End Date:</label>
-                    <input type="date" id="shift-end" name="shift-end"
+                    <label for="end"> Shift End Date:</label>
+                    <input type="date"  v-model="endDate" id="end" name="shift-end"
                         value="2022-12-05"
                         min="2022-01-01" max="2025-12-31">
                     <label for="employeeId">Employee:</label>
@@ -74,7 +74,7 @@
                     </select>
                     <div>&nbsp</div>
                     <div>
-                        <button class ="btn btn-primary" @click="setShift(shift-start, shift-end, employeeId)">Add Shift</button>
+                        <button class ="btn btn-primary" @click="setShift(startDate,endDate, employeeId)">Add Shift</button>
                     </div>
                 </div>
             </div>

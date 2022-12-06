@@ -163,9 +163,13 @@ export default {
         })
     },
     setShift: function(startDate,endDate,employeeId) {
-      this.createShift(startDate,endDate,69)
+      let start = startDate.toString().concat(' 08:00')
+      let end = endDate.toString().concat(' 17:00')
+      this.createShift(start,end,69)
       console.log(this.shifts)
-      let workDayId = this.shifts[this.shifts.length-1].workDayId
+      console.log(start)
+      console.log(end)
+      let workDayId = this.shifts[this.shifts.length].workDayId
       this.addEmployeeToShift(workDayId, employeeId)
     },
 
