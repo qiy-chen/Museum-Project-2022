@@ -1,3 +1,6 @@
+# Build System Information
+* [Important information for the front-end](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Build-System#important-information-for-the-frontend)
+
 ## How to run Frontend
 Step 1: After downloading the repository as a .zip file, in terminal cd into the Museum-Frontend folder
 
