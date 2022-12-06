@@ -1,5 +1,6 @@
+import * as people from "./Person"
+import * as employees from "./Employee";
 import axios from 'axios'
-import Employee from './Employee'
 var config = require('../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
@@ -24,6 +25,7 @@ export default {
   data() {
     return {
       employees: [],
+      people: [],
       shifts: [],
       requestedShiftIndex: 0,
       newShift: {},
@@ -43,21 +45,15 @@ export default {
       .catch(e => {
         this.errorShift = e
       })
+      AXIOS.get('/employee')
+      .then(response => {
+        this.employees = response.data
+      })
+      .catch(e => {
+        this.errorEmployee = e
+      })
   },
   methods: {
-    getAllEmployee: function () {
-      AXIOS.get('/employee', {}, {})
-        .then(response => {
-          console.log(response.data)
-          this.employees = response.data
-          this.errorEmployee = ''
-        })
-        .catch(e => {
-          let errorMsg = e.response.data.message
-          console.log(errorMsg)
-          this.errorEmployee = errorMsg
-        })
-      },
     createShift: function (startTime,endTime,museum) {
       AXIOS.post('/shift', new ShiftRequestDto(startTime, endTime, museum))
         .then(response => {
@@ -167,7 +163,9 @@ export default {
         })
     },
     setShift: function(startDate,endDate,employeeId) {
-      workDayId = this.createShift(startDate,endDate,1)
+      this.createShift(startDate,endDate,69)
+      console.log(this.shifts)
+      let workDayId = this.shifts[this.shifts.length-1].workDayId
       this.addEmployeeToShift(workDayId, employeeId)
     },
 

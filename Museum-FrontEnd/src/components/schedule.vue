@@ -60,21 +60,21 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Add a Shift</h2>
-                    <label for="start"> Shift Start Date:</label>
-                    <input type="date" id="start" name="trip-start"
+                    <label for="shift-start"> Shift Start Date:</label>
+                    <input type="date" id="shift-start" name="shift-start"
                         value="2022-12-05"
                         min="2022-01-01" max="2025-12-31">
-                    <label for="start"> Shift End Date:</label>
-                    <input type="date" id="end" name="trip-end"
+                    <label for="shift-end"> Shift End Date:</label>
+                    <input type="date" id="shift-end" name="shift-end"
                         value="2022-12-05"
                         min="2022-01-01" max="2025-12-31">
-                    <label for="employee">Employee:</label>
-                    <select name="employee" id="employee">
-                        <option v-for="employee in employees" > {{employee.employeeId}}</option>
+                    <label for="employeeId">Employee:</label>
+                    <select name="employeeId" id="employeeId">
+                        <option v-for="employee in employees" > {{(employee.id)}}</option>
                     </select>
                     <div>&nbsp</div>
                     <div>
-                        <button class ="btn btn-primary" @click="setShift(trip-start,trip-end,employee)">Add Shift</button>
+                        <button class ="btn btn-primary" @click="setShift(shift-start, shift-end, employeeId)">Add Shift</button>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <h2 class="section-heading text-uppercase">Remove a Shift</h2>
                     <label for="employee">Employee:</label>
                     <select name="employee" id="employee">
-                        <option v-for="employee in employees" > {{employee.employeeId}}</option>
+                        <option v-for="employee in employees" > {{(employee.id)}}</option>
                     </select>
                     <label for="shift">Shift Id:</label>
                     <select name="shift" id="shiftId">
