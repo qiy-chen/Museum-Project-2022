@@ -53,7 +53,7 @@ Step 2: Run the MuseumBackendApplication.java file as a Java Application. This c
 `../project-group-15/src/main/java/ca/mcgill/ecse321/MuseumBackend/MuseumBackendApplication.java`
 
 ## Test Run Locally 
-As seen below, all repository, service and backend tests run and pass locally. 
+As seen below, all repository, service and integration tests run and pass locally. 
 
 <img width="546" alt="image" src="https://user-images.githubusercontent.com/98911345/205798859-e20ee5b3-320a-43d2-98c3-bf1038c87493.png">
 
