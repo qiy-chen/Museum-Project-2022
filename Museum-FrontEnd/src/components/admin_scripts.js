@@ -10,6 +10,15 @@ var AXIOS = axios.create({
   baseURL: backendUrl,
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
+
+class EmployeeRequestDto {
+  constructor(email, shiftIDs) {
+    this.email = email
+    this.shiftIDs = shiftIDs
+    this.name
+  }
+}
+
 export default {
   name: 'admin_scripts',
   data() {
