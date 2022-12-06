@@ -1,4 +1,5 @@
 # Build System Information
+* [How to run Frontend](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Build-System#how-to-run-frontend)
 * [Important information for the front-end](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Build-System#important-information-for-the-frontend)
 * [Build System](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Build-System#build-system)
 * [How to Run Frontend](https://github.com/McGill-ECSE321-Fall2022/project-group-15/wiki/Build-System#how-to-run-backend)
