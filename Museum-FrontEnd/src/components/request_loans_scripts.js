@@ -27,16 +27,54 @@ export default {
   data() {
     return {
       loans: [],
-      artwork: [],
+      artworks: [],
       startDate: '',
       endDate: '',
       artworkName: '',
     }
   },
+  
+    created () {
+    // Initializing loans from backend
+    //Load all loans
+    AXIOS.get('/loans')
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.loans = response.data
+    })
+    .catch(e => {
+      this.errorLoan = e.response.data.message
+    })
+    
+    AXIOS.get('/artwork')
+    .then(response => {
+      this.artworks = response.data
+    })
+    .catch(e => {
+      let errorMsg = e.response.data.message
+      console.log(errorMsg)
+      this.errorArtwork = errorMsg
+	})
+  },
   methods: {
-    requestLoan: function(startDate,endDate,artworkName) {
-
+    requestLoan: function (startDate, endDate,numOfDays, artworkId) {
+		 AXIOS.post('/loans', new LoanRequestDto(2,startDate,endDate,numOfDays,9.99*1.15, artworkId, localStorage.getItem('id')), 69).then(response => {
+        // JSON responses are automatically parsed.
+          this.loans.push(response.data)
+          this.LoanStatusAsNumber = ''
+    	this.startDate =  ''
+    	this.endDate =  ''
+    	this.numOfDays =  ''
+    	this.rentalFee =  ''
+    	this.artworkId =  ''
+    	this.customerId =  ''
+    	this.museumId =  ''
+        })
+        .catch(e => {
+          var errorMsg = e.response.data.message
+          console.log(errorMsg)
+          this.errorLoan = errorMsg
+        })
+   },
     }
-  }
 }
-
