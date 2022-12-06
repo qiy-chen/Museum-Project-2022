@@ -35,6 +35,11 @@ export default {
     admin.default.created()
   },
   methods: {
+
+    refresh: function (){
+      window.location.reload();
+    },
+
     loginToRightRole: function(email,password) {
       if(email === '') {
         this.foundPerson = []

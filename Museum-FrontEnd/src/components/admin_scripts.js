@@ -33,7 +33,7 @@ export default {
     }
   },
   created: function() {
-  
+
     AXIOS.get('/employee')
       .then(response => {
         this.employees = response.data
@@ -41,9 +41,15 @@ export default {
       .catch(e => {
         this.errorEmployee = e
       })
+
+      setTimeout(() =>{
+      if (window.location.href.substr(-2) !== '?r') {
+    window.location = window.location.href + '?r' ;window.location.reload();
+}},500)
   },
 
   methods: {
+
     createNewPersonAndMakeEmployee: function(email,password,firstName,lastName,museum) {
       if(!email) {
         this.errorPerson += 'Email cannot be blank! '
