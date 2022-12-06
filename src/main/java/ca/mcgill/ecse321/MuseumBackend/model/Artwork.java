@@ -72,7 +72,10 @@ public class Artwork
 
 	// TODO Auto-generated constructor stub
 
-
+@PreRemove
+private void deleteArtwork() {
+    this.delete();
+}
 public boolean setIsLoanable(boolean aIsLoanable)
   {
     boolean wasSet = false;

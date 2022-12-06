@@ -53,11 +53,11 @@ public class LoanService {
     loan.setNumOfDays(loanRequest.getNumOfDays());
     String date = loanRequest.getStartDate();
     date += " 8:00";
-    LocalDateTime startDate = LocalDateTime.parse(date);
+    LocalDateTime startDate = LocalDateTime.parse(date, formatter);
     loan.setStartDate(startDate);
     String date2 = loanRequest.getEndDate();
     date2 += " 8:00";
-    LocalDateTime endDate = LocalDateTime.parse(loanRequest.getEndDate());
+    LocalDateTime endDate = LocalDateTime.parse(date2,formatter);
     loan.setEndDate(endDate);
     loan.setArtwork(artwork);
     loan.setCustomer(customer);

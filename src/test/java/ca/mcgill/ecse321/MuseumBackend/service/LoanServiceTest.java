@@ -76,8 +76,8 @@ public class LoanServiceTest {
     LoanResponseDto loan = loanService.createLoan(loanRequest);
     
     assertNotNull(loan);
-    assertEquals( "2019-08-14", loan.getStartDate().toString());
-    assertEquals("2020-12-20", loan.getEndDate().toString());
+    assertEquals( "2019-08-14T08:00", loan.getStartDate().toString());
+    assertEquals("2020-12-20T08:00", loan.getEndDate().toString());
     assertEquals(LoanStatus.Requested, loan.getStatus());
     assertEquals(60, loan.getNumOfDays());
     assertEquals(2.5, loan.getRentalFee());
