@@ -53,6 +53,7 @@
                         <label for="fname2">RoomId:</label>
                             <select v-model="roomId">
                             <option v-for="display in displays" > {{display.roomId}}</option>
+                            <option v-for="storage in storages"> {{storage.roomId}}</option>
                             </select>
                         <div>&nbsp;</div>
 
@@ -77,8 +78,6 @@
                                 <div>&nbsp;</div>
                                 <th>Artwork Room Id</th>
                             </tr>
-
-
                             <tr v-for="artwork in artworks">
                                 <td>{{ artwork.artworkName}}</td>
                                 <div>&nbsp;</div>
