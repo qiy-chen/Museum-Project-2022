@@ -49,35 +49,36 @@
                         <h3 class="section-subheading text-muted">Enter artwork information down below.</h3>
                         <label for="fname">Name:</label><br>
                             <input type="text" v-model="artworkName" id="fname" name="fname"><br>
-                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>   
                         <label for="fname2">RoomId:</label>
                             <select v-model="roomId">
                             <option v-for="display in displays" > {{display.roomId}}</option>
                             <option v-for="storage in storages"> {{storage.roomId}}</option>
                             </select>
-                        <div>&nbsp;</div>
-
+                        <div>&nbsp;</div> 
+                          
                         <div>
                             <button class ="btn btn-primary" @click="createArtwork(artworkName, roomId, 69)">ADD</button>
-
+                            
                         </div>
                     </div>
                 </div>
-
+            
             <div class="text_center">
-                        &nbsp;
                         <table class="center">
                             <tr>
                                 <th>Artwork Name</th>
-                                <div>&nbsp;</div>
+                                <div>&nbsp;</div> 
                                 <th>Artwork Id</th>
-                                <div>&nbsp;</div>
+                                <div>&nbsp;</div> 
                                 <th>Artwork Value</th>
-                                <div>&nbsp;</div>
+                                <div>&nbsp;</div> 
                                 <th>Artwork Loanable</th>
-                                <div>&nbsp;</div>
+                                <div>&nbsp;</div> 
                                 <th>Artwork Room Id</th>
                             </tr>
+
+                        
                             <tr v-for="artwork in artworks">
                                 <td>{{ artwork.artworkName}}</td>
                                 <div>&nbsp;</div>
@@ -96,14 +97,14 @@
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Delete Artwork</h2>
-                        <h3 class="section-subheading text-muted">Select which artwork to delete.</h3>
+                        <h3 class="section-subheading text-muted">Select which artwork to delete.</h3>  
                         <label for="fname2">artworkId:</label>
                             <select v-model="artworkId">
                             <option v-for="artwork in artworks" > {{artwork.artworkId}}</option>
                             </select>
-                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>      
                         <div>
-                            <button class ="btn btn-primary" @click="deleteArtwork(artworkId)">DELETE</button>
+                            <button class ="btn btn-primary" @click="deleteArtwork(artworkId)">DELETE</button>                            
                         </div>
                     </div>
                 </div>
@@ -114,22 +115,22 @@
                         <h2 class="section-heading text-uppercase">Update Artwork</h2>
                         <h3 class="section-subheading text-muted">Enter artwork information down below.</h3>
                         <label for="fname2">ArtworkId:</label>
-                            <select v-model="artworkId">
+                            <select v-model="roomId">
                             <option v-for="artwork in artworks" > {{artwork.artworkId}}</option>
                             </select>
-                        <div>&nbsp;</div>
+                        <div>&nbsp;</div> 
                         <label for="fname">Name:</label><br>
                             <input type="text" v-model="artworkName" id="fname" name="fname"><br>
-                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>   
                         <label for="fname">Value:</label><br>
                             <input type="number" v-model="value" id="fname" name="fname"><br>
-                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>    
                         <label for="numbers">Loanable?</label>
                         <select name="numbers" v-model="isLoanable" id="numbers">
                             <option value="1">true</option>
                             <option value="2">false</option>
                         </select>
-                        <div>&nbsp;</div>
+                        <div>&nbsp;</div> 
                         <div>
                             <button class ="btn btn-primary" @click="updateArtwork(artworkId, artworkName, value, true)" >UPDATE</button>
                         </div>
@@ -144,8 +145,8 @@
                         <h3 class="section-subheading text-muted">Find by artwork id and select room to move to.</h3>
                         <label for="fname">Artwork ID:</label><br>
                             <input type="number" v-model="artworkId" id="fname" name="fname"><br>
-
-                        <div>&nbsp;</div>
+                    
+                        <div>&nbsp;</div> 
                         <label for="fname">Room ID:</label><br>
                             <input type="number" v-model="roomId" id="fname" name="fname"><br>
                         <div>&nbsp; </div>
@@ -158,7 +159,7 @@
             <section class="page-section" id="moveartwork">
                 <div class="container">
                     <div class="text-center">
-
+                    
                     </div>
                 </div>
             </section>

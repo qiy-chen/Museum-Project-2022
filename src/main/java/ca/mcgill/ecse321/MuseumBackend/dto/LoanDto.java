@@ -3,13 +3,14 @@ package ca.mcgill.ecse321.MuseumBackend.dto;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class LoanDto {
 
   public String status;
   private double rentalFee;
-  private Date startDate;
-  private Date endDate;
+  private LocalDateTime startDate;
+  private LocalDateTime endDate;
   private int numOfDays;
   private int loanId;
   

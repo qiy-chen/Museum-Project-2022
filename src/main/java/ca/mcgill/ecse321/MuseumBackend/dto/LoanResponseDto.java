@@ -4,14 +4,15 @@ import ca.mcgill.ecse321.MuseumBackend.model.Loan;
 import ca.mcgill.ecse321.MuseumBackend.model.Loan.LoanStatus;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class LoanResponseDto {
   private int loanId;
   //private int LoanStatusAsNumber;
   private LoanStatus status;
   private int numOfDays;
-  private Date startDate;
-  private Date endDate;
+  private LocalDateTime startDate;
+  private LocalDateTime endDate;
   private double rentalFee;
   private int artworkId;
   private int customerId;
@@ -52,11 +53,11 @@ public class LoanResponseDto {
     return numOfDays;
   }
 
-  public Date getStartDate() {
+  public LocalDateTime getStartDate() {
     return startDate;
   }
 
-  public Date getEndDate() {
+  public LocalDateTime getEndDate() {
     return endDate;
   }
 

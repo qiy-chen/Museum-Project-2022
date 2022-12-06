@@ -14,29 +14,32 @@ var backendUrl = backendConfigurer();
 
 var AXIOS = axios.create({
   baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+  //headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
+
+
 
 export default {
   name: 'ArtClient',
   data() {
     return {
-
       artworksOnDisplay: [],
       artworksInRoom: [],
       artworkId: 0,
       errorArtwork: '',
       artworkResponse: '',
       roomId: 0,
+      artworkName: '',
     }
   },
 
   created() {
     AXIOS.get('/display/artworks')
     .then(response => {
-      console.log(response)
+      console.log(response.data)
       this.artworksOnDisplay = response.data
       this.errorArtwork = ''
+      this.artworkName = response.data.artworkName
     })
     .catch(e => {
       var errorMsg = e.response.data.message
@@ -47,13 +50,13 @@ export default {
   },
 
   methods: {
-
     getArtworkOnDisplay: function () {
         AXIOS.get('/display/artworks', {}, {})
           .then(response => {
-            console.log(response)
+            console.log(response.data)
             this.artworksOnDisplay = response.data
             this.errorArtwork = ''
+            this.artworkName = response.data.artworkName
           })
           .catch(e => {
             var errorMsg = e.response.data.message

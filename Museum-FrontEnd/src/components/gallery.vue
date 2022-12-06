@@ -50,54 +50,33 @@
                 </div>
             </header>
             <!-- Services-->
-            <section class="page-section" id="services">
-                <div class="container">
-                    <div class="text-center">
-                        <h2 class="section-heading text-uppercase">Gallery</h2>
-                        <h3 class="section-subheading text-muted">Click on the artwork you wish to loan</h3>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-md-4">
-                            <h4 class="my-3">Name</h4>
-                            <p class="text-muted">Price</p>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="my-3">Name</h4>
-                            <p class="text-muted">Price</p>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="my-3">Name</h4>
-                            <p class="text-muted">Price</p>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="page-section" id="services">
-                <div class="container">
-                    <div class="text-center">
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-md-4">
-                            <h4 class="my-3">Name</h4>
-                            <p class="text-muted">Price</p>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="my-3">Name</h4>
-                            <p class="text-muted">Price</p>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="my-3">Name</h4>
-                            <p class="text-muted">Price</p>
-                            <a class="btn btn-dark btn-xl text-uppercase" @click="$router.push({name: 'request_loan'})">Loan</a>  
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="text_center">
+                    &nbsp;
+                    <table class="styled-table">
+                        <tr>
+                            <th>Name</th>
+                            <div>&nbsp;</div>
+                            <th>Id</th>
+                            <div>&nbsp;</div>
+                            <th>Value</th>
+                            <div>&nbsp;</div>
+                            <th>Loanable</th>
+                            <div>&nbsp;</div>
+                            <th>RoomId</th>
+                        </tr>
+                        <tr v-for="artwork in artworksOnDisplay">
+                            <td width="100px"> {{ artwork.artworkName }}</td>
+                            <div>&nbsp;</div>
+                            <td width="100px">{{artwork.artworkId }}</td>
+                            <div>&nbsp;</div>
+                            <td width="5px">{{ artwork.value }}</td>
+                            <div>&nbsp;</div>
+                            <td width="5px">{{ artwork.isLoanable }}</td>
+                            <div>&nbsp;</div>
+                            <td width="5px">{{ artwork.roomId }}</td>
+                        </tr>
+                    </table>
+            </div>
             <!-- Footer-->
             <footer class="footer py-4">
                 <div class="container">
@@ -117,13 +96,51 @@
         </body>
     </div>
 </template>
-<script>
-    src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" 
-    crossorigin="anonymous"
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    src="src/scripts.js"
-    src="https://cdn.startbootstrap.com/sb-forms-latest.js"
+<script src="./artworkClient.js">
 </script>
 <style>
     @import '*/Museum-FrontEnd/src/styles.css';
+</style>
+
+<style>
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #b30f0f;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 60px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #bf0f0f;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #c40707;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #d33232;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #ce1111;
+}
+
 </style>

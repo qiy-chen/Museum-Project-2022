@@ -33,7 +33,7 @@ export default {
   created: function() {
     AXIOS.get('/employee')
       .then(response => {
-        //this.employees = response.data
+        this.employees = response.data
       })
       .catch(e => {
         this.errorEmployee = e
