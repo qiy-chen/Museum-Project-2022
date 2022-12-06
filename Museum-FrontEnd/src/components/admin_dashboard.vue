@@ -67,19 +67,19 @@
                     </div>
                     <table class="center">
                             <tr>
-                                <th>Existing Employee Emails</th>
+                                <th>Employee Emails</th>
                                 <div>&nbsp;</div>
-                                <th>Existing Employee Names</th>
+                                <th>Employee Ids</th>
                                 <div>&nbsp;</div>
-                                <th>Existing Employee Ids</th>
+                                <th>Employee Shifts</th>
                                 <div>&nbsp;</div>
                             </tr>
                             <tr v-for="employee in employees">
                                 <td>{{ employee.email }}</td>
                                 <div>&nbsp;</div>
-                                <td>{{ employee.name }}</td>
+                                <td>{{ employee.id }}</td>
                                 <div>&nbsp;</div>
-                                <td>{{ employee.personRoleIds }}</td>
+                                <td>{{ employee.shifts }}</td>
                                 <div>&nbsp;</div>
                             </tr>
                     </table>
