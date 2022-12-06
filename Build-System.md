@@ -15,6 +15,16 @@ Step 4: Run the following command
 
 This should launch the Frontend in your default browser. 
 
+## Important information for the Frontend
+When the frontend launches it creates a museum and an admin account for the admin to login. To log in using the admin account (and hence use all their functionalities) you must use the following credentials:
+
+**Username/Email: admin@hotmail.com**
+
+**Password: 123** 
+
+* In the admin dashboard, to try out the functionalities of an employee, you must make an employee account. 
+* To try out the functionalities of a customer, simply make an account in the Register page. 
+
 ## How to run Backend
 
 Step 1: Open the project in your editor (e.g. Eclipse)
