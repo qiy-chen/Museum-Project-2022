@@ -39,7 +39,7 @@ When the frontend launches it creates a museum and an admin account for the admi
 * To buy a ticket as a Customer, the Admin must first make a ticket. This is done so that the Admin has control of the number of tickets per day.
 * Only the Customer can view the gallery from their dashboard.
 * The Customer can request a loan from the customer dashboard.
-* If a page is ever black, try refreshing it!
+* If a page is ever blank, try refreshing it!
 
 ## Build System
 To run the application, you can use any command line, where you must open the project, and input the command ./gradlew bootRun. The application will be deployed on a website but the website has not been built yet. 
