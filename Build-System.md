@@ -34,8 +34,11 @@ When the frontend launches it creates a museum and an admin account for the admi
 <img width="1552" alt="image" src="https://user-images.githubusercontent.com/98911345/205796573-78c5c471-20b3-4bbb-adaa-082c2382fdd8.png">
 
 
-* In the admin dashboard, to try out the functionalities of an employee, you must make an employee account. 
-* To try out the functionalities of a customer, simply make an account in the Register page. 
+* To try out the functionalities of an employee, you must make an employee account in the admin dashboard (which you can access by signing in as an admin). 
+* To try out the functionalities of a customer, simply make a customer account from the Register page. 
+* To buy a ticket as a Customer, the Admin must first make a ticket. This is done so that the Admin has control of the number of tickets per day.
+* Only the Customer can view the gallery from their dashboard.
+* The Customer can request a loan from the customer dashboard.
 * If a page is ever black, try refreshing it!
 
 ## Build System
