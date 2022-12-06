@@ -41,7 +41,7 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="text" v-model="password" placeholder="Create a password" />
+                                                        <input class="form-control" id="inputPassword" type="password" v-model="password" placeholder="Create a password" />
                                                         <label for="inputPassword">Password</label>
                                                     </div>
                                                 </div>
