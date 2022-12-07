@@ -42,7 +42,7 @@ When the frontend launches it creates a museum and an admin account for the admi
 * If a page is ever blank, try refreshing it!
 
 ## Build System
-To run the application, you can use any command line, where you must open the project, and input the command ./gradlew bootRun. The application will be deployed on a website but the website has not been built yet. 
+To run the application, you can use any command line, where you must open the project, and input the command ./gradlew bootRun. 
 To build locally with Gradle, cd into the root directory and run the command ```./gradlew build -xtest```. This should give the following output:
 
  <img width="682" alt="Screen Shot 2022-11-19 at 8 30 41 PM" src="https://user-images.githubusercontent.com/98911345/202878586-9c530d5a-134b-4a9a-a158-1227bff1664b.png">
